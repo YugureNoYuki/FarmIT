@@ -19,11 +19,8 @@ namespace farmLogin.Controllers
 {
     public class PlantationController : Controller
     {
-        //get current logged in user
-        private readonly UserManager<ApplicationUser> _userManager;
-
         private FarmDbContext db = new FarmDbContext();
-        public static int routeId;
+        private int routeId;
 
         #region CRUD and ActionPage
         public ActionResult ActionPage()
@@ -318,7 +315,8 @@ namespace farmLogin.Controllers
                     ViewBag.FieldStageID = new SelectList(db.FieldStages, "FieldStageID", "FieldStageDescr", plantation.FieldStageID);
                     ViewBag.RefugeUnit = new SelectList(db.Units, "UnitID", "UnitDescr", plantation.RefugeUnit);
                     ViewBag.YieldUnit = new SelectList(db.Units, "UnitID", "UnitDescr", plantation.YieldUnit);
-                    return View(plantation);
+                    //return View(plantation);
+                    return RedirectToAction("InitTreat", "TreatPlantation");
                 }
 
             }
@@ -335,7 +333,7 @@ namespace farmLogin.Controllers
             ViewBag.FieldStageID = new SelectList(db.FieldStages, "FieldStageID", "FieldStageDescr", plantation.FieldStageID);
             ViewBag.RefugeUnit = new SelectList(db.Units, "UnitID", "UnitDescr", plantation.RefugeUnit);
             ViewBag.YieldUnit = new SelectList(db.Units, "UnitID", "UnitDescr", plantation.YieldUnit);
-            return RedirectToAction("Index");
+            return RedirectToAction("InitTreat","TreatPlantation");
             //return View(plantation);
         }
 

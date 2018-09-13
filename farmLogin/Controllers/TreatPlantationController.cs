@@ -38,11 +38,11 @@ namespace farmLogin.Controllers
         }
 
         // GET: TreatPlantation/Treat/1
-        public ActionResult Treat(int? id) //plantationID
+        public ActionResult InitTreat(int? id) //plantationID
         {
             ViewBag.InventoryID = new SelectList(db.Inventories, "InventoryID", "InvDescr");
-            ViewBag.TreatmentID = new SelectList(db.Treatments, "TreatmentID", "TreatmentDescr");
-            ViewBag.Unit = new SelectList(db.Units, "UnitID", "UnitDescr");
+            ViewBag.TreatmentID = new SelectList(db.Treatments.Where(t => !t.TreatmentDescr.Contains("Stage 2 (Secondary) Treatment") && !t.TreatmentDescr.Contains("Ad-Hoc Treatment")), "TreatmentID", "TreatmentDescr");
+            ViewBag.Unit = new SelectList(db.Units.Where(u => !u.UnitDescr.Contains("MM") && !u.UnitDescr.Contains("HOURS") && !u.UnitDescr.Contains("KM") && !u.UnitDescr.Contains("HA") && !u.UnitDescr.Contains("ML")), "UnitID", "UnitDescr");
             //if (id == null)
             //{
             //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -66,14 +66,32 @@ namespace farmLogin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Treat([Bind(Include = "TreatmentID,InventoryID,TreatmentQnty,Unit")] InventoryTreatment inventoryTreatment, int id)
+        public ActionResult InitTreat([Bind(Include = "TreatmentID,InventoryID,TreatmentQnty,Unit")] InventoryTreatment inventoryTreatment, int id)
         {
             if (ModelState.IsValid)
             {
+                //get inventory quantity: Treatment quantity for selected inventory item cannot be more than the available qty
+                var qty = db.Inventories.Find(inventoryTreatment.InventoryID);
                 try
                 {
-                    db.InventoryTreatments.Add(inventoryTreatment);
-                    db.SaveChanges();
+                    if (Convert.ToInt32(inventoryTreatment.TreatmentQnty) > Convert.ToInt32(qty.InvQty))
+                    {
+                        //return error message: Selected quantity cannot be more than the available inventory qty
+
+                        ModelState.AddModelError("TreatmentQnty", "Selected quantity cannot be more than the available inventory quantity");
+
+                        ViewBag.InventoryID = new SelectList(db.Inventories, "InventoryID", "InvDescr", inventoryTreatment.InventoryID);
+                        ViewBag.TreatmentID = new SelectList(db.Treatments.Where(t => !t.TreatmentDescr.Contains("Stage 1 (Initial) Treatment")), "TreatmentID", "TreatmentDescr", inventoryTreatment.TreatmentID); //Treatment can only be stage 2 or Ad-Hoc
+                        ViewBag.Unit = new SelectList(db.Units.Where(u => !u.UnitDescr.Contains("MM") && !u.UnitDescr.Contains("HOURS") && !u.UnitDescr.Contains("KM") && !u.UnitDescr.Contains("HA") && !u.UnitDescr.Contains("ML")), "UnitID", "UnitDescr", inventoryTreatment.Unit);
+
+                        return View(inventoryTreatment);
+                    }
+                    else
+                    {
+                        db.InventoryTreatments.Add(inventoryTreatment);
+                        db.SaveChanges();
+                        inventoryTreatment.JavaScriptToRun = "mySuccess()";
+                    }
                 }
                 catch (Exception e)
                 {
@@ -95,7 +113,7 @@ namespace farmLogin.Controllers
                             //remove 
 
 
-                            f.FieldStatusID = 2; //Treated
+                            f.FieldStatusID = 2; //Treated (This should be field Stage SIYA!!!)
                             //db.Entry(inventoryTreatment).State = EntityState.Modified;
                             dc.Entry(f).State = EntityState.Modified;
                             dc.SaveChanges();
@@ -136,7 +154,7 @@ namespace farmLogin.Controllers
 
 
                 //CreateFieldTreatment(inventoryTreatment.TreatmentID)
-                return RedirectToAction("Index");
+                return RedirectToAction("Plantations", "Plantation");
             }
 
             ViewBag.InventoryID = new SelectList(db.Inventories, "InventoryID", "InvDescr", inventoryTreatment.InventoryID);

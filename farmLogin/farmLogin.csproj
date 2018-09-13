@@ -791,6 +791,7 @@
     <Content Include="Views\SalesReport\Index.cshtml" />
     <Content Include="Views\FarmWorker\HowToClockInOrOut.cshtml" />
     <Content Include="Views\Plantation\Harvest.cshtml" />
+    <Content Include="Views\TreatPlantation\InitTreat.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
