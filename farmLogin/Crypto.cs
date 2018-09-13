@@ -14,7 +14,6 @@ namespace farmLogin
                 System.Security.Cryptography.SHA256.Create()
                 .ComputeHash(Encoding.UTF8.GetBytes(value))
                 );
-            // test comment changes. Delete me later
         }
     }
 }
