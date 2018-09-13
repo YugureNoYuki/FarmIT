@@ -1,0 +1,276 @@
+﻿
+@{
+    ViewBag.Title = "Steps to Clock in and Out";
+}
+
+<style>
+    .breadcrumb {
+        display: inline-block;
+        overflow: hidden;
+        border-radius: 0px;
+        counter-reset: flag;
+        text-align: center;
+        font-family: Arial;
+        font-size: 12px;
+        font-weight: 700;
+        position: center;
+        background: #3c789e;
+        margin-left: -15px;
+    }
+
+        .breadcrumb a {
+            text-decoration: none;
+            outline: none;
+            display: block;
+            float: left;
+            font-size: 12px;
+            line-height: 36px;
+            padding: 0 10px 0 60px;
+            background: #d1d1d1;
+            color: black;
+            position: relative;
+            box-shadow: 0 3px 6px black;
+        }
+
+            .breadcrumb a:first-child {
+                padding-left: 46px;
+                border-radius: 5px 0 0 5px;
+            }
+
+                .breadcrumb a:first-child:before {
+                    left: 14px;
+                }
+
+            .breadcrumb a:last-child {
+                border-radius: 0 5px 5px 0;
+                padding-right: 20px;
+            }
+
+            .breadcrumb a:after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: -18px;
+                width: 36px;
+                height: 36px;
+                transform: scale(0.707) rotate(45deg);
+                z-index: 1;
+                background: #d1d1d1;
+                box-shadow: 2px -2px 0 2px rgba(0, 0, 0, 0.4), 3px -3px 0 2px rgba(255, 255, 255, 0.1);
+                border-radius: 0 5px 0 50px;
+            }
+
+            .breadcrumb a:last-child:after {
+                content: none;
+            }
+
+            .breadcrumb a:before {
+                content: counter(flag);
+                counter-increment: flag;
+                border-radius: 50%;
+                width: 20px;
+                height: 20px;
+                line-height: 20px;
+                margin: 8px 0;
+                position: absolute;
+                top: 0;
+                left: 30px;
+                color: black;
+                background: white;
+            }
+
+            .breadcrumb a:hover, .breadcrumb a.active,
+            .breadcrumb a:hover:after, .breadcrumb a.active:after {
+                transition: all 0.5s;
+                background: #47A447;
+                color: white;
+            }
+
+    body {
+        background-color: #3c789e;
+        color: white;
+    }
+
+    #LandScape {
+        height: 230px;
+        width: 400px;
+    }
+
+    #Portrait {
+        height: 450px;
+        width: 280px;
+    }
+
+    #Weird {
+        height: 350px;
+        width: 350px;
+    }
+
+    h2 {
+        font-weight: 600;
+        text-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    h3 {
+        font-weight: 600;
+        color: #003c91;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .row {
+        position: relative;
+        margin-bottom: 50px;
+    }
+
+
+    #greenHR {
+        visibility: hidden;
+    }
+
+    #blueHR {
+        visibility: hidden;
+    }
+
+    footer {
+        visibility: hidden;
+    }
+
+    .navbar {
+        position: fixed !important;
+        width: 100%;
+    }
+
+    label {
+        color: black;
+    }
+
+    .Steps {
+        font-size: 20px;
+        color: #3C789E;
+    }
+
+    .panel-success {
+        padding: 20px;
+        background-color: #d2def2;
+        font-size: 18px;
+    }
+</style>
+
+<br />
+<br />
+<br />
+<br />
+<div class="breadcrumb">
+    @Html.ActionLink("Home", "Index", "Home")
+    @Html.ActionLink("Farm Worker Action Page", "ActionPage", "FarmWorker")
+    <a class="active">Steps to Clock in and Out</a>
+</div>
+
+
+<h2>Steps to Clock in and Out</h2>
+
+<br />
+
+<div class="panel panel-success" style="margin-bottom:100px;">
+    <h3><b> Clock in</b></h3>
+    <hr />
+    <div>
+        <div class="row">
+            <div class="col-md-6">
+                <img id="Portrait" src="~/Images/Login Screen.jpeg" />
+            </div>
+            <div class="col-md-6" style="margin-top: 190px;">
+                <label class="Steps">Step 1:</label> <br />
+                <label>Log In from the Mobile Device</label>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div>
+        <div class="row">
+            <div class="col-md-6">
+                <img id="Portrait" src="~/Images/Clock in or Out.jpeg" />
+            </div>
+            <div class="col-md-6" style="margin-top: 190px;">
+                <label class="Steps">Step 2:</label> <br />
+                <label>Click on the Clock In Button on the Left</label>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div>
+        <div class="row">
+            <div class="col-md-6">
+                <img id="Weird" src="~/Images/Scan QR Code.jpg" />
+            </div>
+            <div class="col-md-6" style="margin-top: 130px;">
+                <label class="Steps">Step 3:</label> <br />
+                <label>Aim the Camera at the Farm Worker's QR Code Tag</label>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div>
+        <div class="row" style="margin-bottom: 100px;">
+            <div class="col-md-6">
+                <img id="LandScape" src="~/Images/Clock in Success.jpeg" />
+            </div>
+            <div class="col-md-6" style="margin-top: 70px;">
+                <label class="Steps">Step 4:</label> <br />
+                <label>A Successful Confirmation will pop up showing that the Farm Worker has successfully Clocked in</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-success">
+    <h3><b> Clock Out</b></h3>
+    <hr />
+    <div>
+        <div class="row">
+            <div class="col-md-6">
+                <img id="Portrait" src="~/Images/Login Screen.jpeg" />
+            </div>
+            <div class="col-md-6" style="margin-top: 190px;">
+                <label class="Steps">Step 1:</label> <br />
+                <label>Log In from the Mobile Device</label>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div>
+        <div class="row">
+            <div class="col-md-6">
+                <img id="Portrait" src="~/Images/Clock in or Out.jpeg" />
+            </div>
+            <div class="col-md-6" style="margin-top: 190px;">
+                <label class="Steps">Step 2:</label> <br />
+                <label>Click on the Clock Out Button on the Right</label>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div>
+        <div class="row">
+            <div class="col-md-6">
+                <img id="Weird" src="~/Images/Scan QR Code.jpg" />
+            </div>
+            <div class="col-md-6" style="margin-top: 130px;">
+                <label class="Steps">Step 3:</label> <br />
+                <label>Aim the Camera at the Farm Worker's QR Code Tag</label>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div>
+        <div class="row">
+            <div class="col-md-6">
+                <img id="LandScape" src="~/Images/Clock Out Success.jpeg" />
+            </div>
+            <div class="col-md-6" style="margin-top: 70px;">
+                <label class="Steps">Step 4:</label> <br />
+                <label>A Successful Confirmation will pop up showing that the Farm Worker has successfully Clocked out</label>
+            </div>
+        </div>
+    </div>
+</div>

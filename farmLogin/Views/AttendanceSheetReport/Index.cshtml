@@ -1,0 +1,47 @@
+﻿@model IEnumerable<farmLogin.Models.AttendenceSheet>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Attendance Sheet</h2>
+
+<table class="table table-condensed table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ClockInTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClockOutTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FarmWorker.FarmWorkerFName)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.User.UserEmailAddress)
+                </th>*@
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClockInTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClockOutTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FarmWorker.FarmWorkerFName)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.User.UserEmailAddress)
+                </td>*@
+        </tr>
+    }
+
+</table>
+<br /><br />
+<a href="@Url.Action("Export","AttendanceSheetReport")">Export Report</a>

@@ -1,0 +1,152 @@
+﻿@model farmLogin.Models.FarmWorker
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>FarmWorker</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FarmWorkerFName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FarmWorkerFName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FarmWorkerLName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FarmWorkerLName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FarmWorkerContactNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FarmWorkerContactNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FarmWorkerImg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FarmWorkerImg)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Surburb)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Surburb)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContractStartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContractStartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContractEndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContractEndDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FarmWorkerIDNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FarmWorkerIDNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Country.CountryDescr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country.CountryDescr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Farm.FarmName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Farm.FarmName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FarmWorkerType.FarmWorkerTypeDescr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FarmWorkerType.FarmWorkerTypeDescr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender.GenderDescr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gender.GenderDescr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Province.ProvinceDescr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Province.ProvinceDescr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title.TitleDescr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title.TitleDescr)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

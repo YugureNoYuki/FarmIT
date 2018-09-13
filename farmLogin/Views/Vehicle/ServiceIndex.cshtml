@@ -1,0 +1,59 @@
+﻿@model IEnumerable<farmLogin.Models.VehicleService>
+
+@{
+    ViewBag.Title = "ServiceIndex";
+}
+
+<h2>Vehicle Services</h2>
+
+<table class="table table-striped table-condensed">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.VehicleService_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VehicleService_Cost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VehicleServiceRecord)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Unit1.UnitDescr)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vehicle1.VehName)
+        </th>
+        <th>
+            Actions
+        </th>
+    </tr>
+        </thead>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.VehicleService_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VehicleService_Cost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VehicleServiceRecord)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Unit1.UnitDescr)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Vehicle1.VehName)
+        </td>
+        <td>
+            <a href="@Url.Action("EditService", new { id = item.VehicleServiceID })" data-toggle="tooltip" title="Update Vehicle Service">
+                <i class="glyphicon glyphicon-pencil"></i>
+                <span class="sr-only">VehicleService</span>
+            </a>
+        </td>
+    </tr>
+}
+
+</table>

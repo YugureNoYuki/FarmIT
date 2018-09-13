@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2201108c52d54fa8a64d933c3546f2ad" Name="Diagram1">
+        <EntityTypeShape EntityType="FarmDbModel.AttendenceSheet" Width="1.5" PointX="8" PointY="44.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.Audit" Width="1.5" PointX="6" PointY="50.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.AuditType" Width="1.5" PointX="3.75" PointY="63.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.BiologicalDisaster" Width="1.5" PointX="5.75" PointY="33.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.Country" Width="1.5" PointX="1.5" PointY="46.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.CropCycle" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.CropType" Width="1.5" PointX="0.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.Customer" Width="1.5" PointX="3.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.Farm" Width="1.5" PointX="1.5" PointY="33.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.FarmWorker" Width="1.5" PointX="5.75" PointY="37.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.FarmWorkerType" Width="1.5" PointX="3.5" PointY="55.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.Field" Width="1.5" PointX="0.75" PointY="22.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.FieldBiologicalDisaster" Width="1.5" PointX="8" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.FieldNaturalDisaster" Width="1.5" PointX="8" PointY="26.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.FieldStage" Width="1.5" PointX="0.75" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.FieldStatu" Width="1.5" PointX="1.5" PointY="26.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.FieldTreatment" Width="1.5" PointX="8.25" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.Gender" Width="1.5" PointX="3.5" PointY="58.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.Inventory" Width="1.5" PointX="3" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.InventoryTreatment" Width="1.5" PointX="5.25" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.InventoryType" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.Land" Width="1.5" PointX="1.5" PointY="29.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.Log" Width="1.5" PointX="6" PointY="54.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.NaturalDisaster" Width="1.5" PointX="5.75" PointY="45" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.Order" Width="1.5" PointX="6" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.OrderLine" Width="1.5" PointX="11.25" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.OrderStatu" Width="1.5" PointX="3.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.Plantation" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.Province" Width="1.5" PointX="1.5" PointY="42.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.RainfallRecord" Width="1.5" PointX="3" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.Sale" Width="1.5" PointX="6" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.Silo" Width="1.5" PointX="3" PointY="38.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.SiloHarvest" Width="1.5" PointX="5.25" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.SiloHarvestSale" Width="1.5" PointX="11.25" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.Supplier" Width="1.5" PointX="3.75" PointY="28.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.Title" Width="1.5" PointX="3.5" PointY="60.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.Treatment" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.Unit" Width="1.5" PointX="0.75" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.User" Width="1.5" PointX="3.75" PointY="49.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.UserAccessLevel" Width="1.5" PointX="1.5" PointY="51" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.Vehicle" Width="1.5" PointX="9" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.VehicleMake" Width="1.5" PointX="6.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.VehicleService" Width="1.5" PointX="14.25" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmDbModel.VehicleType" Width="1.5" PointX="6.75" PointY="29" IsExpanded="true" />
+        <AssociationConnector Association="FarmDbModel.FK__Attendenc__FarmW__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Attendenc__UserI__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Audit__AuditType__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Audit__UserID__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__FieldBiol__BioDi__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Customer__Countr__123EB7A3" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__FarmWorke__Count__37A5467C" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Province__Countr__145C0A3F" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Supplier__Countr__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Plantatio__CropC__05D8E0BE" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Plantatio__CropT__04E4BC85" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Customer__Provin__1332DBDC" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Sale__CustomerID__17036CC0" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Farm__ProvinceID__173876EA" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__FarmWorke__FarmI__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Land__FarmID__1A14E395" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Order__FarmID__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Vehicle__Farm__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__FarmWorke__FarmW__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__FarmWorke__Gende__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__FarmWorke__Provi__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__FarmWorke__Title__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Field__FieldStat__22AA2996" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Field__LandID__239E4DCF" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__FieldBiol__Field__2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__FieldNatu__Field__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__FieldTrea__Field__76969D2E" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Plantatio__Field__03F0984C" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__FieldNatu__NatDi__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Plantatio__Field__06CD04F7" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__FieldTrea__Treat__778AC167" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Inventory__Inven__72C60C4A" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Inventory__InvTy__6D0D32F4" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Inventory__Unit__6C190EBB" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__OrderLine__Inven__7B5B524B" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Inventory__Treat__71D1E811" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__InventoryT__Unit__73BA3083" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__RainfallR__LandI__1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Log__UserID__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Order__OrderStat__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Order__SupplierI__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Order__UnitID__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Order__UserID__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__OrderLine__Order__7A672E12" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Plantatio__Refug__07C12930" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Plantatio__Yield__08B54D69" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__SiloHarve__Plant__0F624AF8" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Supplier__Provin__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__RainfallR__UnitI__1CF15040" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Sale__UnitID__160F4887" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__SiloHarve__SaleI__1AD3FDA4" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Silo__UnitID__0B91BA14" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__SiloHarve__SiloI__0E6E26BF" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__SiloHarve__SiloH__19DFD96B" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Vehicle__UnitID__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__VehicleSe__UnitI__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__User__UserAccess__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Vehicle__VehMake__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__Vehicle__VehType__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmDbModel.FK__VehicleSe__Vehic__5AEE82B9" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

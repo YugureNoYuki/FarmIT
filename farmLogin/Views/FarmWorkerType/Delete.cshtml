@@ -1,0 +1,39 @@
+﻿@model farmLogin.Models.FarmWorkerType
+@{
+    ViewBag.Title = "Delete";
+}
+<h2>Delete</h2>
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>FarmWorkerType</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FarmWorkerTypeDescr)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FarmWorkerTypeDescr)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FarmWorkerTypeNotes)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FarmWorkerTypeNotes)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FarmWorkerTypeActiveStatus)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FarmWorkerTypeActiveStatus)
+        </dd>
+    </dl>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

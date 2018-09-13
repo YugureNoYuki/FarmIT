@@ -1,0 +1,2 @@
+C:\Users\Yuki\Desktop\farmLogin\farmLogin\obj\Debug\farmLogin.dll
+C:\Users\Yuki\Desktop\farmLogin\farmLogin\obj\Debug\farmLogin.pdb

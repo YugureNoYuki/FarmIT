@@ -1,0 +1,344 @@
+﻿@model farmLogin.Models.UserAccessLevel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<style>
+    #Confirm {
+        font-family: Arial;
+        font-weight: 600;
+        font-size: 12px;
+        display: inline-block;
+        background-color: #52963f;
+        border-color: #52963f;
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+        #Confirm:hover {
+            background-color: #24820e;
+            border-color: #24820e;
+            transition: 0.3s;
+        }
+        /*Red Button*/
+    #Cancel {
+        font-family: Arial;
+        font-weight: 600;
+        font-size: 12px;
+        display: inline-block;
+        background-color: #e0422a;
+        border-color: #e0422a;
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+       #Cancel:hover {
+            background-color: #bc1c03;
+            border-color: #bc1c03;
+            transition: 0.3s;
+        }
+
+    .breadcrumb {
+        display: inline-block;
+        overflow: hidden;
+        border-radius: 0px;
+        counter-reset: flag;
+        text-align: center;
+        font-family: Arial;
+        font-size: 12px;
+        font-weight: 700;
+        position: center;
+        background: #87CEFA;
+        margin-left: -15px;
+    }
+
+        .breadcrumb a {
+            text-decoration: none;
+            outline: none;
+            display: block;
+            float: left;
+            font-size: 12px;
+            line-height: 36px;
+            padding: 0 10px 0 60px;
+            background: #d1d1d1;
+            color: black;
+            position: relative;
+            box-shadow: 0 3px 6px black;
+        }
+
+            .breadcrumb a:first-child {
+                padding-left: 46px;
+                border-radius: 5px 0 0 5px;
+            }
+
+                .breadcrumb a:first-child:before {
+                    left: 14px;
+                }
+
+            .breadcrumb a:last-child {
+                border-radius: 0 5px 5px 0;
+                padding-right: 20px;
+            }
+
+            .breadcrumb a:after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: -18px;
+                width: 36px;
+                height: 36px;
+                transform: scale(0.707) rotate(45deg);
+                z-index: 1;
+                background: #d1d1d1;
+                box-shadow: 2px -2px 0 2px rgba(0, 0, 0, 0.4), 3px -3px 0 2px rgba(255, 255, 255, 0.1);
+                border-radius: 0 5px 0 50px;
+            }
+
+            .breadcrumb a:last-child:after {
+                content: none;
+            }
+
+            .breadcrumb a:before {
+                content: counter(flag);
+                counter-increment: flag;
+                border-radius: 50%;
+                width: 20px;
+                height: 20px;
+                line-height: 20px;
+                margin: 8px 0;
+                position: absolute;
+                top: 0;
+                left: 30px;
+                color: black;
+                background: white;
+            }
+
+            .breadcrumb a:hover, .breadcrumb a.active,
+            .breadcrumb a:hover:after, .breadcrumb a.active:after {
+                transition: all 0.5s;
+                background: #47A447;
+                color: white;
+            }
+
+    body {
+        background-color: #87CEFA;
+    }
+
+    .panel {
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    #PanelContent {
+        color: black;
+        margin-left: 60px;
+    }
+
+    .panel:hover span {
+        color: #1b8bc6;
+        transition: 0.5s;
+    }
+
+    .panel-success {
+        color: green;
+    }
+
+    .btn {
+        font-weight: 600;
+        background-color: #47A447;
+        font-family: Arial;
+        font-size: 14px;
+        display: inline-block;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        width: 100px;
+        border-radius: 5%;
+    }
+
+        .btn:hover {
+            background-color: #25820F;
+            transition: 0.5s;
+        }
+
+    #btnBack {
+        left: -10px;
+    }
+
+    #btnSave {
+        right: -10px;
+    }
+
+    .panel > .panel-heading {
+        background-image: none;
+        background-color: #d8d8d8;
+    }
+</style>
+
+<div class="breadcrumb">
+    @Html.ActionLink("Home", "Index", "Home")
+    @Html.ActionLink("User Action Page", "ActionPage", "User")
+    @Html.ActionLink("Manage User Access Role", "Index", "UserAccessLevel")
+    <a class="active">Add User Access Role</a>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @*<div class="form-group">*@
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-lock"></span> &nbsp; Add User Access Role Details</b></h3>
+        </div>
+        <div style="color: red">
+            @if (@ViewBag.Error != null)
+                {
+                <label><br />&nbsp;&nbsp; @ViewBag.Error <br /></label>
+            }
+
+        </div>
+        <div class="panel-body">
+            <div class="form-horizontal">
+                <div class="row" id="PanelContent">
+                    <div class="col-xs-6 col-md-8">
+                        <div class="form-group">
+                            <div class="col-xs-6 col-md-8">
+                                @Html.LabelFor(model => model.UserAccessLevelDescr, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.UserAccessLevelDescr, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.UserAccessLevelDescr, "", new { @class = "text-danger" })
+                                </div>
+                        </div>
+                    </div>
+                    
+                    </div>
+                <div class="row" id="PanelContent">
+                    <div class="col-xs-6 col-md-8">
+                        <div class="form-group">
+                            <div class="col-xs-6 col-md-8">
+                                @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-2" })
+                            </div>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+           </div>
+        </div>
+
+        <div class="input-group">
+            <div class="input-group-btn">
+                <button class="btn btn-success" type="button" id="btnSave" data-toggle="modal" data-target="#confirm-submit">
+                    <span class="glyphicon glyphicon-save"></span>
+                    Save
+                </button>
+            </div>
+        </div>
+
+            <!-- Modal -->
+        <div class="modal fade" id="confirm-submit" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" aria-hidden="true" data-dismiss=" modal">&times;</button>
+                        <h4 class="modal-title">Confirmation</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Please confirm that you want to save these details.</p>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button id="Confirm" type="submit" class="btn btn-success" style="float:right" id="confirmBtn">CONFIRM</button>
+                        <button id ="Cancel" type="button" class="btn btn-warning" data-dismiss="modal" style="float: left">CANCEL</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+}
+<div class="row">
+
+    <div class="col-xs-6 col-md-4">
+        @using (Html.BeginForm("Index", "UserAccessLevel", FormMethod.Get, new { @class = "form-inline" }))
+        {
+            <div class="col-xs-6 col-md-4">
+                <div class=input-group>
+                    <div class="input-group-btn">
+                        <button class="btn btn-success" type="submit" id="btnBack">
+                            <span class="glyphicon glyphicon-arrow-left"></span>
+                            Back
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript">
+         @Model.JavaScriptToRun
+
+            function mySuccess() {
+                swal({
+                    icon: "success",
+                    title: "Success!",
+                    text: "Item has successfully been added.",
+                    type: "warning"
+                }).then(function () {
+
+                window.location = "/UserAccessLevel/Index"
+            })
+
+
+        }
+    </script>
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <script>
+        $(function () {
+
+            // We can attach the `fileselect` event to all file inputs on the page
+            $(document).on('change', ':file', function () {
+                var input = $(this),
+                    numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                input.trigger('fileselect', [numFiles, label]);
+            });
+
+            // We can watch for our custom `fileselect` event like this
+            $(document).ready(function () {
+                $(':file').on('fileselect', function (event, numFiles, label) {
+
+                    var input = $(this).parents('.input-group').find(':text'),
+                        log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+                    if (input.length) {
+                        input.val(log);
+                    } else {
+                        if (log) alert(log);
+                    }
+
+                });
+            });
+
+        });
+    </script>
+}
+
+
+
+
+
+

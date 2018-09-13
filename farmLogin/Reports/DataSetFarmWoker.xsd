@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSetFarmWoker" targetNamespace="http://tempuri.org/DataSetFarmWoker.xsd" xmlns:mstns="http://tempuri.org/DataSetFarmWoker.xsd" xmlns="http://tempuri.org/DataSetFarmWoker.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSetFarmWoker" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSetFarmWoker" msprop:Generator_UserDSName="DataSetFarmWoker">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="FarmWorker" msprop:Generator_TableClassName="FarmWorkerDataTable" msprop:Generator_TableVarName="tableFarmWorker" msprop:Generator_TablePropName="FarmWorker" msprop:Generator_RowDeletingName="FarmWorkerRowDeleting" msprop:Generator_RowChangingName="FarmWorkerRowChanging" msprop:Generator_RowEvHandlerName="FarmWorkerRowChangeEventHandler" msprop:Generator_RowDeletedName="FarmWorkerRowDeleted" msprop:Generator_UserTableName="FarmWorker" msprop:Generator_RowChangedName="FarmWorkerRowChanged" msprop:Generator_RowEvArgName="FarmWorkerRowChangeEvent" msprop:Generator_RowClassName="FarmWorkerRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Id" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:string" />
+              <xs:element name="FirstName" msprop:Generator_ColumnVarNameInTable="columnFirstName" msprop:Generator_ColumnPropNameInRow="FirstName" msprop:Generator_ColumnPropNameInTable="FirstNameColumn" msprop:Generator_UserColumnName="FirstName" type="xs:string" minOccurs="0" />
+              <xs:element name="LastName" msprop:Generator_ColumnVarNameInTable="columnLastName" msprop:Generator_ColumnPropNameInRow="LastName" msprop:Generator_ColumnPropNameInTable="LastNameColumn" msprop:Generator_UserColumnName="LastName" type="xs:string" minOccurs="0" />
+              <xs:element name="IDNumber" msprop:Generator_ColumnVarNameInTable="columnIDNumber" msprop:Generator_ColumnPropNameInRow="IDNumber" msprop:Generator_ColumnPropNameInTable="IDNumberColumn" msprop:Generator_UserColumnName="IDNumber" type="xs:string" minOccurs="0" />
+              <xs:element name="ContactNumber" msprop:Generator_ColumnVarNameInTable="columnContactNumber" msprop:Generator_ColumnPropNameInRow="ContactNumber" msprop:Generator_ColumnPropNameInTable="ContactNumberColumn" msprop:Generator_UserColumnName="ContactNumber" type="xs:string" minOccurs="0" />
+              <xs:element name="Title" msprop:Generator_ColumnVarNameInTable="columnTitle" msprop:Generator_ColumnPropNameInRow="Title" msprop:Generator_ColumnPropNameInTable="TitleColumn" msprop:Generator_UserColumnName="Title" type="xs:string" minOccurs="0" />
+              <xs:element name="Gender" msprop:Generator_ColumnVarNameInTable="columnGender" msprop:Generator_ColumnPropNameInRow="Gender" msprop:Generator_ColumnPropNameInTable="GenderColumn" msprop:Generator_UserColumnName="Gender" type="xs:string" minOccurs="0" />
+              <xs:element name="ContractStartDate" msprop:Generator_ColumnVarNameInTable="columnContractStartDate" msprop:Generator_ColumnPropNameInRow="ContractStartDate" msprop:Generator_ColumnPropNameInTable="ContractStartDateColumn" msprop:Generator_UserColumnName="ContractStartDate" type="xs:string" minOccurs="0" />
+              <xs:element name="ContractEndDate" msprop:Generator_ColumnVarNameInTable="columnContractEndDate" msprop:Generator_ColumnPropNameInRow="ContractEndDate" msprop:Generator_ColumnPropNameInTable="ContractEndDateColumn" msprop:Generator_UserColumnName="ContractEndDate" type="xs:string" minOccurs="0" />
+              <xs:element name="FarmWorkerType" msprop:Generator_ColumnVarNameInTable="columnFarmWorkerType" msprop:Generator_ColumnPropNameInRow="FarmWorkerType" msprop:Generator_ColumnPropNameInTable="FarmWorkerTypeColumn" msprop:Generator_UserColumnName="FarmWorkerType" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:FarmWorker" />
+      <xs:field xpath="mstns:Id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

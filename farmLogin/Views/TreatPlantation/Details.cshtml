@@ -1,0 +1,50 @@
+﻿@model farmLogin.Models.InventoryTreatment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>InventoryTreatment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TreatmentQnty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TreatmentQnty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Inventory.InvDescr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Inventory.InvDescr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Treatment.TreatmentDescr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Treatment.TreatmentDescr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Unit1.UnitDescr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Unit1.UnitDescr)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

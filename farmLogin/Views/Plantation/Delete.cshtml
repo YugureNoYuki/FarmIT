@@ -1,0 +1,120 @@
+﻿@model farmLogin.Models.Plantation
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Plantation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DatePlanted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DatePlanted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RefugeSeedAmntUsed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RefugeSeedAmntUsed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RefugeAreaHectares)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RefugeAreaHectares)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpectedYieldQnty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpectedYieldQnty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateHarvested)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateHarvested)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlantationStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlantationStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CropCycle.CropCycleDescr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CropCycle.CropCycleDescr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CropType.CropTypeDescr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CropType.CropTypeDescr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Field.FieldName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Field.FieldName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FieldStage.FieldStageDescr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FieldStage.FieldStageDescr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Unit.UnitDescr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Unit.UnitDescr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Unit1.UnitDescr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Unit1.UnitDescr)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

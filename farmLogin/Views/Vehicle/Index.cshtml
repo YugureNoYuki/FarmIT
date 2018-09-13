@@ -1,0 +1,463 @@
+﻿@model farmLogin.ViewModels.VehicleIndexViewModel
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<style>
+    .breadcrumb {
+        display: inline-block;
+        overflow: hidden;
+        border-radius: 0px;
+        counter-reset: flag;
+        text-align: center;
+        font-family: Arial;
+        font-size: 12px;
+        font-weight: 700;
+        position: center;
+        background: #fff;
+        margin-left: -15px;
+    }
+
+        .breadcrumb a {
+            text-decoration: none;
+            outline: none;
+            display: block;
+            float: left;
+            font-size: 12px;
+            line-height: 36px;
+            padding: 0 10px 0 60px;
+            background: #d1d1d1;
+            color: black;
+            position: relative;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        }
+
+            .breadcrumb a:first-child {
+                padding-left: 46px;
+                border-radius: 5px 0 0 5px;
+            }
+
+                .breadcrumb a:first-child:before {
+                    left: 14px;
+                }
+
+            .breadcrumb a:last-child {
+                border-radius: 0 5px 5px 0;
+                padding-right: 20px;
+            }
+
+            .breadcrumb a:after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: -18px;
+                width: 36px;
+                height: 36px;
+                transform: scale(0.707) rotate(45deg);
+                z-index: 1;
+                background: #d1d1d1;
+                box-shadow: 2px -2px 0 2px rgba(0, 0, 0, 0.4), 3px -3px 0 2px rgba(255, 255, 255, 0.1);
+                border-radius: 0 5px 0 50px;
+            }
+
+            .breadcrumb a:last-child:after {
+                content: none;
+            }
+
+            .breadcrumb a:before {
+                content: counter(flag);
+                counter-increment: flag;
+                border-radius: 50%;
+                width: 20px;
+                height: 20px;
+                line-height: 20px;
+                margin: 8px 0;
+                position: absolute;
+                top: 0;
+                left: 30px;
+                color: black;
+                background: white;
+            }
+
+
+            .breadcrumb a:hover, .breadcrumb a.active,
+            .breadcrumb a:hover:after, .breadcrumb a.active:after {
+                transition: all 0.5s;
+                background: #47A447;
+                color: white;
+            }
+
+    body {
+        background-color: #fff;
+    }
+
+    .panel {
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    #PanelContent {
+        color: black;
+        margin-left: 60px;
+    }
+
+    .panel:hover span {
+        color: #1b8bc6;
+        transition: 0.5s;
+    }
+
+    .panel-success {
+        color: green;
+    }
+
+    .btn {
+        font-weight: 600;
+        background-color: #479CE5;
+        border-color: #428bca;
+        font-family: Arial;
+        font-size: 14px;
+        display: inline-block;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        width: auto !important;
+        border-radius: 5%;
+    }
+
+        .btn:hover {
+            background: #2072d6;
+            border-color: #2072d6;
+            transition: 0.5s;
+        }
+
+    .btn-primary {
+        font-weight: 600;
+        background-color: #428bca;
+        border-color: #357ebd;
+        font-family: Arial;
+        font-size: 14px;
+        display: inline-block;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        width: auto !important;
+        border-radius: 5%;
+    }
+
+    .well {
+        background-image: none;
+        background-color: #eaeaea;
+    }
+
+    .table-heading {
+        color: #0AA633;
+    }
+
+    #ActionIcon:hover {
+        transform: scale(1.3);
+        transition: 0.3s;
+        -webkit-backface-visibility: hidden;
+        -ms-transform: scale(1.3);
+        -webkit-transform: scale(1.3);
+    }
+
+    .glyphicon-pencil {
+        color: #47A447;
+    }
+
+    .glyphicon-eye-open {
+        color: #479ce5;
+    }
+
+    .glyphicon-trash {
+        color: red;
+    }
+
+    .glyphicon-dashboard
+    {
+        color: #f24713;
+    }
+
+    .glyphicon-wrench
+    {
+        color: #2724b7;
+    }
+
+    #SearchBar {
+        right: -20px;
+    }
+
+    .btn-info {
+        right: 20px;
+    }
+
+
+    .pagination {
+        background: red;
+    }
+
+    #Filter {
+        right: -50px;
+    }
+
+    td > a {
+        padding: 3px;
+    }
+
+    .filterDropdown {
+        width: 20px;
+    }
+
+    .col-form-label {
+        top: 8px;
+        left: 20px;
+    }
+
+    .pagination > li > a {
+        font-weight: 600;
+        border-color: #428BCA;
+        font-family: Arial;
+        font-size: 14px;
+        /*box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);*/
+    }
+
+        .pagination > li > a:hover {
+            background: #428BCA;
+            border-color: #428BCA;
+            transition: 0.5s;
+            color: white;
+            /*box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);*/
+        }
+</style>
+
+<div class="breadcrumb">
+    @Html.ActionLink("Home", "Index", "Home")
+    @Html.ActionLink("Vehicle Action Page", "ActionPage", "Vehicle")
+    <a class="active">Manage Vehicles</a>
+</div>
+
+<div class="well">
+    <div class="row">
+
+        <div class="col-xs-6 col-md-2">
+            @using (Html.BeginForm("Create", "Vehicle", FormMethod.Get, new { @class = "form-inline" }))
+            {
+                <div class="input-group">
+                    <div class="input-group-btn">
+                        <button class="btn btn-success" type="submit">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Add Vehicle
+                        </button>
+                    </div>
+                </div>
+            }
+        </div>
+        @*<div class="col-xs-6 col-md-2">
+                @using (Html.BeginForm("Index", "VehicleType", FormMethod.Get, new { @class = "form-inline" }))
+                {
+                    <div class="input-group">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit">
+                                <span class="glyphicon glyphicon-cog"></span>
+                                Manage Types
+                            </button>
+                        </div>
+                    </div>
+                }
+            </div>*@
+        <div class="col-xs-6 col-md-5">
+            @using (Html.BeginForm("Index", "Vehicle", FormMethod.Get))
+            {
+                <div class="input-group" id="Filter">
+                    <label for="FilterDropdown" class="col-sm-6 col-form-label">Filter by type</label>
+                    <div class="col-sm-6">
+                        <span class="filterDropdown">@Html.DropDownListFor(vm => vm.VehicleType, Model.VehTypeFilterItems, "All", new { id = "FilterDropdown", @class = "form-control", onchange = "this.form.submit();" })</span>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-xs-6 col-md-5">
+            @using (Html.BeginForm("Index", "Vehicle", FormMethod.Get, new { @class = "form-inline" }))
+            {
+                <div class="input-group" id="SearchBar">
+                    <span>@Html.TextBox("Search", null, new { @class = "form-control", @placeholder = "Enter search keyword or phrase" })</span>
+                    <div class="input-group-btn">
+                        <button class="btn btn-info" type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<table class="table table-condensed table-striped">
+    <thead>
+        <tr>
+            <th>
+                <span style="color:green;">@Html.DisplayNameFor(model => model.Vehicles.First().VehName)</span>
+            </th>
+            <th>
+                <span style="color:green;">@Html.DisplayNameFor(model => model.Vehicles.First().VehModel)</span>
+            </th>
+            <th>
+                <span style="color:green;">@Html.DisplayNameFor(model => model.Vehicles.First().VehLicenseNum)</span>
+            </th>
+            <th>
+                <span style="color:green;">@Html.DisplayNameFor(model => model.Vehicles.First().Farm1.FarmName)</span>
+            </th>
+            <th>
+                <span style="color:green;">@Html.DisplayNameFor(model => model.Vehicles.First().VehicleMake.VehMakeDescr)</span>
+            </th>
+            <th>
+                <span style="color:green;">@Html.DisplayNameFor(model => model.Vehicles.First().VehicleType.VehTypeDescr)</span>
+            </th>
+            <th>
+                <span style="color:green;">Actions</span>
+            </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model.Vehicles)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.VehName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VehModel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VehLicenseNum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Farm1.FarmName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VehicleMake.VehMakeDescr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VehicleType.VehTypeDescr)
+            </td>
+            <td>
+                <a href="@Url.Action("Details", new { id = item.VehicleID })" data-toggle="tooltip" title="Details">
+                    <i class="glyphicon glyphicon-eye-open" id="ActionIcon"></i>
+                    <span class="sr-only">Details</span>
+                </a>
+                <a href="@Url.Action("Edit", new { id = item.VehicleID })" data-toggle="tooltip" title="Edit">
+                    <i class="glyphicon glyphicon-pencil" id="ActionIcon"></i>
+                    <span class="sr-only">Edit</span>
+                </a>
+                <a id="deleteItem" class="deleteItem" data-target="#basic"
+                   data-toggle="modal"
+                   data-path="@Url.Action("Delete", "Vehicle", new { id = item.VehicleID })" title="Delete">
+                    <i class="glyphicon glyphicon-trash" id="ActionIcon"></i>
+                </a>
+                <a href="@Url.Action("EditMileage", "Vehicle", new { id = item.VehicleID })" data-toggle="tooltip" title="Update Mileage">
+                    <i class="glyphicon glyphicon-dashboard" id="ActionIcon"></i>
+                    <span class="sr-only">EditMileage</span>
+                </a>
+                @*@if (this.Model.VehicleServices.VehicleID != this.Model.Vehicle.VehicleID)*@
+
+                @*<a href="@Url.Action("Create", "VehicleService", new { id = item.VehicleID })" data-toggle="tooltip" title="Capture Vehicle Service">
+                    <i class="glyphicon glyphicon-wrench" id="ActionIcon"></i>
+                    <span class="sr-only">VehicleService</span>
+                </a>*@
+                @*<a href="@Url.Action("ServiceIndex", new { id = item.VehicleID })" data-toggle="tooltip" title="View Vehicle Services">
+                        <i class="glyphicon glyphicon-eye-open"></i>
+                        <span class="sr-only">VehicleService</span>
+                    </a>*@
+
+
+            </td>
+        </tr>
+    }
+
+</table>
+<!-- MODAL -->
+<div class="modal fade" id="basic" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="false"></button>
+                <h4 class="modal-title">Delete Confirmation</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this item?
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" type="button" class="btn btn-default">Cancel</button>
+                <button id="btnContinueDelete" type="button" class="btn btn-primary">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+<p>
+    @*condition? first_expression : second_expression*@
+    @(String.IsNullOrWhiteSpace(Model.Search) ? "Showing all " : "You searched for '" + Model.Search + "' found ")@Model.Vehicles.TotalItemCount vehicles
+</p>
+
+@*Generate paging links*@
+<div>
+    @*wrap in div for presentation purpose*@
+    Page @(Model.Vehicles.PageCount < Model.Vehicles.PageNumber ? 0 : @*evaluate whether or not there are any pages to display*@
+    Model.Vehicles.PageNumber) of @Model.Vehicles.PageCount @*Display Page x of y*@
+    @Html.PagedListPager(Model.Vehicles, page => Url.Action("Index",@*Takes list of inventories and produces a hyperlink to each page*@
+    new
+    {
+        vehicletype = @Model.VehicleType,
+        Search = @Model.Search,
+        page
+    }))
+</div>
+
+@section Scripts {
+    <script>
+        var path_to_delete;
+
+        $(".deleteItem").click(function (e) {
+            path_to_delete = $(this).data('path');
+        });
+
+        $('#btnContinueDelete').click(function () {
+            window.location = path_to_delete;
+        });
+    </script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script type="text/javascript">
+        @Model.JavaScriptToRun
+    </script>
+    <script type="text/javascript">
+        @Model.JavaScriptToRun
+        function mySuccess() {
+
+            //alert('Item has successfully been added.');
+            //window.location = "/InventoryType/Index";
+
+            swal({
+                icon: "success",
+                title: "Success!",
+                text: "Item has successfully been removed.",
+                type: "warning"
+            }).then(function () {
+                window.location = "/Vehicle/Index"
+            })
+        }
+    </script>
+    <script type="text/javascript">
+        @Model.JavaScriptToRun
+        function myFail() {
+
+            //alert('Item has successfully been added.');
+            //window.location = "/InventoryType/Index";
+
+            swal({
+                icon: "error",
+                title: "Error!",
+                text: "This Type is in use by an Inventory Item.",
+                type: "warning"
+            }).then(function () {
+                window.location = "/Vehicle/Index"
+            })
+        }
+    </script>
+}

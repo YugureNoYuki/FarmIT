@@ -1,0 +1,308 @@
+﻿@model IEnumerable<farmLogin.Models.Land>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .breadcrumb {
+        display: inline-block;
+        overflow: hidden;
+        border-radius: 0px;
+        counter-reset: flag;
+        text-align: center;
+        font-family: Arial;
+        font-size: 12px;
+        font-weight: 700;
+        position: center;
+        background: #fff;
+        margin-left: -15px;
+    }
+
+        .breadcrumb a {
+            text-decoration: none;
+            outline: none;
+            display: block;
+            float: left;
+            font-size: 12px;
+            line-height: 36px;
+            padding: 0 10px 0 60px;
+            background: #d1d1d1;
+            color: black;
+            position: relative;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        }
+
+            .breadcrumb a:first-child {
+                padding-left: 46px;
+                border-radius: 5px 0 0 5px;
+            }
+
+                .breadcrumb a:first-child:before {
+                    left: 14px;
+                }
+
+            .breadcrumb a:last-child {
+                border-radius: 0 5px 5px 0;
+                padding-right: 20px;
+            }
+
+            .breadcrumb a:after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: -18px;
+                width: 36px;
+                height: 36px;
+                transform: scale(0.707) rotate(45deg);
+                z-index: 1;
+                background: #d1d1d1;
+                box-shadow: 2px -2px 0 2px rgba(0, 0, 0, 0.4), 3px -3px 0 2px rgba(255, 255, 255, 0.1);
+                border-radius: 0 5px 0 50px;
+            }
+
+            .breadcrumb a:last-child:after {
+                content: none;
+            }
+
+            .breadcrumb a:before {
+                content: counter(flag);
+                counter-increment: flag;
+                border-radius: 50%;
+                width: 20px;
+                height: 20px;
+                line-height: 20px;
+                margin: 8px 0;
+                position: absolute;
+                top: 0;
+                left: 30px;
+                color: black;
+                background: white;
+            }
+
+
+            .breadcrumb a:hover, .breadcrumb a.active,
+            .breadcrumb a:hover:after, .breadcrumb a.active:after {
+                transition: all 0.5s;
+                background: #47A447;
+                color: white;
+            }
+
+    body {
+        background-color: #fff;
+    }
+
+    .panel {
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    #PanelContent {
+        color: black;
+        margin-left: 60px;
+    }
+
+    .panel:hover span {
+        color: #1b8bc6;
+        transition: 0.5s;
+    }
+
+    .panel-success {
+        color: green;
+    }
+
+    .btn {
+        font-weight: 600;
+        background-color: #479CE5;
+        border-color: #428bca;
+        font-family: Arial;
+        font-size: 14px;
+        display: inline-block;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        width: auto !important;
+        border-radius: 5%;
+    }
+
+        .btn:hover {
+            background: #2072d6;
+            border-color: #2072d6;
+            transition: 0.5s;
+        }
+
+
+    .well {
+        background-image: none;
+        background-color: #eaeaea;
+    }
+
+    .table-heading {
+        color: #0AA633;
+    }
+
+    #ActionIcon:hover {
+        transform: scale(1.3);
+        transition: 0.3s;
+        -webkit-backface-visibility: hidden;
+        -ms-transform: scale(1.3);
+        -webkit-transform: scale(1.3);
+    }
+
+    .glyphicon-pencil {
+        color: #47A447;
+    }
+
+    .glyphicon-eye-open {
+        color: #479ce5;
+    }
+
+    .glyphicon-trash {
+        color: red;
+    }
+
+    .glyphicon-usd {
+        color: #e0bf38;
+    }
+
+    #SearchBar {
+        right: -375px;
+    }
+
+    .btn-info {
+        right: 20px;
+    }
+
+        .btn-info:hover {
+            transition: 0.5s;
+        }
+
+
+    #Filter {
+        right: -80px;
+    }
+
+    td > a {
+        padding: 3px;
+    }
+
+    #Order {
+        font-weight: 600;
+        background-color: #479CE5;
+        border-color: #428bca;
+        font-family: Arial;
+        font-size: 14px;
+        display: inline-block;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        width: auto !important;
+        border-radius: 5%;
+        color: #fff;
+    }
+
+        #Order:hover {
+            background: #2072d6;
+            border-color: #2072d6;
+            transition: 0.5s;
+        }
+
+    .pagination > li > a {
+        font-weight: 600;
+        border-color: #428BCA;
+        font-family: Arial;
+        font-size: 14px;
+        /*box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);*/
+    }
+
+        .pagination > li > a:hover {
+            background: #428BCA;
+            border-color: #428BCA;
+            transition: 0.5s;
+            color: white;
+            /*box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);*/
+        }
+</style>
+
+
+<div class="breadcrumb">
+    @Html.ActionLink("Home", "Index", "Home")
+    @Html.ActionLink("Farm Action Page", "ActionPage", "Farm")
+    <a class="active">Manage Lands</a>
+</div>
+
+
+<div class="well">
+    <div class="row">
+        <div class="col-xs-6 col-md-2">
+            @using (Html.BeginForm("Create", "Land", FormMethod.Get, new { @class = "form-inline" }))
+            {
+                <div class="input-group">
+                    <div class="input-group-btn">
+                        <button class="btn btn-success" type="submit">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Add Land
+                        </button>
+                    </div>
+                </div>
+            }
+        </div>
+        @*Not usable*@
+        <div class="col-xs-6 col-md-5" id="SearchBar">
+            @using (Html.BeginForm("Index", "Land", FormMethod.Get, new { @class = "form-inline" }))
+            {
+                <div class="input-group">
+                    <span>@Html.TextBox("Search", null, new { @class = "form-control", @placeholder = "Enter search keyword or phrase" })</span>
+                    <div class="input-group-btn">
+                        <button class="btn btn-info" type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<table class="table table-condensed table-striped">
+    <thead>
+        <tr>
+            <th class="table-heading">
+                @Html.DisplayNameFor(model => model.LandName)
+            </th>
+            <th class="table-heading">
+                Farm
+                @*@Html.DisplayNameFor(model => model.Farm.FarmName)*@
+            </th>
+            <th class="table-heading">
+                Action
+            </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LandName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Farm.FarmName)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", new { id = item.LandID})" data-toggle="tooltip" title="Edit">
+                    <i class="glyphicon glyphicon-pencil" id="ActionIcon"></i>
+                    <span class="sr-only">Edit</span>
+                </a>
+                <a href="@Url.Action("Details", new { id = item.LandID })" data-toggle="tooltip" title="Details">
+                    <i class="glyphicon glyphicon-eye-open" id="ActionIcon"></i>
+                    <span class="sr-only">Details</span>
+                </a>
+                <a href="@Url.Action("Delete", new { id = item.LandID})" data-toggle="tooltip" title="Delete">
+                    <i class="glyphicon glyphicon-trash" id="ActionIcon"></i>
+                    <span class="sr-only">Delete</span>
+                </a>
+
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+<br />
+
+

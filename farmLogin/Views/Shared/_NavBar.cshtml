@@ -1,0 +1,113 @@
+﻿
+<style>
+
+    .navbar-nav
+    {
+        margin-left: 100px;
+    }
+    div.navbar-collapse a:before {
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        left: 0px;
+        bottom: -2px;
+        content: '';
+        background: #0097bd;
+        opacity: 0.2;
+        transition: all 0.3s;
+        border-radius:10%;
+    }
+
+    div.navbar-collapse a:hover:before {
+        height: 100%;
+    }
+
+    .navbar-inverse {
+        background-color: #ffffff;
+        border-color: #28b62c;
+        border-bottom-width: 3px;
+        font-weight: 600;
+    }
+
+        .navbar-inverse #brand-image:hover {
+            content: url('../../Images/FarmIT LogoHover.png');
+            transition: 0.3s;
+        }
+
+        .navbar-inverse .navbar-text {
+            color: #999999;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: #0288d1;
+            font-family: Arial;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+            .navbar-inverse .navbar-nav > li > a:hover,
+            .navbar-inverse .navbar-nav > li > a:focus {
+                color: #0daa10;
+            }
+
+
+        .navbar-inverse .navbar-nav > .open > a,
+        .navbar-inverse .navbar-nav > .open > a:hover,
+        .navbar-inverse .navbar-nav > .open > a:focus {
+            color: #ffffff;
+            background-color: #28b62c;
+        }
+
+    #mobileNav {
+        background: #28b62c;
+        border-bottom-color: #28b62c;
+    }
+
+    #brand-image {
+        position: absolute;
+        height: 80%;
+        top: 15%;
+        left: 1%;
+    }
+
+    .LogOff {
+        position: absolute;
+        left: 25%;
+    }
+</style>
+<div class="navbar navbar-inverse navbar-static-top">
+    @*resolve overlap*@
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"></button>
+            <a class="navbar-brand" href='@Url.Action("Index", "Home")'><img id="brand-image" alt="Logo" src="~/Images/FarmIT Logo.png" /></a>
+        </div>
+
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("USER", "ActionPage", "User")</li>
+                <li style="text-align: center">@Html.ActionLink("FARM WORKER", "ActionPage", "FarmWorker")</li>
+                <li>@Html.ActionLink("FARM", "ActionPage", "Farm")</li>
+                <li>@Html.ActionLink("CROP", "ActionPage", "Plantation")</li>
+                <li>@Html.ActionLink("INVENTORY", "ActionPage", "Inventory")</li>
+                <li>@Html.ActionLink("SUPPLIER", "ActionPage", "Supplier")</li>
+                <li>@Html.ActionLink("VEHICLE", "ActionPage", "Vehicle")</li>
+                <li>@Html.ActionLink("ADMIN", "ActionPage", "Customer")</li>
+                <li>@Html.ActionLink("REPORT", "ActionPage", "Report")</li>
+
+                @*@if (Request.IsAuthenticated)
+                {
+                    @Html.AntiForgeryToken()
+                    <li class="LogOff"><a href="javascript:document.getElementById('logoutForm').submit()">LOG OFF</a></li>
+
+                }*@
+                <li class="login" id="login">
+                    @Html.Partial("_LoginPartial")
+                </li>
+            </ul>
+
+           
+
+        </div>
+    </div>
+</div>

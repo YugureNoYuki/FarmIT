@@ -1,0 +1,39 @@
+﻿@model List<farmLogin.Models.SalesReportViewModel>
+
+@{
+    ViewBag.Title = "Sales Report View";
+}
+
+<h2>@ViewBag.Title</h2>
+<table class="table table-condensed table-striped">
+    <thead>
+        <tr>
+            <th>SaleDate</th>
+            <th>CompanyName</th>
+            <th>CropTypeDescr</th>
+            <th>SiloHarvestSaleTotalAmnt</th>
+            <th>SaleAmnt</th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.SaleDate</td>
+            <td>
+                @item.CompanyName
+            </td>
+            <td>
+                @item.CropTypeDescr
+            </td>
+            <td>
+                @item.SaleAmnt
+            </td>
+            <td>
+                @item.SiloHarvestSaleTotalAmnt
+            </td>
+        </tr>
+    }
+</table>
+
+<br /><br />
+<a href="@Url.Action("Export","SalesReport")">Export Report</a>

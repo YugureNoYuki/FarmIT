@@ -1,0 +1,130 @@
+﻿<style>
+       .card {
+        text-align: center;
+        background-color: #fff;
+        padding: 20px;
+        min-width: 220px;
+        min-height: 200px;
+        margin: 0 auto;
+        margin-top: 20px;
+        border-radius: 5%;
+        justify-content: center;
+        margin-bottom: 20px;
+        box-shadow:0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    .btn {
+        margin-top: 10px !important;
+        font-family: Arial;
+        font-weight: 600;
+        font-size: 12px;
+        display: inline-block;
+        background-color: #52963f;
+        width: 150px;
+        box-shadow:0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+
+        .btn,
+        .btn::after {
+            -webkit-transition: all 0.3s;
+            -moz-transition: all 0.3s;
+            -o-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+
+            .btn::before,
+            .btn::after {
+                background: #0b689e;
+                border-radius: 5%;
+                content: '';
+                position: absolute;
+                z-index: -1;
+                left: 90px;
+            }
+
+            .btn:after {
+                height: 100%;
+                left: 90px;
+                top: 0;
+                width: 0;
+            }
+
+            .btn:hover:after {
+                width: 60%;
+                position: absolute;
+                left: 90px;
+            }
+
+            .btn:hover {
+                background-color: #24820e;
+            }
+
+
+    body {
+        background-color: #87CEFA;
+        overflow: hidden;
+    }
+
+
+    .btn:hover img {
+        transform: scale(1.2);
+        -webkit-transition: transform 0.20s ease-in-out;
+        -moz-transition: transform 0.20s ease-in-out;
+    }
+
+    .btn-success {
+        min-width: 180px;
+        margin-left: auto;
+        margin-right:auto;
+    }
+    #clockCard {
+        text-align: center;
+        background-color: #fff;
+        padding: 20px;
+        min-width: 200px;
+        min-height: 200px;
+        margin: 0 auto;
+        margin-top: 20px;
+        border-radius: 5%;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    #blankBtn{
+        background-color: transparent;
+        border-color: transparent;
+        box-shadow:0 3px 6px #fff;
+    }
+
+
+</style>
+
+@{
+    ViewBag.Title = "User - Action Page";
+}
+
+
+<div class="row" style="margin-bottom: 150px">
+    <div class="col-sm-12 col-md-6">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" id="Image" src="~/Images/1. User.png" alt="User">
+            <div class="card-body">
+                <a href='@Url.Action("Registration", "User")' class="btn btn-success btn-lg">Register User</a>
+                <a href='@Url.Action("Index", "User")' class="btn btn-success btn-lg">View User</a>
+                <a href='@Url.Action("Index", "User")' class="btn btn-success btn-lg">Manage User</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="~/Images/1. User Access Level.png" alt="User Access Role">
+            <div class="card-body">
+                <a href='@Url.Action("Create", "UserAccessLevel")' class="btn btn-success btn-lg">Add User Access Role</a>
+                <a href='@Url.Action("Index", "UserAccessLevel")' class="btn btn-success btn-lg">View User Access Role</a>
+                <a href='@Url.Action("Index", "UserAccessLevel")' class="btn btn-success btn-lg">Manage User Access Role</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+

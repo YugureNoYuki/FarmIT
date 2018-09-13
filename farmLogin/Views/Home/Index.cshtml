@@ -1,0 +1,677 @@
+﻿@model IEnumerable<farmLogin.Models.Silo>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@*<h2>Index</h2>
+
+    Welcome @HttpContext.Current.User.Identity.Name*@
+
+@*@if (Request.IsAuthenticated)
+    {
+        using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
+        {
+            <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+        }
+    }*@
+
+<html>
+
+<head>
+    <script src="~/Scripts/Chart.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    @*Weather*@
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.css">
+    <title>Local Weather App</title>
+
+
+    <style>
+        /*Style*/
+        body {
+            /*background: #F1F2F7;*/
+            overflow-x: hidden;
+            background: #dcdee2;
+        }
+
+        .charts {
+            margin-top: 5%;
+        }
+
+        /*Pie Chart*/
+        .pie {
+            width: 430px;
+            height: 320px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+            background-color: #fff;
+            margin-left: 1%;
+        }
+
+        /*Bar Chart*/
+        .bar {
+            width: 430px;
+            height: 320px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+            background-color: #fff;
+            margin-top: -26.32%;
+            margin-left: 38%;
+        }
+
+        /*Useal Footer*/
+        .body-content {
+            max-width: 90% !important;
+            min-width: 90% !important;
+        }
+
+        #greenHR {
+            visibility: hidden;
+        }
+
+        #blueHR {
+            visibility: hidden;
+        }
+
+        footer {
+            visibility: hidden;
+        }
+
+        /*Image*/
+        #DashboardImage {
+            position: absolute;
+            margin-left: -7%;
+            margin-top: -8%;
+            opacity: 1;
+        }
+        /*Video*/
+        #SystemVideo {
+            width: 120%;
+            margin-top: 10%;
+        }
+
+        /*.videoLabel {
+            position: absolute;
+            margin-top: 15%;
+            margin-left: 18%;
+            font-family: Calibri;
+            color: #4aba05;
+            font-weight: 600;
+            font-size: 35px;
+        }*/
+
+        .video-container {
+            padding-left: 0px;
+            padding-right: 0px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+        }
+
+        /*Weather*/
+        html {
+            height: 100%;
+            background: linear-gradient(to bottom, #4C739B 0%, #B0D5A7 100%) fixed;
+            background: -webkit-linear-gradient(to bottom, #4C739B 0%, #B0D5A7 100%) fixed;
+            background: -moz-linear-gradient(to bottom, #4C739B 0%, #B0D5A7 100%) fixed;
+        }
+
+        #weatherbox {
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+            /*background-color: #8FB791;*/
+            right: 6% !important;
+            border: 1px solid #FFFFFF;
+            color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: absolute;
+            margin-left: 58%;
+            max-width: 100%;
+            max-height: 100%;
+            bottom: 5vw;
+            width: 390px;
+            height: 397px;
+            border-radius: 5px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            top: 19.5%;
+        }
+
+        #topbox {
+            background-color: #28688C;
+            border-bottom: 1px #FFFFFF solid;
+            height: 20%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 25px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        #middlebox {
+            background-color: #91b6d8;
+            height: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        #midmid {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        #bottombox {
+            background-color: #569dc4;
+            height: 30%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        .bottomsides {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .wi {
+            width: 100%;
+            font-size: 55px;
+        }
+
+        button {
+            color: #FFFFFF;
+            outline: none;
+        }
+
+        #temp {
+            font-size: 75px;
+            padding-left: 10px;
+        }
+
+        .fc {
+            border: none;
+            border-radius: 50%;
+            font-size: 35px;
+            height: 1.5em;
+            width: 1.5em;
+            text-align: center;
+            text-decoration: none;
+            background: none;
+            cursor: pointer;
+            padding: 0px;
+        }
+
+            .fc:hover {
+                color: #FFFFFF;
+                border: 1px solid #FFFFFF;
+            }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            height: 5vw;
+            background-color: #000000;
+            z-index: 2;
+        }
+
+        #pagebottom {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0px 10px;
+        }
+
+        #contact {
+            margin: 0px 10px;
+            padding: 0px 10px;
+            color: #C1C1C1;
+            font-family: sans-serif;
+        }
+
+        #social {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            padding-right: 10vw;
+            height: 90%;
+        }
+
+        footer div a i {
+            color: #C1C1C1;
+            margin: 0px 10px;
+        }
+
+            footer div a i:hover {
+                color: #B0D5A7;
+            }
+
+        #siloCapacity {
+            width: 290px;
+            height: 150px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+            background-color: #fff;
+            margin-top: -85% !important;
+            margin-left: 239%;
+            text-align: center;
+        }
+
+        #SiloHarvestStored {
+            width: 290px;
+            height: 150px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+            background-color: #fff;
+            margin-top: 5% !important;
+            margin-left: 239%;
+            text-align: center;
+        }
+
+        .MoreInfo {
+            text-align: center;
+        }
+
+        .table {
+            border-top-style: none;
+            border-left-style: none;
+            border-right-style: none;
+            border-bottom-style: none;
+        }
+
+        td {
+            border: none !important;
+            text-align: left;
+        }
+
+        .table-heading {
+            color: #4f9b54;
+        }
+    </style>
+</head>
+
+<body>
+    @if (Model != null)
+    {
+        var db = new farmLogin.Models.FarmDbContext();
+        var listS = db.SiloHarvests.ToList();
+        var newData = (from a in listS
+                       join b in db.Plantations.ToList() on a.PlantationID equals b.PlantationID
+                       join c in db.CropTypes.ToList() on b.CropTypeID equals c.CropTypeID
+                       join d in db.Silos.ToList() on a.SiloID equals d.SiloID
+                       select new
+                       {
+                           SiloID = a.SiloID,
+                           CropType = c.CropTypeDescr,
+                           SiloName = d.SiloDescr
+
+                       }).Distinct().ToList();
+
+        @*@*Image*@
+        <div id="DashboardImage">
+                <img style="width: 120% !important; box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);" src="~/Images/Dashboard-Image2.jpg" />
+            </div>
+
+        @*Video*@
+        <div class="row">
+            <div class="col-md-6">
+                @*<h1 class="videoLabel">System Video</h1>*@
+                <video controls class="container video-container" id="SystemVideo">
+                    <source style="width: 50% !important; z-index:1;" src="~/Video/System Video.mp4" type="video/mp4">
+                    your browser doesn't support this video type
+                </video>
+            </div>
+
+            @*Weather*@
+            <div id="weatherbox" class="col-md-6">
+                <div id="topbox">
+                    <span class="glyphicon glyphicon-map-marker"></span><span id="city"></span>
+                </div>
+                <div id="middlebox">
+                    <div id="midmid">
+                        <span><i id="currenticon"></i></span>
+                        <span id="temp"></span>
+                        <button class="fc">C</button>
+                    </div>
+                    <span id="desc"></span>
+                </div>
+                <div id="bottombox">
+                    <div class="bottomsides">
+                        <span><i class="wi wi-raindrop"></i></span>
+                        <span id="hum"></span>
+                    </div>
+                    <div class="bottomsides">
+                        <span><i class="wi wi-strong-wind"></i></span>
+                        <span id="wind"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        @*Pie Chart*@
+            <div class="row charts">
+                <div id="chart_container" class="pie col-md-4 col-sm-4">
+                    <canvas id="pie_chart"></canvas>
+                </div>
+
+                @*Bar Graph*@
+                <div id="chart container" class="bar col-md-4 col-sm-4">
+                    <canvas id="bar_chart"></canvas>
+                </div>
+
+                @*Capacity*@
+
+                <div class="col-md-4 col-sm-4">
+                    <div id="siloCapacity" class="Capacity" style="overflow-y:scroll;">
+                        <label>Silo Capacity</label>
+                        <table class="table">
+                            <tr>
+                                <th class="table-heading">
+                                    @Html.DisplayNameFor(model => model.SiloDescr)
+                                </th>
+                                <th class="table-heading">
+                                    @Html.DisplayNameFor(model => model.SiloCapacity)
+                                </th>
+                            </tr>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SiloDescr)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SiloCapacity)
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+
+                    @*HarvestStored*@
+                    <div id="SiloHarvestStored" class="HarvestStored" style="overflow-y:scroll">
+                        <label>Crop Type Stored</label>
+                        <table class="table">
+                            <tr>
+                                <th class="table-heading">
+                                    @Html.DisplayNameFor(model => model.SiloDescr)
+                                </th>
+                                <th class="table-heading">
+                                    Crop Type
+                                </th>
+                            </tr>
+                            @foreach (var item in newData)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SiloName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CropType)
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+            }
+
+
+
+
+
+            @*Weather*@
+
+
+            <script>
+                //Pie Chart
+                var repArray = @Html.Raw(Json.Encode(ViewBag.REP));
+                var fields = @Html.Raw(Json.Encode(ViewBag.FIELDS));
+                var ctx = $("#pie_chart")
+                var myPieChart = new Chart(ctx,{
+                    type: 'pie',
+                    data:{
+                        labels: ["In Use","Harvested","Ready to Plant"],
+                        datasets:
+                            [{
+                                data:repArray,
+                                backgroundColor:["rgba(75, 192, 192)","rgba(54, 162, 235)", "rgba(255, 205, 86)"],
+                                borderColor:["rgb(75, 192, 192)", "rgb(54, 162, 235)", "rgb(255, 205, 86)"],
+                                borderWidth:3,
+                            }]
+                    },
+                    options: {
+                        maintainAspectRatio:false,
+                        legend:{
+                            position: 'left',
+                            fontColor: 'black',
+                            fontWeight: 'bold'
+                        },
+                        title: {
+                            display: true,
+                            text: 'Current Field Status',
+                            position: 'top',
+                            fontSize: '15',
+                        },
+                        animation: { animateScale: true, animateRotate: true }
+                    }
+                })
+
+                //Bar Chart
+                var repArrayBar = @Html.Raw(Json.Encode(ViewBag.REPBAR));
+                var silos = @Html.Raw(Json.Encode(ViewBag.SILOS));
+                var ctx = $("#bar_chart")
+                var myBarChart = new Chart(ctx,{
+                    type: 'bar',
+                    data:{
+                        labels: silos,
+                        datasets:
+                            [{
+                                data:repArrayBar,
+                                backgroundColor:["#ff8e56","#a56af2", "#4BC0C0","#FF6384","#FFCD56","#36A2EB"],
+                                borderColor:["#ff8e56", "#a56af2", "#4BC0C0","#FF6384","#FFCD56","#a56af2"],
+                                borderWidth:3,
+                            }]
+                    },
+                    options: {
+                        maintainAspectRatio:false,
+                        legend: false,
+                        title: {
+                            display: true,
+                            text: 'Silo Harvest Tonnes Stored',
+                            position: 'top',
+                            fontSize: '15',
+                        },
+
+                        animation: { animateScale: true},
+                        scales: {
+                            xAxes: [{
+                                stacked: true,
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'Silos',
+                                    labelfontSize: '12',
+                                    labelfontWeight: 'bold'
+                                }
+                            }],
+                            yAxes: [{
+                                stacked: true,
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'Harvest Tonnes Stored',
+                                    labelfontSize: '12',
+                                    labelfontWeight: 'bold'
+                                }
+
+                            }]
+                        },
+
+                    }
+                })
+
+                //SiloCapacity
+
+                @*var capacity = @Html.Raw(Json.Encode(ViewBag.CAPACITY));
+        var ctx = $("#SiloCapacity")
+        var myCapacityLabel = new myCapacityLabel({
+            labels: silos, capacity
+
+        })*@
+
+
+
+                @*Weather*@
+
+                $( document ).ready(function() {
+
+                    var lat; var lon; var desc; var hum; var weatherid;
+                    var temp = []; var wind = [];
+
+                    // Request IP address from user to get location & store coordinates
+                    $.getJSON("https://ipapi.co/json", function(data) {
+                        //$("#city").html(data.city);
+                        lat = data.latitude;
+                        lon = data.longitude;
+
+                        // Get weather information
+                        // Need to add 'https://cors-anywhere.herokuapp.com/' before URL to have HTTPS using a CORS server
+                        $.getJSON("https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon +"&APPID=44762e241a2c3fc4f616e416abc08f0e", function(weatherData) {
+
+                            $("#city").html(weatherData.name);
+                            // Store temperates (celsius and fahrenheit)
+                            temp[0] = (weatherData.main.temp - 273.15).toFixed(0) + "&#176";
+                            temp[1] = (((weatherData.main.temp - 273.15)*1.8) + 32).toFixed(0) + "&#176";
+
+                            // Store description, humidity, and wind
+                            desc = weatherData.weather[0].description;
+                            hum = weatherData.main.humidity + '%';
+
+                            // Store wind (km/h and mi/h)
+                            wind[0] = (weatherData.wind.speed * 3.6).toFixed(2) + " km/h";
+                            wind[1] = (weatherData.wind.speed * 2.23).toFixed(2) + " mi/h";
+
+                            // Store weather ID for icons; change icon depending on weather conditions
+                            weatherid = (weatherData.weather[0].id);
+
+                            if (weatherid == 800) {
+                                $("#currenticon").html('<i class="wi wi-day-sunny"</i>').css({"color": "#FFE14A"});
+                            };
+
+                            var rainIcons = [300, 301, 302, 310, 311, 312, 313, 314, 321, 500, 501, 502, 503, 504, 511, 520, 521, 522, 531];
+                            for (i=0; i<rainIcons.length; i++) {
+                                if (weatherid == rainIcons[i]) {
+                                    $("#currenticon").html('<i class="wi wi-rain"</i>').css({"color": "#244A69"});
+                                };
+                            };
+
+                            var stormIcons = [200, 201, 202, 210, 211, 212, 221, 230, 231, 232];
+                            for (i=0; i<stormIcons.length; i++) {
+                                if (weatherid == stormIcons[i]) {
+                                    $("#currenticon").html('<i class="wi wi-storm-showers"></i>').css({"color": "#244A69"});
+                                };
+                            };
+
+                            var cloudIcons = [801, 802, 803, 804];
+                            for (i=0; i<cloudIcons.length; i++) {
+                                if (weatherid == cloudIcons[i]) {
+                                    $("#currenticon").html('<i class="wi wi-cloudy"></i>').css({"color": "#C1C1C1"});
+                                }
+                            }
+
+                            var snowIcons = [600, 601, 602, 611, 612, 615, 616, 620, 621, 622];
+                            for (i=0; i<snowIcons.length; i++) {
+                                if (weatherid == snowIcons[i]) {
+                                    $("#currenticon").html('<i class="wi wi-snow"></i>').css({"color": "#FFFFFF"});
+                                }
+                            }
+
+                            var atmosphereIcons = [701, 711, 721, 731, 741, 751, 761, 762, 771, 781];
+                            for (i=0; i<atmosphereIcons.length; i++) {
+                                if (weatherid == atmosphereIcons[i]) {
+                                    $("#currenticon").html('<i class="wi wi-dust"></i>').css({"color": "#C1C1C1"});
+                                }
+                            }
+
+                            var extremeIcons = [900, 901, 902, 903, 904, 905, 906];
+                            for (i=0; i<extremeIcons.length; i++) {
+                                if (weatherid == extremeIcons[i]) {
+                                    $("#currenticon").html('<i class="wi wi-storm-warning"></i>').css({"color": "#FFFFFF"});
+                                }
+                            }
+
+                            var additionalIcons = [951, 952, 953, 954, 955, 956, 957, 958, 959, 960, 961, 961];
+                            for (i=0; i<additionalIcons.length; i++) {
+                                if (weatherid == additionalIcons[i]) {
+                                    $("#currenticon").html('<i class="wi wi-hurricane-warning"></i>').css({"color": "#FFFFFF"});
+                                }
+                            }
+
+                            // Insert weather info temp
+                            $("#temp").html(temp[0]);
+                            $("#desc").html(desc);
+                            $("#hum").html(hum);
+                            $("#wind").html(wind[0]);
+                        });
+
+                        // Function to switch between units
+                        $(".fc").click (function() {
+                            if ($(".fc").text() === "C") {
+                                $(".fc").text("F");
+                                $("#temp").html(temp[1]);
+                                $("#wind").html(wind[1]);
+                            }
+                            else {
+                                $(".fc").text('C');
+                                $("#temp").html(temp[0]);
+                                $("#wind").html(wind[0]);
+                            }
+                        });
+
+                        // Switch weather icons based on description from API
+                        var weatherIcons = {
+                            sunny: ["wi-day-sunny", "#FFE14A"],
+                            cloudy: ["wi-cloudy", "#C1C1C1"],
+                            rainy: ["wi-rain", "#33436D"],
+                            storm: ["wi-storm-showers", "#33436D"],
+                            snow: ["wi-snow", "#FFFFFF"]
+                        };
+
+
+                    });
+                });
+
+            </script>
+</body>
+</html>
+

@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "SpecifyHarvestComplete";
+}
+
+<h2>SpecifyHarvestComplete</h2>
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        Please specify whether this harvest was partial or complete
+    </div>
+    <div class="panel-body">
+        <div class="input-group">
+            <a href='@Url.Action("PartialHarvest", "AddHarvestSilo")' class="btn btn-success btn-lg">Partial</a>
+            <a href='@Url.Action("CompleteHarvest", "AddHarvestSilo")' class="btn btn-success btn-lg">Complete</a>
+            <a href='@Url.Action("NotApplicable", "AddHarvestSilo")' class="btn btn-success btn-lg">Not Applicable</a>
+        </div>
+    </div>
+</div>

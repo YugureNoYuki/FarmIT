@@ -1,0 +1,544 @@
+﻿@* PLANTATION PLAN INDEX *@
+
+@Html.AntiForgeryToken()
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .breadcrumb {
+        display: inline-block;
+        overflow: hidden;
+        border-radius: 0px;
+        counter-reset: flag;
+        text-align: center;
+        font-family: Arial;
+        font-size: 12px;
+        font-weight: 700;
+        position: center;
+        background: #fff;
+        margin-left: -15px;
+    }
+
+        .breadcrumb a {
+            text-decoration: none;
+            outline: none;
+            display: block;
+            float: left;
+            font-size: 12px;
+            line-height: 36px;
+            padding: 0 10px 0 60px;
+            background: #d1d1d1;
+            color: black;
+            position: relative;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        }
+
+            .breadcrumb a:first-child {
+                padding-left: 46px;
+                border-radius: 5px 0 0 5px;
+            }
+
+                .breadcrumb a:first-child:before {
+                    left: 14px;
+                }
+
+            .breadcrumb a:last-child {
+                border-radius: 0 5px 5px 0;
+                padding-right: 20px;
+            }
+
+            .breadcrumb a:after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: -18px;
+                width: 36px;
+                height: 36px;
+                transform: scale(0.707) rotate(45deg);
+                z-index: 1;
+                background: #d1d1d1;
+                box-shadow: 2px -2px 0 2px rgba(0, 0, 0, 0.4), 3px -3px 0 2px rgba(255, 255, 255, 0.1);
+                border-radius: 0 5px 0 50px;
+            }
+
+            .breadcrumb a:last-child:after {
+                content: none;
+            }
+
+            .breadcrumb a:before {
+                content: counter(flag);
+                counter-increment: flag;
+                border-radius: 50%;
+                width: 20px;
+                height: 20px;
+                line-height: 20px;
+                margin: 8px 0;
+                position: absolute;
+                top: 0;
+                left: 30px;
+                color: black;
+                background: white;
+            }
+
+
+            .breadcrumb a:hover, .breadcrumb a.active,
+            .breadcrumb a:hover:after, .breadcrumb a.active:after {
+                transition: all 0.5s;
+                background: #47A447;
+                color: white;
+            }
+
+    body {
+        background-color: #fff;
+    }
+
+    .panel {
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    #PanelContent {
+        color: black;
+        margin-left: 60px;
+    }
+
+    .panel:hover span {
+        color: #1b8bc6;
+        transition: 0.5s;
+    }
+
+    .panel-success {
+        color: green;
+    }
+
+    .btn {
+        font-weight: 600;
+        background-color: #479CE5;
+        border-color: #428bca;
+        font-family: Arial;
+        font-size: 14px;
+        display: inline-block;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        width: auto !important;
+        border-radius: 5%;
+    }
+
+        .btn:hover {
+            background: #2072d6;
+            border-color: #2072d6;
+            transition: 0.5s;
+        }
+
+
+    .well {
+        background-image: none;
+        background-color: #eaeaea;
+    }
+
+    .table-heading {
+        color: #0AA633;
+    }
+
+    #ActionIcon:hover {
+        transform: scale(1.3);
+        transition: 0.3s;
+        -webkit-backface-visibility: hidden;
+        -ms-transform: scale(1.3);
+        -webkit-transform: scale(1.3);
+    }
+
+    .glyphicon-pencil {
+        color: #47A447;
+    }
+
+    .glyphicon-eye-open {
+        color: #479ce5;
+    }
+
+    .glyphicon-trash {
+        color: red;
+    }
+
+    .glyphicon-shopping-cart {
+        color: orangered;
+    }
+
+    #SearchBar {
+        right: -20px;
+    }
+
+    .btn-info {
+        right: 20px;
+    }
+
+        .btn-info:hover {
+            transition: 0.5s;
+        }
+
+
+    #Filter {
+        right: -80px;
+    }
+
+    td > a {
+        padding: 3px;
+    }
+</style>
+
+<div class="breadcrumb">
+    <a href="#">Home</a>
+    @Html.ActionLink("Plantation Action Page", "ActionPage", "Plantation")
+    <a class="active">View Plantation Plans</a>
+</div>
+
+<div class="well">
+    <div class="row">
+        <div class="col-xs-6 col-md-2">
+            @using (Html.BeginForm("Create", "Plantation", FormMethod.Get, new { @class = "form-inline" }))
+            {
+                <div class="input-group">
+                    <div class="input-group-btn">
+                        <button class="btn btn-success" type="submit">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Add Plan
+                        </button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<h2>Plantation Plans</h2>
+<div id="calender"></div>
+
+
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><span id="eventTitle"></span></h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <button id="btnEdit" class="btn btn-default btn-sm pull-right" style="margin-right:5px;">
+                        <span class="glyphicon glyphicon-pencil"></span> Edit
+                    </button>
+                    <button id="btnConfirm" class="btn btn-default btn-sm pull-right" style="margin-right:5px;">
+                        <span class="glyphicon glyphicon-pencil"></span> Confirm
+                    </button>
+                </div>
+
+                <p id="pDetails"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="myModalSave" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Plan Plantation</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <input type="hidden" id="hdEventID" value="0" />
+                    <div class="form-group">
+                        <label>FieldID</label>
+                        <input type="text" id="txtFieldID" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Date Planted</label>
+                        <div class="input-group date" id="dtp1">
+                            <input type="text" id="txtDatePlanted" class="form-control" />
+                            @*<span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Date Harvested</label>
+                        <div class="input-group date" id="dtp1">
+                            <input type="text" id="txtDateHarvested" class="form-control" />
+                            @*<span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>CropTypeID</label>
+                        <textarea id="txtCropTypeID" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>CropCycleID</label>
+                        <input type="text" id="txtCropCycleID" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>FieldStageID</label>
+                        <input type="text" id="txtFieldStageID" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Refuge Seed Amount Used</label>
+                        <input type="text" id="txtRefugeSeedAmntUsed" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Refuge Unit</label>
+                        <input type="text" id="txtRefugeUnit" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Refuge Area Hectares</label>
+                        <input type="text" id="txtRefugeAreaHectares" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Expected Yield Quantity</label>
+                        <input type="text" id="txtExpectedYieldQuantity" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Yield Unit</label>
+                        <input type="text" id="txtYieldUnit" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Date Harvested</label>
+                        <input type="text" id="txtDateHarvested" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Plantation Status</label>
+                        <input type="text" id="txtPlantationStatus" class="form-control" />
+                    </div>
+                    <button type="button" id="btnSave" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@* style sheets for FULLCalender from CDN *@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
+
+@section Scripts{
+
+    @* JavaScripts for FULLCalender from CDN *@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+    @* /////////////////////////////////////////////////*@
+    @* /////////////////ORIGINAL GET FOR CALENDAR/////////////////*@
+    @* /////////////////////////////////////////////////*@
+    <script>
+        $(function () {
+            $(document).ready(function () {
+                var events = [];
+                //added in for CRUDS
+                var selectedEvent = null;
+                //FetchEventAndRenderCalender();
+                ///////////////////////////////
+                $.ajax({
+                    type: "GET",
+                    url: "/Plantation/GetEvents",
+                    success: function (data) {
+                        //log the results of OBJECT (data)
+                        console.log(JSON.stringify(data));
+                        $.each(data, function (i, v) {
+                            //log the OBJECT data
+                            console.log(i);
+                            console.log(v);
+                            events.push({
+                                eventID: v.PlantationID,
+                                title: v.CropName + " - " + v.FieldName,
+                                description: v.PlantationStatus,
+                                start: moment(v.DatePlanted),
+                                end: v.DateHarvested != null ? moment(v.DateHarvested) : null,
+                                field: v.FieldName,
+                                cycle: v.CycleName,
+                                stage: v.Stage,
+                                refuge: v.Refuge,
+                                yieldunit: v.YieldUnit,
+                                refugeseed: v.RefugeSeedAmntUsed,
+                                refugehectares: v.RefugeAreaHectares,
+                                expyield: v.ExpectedYieldQnty,
+                                dateharvested: v.DateHarvested != null ? moment(v.DateHarvested) : null,
+                                //color: blue,
+                                allDay: true
+                            });
+                            console.log(events);
+                        })
+
+                        GenerateCalender(events);
+                    },
+                    error: function (error) {
+                        console.log(error);
+                        alert('failed');
+                    }
+                })
+
+                function GenerateCalender(events) {
+                    $('#calender').fullCalendar('destroy');
+                    $('#calender').fullCalendar({
+                        contentHeight: 400,
+                        defaultDate: new Date(),
+                        timeFormat: 'h(:mm)a',
+                        header: {
+                            left: 'prev,next today',
+                            center: 'title',
+                            right: 'month'
+                        },
+                        eventLimit: true,
+                        eventColor: '#378006',
+                        events: events,
+                        eventClick: function (calEvent, jsEvent, view) {
+                            //added in code for CRUDS
+                            selectedEvent = calEvent;
+                            //////////////////////////
+                            $('#myModal #eventTitle').text(calEvent.title);
+                            var $description = $('<div/>');
+                            $description.append($('<p/>').html('<b>Start:</b>' + calEvent.start.format("DD-MMM-YYYY")));
+                            if (calEvent.end != null) {
+                                $description.append($('<p/>').html('<b>End:</b>' + calEvent.end.format("DD-MMM-YYYY")));
+                            }
+
+                            $description.append($('<p/>').html('<b>Description:</b>' + calEvent.description));
+                            $description.append($('<p/>').html('<b>Crop Type:</b>' + calEvent.title));
+                            $description.append($('<p/>').html('<b>Field Name:</b>' + calEvent.field));
+                            $description.append($('<p/>').html('<b>Cycle Name:</b>' + calEvent.cycle));
+                            $description.append($('<p/>').html('<b>Field Stage:</b>' + calEvent.stage));
+                            $description.append($('<p/>').html('<b>Refuge Seed Amount:</b>' + calEvent.refugeseed));
+                            $description.append($('<p/>').html('<b>Refuge Unit:</b>' + calEvent.refuge));
+                            $description.append($('<p/>').html('<b>Refuge Area Hectares:</b>' + calEvent.refugehectares));
+                            $description.append($('<p/>').html('<b>Yield Unit:</b>' + calEvent.yieldunit));
+                            $description.append($('<p/>').html('<b>Expected Yield:</b>' + calEvent.expyield));
+
+                            if (calEvent.dateharvested != null) {
+                                $description.append($('<p/>').html('<b>Date Harvested:</b>' + calEvent.dateharvested.format("DD-MMM-YYYY")));
+                            }
+
+
+                            $('#myModal #pDetails').empty().html($description);
+
+                            $('#myModal').modal('show');
+                        }
+                    })
+
+                    $('#btnEdit').click(function () {
+                        //Open modal dialog for edit event
+
+                        //window.location = "/Edit/Plantation";
+                        //$('#calender').fullCalendar('unselect');
+                        var myID = selectedEvent.eventID;
+                        console.log(myID);
+
+                        if (selectedEvent != null) {
+
+                            $.ajax({
+                                type: "POST",
+                                url: '/Plantation/RedirectToEdit',
+                                data: { 'plantationID': selectedEvent.eventID },
+                                success: function (data) {
+                                    //if (data.status) {
+                                    //    //Refresh the calender
+                                    //    FetchEventAndRenderCalendar();
+                                    //    $('#myModal').modal('hide');
+                                    //}
+
+                                    window.location.href = data.Url;
+
+                                },
+                                error: function () {
+                                    alert('Failed');
+                                }
+                            })
+
+                        }
+
+                    })
+                    $('#btnConfirm').click(function () {
+                        //Open modal dialog for edit event
+
+                        //window.location = "/Edit/Plantation";
+                        //$('#calender').fullCalendar('unselect');
+                        var myID = selectedEvent.eventID;
+                        console.log(myID);
+
+                        if (selectedEvent != null) {
+
+                            $.ajax({
+                                type: "POST",
+                                url: '/Plantation/RedirectToConfirm',
+                                data: { 'plantationID': selectedEvent.eventID },
+                                success: function (data) {
+                                    //if (data.status) {
+                                    //    //Refresh the calender
+                                    //    FetchEventAndRenderCalendar();
+                                    //    $('#myModal').modal('hide');
+                                    //}
+
+                                    window.location.href = data.Url;
+
+                                },
+                                error: function () {
+                                    alert('Failed');
+                                }
+                            })
+
+                        }
+
+                    })
+                    $('#btnDelete').click(function () {
+                        if (selectedEvent != null && confirm('Are you sure?')) {
+                            $.ajax({
+                                type: "POST",
+                                url: '/Plantation/Delete',
+                                data: { 'eventID': selectedEvent.eventID },
+                                success: function (data) {
+                                    if (data.status) {
+                                        //Refresh the calender
+                                        FetchEventAndRenderCalendar();
+                                        $('#myModal').modal('hide');
+                                    }
+                                },
+                                error: function () {
+                                    alert('Failed');
+                                }
+                            })
+                        }
+                    })
+
+                    $('#dtp1,#dtp2').datetimepicker({
+                        format: 'DD/MM/YYYY HH:mm A'
+                    });
+                    $('#chkIsFullDay').change(function () {
+                        if ($(this).is(':checked')) {
+                            $('#divEndDate').hide();
+                        }
+                        else {
+                            $('#divEndDate').show();
+                        }
+                    });
+
+                    function openAddEditForm() {
+                        if (selectedEvent != null) {
+                            $('#hdEventID').val(selectedEvent.eventID);
+                            $('#txtSubject').val(selectedEvent.title);
+                            $('#txtStart').val(selectedEvent.start.format('DD/MM/YYYY HH:mm A'));
+                            //$('#chkIsFullDay').prop("checked", selectedEvent.allDay || false);
+                            //$('#chkIsFullDay').change();
+                            $('#txtEnd').val(selectedEvent.end != null ? selectedEvent.end.format('DD/MM/YYYY HH:mm A') : '');
+                            $('#txtDescription').val(selectedEvent.description);
+                            //$('#ddThemeColor').val(selectedEvent.color);
+                        }
+                        $('#myModal').modal('hide');
+                        $('#myModalSave').modal();
+                    }
+
+                }
+            })
+        })
+    </script>
+}

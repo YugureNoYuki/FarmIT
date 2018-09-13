@@ -1,0 +1,288 @@
+﻿@model farmLogin.Models.FarmWorker
+@{
+    ViewBag.Title = "Details";
+}
+<style>
+    body {
+        background-color: #87CEFA;
+    }
+
+    .breadcrumb {
+        display: inline-block;
+        overflow: hidden;
+        border-radius: 0px;
+        counter-reset: flag;
+        text-align: center;
+        font-family: Arial;
+        font-size: 12px;
+        font-weight: 700;
+        position: center;
+        background: #87CEFA;
+        margin-left: -15px;
+    }
+
+        .breadcrumb a {
+            text-decoration: none;
+            outline: none;
+            display: block;
+            float: left;
+            font-size: 12px;
+            line-height: 36px;
+            padding: 0 10px 0 60px;
+            background: #d1d1d1;
+            color: black;
+            position: relative;
+            box-shadow: 0 3px 6px black;
+        }
+
+            .breadcrumb a:first-child {
+                padding-left: 46px;
+                border-radius: 5px 0 0 5px;
+            }
+
+                .breadcrumb a:first-child:before {
+                    left: 14px;
+                }
+
+            .breadcrumb a:last-child {
+                border-radius: 0 5px 5px 0;
+                padding-right: 20px;
+            }
+
+            .breadcrumb a:after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: -18px;
+                width: 36px;
+                height: 36px;
+                transform: scale(0.707) rotate(45deg);
+                z-index: 1;
+                background: #d1d1d1;
+                box-shadow: 2px -2px 0 2px rgba(0, 0, 0, 0.4), 3px -3px 0 2px rgba(255, 255, 255, 0.1);
+                border-radius: 0 5px 0 50px;
+            }
+
+            .breadcrumb a:last-child:after {
+                content: none;
+            }
+
+            .breadcrumb a:before {
+                content: counter(flag);
+                counter-increment: flag;
+                border-radius: 50%;
+                width: 20px;
+                height: 20px;
+                line-height: 20px;
+                margin: 8px 0;
+                position: absolute;
+                top: 0;
+                left: 30px;
+                color: black;
+                background: white;
+            }
+
+            .breadcrumb a:hover, .breadcrumb a.active,
+            .breadcrumb a:hover:after, .breadcrumb a.active:after {
+                transition: all 0.5s;
+                background: #47A447;
+                color: white;
+            }
+
+    .panel {
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    #PanelContent {
+        color: black;
+    }
+
+    .sr-only:hover {
+        color: #47A447;
+        transition: 0.5s;
+    }
+
+    .panel > .panel-heading {
+        background-image: none;
+        background-color: #d8d8d8;
+    }
+
+    .btn {
+        font-weight: 600;
+        background-color: #47A447;
+        font-family: Arial;
+        font-size: 14px;
+        display: inline-block;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        width: 100px;
+        border-radius: 5%;
+        left: -15px;
+    }
+
+        .btn:hover {
+            background-color: #25820F;
+            transition: 0.5s;
+        }
+
+    .glyphicon-pencil {
+        color: #62ae00;
+        transform: scale(1.1);
+    }
+
+    .panel:hover .glyphicon-pencil {
+        transition: 0.5s;
+        transform: scale(1.3);
+    }
+
+    .glyphicon-pencil:hover {
+        color: #0097bd;
+        transition: 0.5s;
+    }
+
+    dd {
+        padding-left: 15px;
+        padding-bottom: 3px;
+    }
+</style>
+
+
+<div class="breadcrumb">
+    @Html.ActionLink("Home", "Index", "Home")
+    @Html.ActionLink("Farm Worker Action Page", "ActionPage", "FarmWorker")
+    @Html.ActionLink("Manage Farm Workers", "Index", "FarmWorker")
+    <a class="active">Farm Worker Details</a>
+</div>
+<div class="panel panel-success" id="PanelContent">
+    <div class="panel-heading">
+        <h3 class="panel-title" style="color:black;">
+            <span class="glyphicon glyphicon-user"></span> &nbsp;
+            <b>Farm Worker Details </b>
+            <span class="pull-right">
+                &nbsp;
+                <a href="@Url.Action("Edit", new { id = Model.FarmWorkerNum,})">
+                    <i class="glyphicon glyphicon-pencil"></i>
+                    <span class="sr-only">Edit</span>
+                </a>
+            </span>
+        </h3>
+    </div>
+    <dl class="dl-horizontal" id="detailsDL">
+        <dt>
+            Farm Worker Image
+        </dt>
+        <dd>
+            @*@Html.DisplayFor(model => model.FarmWorkerImg)*@
+            <img src="@Url.Content(Model.FarmWorkerImg)" height="200" width="200" />
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FarmWorkerFName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FarmWorkerFName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FarmWorkerLName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FarmWorkerLName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FarmWorkerIDNum)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FarmWorkerIDNum)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FarmWorkerContactNum)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FarmWorkerContactNum)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Title.TitleDescr)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title.TitleDescr)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender.GenderDescr)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Gender.GenderDescr)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Surburb)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Surburb)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Province.ProvinceDescr)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Province.ProvinceDescr)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Country.CountryDescr)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Country.CountryDescr)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ContractStartDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ContractStartDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ContractEndDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ContractEndDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FarmWorkerType.FarmWorkerTypeDescr)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FarmWorkerType.FarmWorkerTypeDescr)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Farm.FarmName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Farm.FarmName)
+        </dd>
+    </dl>
+</div>
+<div class="form-inline">
+    @using (Html.BeginForm("Index", "FarmWorker", FormMethod.Get, new { @class = "form-inline" }))
+            {
+        <div class="col-md-6">
+            <div class=input-group>
+                <div class="input-group-btn">
+                    <button class="btn btn-success" type="submit" id="btnBack-Details">
+                        <span class="glyphicon glyphicon-arrow-left"></span>
+                        Back
+                    </button>
+                </div>
+            </div>
+        </div>
+        <br style="margin-top: 10px; margin-bottom:60px;" />
+    }
+</div>
+
+<br />
+
+

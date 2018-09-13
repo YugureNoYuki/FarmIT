@@ -1,0 +1,40 @@
+﻿@model farmLogin.Models.BiologicalDisaster
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>BiologicalDisaster</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BioDisasterDescr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BioDisasterDescr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BioDisasterNotes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BioDisasterNotes)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

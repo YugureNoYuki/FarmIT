@@ -1,0 +1,144 @@
+﻿@model farmLogin.Models.Vehicle
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Vehicle</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.VehName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VehName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VehYear)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VehYear)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VehModel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VehModel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VehEngineNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VehEngineNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VehVinNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VehVinNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VehRegNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VehRegNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VehLicenseNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VehLicenseNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VehExpDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VehExpDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VehCurrMileage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VehCurrMileage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VehServiceInterval)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VehServiceInterval)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VehNextService)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VehNextService)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Farm1.FarmName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Farm1.FarmName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Unit.UnitDescr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Unit.UnitDescr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VehicleMake.VehMakeDescr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VehicleMake.VehMakeDescr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VehicleType.VehTypeDescr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VehicleType.VehTypeDescr)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

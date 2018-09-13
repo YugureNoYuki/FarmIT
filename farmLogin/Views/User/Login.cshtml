@@ -1,0 +1,431 @@
+﻿@model farmLogin.Models.UserLogin
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<style>
+    body {
+        background: #87CEFA;
+        overflow: hidden;
+        color: #444;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-size-adjust: 100%;
+    }
+
+    [class^="cloud-"] {
+        position: absolute;
+        right: 120%;
+        width: 200px;
+        height: 60px;
+        top: 100px;
+        background: white;
+        -webkit-border-radius: 200px;
+        -moz-border-radius: 200px;
+        border-radius: 200px;
+    }
+
+        [class^="cloud-"]:before, [class^="cloud-"]:after {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 10px;
+            width: 100px;
+            height: 80px;
+            background: #fff;
+            -webkit-border-radius: 100px;
+            border-radius: 100px;
+            -webkit-transform: rotate(30deg);
+            -moz-transform: rotate(30deg);
+            transform: rotate(30deg);
+        }
+
+        [class^="cloud-"]:after {
+            top: -55px;
+            left: auto;
+            right: 15px;
+            width: 120px;
+            height: 120px;
+        }
+
+    .cloud-1 {
+        top: 150px;
+        -webkit-animation: moveclouds 30s linear infinite;
+        -moz-animation: moveclouds 30s linear infinite;
+        -o-animation: moveclouds 30s linear infinite;
+        animation: moveclouds 30s linear infinite;
+        z-index: -1;
+    }
+
+    .cloud-2 {
+        top: 200px;
+        opacity: 0.8;
+        -webkit-transform: scale(0.8);
+        -moz-transform: scale(0.8);
+        transform: scale(0.8);
+        -webkit-animation: moveclouds 45s linear infinite;
+        -moz-animation: moveclouds 45s linear infinite;
+        -o-animation: moveclouds 45s linear infinite;
+        animation: moveclouds 45s linear infinite;
+        -webkit-animation-delay: 5s;
+        -moz-animation-delay: 5s;
+        animation-delay: 5s;
+        z-index: -1;
+    }
+
+    .cloud-3 {
+        top: 250px;
+        opacity: 0.6;
+        -webkit-transform: scale(0.6);
+        -moz-transform: scale(0.6);
+        transform: scale(0.6);
+        -webkit-animation: moveclouds 40s linear infinite;
+        -moz-animation: moveclouds 40s linear infinite;
+        -o-animation: moveclouds 40s linear infinite;
+        animation: moveclouds 40s linear infinite;
+        z-index: -1;
+    }
+
+    .cloud-4 {
+        top: 300px;
+        opacity: 0.75;
+        -webkit-transform: scale(0.75);
+        -moz-transform: scale(0.75);
+        transform: scale(0.75);
+        -webkit-animation: moveclouds 26s linear infinite;
+        -moz-animation: moveclouds 26s linear infinite;
+        -o-animation: moveclouds 26s linear infinite;
+        animation: moveclouds 26s linear infinite;
+        -webkit-animation-delay: 8s;
+        -moz-animation-delay: 8s;
+        animation-delay: 8s;
+        z-index: -1;
+    }
+
+
+    .body-content {
+        margin-top: 1000px;
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    .Logo {
+        width: 40%;
+    }
+
+    .navbar {
+        margin-top: -2000px;
+    }
+
+    /*Login*/
+    #loginBox {
+        width: 400px;
+        height: 400px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -220px;
+        margin-left: -200px;
+        background: #F8F8F8;
+        border-radius: 10px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    #loginBox_header {
+        height: 60px;
+        line-height: 60px;
+        width: 400px;
+        position: relative;
+        left:-15.5px !important;
+        background: #FFF;
+        border-radius: 10px 10px 0 0;
+        -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
+        -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
+    }
+
+
+
+    .image-hover {
+        position: relative;
+        width: 450px;
+        height: 200px;
+        display: inline-block;
+        overflow: hidden;
+        background: #fff;
+        border: 10px solid #fff;
+    }
+
+
+    .img-opacity img {
+        position: absolute;
+        top: 8px;
+        right: 0px;
+        bottom: 0px;
+        left: 120px;
+    }
+
+    .img-opacity .img-1 {
+        opacity: 1;
+    }
+
+    .img-opacity .img-2 {
+        opacity: 0;
+    }
+
+    .img-opacity:hover .img-1 {
+        opacity: 0;
+    }
+
+    .img-opacity:hover .img-2 {
+        opacity: 1;
+    }
+
+    .img-opacity img {
+        transition: all .4s ease-in-out;
+        -webkit-transition: all .4s ease-in-out;
+        -moz-transition: all .4s ease-in-out;
+        -o-transition: all .4s ease-in-out;
+    }
+
+    .img-opacity:hover img {
+        transition: all .4s ease-in-out;
+        -webkit-transition: all .4s ease-in-out;
+        -moz-transition: all .4s ease-in-out;
+        -o-transition: all .4s ease-in-out;
+    }
+
+    #loginBox_content {
+        margin-top: 20px;
+        height: 200px;
+        padding: 30px 20px;
+    }
+
+    input {
+        width: 300px;
+        padding: 14px 15px;
+        background: #F0F0F0;
+        font: normal 16px/1.5 Arial;
+        color: #444;
+        font-weight: 600;
+    }
+
+    .form-control {
+        position: relative;
+        display: inline-block;
+        height: 50px;
+        margin-bottom: 15px;
+    }
+
+    .tip {
+        text-indent: 80px;
+        -webkit-transition: all .3s ease-in-out;
+        -moz-transition: all .3s ease-in-out;
+        transition: all .3s ease-in-out;
+    }
+
+        .tip:focus, .tip:active {
+            text-indent: 0;
+        }
+
+        .tip + label {
+            position: absolute;
+            top: 16px;
+            left: 15px;
+            -webkit-transition: all .3s ease-in-out;
+            -moz-transition: all .3s ease-in-out;
+            transition: all .3s ease-in-out;
+        }
+
+        .tip:focus + label, .tip:active + label {
+            -webkit-transform: translateY(-40px);
+            -moz-transform: translateY(-40px);
+            transform: translateY(-40px);
+        }
+
+    #loginBox_btn {
+        width: 100%;
+        height: 60px;
+        line-height: 60px;
+        outline: 0;
+        border: none;
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        background: #77CA60;
+        border-radius: 0 0 10px 10px;
+        cursor: pointer;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        text-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .loginButton {
+        /*width: 100%;
+        height: 5px;
+        position: absolute;
+        bottom:-5%;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, .1);*/
+    }
+
+    #loginBox_btn:hover {
+        background-color: #47a32d;
+        transition: 0.5s;
+    }
+
+    .FogotPassword {
+        position: absolute;
+        left: 62px;
+        font-family: Arial;
+        font-weight: 500;
+    }
+
+    .validationEmail {
+        position: absolute;
+        left: 4%;
+        top: 40%;
+        z-index: 1;
+    }
+
+    .validationPassword {
+        position: absolute;
+        left: 4%;
+        top: 60%;
+    }
+
+    .text-danger
+    {
+        position:absolute;
+        left: 15.5%;
+        top: 75%;
+    }
+
+</style>
+
+
+<div id="header">
+    <div id="clouds">
+        <div class="cloud-1" data-speed="35000"></div>
+        <div class="cloud-2" data-speed="45000" data-delay="15000"></div>
+        <div class="cloud-3" data-speed="40000"></div>
+        <div class="cloud-4" data-speed="38000" data-delay="20000"></div>
+    </div>
+</div>
+
+@using (Html.BeginForm("Login", "User", FormMethod.Post, new { id = "loginBox" }))
+{
+    @Html.AntiForgeryToken()
+
+<div id="content">
+    <div class="container">
+        <div @*id="loginBox"*@>
+            <div id="loginBox_header" class="img-opacity img-hover"><img src="~/Images/FarmIT Logo.png" class="img-1" style="width: 40%;" /><img src="~/Images/FarmIT LogoHover.png" class="img-2" style="width: 40%;" /></div>
+            
+            <div id="loginBox_content">
+                <div class="row">
+                    <div class="form-group textbox">
+                        <div class="col-md-12" style="margin-bottom: 3.5%;">
+                            @Html.EditorFor(model => model.UserEmailAddress, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" }})
+                        </div>
+                    </div>
+                    <div class="row validationEmail col-md-12">
+                        @Html.ValidationMessageFor(model => model.UserEmailAddress, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group textbox">
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.UserPassword, new { htmlAttributes = new { @class = "form-control", @placeholder = "Password" } })
+                        </div>
+                    </div>
+                    <div class="row validationPassword col-md-12">
+                        @Html.ValidationMessageFor(model => model.UserPassword, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="text-danger">
+                @ViewBag.Message
+            </div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="FogotPassword">
+                @Html.ActionLink("Forgot Password?", "ForgotPassword", "User")
+            </div>
+            <div id="loginBox_footer">
+                <div class="loginButton">
+                    <button id="loginBox_btn" type="submit" value="Login">Login</button>
+                </div>
+            </div><!-- / #loginBox_footer -->
+        </div><!-- / #loginBox -->
+    </div>
+</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        //javascript: window.history.forward(1);
+    </script>
+}
+
+
+
+
+
+
+@*@using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+                <div class="text-danger">
+                    @ViewBag.Message
+                </div>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserEmailAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.UserEmailAddress, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UserEmailAddress, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.UserPassword, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UserPassword, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RememberMe, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.RememberMe)
+                            @Html.ValidationMessageFor(model => model.RememberMe, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+
+                <div>
+                    @Html.ActionLink("Register Now", "Registration", "User")
+                </div>
+
+                <div>
+                    @Html.ActionLink("Forgot Password?", "ForgotPassword", "User")
+                </div>
+    }*@
+
+
+
+

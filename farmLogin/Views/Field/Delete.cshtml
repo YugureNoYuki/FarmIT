@@ -1,0 +1,56 @@
+﻿@model farmLogin.Models.Field
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Field</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FieldName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FieldName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FieldHectares)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FieldHectares)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FieldStatu.FieldStatDescr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FieldStatu.FieldStatDescr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Land.LandName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Land.LandName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

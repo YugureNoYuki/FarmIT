@@ -1,0 +1,395 @@
+﻿@model farmLogin.Models.CropType
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+     /*Confirmation Box*/
+      #btnContinueDelete {
+        font-family: Arial;
+        font-weight: 600;
+        font-size: 12px;
+        display: inline-block;
+        background-color: #e0422a;
+        border-color: #e0422a;
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+        #btnContinueDelete:hover {
+            background-color: #bc1c03;
+            border-color: #bc1c03;
+            transition: 0.3s;
+        }
+
+        #btnContinueCancel {
+        font-family: Arial;
+        font-weight: 600;
+        font-size: 12px;
+        display: inline-block;
+        background-color: #9ba5a4;
+        border-color: #9ba5a4;
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+        #btnContinueCancel:hover {
+            background-color: #8c9190;
+            border-color: #8c9190;
+            transition: 0.3s;
+        }
+
+    .breadcrumb {
+        display: inline-block;
+        overflow: hidden;
+        border-radius: 0px;
+        counter-reset: flag;
+        text-align: center;
+        font-family: Arial;
+        font-size: 12px;
+        font-weight: 700;
+        position: center;
+        background: #fff;
+        margin-left: -15px;
+    }
+
+        .breadcrumb a {
+            text-decoration: none;
+            outline: none;
+            display: block;
+            float: left;
+            font-size: 12px;
+            line-height: 36px;
+            padding: 0 10px 0 60px;
+            background: #d1d1d1;
+            color: black;
+            position: relative;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        }
+
+            .breadcrumb a:first-child {
+                padding-left: 46px;
+                border-radius: 5px 0 0 5px;
+            }
+
+                .breadcrumb a:first-child:before {
+                    left: 14px;
+                }
+
+            .breadcrumb a:last-child {
+                border-radius: 0 5px 5px 0;
+                padding-right: 20px;
+            }
+
+            .breadcrumb a:after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: -18px;
+                width: 36px;
+                height: 36px;
+                transform: scale(0.707) rotate(45deg);
+                z-index: 1;
+                background: #d1d1d1;
+                box-shadow: 2px -2px 0 2px rgba(0, 0, 0, 0.4), 3px -3px 0 2px rgba(255, 255, 255, 0.1);
+                border-radius: 0 5px 0 50px;
+            }
+
+            .breadcrumb a:last-child:after {
+                content: none;
+            }
+
+            .breadcrumb a:before {
+                content: counter(flag);
+                counter-increment: flag;
+                border-radius: 50%;
+                width: 20px;
+                height: 20px;
+                line-height: 20px;
+                margin: 8px 0;
+                position: absolute;
+                top: 0;
+                left: 30px;
+                color: black;
+                background: white;
+            }
+
+
+            .breadcrumb a:hover, .breadcrumb a.active,
+            .breadcrumb a:hover:after, .breadcrumb a.active:after {
+                transition: all 0.5s;
+                background: #47A447;
+                color: white;
+            }
+
+    body {
+        background-color: #fff;
+    }
+
+    .panel {
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    #PanelContent {
+        color: black;
+        margin-left: 60px;
+    }
+
+    .panel:hover span {
+        color: #1b8bc6;
+        transition: 0.5s;
+    }
+
+    .panel-success {
+        color: green;
+    }
+
+    .btn {
+        font-weight: 600;
+        background-color: #47A447;
+        font-family: Arial;
+        font-size: 13px;
+        display: inline-block;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        border-radius: 5%;
+    }
+
+    .btn:hover {
+        background-color: #25820F;
+        transition: 0.5s;
+    }
+
+
+    .well {
+        background-image: none;
+        background-color: #eaeaea;
+    }
+
+    .table-heading {
+        color: #428BCA;
+    }
+
+    #ActionIcon:hover {
+        transform: scale(1.3);
+        transition: 0.3s;
+        -webkit-backface-visibility: hidden;
+        -ms-transform: scale(1.3);
+        -webkit-transform: scale(1.3);
+    }
+
+    .glyphicon-pencil {
+        color: #47A447;
+    }
+
+    .glyphicon-eye-open {
+        color: #479ce5;
+    }
+
+    .glyphicon-trash {
+        color: red;
+    }
+
+    #SearchBar {
+        right: -20px;
+        top: -5px;
+    }
+
+    .btn-info {
+        background: #479CE5;
+        right: 20px;
+    }
+
+        .btn-info:hover {
+            background: #2072d6;
+            transition: 0.5s;
+        }
+
+    .pagination {
+        background: red;
+    }
+
+    #types {
+        background: #479CE5;
+        font-weight: 600;
+        font-family: Arial;
+        font-size: 13px;
+        display: inline-block;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        color: #fff;
+        border-color: #479CE5;
+        top: 5px;
+    }
+
+        #types:hover {
+            background: #2072d6;
+            border-color: #2072d6;
+            transition: 0.5s;
+        }
+
+    #Filter {
+        top: -3px;
+        right: -50px;
+    }
+
+    td > a {
+        padding: 3px;
+    }
+        .pagination > li > a {
+        font-weight: 600;
+        border-color: #428BCA;
+        font-family: Arial;
+        font-size: 14px;
+        /*box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);*/
+    }
+
+        .pagination > li > a:hover {
+            background: #428BCA;
+            border-color: #428BCA;
+            transition: 0.5s;
+            color: white;
+            /*box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);*/
+        }
+</style>
+<div class="breadcrumb">
+    <a href="#">Home</a>
+    @Html.ActionLink("Crop Action Page", "ActionPage", "Plantation")
+    <a class="active">Manage Crop Types</a>
+</div>
+
+@if (Model != null)
+{
+    var db = new farmLogin.Models.FarmDbContext();
+    var myList = db.CropTypes.ToList();
+
+    <div class="well">
+        <div class="row">
+            <div class="col-xs-6 col-md-2">
+                @using (Html.BeginForm("Create", "CropType", FormMethod.Get, new { @class = "form-inline" }))
+                {
+                    <div class="input-group">
+                        <div class="input-group-btn">
+                            <button class="btn btn-success" type="submit">
+                                <span class="glyphicon glyphicon-plus"></span>
+                                Add Crop Type
+                            </button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <table class="table table-condensed table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CropTypeDescr)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MaturityDays)
+                </th>
+                <th>
+                    <span class="table-heading">Actions</span>
+                </th>
+            </tr>
+        </thead>
+        @foreach (var item in myList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CropTypeDescr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaturityDays)
+                </td>
+                <td>
+                    <a href="@Url.Action("Details", new { id = item.CropTypeID })" data-toggle="tooltip" title="Details">
+                        <i class="glyphicon glyphicon-eye-open" id="ActionIcon"></i>
+                        <span class="sr-only">Details</span>
+                    </a>
+                    <a href="@Url.Action("Edit", new { id = item.CropTypeID })" data-toggle="tooltip" title="Edit">
+                        <i class="glyphicon glyphicon-pencil" id="ActionIcon"></i>
+                        <span class="sr-only">Edit</span>
+                    </a>
+                    <a id="deleteItem" class="deleteItem" data-target="#basic"
+                       data-toggle="modal"
+                       data-path="@Url.Action("Delete", "CropType", new { id = item.CropTypeID })" title="Delete">
+                        <i class="glyphicon glyphicon-trash" id="ActionIcon"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </table>
+     <!-- MODAL -->
+    <div class="modal fade" id="basic" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="false"></button>
+                    <h4 class="modal-title">Delete Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to remove this item?
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" type="button" class="btn btn-default">Cancel</button>
+                    <button id="btnContinueDelete" type="button" class="btn btn-primary">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+@section Scripts {
+    <script>
+        var path_to_delete;
+
+        $(".deleteItem").click(function (e) {
+            path_to_delete = $(this).data('path');
+        });
+
+        $('#btnContinueDelete').click(function () {
+            window.location = path_to_delete;
+        });
+    </script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript">@Model.JavaScriptToRun</script>
+    <script type="text/javascript">
+        @Model.JavaScriptToRun
+        function myDelSuccess() {
+
+            //alert('Item has successfully been added.');
+            //window.location = "/InventoryType/Index";
+
+            swal({
+                icon: "success",
+                title: "Success!",
+                text: "Item has successfully been removed.",
+                type: "warning",
+            }).then(function () {
+                window.location = "/CropType/Index"
+            })
+        }
+    </script>
+    <script type="text/javascript">
+        @Model.JavaScriptToRun
+        function myFail() {
+
+            //alert('Item has successfully been added.');
+            //window.location = "/InventoryType/Index";
+
+            swal({
+                icon: "error",
+                title: "Error!",
+                text: "This CropType cannot be removed because it is in use by Plantation(s)",
+                type: "warning"
+            }).then(function () {
+                window.location = "/CropType/Index"
+            })
+        }
+    </script>
+}

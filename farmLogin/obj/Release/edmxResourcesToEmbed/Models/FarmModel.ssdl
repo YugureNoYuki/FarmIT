@@ -1,0 +1,1503 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FarmDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AttendenceSheet">
+    <Key>
+      <PropertyRef Name="AttendenceSheetID" />
+    </Key>
+    <Property Name="AttendenceSheetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClockInTime" Type="smalldatetime" Nullable="false" />
+    <Property Name="ClockOutTime" Type="smalldatetime" />
+    <Property Name="FarmWorkerNum" Type="int" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Audit">
+    <Key>
+      <PropertyRef Name="AuditID" />
+    </Key>
+    <Property Name="AuditID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AuditRefTable" Type="varchar" MaxLength="35" Nullable="false" />
+    <Property Name="TrxDate" Type="date" Nullable="false" />
+    <Property Name="TrxTime" Type="datetime" Nullable="false" />
+    <Property Name="TrxNewRecord" Type="varchar" MaxLength="255" />
+    <Property Name="TrxOldRecord" Type="varchar" MaxLength="255" />
+    <Property Name="AuditRefAtrribute" Type="varchar" MaxLength="35" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="AuditTypeID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AuditType">
+    <Key>
+      <PropertyRef Name="AuditTypeID" />
+    </Key>
+    <Property Name="AuditTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AuditTypeDescr" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BiologicalDisaster">
+    <Key>
+      <PropertyRef Name="BioDisasterID" />
+    </Key>
+    <Property Name="BioDisasterID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BioDisasterDescr" Type="varchar" MaxLength="35" Nullable="false" />
+    <Property Name="BioDisasterNotes" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryID" />
+    </Key>
+    <Property Name="CountryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CountryDescr" Type="varchar" MaxLength="25" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CropCycle">
+    <Key>
+      <PropertyRef Name="CropCycleID" />
+    </Key>
+    <Property Name="CropCycleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CropCycleStartDate" Type="date" Nullable="false" />
+    <Property Name="CropCycleEndDate" Type="date" Nullable="false" />
+    <Property Name="CropCycleDescr" Type="varchar" MaxLength="35" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CropType">
+    <Key>
+      <PropertyRef Name="CropTypeID" />
+    </Key>
+    <Property Name="CropTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CropTypeDescr" Type="varchar" MaxLength="20" />
+    <Property Name="MaturityDays" Type="int" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerFName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CustomerLName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CustomerContactNum" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="ContactPersonalEmailAddress" Type="varchar" MaxLength="35" />
+    <Property Name="CompanyName" Type="varchar" MaxLength="35" />
+    <Property Name="Address" Type="varchar" MaxLength="35" />
+    <Property Name="Surburb" Type="varchar" MaxLength="35" />
+    <Property Name="City" Type="varchar" MaxLength="35" />
+    <Property Name="CountryID" Type="int" Nullable="false" />
+    <Property Name="ProvinceID" Type="int" Nullable="false" />
+    <Property Name="CompanyTelNum" Type="char" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Farm">
+    <Key>
+      <PropertyRef Name="FarmID" />
+    </Key>
+    <Property Name="FarmID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FarmName" Type="varchar" MaxLength="35" Nullable="false" />
+    <Property Name="ProvinceID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FarmWorker">
+    <Key>
+      <PropertyRef Name="FarmWorkerNum" />
+    </Key>
+    <Property Name="FarmWorkerNum" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FarmWorkerFName" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="FarmWorkerLName" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="FarmWorkerContactNum" Type="char" MaxLength="10" />
+    <Property Name="FarmWorkerImg" Type="varchar" MaxLength="255" />
+    <Property Name="Address" Type="varchar" MaxLength="35" />
+    <Property Name="Surburb" Type="varchar" MaxLength="35" />
+    <Property Name="City" Type="varchar" MaxLength="35" />
+    <Property Name="CountryID" Type="int" Nullable="false" />
+    <Property Name="ProvinceID" Type="int" Nullable="false" />
+    <Property Name="ContractStartDate" Type="date" Nullable="false" />
+    <Property Name="ContractEndDate" Type="date" Nullable="false" />
+    <Property Name="FarmWorkerIDNum" Type="char" MaxLength="13" Nullable="false" />
+    <Property Name="TitleID" Type="int" Nullable="false" />
+    <Property Name="GenderID" Type="int" Nullable="false" />
+    <Property Name="FarmWorkerTypeID" Type="int" Nullable="false" />
+    <Property Name="FarmID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FarmWorkerType">
+    <Key>
+      <PropertyRef Name="FarmWorkerTypeID" />
+    </Key>
+    <Property Name="FarmWorkerTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FarmWorkerTypeDescr" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="FarmWorkerTypeNotes" Type="varchar" MaxLength="50" />
+    <Property Name="FarmWorkerTypeActiveStatus" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Field">
+    <Key>
+      <PropertyRef Name="FieldID" />
+    </Key>
+    <Property Name="FieldID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FieldName" Type="varchar" MaxLength="35" Nullable="false" />
+    <Property Name="FieldHectares" Type="float" Nullable="false" />
+    <Property Name="Field StatusID" Type="int" Nullable="false" />
+    <Property Name="LandID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FieldBiologicalDisaster">
+    <Key>
+      <PropertyRef Name="FieldID" />
+      <PropertyRef Name="BioDisasterID" />
+    </Key>
+    <Property Name="FieldID" Type="int" Nullable="false" />
+    <Property Name="BioDisasterID" Type="int" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FieldNaturalDisaster">
+    <Key>
+      <PropertyRef Name="FieldID" />
+      <PropertyRef Name="NatDisasterID" />
+    </Key>
+    <Property Name="FieldID" Type="int" Nullable="false" />
+    <Property Name="NatDisasterID" Type="int" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FieldStage">
+    <Key>
+      <PropertyRef Name="FieldStageID" />
+    </Key>
+    <Property Name="FieldStageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FieldStageDescr" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FieldStatus">
+    <Key>
+      <PropertyRef Name="FieldStatID" />
+    </Key>
+    <Property Name="FieldStatID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FieldStatDescr" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="StatPreConditions" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="FieldTreatment">
+    <Key>
+      <PropertyRef Name="FieldID" />
+      <PropertyRef Name="TreatmentID" />
+    </Key>
+    <Property Name="FieldID" Type="int" Nullable="false" />
+    <Property Name="TreatmentID" Type="int" Nullable="false" />
+    <Property Name="TreatmentDate" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Gender">
+    <Key>
+      <PropertyRef Name="GenderID" />
+    </Key>
+    <Property Name="GenderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GenderDescr" Type="varchar" MaxLength="8" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Inventory">
+    <Key>
+      <PropertyRef Name="InventoryID" />
+    </Key>
+    <Property Name="InventoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InvDescr" Type="varchar" MaxLength="35" Nullable="false" />
+    <Property Name="InvQty" Type="int" Nullable="false" />
+    <Property Name="InvDatePurchased" Type="date" Nullable="false" />
+    <Property Name="InvCode" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Unit" Type="int" Nullable="false" />
+    <Property Name="InvTypeID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InventoryTreatment">
+    <Key>
+      <PropertyRef Name="TreatmentID" />
+      <PropertyRef Name="InventoryID" />
+    </Key>
+    <Property Name="TreatmentID" Type="int" Nullable="false" />
+    <Property Name="InventoryID" Type="int" Nullable="false" />
+    <Property Name="TreatmentQnty" Type="int" Nullable="false" />
+    <Property Name="Unit" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InventoryType">
+    <Key>
+      <PropertyRef Name="InvTypeID" />
+    </Key>
+    <Property Name="InvTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InvTypeDescr" Type="varchar" MaxLength="35" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Land">
+    <Key>
+      <PropertyRef Name="LandID" />
+    </Key>
+    <Property Name="LandID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LandName" Type="varchar" MaxLength="35" Nullable="false" />
+    <Property Name="FarmID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Log">
+    <Key>
+      <PropertyRef Name="LogID" />
+    </Key>
+    <Property Name="LogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LogInTimeStamp" Type="datetime" Nullable="false" />
+    <Property Name="LogOutTimeStamp" Type="datetime" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NaturalDisaster">
+    <Key>
+      <PropertyRef Name="NatDisasterID" />
+    </Key>
+    <Property Name="NatDisasterID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NatDisasterDescr" Type="varchar" MaxLength="35" Nullable="false" />
+    <Property Name="NatDisasterPrecautions" Type="varchar" MaxLength="100" />
+    <Property Name="NatDisasterPotentialEffects" Type="varchar" MaxLength="100" />
+    <Property Name="NatDisasterSigns" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderNum" />
+    </Key>
+    <Property Name="OrderNum" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderDate" Type="date" Nullable="false" />
+    <Property Name="OrderItemPrice" Type="float" Nullable="false" />
+    <Property Name="SupplierID" Type="int" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="FarmID" Type="int" Nullable="false" />
+    <Property Name="OrderStatusID" Type="int" Nullable="false" />
+    <Property Name="OrderItem" Type="varchar" MaxLength="35" Nullable="false" />
+    <Property Name="OrderQty" Type="int" Nullable="false" />
+    <Property Name="UnitID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OrderLine">
+    <Key>
+      <PropertyRef Name="OrderNum" />
+      <PropertyRef Name="InventoryID" />
+    </Key>
+    <Property Name="OrderNum" Type="int" Nullable="false" />
+    <Property Name="InventoryID" Type="int" Nullable="false" />
+    <Property Name="OrderLineTotalAmount" Type="float" Nullable="false" />
+    <Property Name="OrderLineTotalQuantity" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OrderStatus">
+    <Key>
+      <PropertyRef Name="OrderStatusID" />
+    </Key>
+    <Property Name="OrderStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderStatusDescr" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Plantation">
+    <Key>
+      <PropertyRef Name="PlantationID" />
+    </Key>
+    <Property Name="PlantationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FieldID" Type="int" Nullable="false" />
+    <Property Name="CropTypeID" Type="int" Nullable="false" />
+    <Property Name="CropCycleID" Type="int" Nullable="false" />
+    <Property Name="FieldStageID" Type="int" Nullable="false" />
+    <Property Name="DatePlanted" Type="date" />
+    <Property Name="RefugeSeedAmntUsed" Type="float" />
+    <Property Name="RefugeUnit" Type="int" Nullable="false" />
+    <Property Name="RefugeAreaHectares" Type="float" />
+    <Property Name="ExpectedYieldQnty" Type="float" Nullable="false" />
+    <Property Name="YieldUnit" Type="int" Nullable="false" />
+    <Property Name="DateHarvested" Type="date" />
+    <Property Name="PlantationStatus" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Province">
+    <Key>
+      <PropertyRef Name="ProvinceID" />
+    </Key>
+    <Property Name="ProvinceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProvinceDescr" Type="varchar" MaxLength="36" Nullable="false" />
+    <Property Name="CountryID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RainfallRecord">
+    <Key>
+      <PropertyRef Name="RainFallRecID" />
+    </Key>
+    <Property Name="RainFallRecID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RecordDate" Type="date" Nullable="false" />
+    <Property Name="RecordMeasurement" Type="int" Nullable="false" />
+    <Property Name="UnitID" Type="int" Nullable="false" />
+    <Property Name="LandID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sale">
+    <Key>
+      <PropertyRef Name="SaleID" />
+    </Key>
+    <Property Name="SaleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SaleDate" Type="date" Nullable="false" />
+    <Property Name="SaleQty" Type="float" Nullable="false" />
+    <Property Name="UnitID" Type="int" Nullable="false" />
+    <Property Name="SaleAmnt" Type="float" Nullable="false" />
+    <Property Name="CustomerID" Type="int" Nullable="false" />
+    <Property Name="PurchaseAgreement" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Silo">
+    <Key>
+      <PropertyRef Name="SiloID" />
+    </Key>
+    <Property Name="SiloID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SiloDescr" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="SiloCapacity" Type="float" Nullable="false" />
+    <Property Name="UnitID" Type="int" Nullable="false" />
+    <Property Name="SiloRentalFeePA" Type="float" />
+    <Property Name="SiloStatus" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="SiloHarvest">
+    <Key>
+      <PropertyRef Name="SiloHarvestID" />
+    </Key>
+    <Property Name="SiloHarvestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SiloHarvestStoreStartDate" Type="date" Nullable="false" />
+    <Property Name="SiloHarvestStoreEndDate" Type="date" Nullable="false" />
+    <Property Name="SiloHarvestTonnesStored" Type="float" Nullable="false" />
+    <Property Name="SiloID" Type="int" Nullable="false" />
+    <Property Name="PlantationID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SiloHarvestSale">
+    <Key>
+      <PropertyRef Name="SiloHarvestID" />
+      <PropertyRef Name="SaleID" />
+    </Key>
+    <Property Name="SiloHarvestID" Type="int" Nullable="false" />
+    <Property Name="SaleID" Type="int" Nullable="false" />
+    <Property Name="SiloHarvestSaleTotalAmnt" Type="float" Nullable="false" />
+    <Property Name="SiloHarvestSaleTotalQty" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="SupplierID" />
+    </Key>
+    <Property Name="SupplierID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SupplierName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="35" />
+    <Property Name="Surburb" Type="varchar" MaxLength="35" />
+    <Property Name="City" Type="varchar" MaxLength="35" />
+    <Property Name="CountryID" Type="int" Nullable="false" />
+    <Property Name="ProvinceID" Type="int" Nullable="false" />
+    <Property Name="SupplierEmailAddress" Type="varchar" MaxLength="35" Nullable="false" />
+    <Property Name="SupplierPhoneNum" Type="char" MaxLength="10" />
+    <Property Name="SupplierCellNum" Type="char" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Title">
+    <Key>
+      <PropertyRef Name="TitleID" />
+    </Key>
+    <Property Name="TitleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TitleDescr" Type="varchar" MaxLength="8" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Treatment">
+    <Key>
+      <PropertyRef Name="TreatmentID" />
+    </Key>
+    <Property Name="TreatmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TreatmentDescr" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Unit">
+    <Key>
+      <PropertyRef Name="UnitID" />
+    </Key>
+    <Property Name="UnitID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UnitDescr" Type="varchar" MaxLength="5" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserEmailAddress" Type="varchar" MaxLength="35" Nullable="false" />
+    <Property Name="UserPassword" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserContractNum" Type="char" MaxLength="10" />
+    <Property Name="UserFName" Type="varchar" MaxLength="35" Nullable="false" />
+    <Property Name="UserLName" Type="varchar" MaxLength="35" Nullable="false" />
+    <Property Name="UserIDNum" Type="char" MaxLength="13" Nullable="false" />
+    <Property Name="IsEmailVerified" Type="bit" />
+    <Property Name="ActivationCode" Type="uniqueidentifier" />
+    <Property Name="ResetPasswordCode" Type="nvarchar" MaxLength="100" />
+    <Property Name="UserAccessLevelID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserAccessLevel">
+    <Key>
+      <PropertyRef Name="UserAccessLevelID" />
+    </Key>
+    <Property Name="UserAccessLevelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserAccessLevelDescr" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Notes" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="UserRoleID" />
+    </Key>
+    <Property Name="UserRoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="UserAccesssLevelID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Vehicle">
+    <Key>
+      <PropertyRef Name="VehicleID" />
+    </Key>
+    <Property Name="VehicleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VehName" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="VehYear" Type="varchar" MaxLength="10" />
+    <Property Name="VehModel" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="VehEngineNum" Type="varchar" MaxLength="30" />
+    <Property Name="VehVinNum" Type="varchar" MaxLength="17" Nullable="false" />
+    <Property Name="VehRegNum" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="VehLicenseNum" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="VehExpDate" Type="date" Nullable="false" />
+    <Property Name="VehCurrMileage" Type="int" Nullable="false" />
+    <Property Name="VehServiceInterval" Type="int" Nullable="false" />
+    <Property Name="UnitID" Type="int" Nullable="false" />
+    <Property Name="VehNextService" Type="int" Nullable="false" />
+    <Property Name="Farm" Type="int" Nullable="false" />
+    <Property Name="VehTypeID" Type="int" Nullable="false" />
+    <Property Name="VehMakeID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VehicleMake">
+    <Key>
+      <PropertyRef Name="VehMakeID" />
+    </Key>
+    <Property Name="VehMakeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VehMakeDescr" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VehicleService">
+    <Key>
+      <PropertyRef Name="VehicleServiceID" />
+    </Key>
+    <Property Name="VehicleServiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VehicleService_Date" Type="date" Nullable="false" />
+    <Property Name="VehicleService_Cost" Type="float" />
+    <Property Name="VehicleServiceRecord" Type="int" Nullable="false" />
+    <Property Name="UnitID" Type="int" Nullable="false" />
+    <Property Name="VehicleID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VehicleType">
+    <Key>
+      <PropertyRef Name="VehTypeID" />
+    </Key>
+    <Property Name="VehTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VehTypeDescr" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="VehTypeImg" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <Association Name="FK__Attendenc__FarmW__5070F446">
+    <End Role="FarmWorker" Type="Self.FarmWorker" Multiplicity="1" />
+    <End Role="AttendenceSheet" Type="Self.AttendenceSheet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FarmWorker">
+        <PropertyRef Name="FarmWorkerNum" />
+      </Principal>
+      <Dependent Role="AttendenceSheet">
+        <PropertyRef Name="FarmWorkerNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Attendenc__UserI__5165187F">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="AttendenceSheet" Type="Self.AttendenceSheet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="AttendenceSheet">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Audit__AuditType__4AB81AF0">
+    <End Role="AuditType" Type="Self.AuditType" Multiplicity="1" />
+    <End Role="Audit" Type="Self.Audit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AuditType">
+        <PropertyRef Name="AuditTypeID" />
+      </Principal>
+      <Dependent Role="Audit">
+        <PropertyRef Name="AuditTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Audit__UserID__49C3F6B7">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Audit" Type="Self.Audit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Audit">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Customer__Countr__160F4887">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Customer__Provin__17036CC0">
+    <End Role="Province" Type="Self.Province" Multiplicity="1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Province">
+        <PropertyRef Name="ProvinceID" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="ProvinceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Farm__ProvinceID__173876EA">
+    <End Role="Province" Type="Self.Province" Multiplicity="1" />
+    <End Role="Farm" Type="Self.Farm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Province">
+        <PropertyRef Name="ProvinceID" />
+      </Principal>
+      <Dependent Role="Farm">
+        <PropertyRef Name="ProvinceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FarmWorke__Count__37A5467C">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="FarmWorker" Type="Self.FarmWorker" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="FarmWorker">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FarmWorke__FarmI__3C69FB99">
+    <End Role="Farm" Type="Self.Farm" Multiplicity="1" />
+    <End Role="FarmWorker" Type="Self.FarmWorker" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Farm">
+        <PropertyRef Name="FarmID" />
+      </Principal>
+      <Dependent Role="FarmWorker">
+        <PropertyRef Name="FarmID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FarmWorke__FarmW__3B75D760">
+    <End Role="FarmWorkerType" Type="Self.FarmWorkerType" Multiplicity="1" />
+    <End Role="FarmWorker" Type="Self.FarmWorker" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FarmWorkerType">
+        <PropertyRef Name="FarmWorkerTypeID" />
+      </Principal>
+      <Dependent Role="FarmWorker">
+        <PropertyRef Name="FarmWorkerTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FarmWorke__Gende__3A81B327">
+    <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+    <End Role="FarmWorker" Type="Self.FarmWorker" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gender">
+        <PropertyRef Name="GenderID" />
+      </Principal>
+      <Dependent Role="FarmWorker">
+        <PropertyRef Name="GenderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FarmWorke__Provi__38996AB5">
+    <End Role="Province" Type="Self.Province" Multiplicity="1" />
+    <End Role="FarmWorker" Type="Self.FarmWorker" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Province">
+        <PropertyRef Name="ProvinceID" />
+      </Principal>
+      <Dependent Role="FarmWorker">
+        <PropertyRef Name="ProvinceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FarmWorke__Title__398D8EEE">
+    <End Role="Title" Type="Self.Title" Multiplicity="1" />
+    <End Role="FarmWorker" Type="Self.FarmWorker" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Title">
+        <PropertyRef Name="TitleID" />
+      </Principal>
+      <Dependent Role="FarmWorker">
+        <PropertyRef Name="TitleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Field__Field Sta__22AA2996">
+    <End Role="FieldStatus" Type="Self.FieldStatus" Multiplicity="1" />
+    <End Role="Field" Type="Self.Field" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FieldStatus">
+        <PropertyRef Name="FieldStatID" />
+      </Principal>
+      <Dependent Role="Field">
+        <PropertyRef Name="Field StatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Field__LandID__239E4DCF">
+    <End Role="Land" Type="Self.Land" Multiplicity="1" />
+    <End Role="Field" Type="Self.Field" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Land">
+        <PropertyRef Name="LandID" />
+      </Principal>
+      <Dependent Role="Field">
+        <PropertyRef Name="LandID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FieldBiol__BioDi__2F10007B">
+    <End Role="BiologicalDisaster" Type="Self.BiologicalDisaster" Multiplicity="1" />
+    <End Role="FieldBiologicalDisaster" Type="Self.FieldBiologicalDisaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BiologicalDisaster">
+        <PropertyRef Name="BioDisasterID" />
+      </Principal>
+      <Dependent Role="FieldBiologicalDisaster">
+        <PropertyRef Name="BioDisasterID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FieldBiol__Field__2E1BDC42">
+    <End Role="Field" Type="Self.Field" Multiplicity="1" />
+    <End Role="FieldBiologicalDisaster" Type="Self.FieldBiologicalDisaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Field">
+        <PropertyRef Name="FieldID" />
+      </Principal>
+      <Dependent Role="FieldBiologicalDisaster">
+        <PropertyRef Name="FieldID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FieldNatu__Field__286302EC">
+    <End Role="Field" Type="Self.Field" Multiplicity="1" />
+    <End Role="FieldNaturalDisaster" Type="Self.FieldNaturalDisaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Field">
+        <PropertyRef Name="FieldID" />
+      </Principal>
+      <Dependent Role="FieldNaturalDisaster">
+        <PropertyRef Name="FieldID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FieldNatu__NatDi__29572725">
+    <End Role="NaturalDisaster" Type="Self.NaturalDisaster" Multiplicity="1" />
+    <End Role="FieldNaturalDisaster" Type="Self.FieldNaturalDisaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NaturalDisaster">
+        <PropertyRef Name="NatDisasterID" />
+      </Principal>
+      <Dependent Role="FieldNaturalDisaster">
+        <PropertyRef Name="NatDisasterID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FieldTrea__Field__7A672E12">
+    <End Role="Field" Type="Self.Field" Multiplicity="1" />
+    <End Role="FieldTreatment" Type="Self.FieldTreatment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Field">
+        <PropertyRef Name="FieldID" />
+      </Principal>
+      <Dependent Role="FieldTreatment">
+        <PropertyRef Name="FieldID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FieldTrea__Treat__7B5B524B">
+    <End Role="Treatment" Type="Self.Treatment" Multiplicity="1" />
+    <End Role="FieldTreatment" Type="Self.FieldTreatment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Treatment">
+        <PropertyRef Name="TreatmentID" />
+      </Principal>
+      <Dependent Role="FieldTreatment">
+        <PropertyRef Name="TreatmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Inventory__Inven__76969D2E">
+    <End Role="Inventory" Type="Self.Inventory" Multiplicity="1" />
+    <End Role="InventoryTreatment" Type="Self.InventoryTreatment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Inventory">
+        <PropertyRef Name="InventoryID" />
+      </Principal>
+      <Dependent Role="InventoryTreatment">
+        <PropertyRef Name="InventoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Inventory__InvTy__70DDC3D8">
+    <End Role="InventoryType" Type="Self.InventoryType" Multiplicity="1" />
+    <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InventoryType">
+        <PropertyRef Name="InvTypeID" />
+      </Principal>
+      <Dependent Role="Inventory">
+        <PropertyRef Name="InvTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Inventory__Treat__75A278F5">
+    <End Role="Treatment" Type="Self.Treatment" Multiplicity="1" />
+    <End Role="InventoryTreatment" Type="Self.InventoryTreatment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Treatment">
+        <PropertyRef Name="TreatmentID" />
+      </Principal>
+      <Dependent Role="InventoryTreatment">
+        <PropertyRef Name="TreatmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Inventory__Unit__6FE99F9F">
+    <End Role="Unit" Type="Self.Unit" Multiplicity="1" />
+    <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unit">
+        <PropertyRef Name="UnitID" />
+      </Principal>
+      <Dependent Role="Inventory">
+        <PropertyRef Name="Unit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__InventoryT__Unit__778AC167">
+    <End Role="Unit" Type="Self.Unit" Multiplicity="1" />
+    <End Role="InventoryTreatment" Type="Self.InventoryTreatment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unit">
+        <PropertyRef Name="UnitID" />
+      </Principal>
+      <Dependent Role="InventoryTreatment">
+        <PropertyRef Name="Unit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Land__FarmID__1A14E395">
+    <End Role="Farm" Type="Self.Farm" Multiplicity="1" />
+    <End Role="Land" Type="Self.Land" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Farm">
+        <PropertyRef Name="FarmID" />
+      </Principal>
+      <Dependent Role="Land">
+        <PropertyRef Name="FarmID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Log__UserID__4D94879B">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Log" Type="Self.Log" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Log">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Order__FarmID__693CA210">
+    <End Role="Farm" Type="Self.Farm" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Farm">
+        <PropertyRef Name="FarmID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="FarmID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Order__OrderStat__6A30C649">
+    <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderStatus">
+        <PropertyRef Name="OrderStatusID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="OrderStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Order__SupplierI__6754599E">
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="SupplierID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="SupplierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Order__UnitID__6B24EA82">
+    <End Role="Unit" Type="Self.Unit" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unit">
+        <PropertyRef Name="UnitID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="UnitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Order__UserID__68487DD7">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderLine__Inven__7F2BE32F">
+    <End Role="Inventory" Type="Self.Inventory" Multiplicity="1" />
+    <End Role="OrderLine" Type="Self.OrderLine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Inventory">
+        <PropertyRef Name="InventoryID" />
+      </Principal>
+      <Dependent Role="OrderLine">
+        <PropertyRef Name="InventoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderLine__Order__7E37BEF6">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="OrderLine" Type="Self.OrderLine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderNum" />
+      </Principal>
+      <Dependent Role="OrderLine">
+        <PropertyRef Name="OrderNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Plantatio__CropC__09A971A2">
+    <End Role="CropCycle" Type="Self.CropCycle" Multiplicity="1" />
+    <End Role="Plantation" Type="Self.Plantation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CropCycle">
+        <PropertyRef Name="CropCycleID" />
+      </Principal>
+      <Dependent Role="Plantation">
+        <PropertyRef Name="CropCycleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Plantatio__CropT__08B54D69">
+    <End Role="CropType" Type="Self.CropType" Multiplicity="1" />
+    <End Role="Plantation" Type="Self.Plantation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CropType">
+        <PropertyRef Name="CropTypeID" />
+      </Principal>
+      <Dependent Role="Plantation">
+        <PropertyRef Name="CropTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Plantatio__Field__07C12930">
+    <End Role="Field" Type="Self.Field" Multiplicity="1" />
+    <End Role="Plantation" Type="Self.Plantation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Field">
+        <PropertyRef Name="FieldID" />
+      </Principal>
+      <Dependent Role="Plantation">
+        <PropertyRef Name="FieldID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Plantatio__Field__0A9D95DB">
+    <End Role="FieldStage" Type="Self.FieldStage" Multiplicity="1" />
+    <End Role="Plantation" Type="Self.Plantation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FieldStage">
+        <PropertyRef Name="FieldStageID" />
+      </Principal>
+      <Dependent Role="Plantation">
+        <PropertyRef Name="FieldStageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Plantatio__Refug__0B91BA14">
+    <End Role="Unit" Type="Self.Unit" Multiplicity="1" />
+    <End Role="Plantation" Type="Self.Plantation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unit">
+        <PropertyRef Name="UnitID" />
+      </Principal>
+      <Dependent Role="Plantation">
+        <PropertyRef Name="RefugeUnit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Plantatio__Yield__0C85DE4D">
+    <End Role="Unit" Type="Self.Unit" Multiplicity="1" />
+    <End Role="Plantation" Type="Self.Plantation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unit">
+        <PropertyRef Name="UnitID" />
+      </Principal>
+      <Dependent Role="Plantation">
+        <PropertyRef Name="YieldUnit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Province__Countr__145C0A3F">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="Province" Type="Self.Province" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="Province">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RainfallR__LandI__1DE57479">
+    <End Role="Land" Type="Self.Land" Multiplicity="1" />
+    <End Role="RainfallRecord" Type="Self.RainfallRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Land">
+        <PropertyRef Name="LandID" />
+      </Principal>
+      <Dependent Role="RainfallRecord">
+        <PropertyRef Name="LandID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RainfallR__UnitI__1CF15040">
+    <End Role="Unit" Type="Self.Unit" Multiplicity="1" />
+    <End Role="RainfallRecord" Type="Self.RainfallRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unit">
+        <PropertyRef Name="UnitID" />
+      </Principal>
+      <Dependent Role="RainfallRecord">
+        <PropertyRef Name="UnitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sale__CustomerID__1AD3FDA4">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Sale">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sale__UnitID__19DFD96B">
+    <End Role="Unit" Type="Self.Unit" Multiplicity="1" />
+    <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unit">
+        <PropertyRef Name="UnitID" />
+      </Principal>
+      <Dependent Role="Sale">
+        <PropertyRef Name="UnitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Silo__UnitID__0F624AF8">
+    <End Role="Unit" Type="Self.Unit" Multiplicity="1" />
+    <End Role="Silo" Type="Self.Silo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unit">
+        <PropertyRef Name="UnitID" />
+      </Principal>
+      <Dependent Role="Silo">
+        <PropertyRef Name="UnitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SiloHarve__Plant__1332DBDC">
+    <End Role="Plantation" Type="Self.Plantation" Multiplicity="1" />
+    <End Role="SiloHarvest" Type="Self.SiloHarvest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Plantation">
+        <PropertyRef Name="PlantationID" />
+      </Principal>
+      <Dependent Role="SiloHarvest">
+        <PropertyRef Name="PlantationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SiloHarve__SaleI__1EA48E88">
+    <End Role="Sale" Type="Self.Sale" Multiplicity="1" />
+    <End Role="SiloHarvestSale" Type="Self.SiloHarvestSale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sale">
+        <PropertyRef Name="SaleID" />
+      </Principal>
+      <Dependent Role="SiloHarvestSale">
+        <PropertyRef Name="SaleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SiloHarve__SiloH__1DB06A4F">
+    <End Role="SiloHarvest" Type="Self.SiloHarvest" Multiplicity="1" />
+    <End Role="SiloHarvestSale" Type="Self.SiloHarvestSale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SiloHarvest">
+        <PropertyRef Name="SiloHarvestID" />
+      </Principal>
+      <Dependent Role="SiloHarvestSale">
+        <PropertyRef Name="SiloHarvestID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SiloHarve__SiloI__123EB7A3">
+    <End Role="Silo" Type="Self.Silo" Multiplicity="1" />
+    <End Role="SiloHarvest" Type="Self.SiloHarvest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Silo">
+        <PropertyRef Name="SiloID" />
+      </Principal>
+      <Dependent Role="SiloHarvest">
+        <PropertyRef Name="SiloID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Supplier__Countr__6383C8BA">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="Supplier">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Supplier__Provin__6477ECF3">
+    <End Role="Province" Type="Self.Province" Multiplicity="1" />
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Province">
+        <PropertyRef Name="ProvinceID" />
+      </Principal>
+      <Dependent Role="Supplier">
+        <PropertyRef Name="ProvinceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__User__UserAccess__412EB0B6">
+    <End Role="UserAccessLevel" Type="Self.UserAccessLevel" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserAccessLevel">
+        <PropertyRef Name="UserAccessLevelID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="UserAccessLevelID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserRole__UserAc__44FF419A">
+    <End Role="UserAccessLevel" Type="Self.UserAccessLevel" Multiplicity="1" />
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserAccessLevel">
+        <PropertyRef Name="UserAccessLevelID" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="UserAccesssLevelID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserRole__UserID__440B1D61">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Vehicle__Farm__59063A47">
+    <End Role="Farm" Type="Self.Farm" Multiplicity="1" />
+    <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Farm">
+        <PropertyRef Name="FarmID" />
+      </Principal>
+      <Dependent Role="Vehicle">
+        <PropertyRef Name="Farm" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Vehicle__UnitID__5812160E">
+    <End Role="Unit" Type="Self.Unit" Multiplicity="1" />
+    <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unit">
+        <PropertyRef Name="UnitID" />
+      </Principal>
+      <Dependent Role="Vehicle">
+        <PropertyRef Name="UnitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Vehicle__VehMake__5AEE82B9">
+    <End Role="VehicleMake" Type="Self.VehicleMake" Multiplicity="1" />
+    <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VehicleMake">
+        <PropertyRef Name="VehMakeID" />
+      </Principal>
+      <Dependent Role="Vehicle">
+        <PropertyRef Name="VehMakeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Vehicle__VehType__59FA5E80">
+    <End Role="VehicleType" Type="Self.VehicleType" Multiplicity="1" />
+    <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VehicleType">
+        <PropertyRef Name="VehTypeID" />
+      </Principal>
+      <Dependent Role="Vehicle">
+        <PropertyRef Name="VehTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VehicleSe__UnitI__5DCAEF64">
+    <End Role="Unit" Type="Self.Unit" Multiplicity="1" />
+    <End Role="VehicleService" Type="Self.VehicleService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unit">
+        <PropertyRef Name="UnitID" />
+      </Principal>
+      <Dependent Role="VehicleService">
+        <PropertyRef Name="UnitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VehicleSe__Vehic__5EBF139D">
+    <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="1" />
+    <End Role="VehicleService" Type="Self.VehicleService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vehicle">
+        <PropertyRef Name="VehicleID" />
+      </Principal>
+      <Dependent Role="VehicleService">
+        <PropertyRef Name="VehicleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FarmDbModelStoreContainer">
+    <EntitySet Name="AttendenceSheet" EntityType="Self.AttendenceSheet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Audit" EntityType="Self.Audit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AuditType" EntityType="Self.AuditType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BiologicalDisaster" EntityType="Self.BiologicalDisaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CropCycle" EntityType="Self.CropCycle" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CropType" EntityType="Self.CropType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Farm" EntityType="Self.Farm" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FarmWorker" EntityType="Self.FarmWorker" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FarmWorkerType" EntityType="Self.FarmWorkerType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Field" EntityType="Self.Field" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FieldBiologicalDisaster" EntityType="Self.FieldBiologicalDisaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FieldNaturalDisaster" EntityType="Self.FieldNaturalDisaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FieldStage" EntityType="Self.FieldStage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FieldStatus" EntityType="Self.FieldStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FieldTreatment" EntityType="Self.FieldTreatment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Inventory" EntityType="Self.Inventory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InventoryTreatment" EntityType="Self.InventoryTreatment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InventoryType" EntityType="Self.InventoryType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Land" EntityType="Self.Land" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NaturalDisaster" EntityType="Self.NaturalDisaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderLine" EntityType="Self.OrderLine" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Plantation" EntityType="Self.Plantation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Province" EntityType="Self.Province" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RainfallRecord" EntityType="Self.RainfallRecord" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sale" EntityType="Self.Sale" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Silo" EntityType="Self.Silo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SiloHarvest" EntityType="Self.SiloHarvest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SiloHarvestSale" EntityType="Self.SiloHarvestSale" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Title" EntityType="Self.Title" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Treatment" EntityType="Self.Treatment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Unit" EntityType="Self.Unit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserAccessLevel" EntityType="Self.UserAccessLevel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vehicle" EntityType="Self.Vehicle" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VehicleMake" EntityType="Self.VehicleMake" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VehicleService" EntityType="Self.VehicleService" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VehicleType" EntityType="Self.VehicleType" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Attendenc__FarmW__5070F446" Association="Self.FK__Attendenc__FarmW__5070F446">
+      <End Role="FarmWorker" EntitySet="FarmWorker" />
+      <End Role="AttendenceSheet" EntitySet="AttendenceSheet" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Attendenc__UserI__5165187F" Association="Self.FK__Attendenc__UserI__5165187F">
+      <End Role="User" EntitySet="User" />
+      <End Role="AttendenceSheet" EntitySet="AttendenceSheet" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Audit__AuditType__4AB81AF0" Association="Self.FK__Audit__AuditType__4AB81AF0">
+      <End Role="AuditType" EntitySet="AuditType" />
+      <End Role="Audit" EntitySet="Audit" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Audit__UserID__49C3F6B7" Association="Self.FK__Audit__UserID__49C3F6B7">
+      <End Role="User" EntitySet="User" />
+      <End Role="Audit" EntitySet="Audit" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Customer__Countr__160F4887" Association="Self.FK__Customer__Countr__160F4887">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Customer__Provin__17036CC0" Association="Self.FK__Customer__Provin__17036CC0">
+      <End Role="Province" EntitySet="Province" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Farm__ProvinceID__173876EA" Association="Self.FK__Farm__ProvinceID__173876EA">
+      <End Role="Province" EntitySet="Province" />
+      <End Role="Farm" EntitySet="Farm" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FarmWorke__Count__37A5467C" Association="Self.FK__FarmWorke__Count__37A5467C">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="FarmWorker" EntitySet="FarmWorker" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FarmWorke__FarmI__3C69FB99" Association="Self.FK__FarmWorke__FarmI__3C69FB99">
+      <End Role="Farm" EntitySet="Farm" />
+      <End Role="FarmWorker" EntitySet="FarmWorker" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FarmWorke__FarmW__3B75D760" Association="Self.FK__FarmWorke__FarmW__3B75D760">
+      <End Role="FarmWorkerType" EntitySet="FarmWorkerType" />
+      <End Role="FarmWorker" EntitySet="FarmWorker" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FarmWorke__Gende__3A81B327" Association="Self.FK__FarmWorke__Gende__3A81B327">
+      <End Role="Gender" EntitySet="Gender" />
+      <End Role="FarmWorker" EntitySet="FarmWorker" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FarmWorke__Provi__38996AB5" Association="Self.FK__FarmWorke__Provi__38996AB5">
+      <End Role="Province" EntitySet="Province" />
+      <End Role="FarmWorker" EntitySet="FarmWorker" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FarmWorke__Title__398D8EEE" Association="Self.FK__FarmWorke__Title__398D8EEE">
+      <End Role="Title" EntitySet="Title" />
+      <End Role="FarmWorker" EntitySet="FarmWorker" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Field__Field Sta__22AA2996" Association="Self.FK__Field__Field Sta__22AA2996">
+      <End Role="FieldStatus" EntitySet="FieldStatus" />
+      <End Role="Field" EntitySet="Field" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Field__LandID__239E4DCF" Association="Self.FK__Field__LandID__239E4DCF">
+      <End Role="Land" EntitySet="Land" />
+      <End Role="Field" EntitySet="Field" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FieldBiol__BioDi__2F10007B" Association="Self.FK__FieldBiol__BioDi__2F10007B">
+      <End Role="BiologicalDisaster" EntitySet="BiologicalDisaster" />
+      <End Role="FieldBiologicalDisaster" EntitySet="FieldBiologicalDisaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FieldBiol__Field__2E1BDC42" Association="Self.FK__FieldBiol__Field__2E1BDC42">
+      <End Role="Field" EntitySet="Field" />
+      <End Role="FieldBiologicalDisaster" EntitySet="FieldBiologicalDisaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FieldNatu__Field__286302EC" Association="Self.FK__FieldNatu__Field__286302EC">
+      <End Role="Field" EntitySet="Field" />
+      <End Role="FieldNaturalDisaster" EntitySet="FieldNaturalDisaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FieldNatu__NatDi__29572725" Association="Self.FK__FieldNatu__NatDi__29572725">
+      <End Role="NaturalDisaster" EntitySet="NaturalDisaster" />
+      <End Role="FieldNaturalDisaster" EntitySet="FieldNaturalDisaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FieldTrea__Field__7A672E12" Association="Self.FK__FieldTrea__Field__7A672E12">
+      <End Role="Field" EntitySet="Field" />
+      <End Role="FieldTreatment" EntitySet="FieldTreatment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FieldTrea__Treat__7B5B524B" Association="Self.FK__FieldTrea__Treat__7B5B524B">
+      <End Role="Treatment" EntitySet="Treatment" />
+      <End Role="FieldTreatment" EntitySet="FieldTreatment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inventory__Inven__76969D2E" Association="Self.FK__Inventory__Inven__76969D2E">
+      <End Role="Inventory" EntitySet="Inventory" />
+      <End Role="InventoryTreatment" EntitySet="InventoryTreatment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inventory__InvTy__70DDC3D8" Association="Self.FK__Inventory__InvTy__70DDC3D8">
+      <End Role="InventoryType" EntitySet="InventoryType" />
+      <End Role="Inventory" EntitySet="Inventory" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inventory__Treat__75A278F5" Association="Self.FK__Inventory__Treat__75A278F5">
+      <End Role="Treatment" EntitySet="Treatment" />
+      <End Role="InventoryTreatment" EntitySet="InventoryTreatment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inventory__Unit__6FE99F9F" Association="Self.FK__Inventory__Unit__6FE99F9F">
+      <End Role="Unit" EntitySet="Unit" />
+      <End Role="Inventory" EntitySet="Inventory" />
+    </AssociationSet>
+    <AssociationSet Name="FK__InventoryT__Unit__778AC167" Association="Self.FK__InventoryT__Unit__778AC167">
+      <End Role="Unit" EntitySet="Unit" />
+      <End Role="InventoryTreatment" EntitySet="InventoryTreatment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Land__FarmID__1A14E395" Association="Self.FK__Land__FarmID__1A14E395">
+      <End Role="Farm" EntitySet="Farm" />
+      <End Role="Land" EntitySet="Land" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Log__UserID__4D94879B" Association="Self.FK__Log__UserID__4D94879B">
+      <End Role="User" EntitySet="User" />
+      <End Role="Log" EntitySet="Log" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Order__FarmID__693CA210" Association="Self.FK__Order__FarmID__693CA210">
+      <End Role="Farm" EntitySet="Farm" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Order__OrderStat__6A30C649" Association="Self.FK__Order__OrderStat__6A30C649">
+      <End Role="OrderStatus" EntitySet="OrderStatus" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Order__SupplierI__6754599E" Association="Self.FK__Order__SupplierI__6754599E">
+      <End Role="Supplier" EntitySet="Supplier" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Order__UnitID__6B24EA82" Association="Self.FK__Order__UnitID__6B24EA82">
+      <End Role="Unit" EntitySet="Unit" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Order__UserID__68487DD7" Association="Self.FK__Order__UserID__68487DD7">
+      <End Role="User" EntitySet="User" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderLine__Inven__7F2BE32F" Association="Self.FK__OrderLine__Inven__7F2BE32F">
+      <End Role="Inventory" EntitySet="Inventory" />
+      <End Role="OrderLine" EntitySet="OrderLine" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderLine__Order__7E37BEF6" Association="Self.FK__OrderLine__Order__7E37BEF6">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="OrderLine" EntitySet="OrderLine" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Plantatio__CropC__09A971A2" Association="Self.FK__Plantatio__CropC__09A971A2">
+      <End Role="CropCycle" EntitySet="CropCycle" />
+      <End Role="Plantation" EntitySet="Plantation" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Plantatio__CropT__08B54D69" Association="Self.FK__Plantatio__CropT__08B54D69">
+      <End Role="CropType" EntitySet="CropType" />
+      <End Role="Plantation" EntitySet="Plantation" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Plantatio__Field__07C12930" Association="Self.FK__Plantatio__Field__07C12930">
+      <End Role="Field" EntitySet="Field" />
+      <End Role="Plantation" EntitySet="Plantation" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Plantatio__Field__0A9D95DB" Association="Self.FK__Plantatio__Field__0A9D95DB">
+      <End Role="FieldStage" EntitySet="FieldStage" />
+      <End Role="Plantation" EntitySet="Plantation" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Plantatio__Refug__0B91BA14" Association="Self.FK__Plantatio__Refug__0B91BA14">
+      <End Role="Unit" EntitySet="Unit" />
+      <End Role="Plantation" EntitySet="Plantation" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Plantatio__Yield__0C85DE4D" Association="Self.FK__Plantatio__Yield__0C85DE4D">
+      <End Role="Unit" EntitySet="Unit" />
+      <End Role="Plantation" EntitySet="Plantation" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Province__Countr__145C0A3F" Association="Self.FK__Province__Countr__145C0A3F">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Province" EntitySet="Province" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RainfallR__LandI__1DE57479" Association="Self.FK__RainfallR__LandI__1DE57479">
+      <End Role="Land" EntitySet="Land" />
+      <End Role="RainfallRecord" EntitySet="RainfallRecord" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RainfallR__UnitI__1CF15040" Association="Self.FK__RainfallR__UnitI__1CF15040">
+      <End Role="Unit" EntitySet="Unit" />
+      <End Role="RainfallRecord" EntitySet="RainfallRecord" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sale__CustomerID__1AD3FDA4" Association="Self.FK__Sale__CustomerID__1AD3FDA4">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Sale" EntitySet="Sale" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sale__UnitID__19DFD96B" Association="Self.FK__Sale__UnitID__19DFD96B">
+      <End Role="Unit" EntitySet="Unit" />
+      <End Role="Sale" EntitySet="Sale" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Silo__UnitID__0F624AF8" Association="Self.FK__Silo__UnitID__0F624AF8">
+      <End Role="Unit" EntitySet="Unit" />
+      <End Role="Silo" EntitySet="Silo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SiloHarve__Plant__1332DBDC" Association="Self.FK__SiloHarve__Plant__1332DBDC">
+      <End Role="Plantation" EntitySet="Plantation" />
+      <End Role="SiloHarvest" EntitySet="SiloHarvest" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SiloHarve__SaleI__1EA48E88" Association="Self.FK__SiloHarve__SaleI__1EA48E88">
+      <End Role="Sale" EntitySet="Sale" />
+      <End Role="SiloHarvestSale" EntitySet="SiloHarvestSale" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SiloHarve__SiloH__1DB06A4F" Association="Self.FK__SiloHarve__SiloH__1DB06A4F">
+      <End Role="SiloHarvest" EntitySet="SiloHarvest" />
+      <End Role="SiloHarvestSale" EntitySet="SiloHarvestSale" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SiloHarve__SiloI__123EB7A3" Association="Self.FK__SiloHarve__SiloI__123EB7A3">
+      <End Role="Silo" EntitySet="Silo" />
+      <End Role="SiloHarvest" EntitySet="SiloHarvest" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Supplier__Countr__6383C8BA" Association="Self.FK__Supplier__Countr__6383C8BA">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Supplier" EntitySet="Supplier" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Supplier__Provin__6477ECF3" Association="Self.FK__Supplier__Provin__6477ECF3">
+      <End Role="Province" EntitySet="Province" />
+      <End Role="Supplier" EntitySet="Supplier" />
+    </AssociationSet>
+    <AssociationSet Name="FK__User__UserAccess__412EB0B6" Association="Self.FK__User__UserAccess__412EB0B6">
+      <End Role="UserAccessLevel" EntitySet="UserAccessLevel" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserRole__UserAc__44FF419A" Association="Self.FK__UserRole__UserAc__44FF419A">
+      <End Role="UserAccessLevel" EntitySet="UserAccessLevel" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserRole__UserID__440B1D61" Association="Self.FK__UserRole__UserID__440B1D61">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Vehicle__Farm__59063A47" Association="Self.FK__Vehicle__Farm__59063A47">
+      <End Role="Farm" EntitySet="Farm" />
+      <End Role="Vehicle" EntitySet="Vehicle" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Vehicle__UnitID__5812160E" Association="Self.FK__Vehicle__UnitID__5812160E">
+      <End Role="Unit" EntitySet="Unit" />
+      <End Role="Vehicle" EntitySet="Vehicle" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Vehicle__VehMake__5AEE82B9" Association="Self.FK__Vehicle__VehMake__5AEE82B9">
+      <End Role="VehicleMake" EntitySet="VehicleMake" />
+      <End Role="Vehicle" EntitySet="Vehicle" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Vehicle__VehType__59FA5E80" Association="Self.FK__Vehicle__VehType__59FA5E80">
+      <End Role="VehicleType" EntitySet="VehicleType" />
+      <End Role="Vehicle" EntitySet="Vehicle" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VehicleSe__UnitI__5DCAEF64" Association="Self.FK__VehicleSe__UnitI__5DCAEF64">
+      <End Role="Unit" EntitySet="Unit" />
+      <End Role="VehicleService" EntitySet="VehicleService" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VehicleSe__Vehic__5EBF139D" Association="Self.FK__VehicleSe__Vehic__5EBF139D">
+      <End Role="Vehicle" EntitySet="Vehicle" />
+      <End Role="VehicleService" EntitySet="VehicleService" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "VerifyAccount";
+}
+
+<style>
+    .navbar {
+        margin-top: -2000px;
+        margin-bottom: 2000px;
+    }
+
+    body {
+        background: #87CEFA;
+        overflow: hidden;
+        font-weight: 600;
+        font-family: Arial;
+        color: #0288D1;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-size-adjust: 100%;
+    }
+
+    h2 {
+        font-weight: 600;
+        text-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .BreakPoint {
+        margin-bottom: 300px;
+    }
+
+    .success {
+        color: #24820e;
+    }
+
+    .fail {
+        color: #ff1919;
+    }
+
+    a {
+        color: #2072D6;
+    }
+
+    footer {
+        width: 25%;
+        float: right;
+        content: url('../../Images/FarmIT Logo.png');
+    }
+</style>
+
+
+<h2>VERIFIED ACCOUNT</h2>
+
+<br />
+<div class="BreakPoint">
+    @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
+    {
+        <div class="alert alert-success">
+            <span class="glyphicon glyphicon-ok success"></span> &nbsp;&nbsp;<label class="success"><strong>Congratulations!</strong> Your account has been activated successfully.</label> &nbsp;&nbsp; <a>@Html.ActionLink("Click here to Login", "Login", "User")</a>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger">
+            <span class="glyphicon glyphicon-remove fail"></span> &nbsp;&nbsp;<label class="fail"><strong>ERROR!</strong>@ViewBag.Message</label>
+        </div>
+    }
+</div>
+
+
+

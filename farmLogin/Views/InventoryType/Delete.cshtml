@@ -1,0 +1,39 @@
+﻿@model farmLogin.Models.InventoryType
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+<div style="color: red">
+    @if (@ViewBag.Error != null)
+    {
+        <label> @ViewBag.Error</label>
+    }
+
+</div>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>InventoryType</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.InvTypeDescr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InvTypeDescr)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

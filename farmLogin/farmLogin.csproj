@@ -1,0 +1,873 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{900AAE86-1DFF-43BB-8D9E-D9C8C881F6CC}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>farmLogin</RootNamespace>
+    <AssemblyName>farmLogin</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.0.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.0.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.0.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.0.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.0.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.0.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.2\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AddHarvestSiloController.cs" />
+    <Compile Include="Controllers\AttendanceSheetReportController.cs" />
+    <Compile Include="Controllers\AttendenceSheetsController.cs" />
+    <Compile Include="Controllers\BiologicalDisasterController.cs" />
+    <Compile Include="Controllers\CropCycleController.cs" />
+    <Compile Include="Controllers\CropTypeController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\FarmController.cs" />
+    <Compile Include="Controllers\FarmWorkerController.cs" />
+    <Compile Include="Controllers\FarmWorkerReportController.cs" />
+    <Compile Include="Controllers\FarmWorkerTypeController.cs" />
+    <Compile Include="Controllers\FieldController.cs" />
+    <Compile Include="Controllers\FieldHistoryReportController.cs" />
+    <Compile Include="Controllers\HarvestSaleController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InventoryController.cs" />
+    <Compile Include="Controllers\InventoryTypeController.cs" />
+    <Compile Include="Controllers\LandController.cs" />
+    <Compile Include="Controllers\NaturalDisasterController.cs" />
+    <Compile Include="Controllers\PlantationController.cs" />
+    <Compile Include="Controllers\RainfallRecordController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\SalesReportController.cs" />
+    <Compile Include="Controllers\SiloController.cs" />
+    <Compile Include="Controllers\SupplierController.cs" />
+    <Compile Include="Controllers\SupplierOrderController.cs" />
+    <Compile Include="Controllers\TreatPlantationController.cs" />
+    <Compile Include="Controllers\UserAccessLevelController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\VehicleController.cs" />
+    <Compile Include="Controllers\VehicleReportController.cs" />
+    <Compile Include="Controllers\VehicleServiceController.cs" />
+    <Compile Include="Controllers\VehicleServiceReportController.cs" />
+    <Compile Include="Controllers\VehicleTypeController.cs" />
+    <Compile Include="Crypto.cs" />
+    <Compile Include="DecimalModelBinder.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AttendenceSheet.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Audit.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AuditType.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BiologicalDisaster.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Country.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CropCycle.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CropType.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Extended\AttendenceSheet.cs" />
+    <Compile Include="Models\Extended\Audit.cs" />
+    <Compile Include="Models\Extended\AuditType.cs" />
+    <Compile Include="Models\Extended\BiologicalDisaster.cs" />
+    <Compile Include="Models\Extended\Country.cs" />
+    <Compile Include="Models\Extended\CropCycle.cs" />
+    <Compile Include="Models\Extended\CropType.cs" />
+    <Compile Include="Models\Extended\Customer.cs" />
+    <Compile Include="Models\Extended\Farm.cs" />
+    <Compile Include="Models\Extended\FarmWorker.cs" />
+    <Compile Include="Models\Extended\FarmWorkerType.cs" />
+    <Compile Include="Models\Extended\FieldBiologicalDisaster.cs" />
+    <Compile Include="Models\Extended\Field.cs" />
+    <Compile Include="Models\Extended\FieldNaturalDisaster.cs" />
+    <Compile Include="Models\Extended\FieldStage.cs" />
+    <Compile Include="Models\Extended\FieldStatu.cs" />
+    <Compile Include="Models\Extended\FieldTreatment.cs" />
+    <Compile Include="Models\Extended\Gender.cs" />
+    <Compile Include="Models\Extended\Inventory.cs" />
+    <Compile Include="Models\Extended\InventoryTreatment.cs" />
+    <Compile Include="Models\Extended\InventoryType.cs" />
+    <Compile Include="Models\Extended\Land.cs" />
+    <Compile Include="Models\Extended\Log.cs" />
+    <Compile Include="Models\Extended\NaturalDisaster.cs" />
+    <Compile Include="Models\Extended\OrderLine.cs" />
+    <Compile Include="Models\Extended\Order.cs" />
+    <Compile Include="Models\Extended\OrderStatu.cs" />
+    <Compile Include="Models\Extended\Plantation.cs" />
+    <Compile Include="Models\Extended\Province.cs" />
+    <Compile Include="Models\Extended\RainfallRecord.cs" />
+    <Compile Include="Models\Extended\UserRole.cs" />
+    <Compile Include="Models\Farm.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FarmModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FarmModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FarmModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FarmModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FarmModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FarmWorker.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FarmWorkerType.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Field.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FieldBiologicalDisaster.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FieldNaturalDisaster.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FieldStage.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FieldStatu.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FieldTreatment.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Gender.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Inventory.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InventoryTreatment.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InventoryType.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Land.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Log.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NaturalDisaster.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderLine.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderStatu.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Plantation.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Province.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RainfallRecord.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ReportModels\SalesReportViewModel.cs" />
+    <Compile Include="Models\ResetPasswordModel.cs" />
+    <Compile Include="Models\Extended\Sale.cs" />
+    <Compile Include="Models\Extended\SiloHarvest.cs" />
+    <Compile Include="Models\Extended\SiloHarvestSale.cs" />
+    <Compile Include="Models\Extended\Silo.cs" />
+    <Compile Include="Models\Extended\Supplier.cs" />
+    <Compile Include="Models\Extended\Title.cs" />
+    <Compile Include="Models\Extended\Treatment.cs" />
+    <Compile Include="Models\Extended\Unit.cs" />
+    <Compile Include="Models\Extended\UserAccessLevel.cs" />
+    <Compile Include="Models\Extended\User.cs" />
+    <Compile Include="Models\Sale.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Silo.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SiloHarvest.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SiloHarvestSale.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Supplier.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Title.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Treatment.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Unit.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserAccessLevel.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserLogin.cs" />
+    <Compile Include="Models\Extended\VehicleMake.cs" />
+    <Compile Include="Models\Extended\Vehicle.cs" />
+    <Compile Include="Models\Extended\VehicleService.cs" />
+    <Compile Include="Models\Extended\VehicleType.cs" />
+    <Compile Include="Models\Vehicle.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VehicleMake.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VehicleService.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VehicleType.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MyDateValidation.cs" />
+    <Compile Include="MyPastValidation.cs" />
+    <Compile Include="MyRoleProvider.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\CrystalReport3.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReport3.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\CrystalReportAttendance.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReportAttendance.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\CrystalReportFarmWorker.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReportFarmWorker.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\CrystalReportSales.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReportSales.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\DataSetAttendance.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetAttendance.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DataSetFarmWoker.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetFarmWoker.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DataSetSales.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetSales.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\LandRainfall.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LandRainfall.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ViewModels\CropCycleIndexViewModel.cs" />
+    <Compile Include="ViewModels\CustomerIndexViewModel.cs" />
+    <Compile Include="ViewModels\FarmWorkerIndexViewModel.cs" />
+    <Compile Include="ViewModels\InventoryIndexViewModel.cs" />
+    <Compile Include="ViewModels\PlantationViewModel.cs" />
+    <Compile Include="ViewModels\RoleViewModel.cs" />
+    <Compile Include="ViewModels\SupplierIndexViewModel.cs" />
+    <Compile Include="ViewModels\UserAccessLevelIndexViewModel.cs" />
+    <Compile Include="ViewModels\UserIndexViewModel.cs" />
+    <Compile Include="ViewModels\VehicleIndexViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jquery.timepicker.css" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Images\1. User Access Level.png" />
+    <Content Include="Images\1. User.png" />
+    <Content Include="Images\2. Farm Worker Type.png" />
+    <Content Include="Images\2. Farm Worker.png" />
+    <Content Include="Images\2.Clock.png" />
+    <Content Include="Images\3. Farm.png" />
+    <Content Include="Images\3. Field.png" />
+    <Content Include="Images\3. Land.png" />
+    <Content Include="Images\4. Crop Type.png" />
+    <Content Include="Images\4. Harvest Sale.png" />
+    <Content Include="Images\4. Plantation Plan.png" />
+    <Content Include="Images\4. Plantation.png" />
+    <Content Include="Images\4.Silos.png" />
+    <Content Include="Images\5. Inventory Type.png" />
+    <Content Include="Images\5. Inventory.png" />
+    <Content Include="Images\6. Supplier Order.png" />
+    <Content Include="Images\6. Supplier.png" />
+    <Content Include="Images\7. Vehicle Service.png" />
+    <Content Include="Images\7. Vehicle Type.png" />
+    <Content Include="Images\7. Vehicle.png" />
+    <Content Include="Images\8. Biological Disaster.png" />
+    <Content Include="Images\8. Crop Cycle.png" />
+    <Content Include="Images\8. Customer.png" />
+    <Content Include="Images\8. Natural Disaster.png" />
+    <Content Include="Images\9. Biological Disaster Report.png" />
+    <Content Include="Images\9. Farm Worker Attendance Report.png" />
+    <Content Include="Images\9. Field Historty Reports.png" />
+    <Content Include="Images\9. Harvest Report 3D.png" />
+    <Content Include="Images\9. Sale Report.png" />
+    <Content Include="Images\9. Vehicle Service Report.png" />
+    <Content Include="Images\9. Yield and Rainfall Report.png" />
+    <Content Include="Images\Aliferous Logo - Transparent.png" />
+    <Content Include="Images\Aliferous Logo.jpg" />
+    <Content Include="Images\Clock in or Out.jpeg" />
+    <Content Include="Images\Clock in Success.jpeg" />
+    <Content Include="Images\Clock Out Success.jpeg" />
+    <Content Include="Images\Dashboard-Image2.jpg" />
+    <Content Include="Images\Dashboard.jpg" />
+    <Content Include="Images\FarmIT Logo.png" />
+    <Content Include="Images\FarmIT LogoHover.png" />
+    <Content Include="Images\favicon.ico" />
+    <Content Include="Images\glyphicons-535-lab-alt- hover.png" />
+    <Content Include="Images\glyphicons-535-lab-alt.png" />
+    <Content Include="Images\Harvest.gif" />
+    <Content Include="Images\Login Screen.jpeg" />
+    <Content Include="Images\Scan QR Code.jpg" />
+    <Content Include="Models\FarmModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FarmModel.edmx</DependentUpon>
+      <LastGenOutput>FarmModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\FarmModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FarmModel.edmx</DependentUpon>
+      <LastGenOutput>FarmModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\ai.0.22.9-build00167.js" />
+    <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\DataSetAttendance.xsc">
+      <DependentUpon>DataSetAttendance.xsd</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\FarmModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>FarmModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\FarmModel.edmx.diagram">
+      <DependentUpon>FarmModel.edmx</DependentUpon>
+    </Content>
+    <None Include="Reports\DataSetAttendance.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetAttendance.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\DataSetAttendance.xss">
+      <DependentUpon>DataSetAttendance.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\DataSetSales.xsc">
+      <DependentUpon>DataSetSales.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\DataSetFarmWoker.xsc">
+      <DependentUpon>DataSetFarmWoker.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\DataSetFarmWoker.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetFarmWoker.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\DataSetFarmWoker.xss">
+      <DependentUpon>DataSetFarmWoker.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\DataSetSales.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetSales.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\DataSetSales.xss">
+      <DependentUpon>DataSetSales.xsd</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Chart.js" />
+    <Content Include="Scripts\Chart.min.js" />
+    <Content Include="Scripts\cldr.js" />
+    <Content Include="Scripts\cldr\event.js" />
+    <Content Include="Scripts\cldr\supplemental.js" />
+    <Content Include="Scripts\cldr\unresolved.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.timepicker.js" />
+    <Content Include="Scripts\jquery.timepicker.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Video\System Video.mp4" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\User\Registration.cshtml" />
+    <Content Include="Views\User\VerifyAccount.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\User\ForgotPassword.cshtml" />
+    <Content Include="Views\User\ResetPassword.cshtml" />
+    <Content Include="Views\Home\AdminIndex.cshtml" />
+    <Content Include="Views\Home\UserIndex.cshtml" />
+    <Content Include="Views\Inventory\ActionPage.cshtml" />
+    <Content Include="Views\Inventory\Create.cshtml" />
+    <Content Include="Views\Inventory\Delete.cshtml" />
+    <Content Include="Views\Inventory\Details.cshtml" />
+    <Content Include="Views\Inventory\Edit.cshtml" />
+    <Content Include="Views\Inventory\Index.cshtml" />
+    <Content Include="Views\BiologicalDisaster\Create.cshtml" />
+    <Content Include="Views\BiologicalDisaster\Delete.cshtml" />
+    <Content Include="Views\BiologicalDisaster\Details.cshtml" />
+    <Content Include="Views\BiologicalDisaster\Edit.cshtml" />
+    <Content Include="Views\BiologicalDisaster\Index.cshtml" />
+    <Content Include="Views\CropCycle\Create.cshtml" />
+    <Content Include="Views\CropCycle\Delete.cshtml" />
+    <Content Include="Views\CropCycle\Details.cshtml" />
+    <Content Include="Views\CropCycle\Edit.cshtml" />
+    <Content Include="Views\CropCycle\Index.cshtml" />
+    <Content Include="Views\CropType\Create.cshtml" />
+    <Content Include="Views\CropType\Delete.cshtml" />
+    <Content Include="Views\CropType\Details.cshtml" />
+    <Content Include="Views\CropType\Edit.cshtml" />
+    <Content Include="Views\CropType\Index.cshtml" />
+    <Content Include="Views\Customer\ActionPage.cshtml" />
+    <Content Include="Views\Customer\Create.cshtml" />
+    <Content Include="Views\Customer\Delete.cshtml" />
+    <Content Include="Views\Customer\Details.cshtml" />
+    <Content Include="Views\Customer\Edit.cshtml" />
+    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Farm\Create.cshtml" />
+    <Content Include="Views\Farm\Delete.cshtml" />
+    <Content Include="Views\Farm\Details.cshtml" />
+    <Content Include="Views\Farm\Edit.cshtml" />
+    <Content Include="Views\Farm\Index.cshtml" />
+    <Content Include="Views\FarmWorker\ActionPage.cshtml" />
+    <Content Include="Views\FarmWorker\Create.cshtml" />
+    <Content Include="Views\FarmWorker\Delete.cshtml" />
+    <Content Include="Views\FarmWorker\Details.cshtml" />
+    <Content Include="Views\FarmWorker\Edit.cshtml" />
+    <Content Include="Views\FarmWorker\Index.cshtml" />
+    <Content Include="Views\FarmWorkerType\Create.cshtml" />
+    <Content Include="Views\FarmWorkerType\Delete.cshtml" />
+    <Content Include="Views\FarmWorkerType\Details.cshtml" />
+    <Content Include="Views\FarmWorkerType\Edit.cshtml" />
+    <Content Include="Views\FarmWorkerType\Index.cshtml" />
+    <Content Include="Views\Field\Create.cshtml" />
+    <Content Include="Views\Field\Delete.cshtml" />
+    <Content Include="Views\Field\Details.cshtml" />
+    <Content Include="Views\Field\Edit.cshtml" />
+    <Content Include="Views\Field\Index.cshtml" />
+    <Content Include="Views\HarvestSale\Create.cshtml" />
+    <Content Include="Views\HarvestSale\Delete.cshtml" />
+    <Content Include="Views\HarvestSale\Details.cshtml" />
+    <Content Include="Views\HarvestSale\Edit.cshtml" />
+    <Content Include="Views\HarvestSale\Index.cshtml" />
+    <Content Include="Views\InventoryType\Create.cshtml" />
+    <Content Include="Views\InventoryType\Delete.cshtml" />
+    <Content Include="Views\InventoryType\Details.cshtml" />
+    <Content Include="Views\InventoryType\Edit.cshtml" />
+    <Content Include="Views\InventoryType\Index.cshtml" />
+    <Content Include="Views\Land\Create.cshtml" />
+    <Content Include="Views\Land\Delete.cshtml" />
+    <Content Include="Views\Land\Details.cshtml" />
+    <Content Include="Views\Land\Edit.cshtml" />
+    <Content Include="Views\Land\Index.cshtml" />
+    <Content Include="Views\Plantation\ActionPage.cshtml" />
+    <Content Include="Views\Plantation\Create.cshtml" />
+    <Content Include="Views\Plantation\Delete.cshtml" />
+    <Content Include="Views\Plantation\Details.cshtml" />
+    <Content Include="Views\Plantation\Edit.cshtml" />
+    <Content Include="Views\Plantation\Index.cshtml" />
+    <Content Include="Views\Report\ActionPage.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_NavBar.cshtml" />
+    <Content Include="Views\Silo\Create.cshtml" />
+    <Content Include="Views\Silo\Delete.cshtml" />
+    <Content Include="Views\Silo\Details.cshtml" />
+    <Content Include="Views\Silo\Edit.cshtml" />
+    <Content Include="Views\Silo\Index.cshtml" />
+    <Content Include="Views\Supplier\ActionPage.cshtml" />
+    <Content Include="Views\Supplier\Create.cshtml" />
+    <Content Include="Views\Supplier\Delete.cshtml" />
+    <Content Include="Views\Supplier\Details.cshtml" />
+    <Content Include="Views\Supplier\Edit.cshtml" />
+    <Content Include="Views\Supplier\Index.cshtml" />
+    <Content Include="Views\SupplierOrder\Create.cshtml" />
+    <Content Include="Views\SupplierOrder\Delete.cshtml" />
+    <Content Include="Views\SupplierOrder\Details.cshtml" />
+    <Content Include="Views\SupplierOrder\Edit.cshtml" />
+    <Content Include="Views\SupplierOrder\Index.cshtml" />
+    <Content Include="Views\TreatPlantation\Create.cshtml" />
+    <Content Include="Views\TreatPlantation\Delete.cshtml" />
+    <Content Include="Views\TreatPlantation\Details.cshtml" />
+    <Content Include="Views\TreatPlantation\Edit.cshtml" />
+    <Content Include="Views\TreatPlantation\Index.cshtml" />
+    <Content Include="Views\UserAccessLevel\Create.cshtml" />
+    <Content Include="Views\UserAccessLevel\Delete.cshtml" />
+    <Content Include="Views\UserAccessLevel\Details.cshtml" />
+    <Content Include="Views\UserAccessLevel\Edit.cshtml" />
+    <Content Include="Views\UserAccessLevel\Index.cshtml" />
+    <Content Include="Views\Vehicle\ActionPage.cshtml" />
+    <Content Include="Views\Vehicle\Create.cshtml" />
+    <Content Include="Views\Vehicle\CreateVehicleService.cshtml" />
+    <Content Include="Views\Vehicle\Delete.cshtml" />
+    <Content Include="Views\Vehicle\Details.cshtml" />
+    <Content Include="Views\Vehicle\Edit.cshtml" />
+    <Content Include="Views\Vehicle\EditService.cshtml" />
+    <Content Include="Views\Vehicle\Index.cshtml" />
+    <Content Include="Views\Vehicle\ServiceIndex.cshtml" />
+    <Content Include="Views\VehicleService\Create.cshtml" />
+    <Content Include="Views\VehicleService\Delete.cshtml" />
+    <Content Include="Views\VehicleService\Details.cshtml" />
+    <Content Include="Views\VehicleService\Edit.cshtml" />
+    <Content Include="Views\VehicleService\Index.cshtml" />
+    <Content Include="Views\VehicleType\Create.cshtml" />
+    <Content Include="Views\VehicleType\Delete.cshtml" />
+    <Content Include="Views\VehicleType\Details.cshtml" />
+    <Content Include="Views\VehicleType\Edit.cshtml" />
+    <Content Include="Views\VehicleType\Index.cshtml" />
+    <Content Include="Views\User\ActionPage.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\User\Delete.cshtml" />
+    <Content Include="Views\User\Details.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\NaturalDisaster\Index.cshtml" />
+    <Content Include="Views\NaturalDisaster\Details.cshtml" />
+    <Content Include="Views\Vehicle\EditMileage.cshtml" />
+    <Content Include="Views\Farm\ActionPage.cshtml" />
+    <Content Include="Views\Field\SetStatus.cshtml" />
+    <Content Include="Views\RainfallRecord\CaptureRainfallRec.cshtml" />
+    <Content Include="Views\Plantation\Plantations.cshtml" />
+    <Content Include="Views\AttendenceSheets\clockOut.cshtml" />
+    <Content Include="Views\AttendenceSheets\Create.cshtml" />
+    <Content Include="Views\Plantation\Confirm.cshtml" />
+    <Content Include="Views\AddHarvestSilo\Create.cshtml" />
+    <Content Include="Views\AddHarvestSilo\Reason.cshtml" />
+    <Content Include="Views\AddHarvestSilo\FieldBioDisaster.cshtml" />
+    <Content Include="Views\AddHarvestSilo\FieldNaturalDisaster.cshtml" />
+    <Content Include="Views\AddHarvestSilo\SpecifyHarvestComplete.cshtml" />
+    <Content Include="Views\TreatPlantation\Treat.cshtml" />
+    <Content Include="Views\AttendanceSheetReport\Index.cshtml" />
+    <Content Include="Views\FarmWorkerReport\Index.cshtml" />
+    <Content Include="Views\SalesReport\Index.cshtml" />
+    <Content Include="Views\FarmWorker\HowToClockInOrOut.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Files\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\CrystalReport3.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReport3.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\CrystalReportAttendance.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReportAttendance.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\CrystalReportFarmWorker.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReportFarmWorker.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\CrystalReportSales.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReportSales.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\LandRainfall.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>LandRainfall.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>4631</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:4631/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

@@ -1,0 +1,331 @@
+﻿@model farmLogin.Models.BiologicalDisaster
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<style>
+    .breadcrumb {
+        display: inline-block;
+        overflow: hidden;
+        border-radius: 0px;
+        counter-reset: flag;
+        text-align: center;
+        font-family: Arial;
+        font-size: 12px;
+        font-weight: 700;
+        position: center;
+        background: #87CEFA;
+        margin-left: -15px;
+    }
+
+        .breadcrumb a {
+            text-decoration: none;
+            outline: none;
+            display: block;
+            float: left;
+            font-size: 12px;
+            line-height: 36px;
+            padding: 0 10px 0 60px;
+            background: #d1d1d1;
+            color: black;
+            position: relative;
+            box-shadow: 0 3px 6px black;
+        }
+
+            .breadcrumb a:first-child {
+                padding-left: 46px;
+                border-radius: 5px 0 0 5px;
+            }
+
+                .breadcrumb a:first-child:before {
+                    left: 14px;
+                }
+
+            .breadcrumb a:last-child {
+                border-radius: 0 5px 5px 0;
+                padding-right: 20px;
+            }
+
+            .breadcrumb a:after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: -18px;
+                width: 36px;
+                height: 36px;
+                transform: scale(0.707) rotate(45deg);
+                z-index: 1;
+                background: #d1d1d1;
+                box-shadow: 2px -2px 0 2px rgba(0, 0, 0, 0.4), 3px -3px 0 2px rgba(255, 255, 255, 0.1);
+                border-radius: 0 5px 0 50px;
+            }
+
+            .breadcrumb a:last-child:after {
+                content: none;
+            }
+
+            .breadcrumb a:before {
+                content: counter(flag);
+                counter-increment: flag;
+                border-radius: 50%;
+                width: 20px;
+                height: 20px;
+                line-height: 20px;
+                margin: 8px 0;
+                position: absolute;
+                top: 0;
+                left: 30px;
+                color: black;
+                background: white;
+            }
+
+            .breadcrumb a:hover, .breadcrumb a.active,
+            .breadcrumb a:hover:after, .breadcrumb a.active:after {
+                transition: all 0.5s;
+                background: #47A447;
+                color: white;
+            }
+
+    body {
+        background-color: #87CEFA;
+    }
+
+    .panel {
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    #PanelContent {
+        color: black;
+        margin-left: 60px;
+    }
+
+    .panel:hover span {
+        color: #1b8bc6;
+        transition: 0.5s;
+    }
+
+    .panel-success {
+        color: green;
+    }
+
+    .btn {
+        font-weight: 600;
+        background-color: #47A447;
+        font-family: Arial;
+        font-size: 14px;
+        display: inline-block;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        width: 100px;
+        border-radius: 5%;
+    }
+
+        .btn:hover {
+            background-color: #25820F;
+            transition: 0.5s;
+        }
+
+    .btn-default {
+        font-weight: 600;
+        color: white;
+        background-color: #79B9E1;
+        font-family: Arial;
+        font-size: 14px;
+        display: inline-block;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        width: 100px;
+        border-color: #79B9E1;
+        border-radius: 5%;
+    }
+
+        .btn-default:hover {
+            background-color: #1b8bc6;
+            color: white;
+            border-color: #79B9E1;
+            border-radius: 5%;
+            transition: 0.5s;
+        }
+
+    .btn-warning {
+        font-weight: 600;
+        color: white;
+        background-color: #d75152;
+        font-family: Arial;
+        font-size: 14px;
+        display: inline-block;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        width: 100px;
+        border-color: #d75152;
+        border-radius: 5%;
+    }
+
+        .btn-warning:hover {
+            background-color: #e54041;
+            color: white;
+            border-color: #e54041;
+            border-radius: 5%;
+            transition: 0.5s;
+        }
+
+    #btnBack {
+        left: -10px;
+    }
+
+    #btnSave {
+        right: -10px;
+    }
+
+    .panel > .panel-heading {
+        background-image: none;
+        background-color: #d8d8d8;
+    }
+
+    #addInventoryType {
+        width: 175px;
+        background-color: #2072D6;
+        border-color: #2072D6;
+    }
+
+        #addInventoryType:hover {
+            background: #1955a0;
+            border-color: #1955a0;
+        }
+</style>
+
+<div class="breadcrumb">
+    @Html.ActionLink("Home", "Index", "Home")
+    @Html.ActionLink("Admin Action Page", "ActionPage", "Customer")
+    @Html.ActionLink("Manage Biological Disasters", "Index", "BiologicalDisaster")
+    <a class="active">Update Biological Disaster</a>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @*<div class="form-group">*@
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.BioDisasterID)
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-flash"></span> &nbsp; Update Biological Disaster Details</b></h3>
+        </div>
+        <div style="color: red">
+            @if (@ViewBag.Error != null)
+                {
+                <label><br />&nbsp;&nbsp; @ViewBag.Error <br /></label>
+            }
+
+        </div>
+        <div class="panel-body">
+            <div class="form-horizontal">
+                <div class="row" id="PanelContent">
+                    <div class="col-xs-6 col-md-8">
+                        <div class="form-group">
+                            <div class="col-xs-6 col-md-8">
+                                @Html.LabelFor(model => model.BioDisasterDescr, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.BioDisasterDescr, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.BioDisasterDescr, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row" id="PanelContent">
+                    <div class="col-xs-6 col-md-8">
+                        <div class="form-group">
+                            <div class="col-xs-6 col-md-8">
+                                @Html.LabelFor(model => model.BioDisasterNotes, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.BioDisasterNotes, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.BioDisasterNotes, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <div class="input-group-btn">
+            <button class="btn btn-success" type="button" id="btnSave" data-toggle="modal" data-target="#confirm-submit">
+                <span class="glyphicon glyphicon-save"></span>
+                Save
+            </button>
+        </div>
+    </div>
+                <!-- Modal -->
+            <div class="modal fade" id="confirm-submit" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" aria-hidden="false" data-dismiss=" modal">&times;</button>
+                            <h4 class="modal-title">Confirmation</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Please confirm that you want to save these updated details.</p>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success" style="float:right" id="confirmBtn">CONFIRM</button>
+                            <button type="button" class="btn btn-warning" data-dismiss="modal" style="float: left">CANCEL</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+}
+<div class="row">
+
+    <div class="col-xs-6 col-md-4">
+        @using (Html.BeginForm("Index", "BiologicalDisaster", FormMethod.Get, new { @class = "form-inline" }))
+        {
+            <div class="col-xs-6 col-md-4">
+                <div class=input-group>
+                    <div class="input-group-btn">
+                        <button class="btn btn-success" type="submit" id="btnBack">
+                            <span class="glyphicon glyphicon-arrow-left"></span>
+                            Back
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script type="text/javascript">
+        @Model.JavaScriptToRun
+    </script>
+    <script type="text/javascript">
+        @Model.JavaScriptToRun
+        function mySuccess() {
+
+            //alert('Item has successfully been added.');
+            //window.location = "/InventoryType/Index";
+
+            swal({
+                icon: "success",
+                title: "Success!",
+                text: "Item has successfully been updated.",
+                type: "warning"
+            }).then(function () {
+                window.location = "/BiologicalDisaster/Index"
+            })
+        }
+    </script>
+}

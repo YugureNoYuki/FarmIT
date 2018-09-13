@@ -1,0 +1,127 @@
+﻿@model farmLogin.Models.Farm
+
+@{
+    ViewBag.Title = "Farm - ActionPage";
+}
+
+<style>
+    .card {
+        text-align: center;
+        background-color: #fff;
+        padding: 20px;
+        min-width: 220px;
+        min-height: 200px;
+        margin: 0 auto;
+        margin-top: 20px;
+        border-radius: 5%;
+        justify-content: center;
+        margin-bottom: 20px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    .btn {
+        margin-top: 10px !important;
+        font-family: Arial;
+        font-weight: 600;
+        font-size: 12px;
+        display: inline-block;
+        background-color: #52963f;
+        width: 150px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+
+        .btn,
+        .btn::after {
+            -webkit-transition: all 0.3s;
+            -moz-transition: all 0.3s;
+            -o-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+
+            .btn::before,
+            .btn::after {
+                background: #0b689e;
+                border-radius: 5%;
+                content: '';
+                position: absolute;
+                z-index: -1;
+                left: 40px;
+            }
+
+            .btn:after {
+                height: 100%;
+                left: 15px;
+                top: 0;
+                width: 0;
+            }
+
+            .btn:hover:after {
+                width: 90%;
+            }
+
+            .btn:hover {
+                background-color: #24820e;
+            }
+
+
+    body {
+        background-color: #87CEFA;
+    }
+
+
+    .card:hover img {
+        transform: scale(1.2);
+        -webkit-transition: transform 0.20s ease-in-out;
+        -moz-transition: transform 0.20s ease-in-out;
+    }
+
+    .btn-success {
+        min-width: 180px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #blankBtn {
+        background-color: transparent;
+        border-color: transparent;
+        box-shadow: 0 3px 6px #fff;
+    }
+</style>
+
+
+<div class="row" style="margin-bottom: 170px">
+    <div class="col-sm-12 col-md-4">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" id="Image" src="~/Images/3. Farm.png" alt="Farm">
+            <div class="card-body">
+                <a href='@Url.Action("Create", "Farm")' class="btn btn-success btn-lg">Add Farm</a>
+                <a href='@Url.Action("Index", "Farm")' class="btn btn-success btn-lg">View Farm</a>
+                <a href='@Url.Action("Index", "Farm")' class="btn btn-success btn-lg">Manage Farm</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-4">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="~/Images/3. Land.png" alt="Land">
+            <div class="card-body">
+                <a href='@Url.Action("Create", "Land")' class="btn btn-success btn-lg">Add Land</a>
+                <a href='@Url.Action("Index", "Farm")' class="btn btn-success btn-lg">View Land</a>
+                <a href='@Url.Action("Index", "Farm")' class="btn btn-success btn-lg">Manage Land</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-4">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="~/Images/3. Field.png" alt="Field">
+            <div class="card-body">
+                <a href='@Url.Action("Create", "Field")' class="btn btn-success btn-lg">Add Field</a>
+                <a href='@Url.Action("Index", "Farm")' class="btn btn-success btn-lg">View Field</a>
+                <a href='@Url.Action("Index", "Farm")' class="btn btn-success btn-lg">Manage Field</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
