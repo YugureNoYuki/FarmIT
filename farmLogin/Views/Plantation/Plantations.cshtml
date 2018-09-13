@@ -503,6 +503,40 @@
 
                     })
 
+                    //Treat Plantation
+                    $('#btnTreat').click(function () {
+                        //Open modal dialog for edit event
+
+                        //window.location = "/Edit/Plantation";
+                        //$('#calender').fullCalendar('unselect');
+                        var myID = selectedEvent.eventID;
+                        console.log(myID);
+
+                        if (selectedEvent != null) {
+
+                            $.ajax({
+                                type: "POST",
+                                url: '/Plantation/RedirectToTreat',
+                                data: { 'plantationID': selectedEvent.eventID },
+                                success: function (data) {
+                                    //if (data.status) {
+                                    //    //Refresh the calender
+                                    //    FetchEventAndRenderCalendar();
+                                    //    $('#myModal').modal('hide');
+                                    //}
+
+                                    window.location.href = data.Url;
+
+                                },
+                                error: function () {
+                                    alert('Failed');
+                                }
+                            })
+
+                        }
+
+                    })
+
                     $('#btnDelete').click(function () {
                         if (selectedEvent != null && confirm('Are you sure?')) {
                             $.ajax({

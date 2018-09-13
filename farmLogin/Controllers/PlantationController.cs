@@ -13,11 +13,15 @@ using System.Web.Script.Serialization;
 using System.Data.Entity.Migrations;
 using System.Globalization;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNet.Identity;
 
 namespace farmLogin.Controllers
 {
     public class PlantationController : Controller
     {
+        //get current logged in user
+        private readonly UserManager<ApplicationUser> _userManager;
+
         private FarmDbContext db = new FarmDbContext();
         public static int routeId;
 
@@ -206,50 +210,50 @@ namespace farmLogin.Controllers
         #endregion
 
 
-        //public ActionResult Set(int? id)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        if (id == null)
-        //        {
-        //            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //        }
-        //        Plantation plantation = db.Plantations.Find(id);
+        public ActionResult Set(int? id)
+        {
+            if (ModelState.IsValid)
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Plantation plantation = db.Plantations.Find(id);
 
-        //        plantation.FieldStageID = 5;
-        //        plantation.JavaScriptToRun = "mySuccess()";
-        //        if (plantation == null)
-        //        {
-        //            return HttpNotFound();
-        //        }
+                plantation.FieldStageID = 5;
+                plantation.JavaScriptToRun = "mySuccess()";
+                if (plantation == null)
+                {
+                    return HttpNotFound();
+                }
 
-        //        try
-        //        {
-        //            db.SaveChanges();
-        //            return RedirectToAction("Plantations", plantation);
-        //        }
-        //        catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
-        //        {
-        //            Exception raise = dbEx;
-        //            foreach (var validationErrors in dbEx.EntityValidationErrors)
-        //            {
-        //                foreach (var validationError in validationErrors.ValidationErrors)
-        //                {
-        //                    string message = string.Format("{0}:{1}",
-        //                        validationErrors.Entry.Entity.ToString(),
-        //                        validationError.ErrorMessage);
-        //                    // raise a new exception nesting
-        //                    // the current instance as InnerException
-        //                    raise = new InvalidOperationException(message, raise);
-        //                }
-        //            }
-        //            throw raise;
-        //        }
+                try
+                {
+                    db.SaveChanges();
+                    return RedirectToAction("Plantations", plantation);
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+                {
+                    Exception raise = dbEx;
+                    foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            string message = string.Format("{0}:{1}",
+                                validationErrors.Entry.Entity.ToString(),
+                                validationError.ErrorMessage);
+                            // raise a new exception nesting
+                            // the current instance as InnerException
+                            raise = new InvalidOperationException(message, raise);
+                        }
+                    }
+                    throw raise;
+                }
 
-        //    }
-        //    return View();
+            }
+            return View();
 
-        //}
+        }
 
         #region Confirm Plantation
         //GET
@@ -389,6 +393,137 @@ namespace farmLogin.Controllers
             ViewBag.PlantationID = new SelectList(db.Plantations, "PlantationID", "PlantationStatus", siloHarvest.PlantationID);
             ViewBag.SiloID = new SelectList(db.Silos, "SiloID", "SiloDescr", siloHarvest.SiloID);
             return View(siloHarvest);
+        }
+
+        #endregion
+
+        #region Treat Plantation
+        public FieldTreatment ft = new FieldTreatment();
+
+        // GET: TreatPlantation/Treat/1
+        public ActionResult Treat(int? id) //plantationID
+        {
+            ViewBag.InventoryID = new SelectList(db.Inventories, "InventoryID", "InvDescr");
+            ViewBag.TreatmentID = new SelectList(db.Treatments.Where(t => !t.TreatmentDescr.Contains("Stage 1 (Initial) Treatment")), "TreatmentID", "TreatmentDescr");
+            ViewBag.Unit = new SelectList(db.Units.Where(u => !u.UnitDescr.Contains("MM") && !u.UnitDescr.Contains("HOURS") && !u.UnitDescr.Contains("KM") && !u.UnitDescr.Contains("HA") && !u.UnitDescr.Contains("ML")), "UnitID", "UnitDescr");
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //GET PlantationID & FieldID
+            using (FarmDbContext dc = new FarmDbContext())
+            {
+                var tplantation = dc.Plantations.Find(id); //return plantation id
+                //if(tplantation == null)
+                //{
+                //    return HttpNotFound();
+                //}
+                //return View();
+            }
+
+            return View();
+        }
+
+        // POST: TreatPlantation/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Treat([Bind(Include = "TreatmentID,InventoryID,TreatmentQnty,Unit")] InventoryTreatment inventoryTreatment, int id)
+        {
+            if (ModelState.IsValid)
+            {
+                //get inventory quantity: Treatment quantity for selected inventory item cannot be more than the available qty
+                var qty = db.Inventories.Find(inventoryTreatment.InventoryID);
+                try
+                {
+                    if(Convert.ToInt32(inventoryTreatment.TreatmentQnty) > Convert.ToInt32(qty.InvQty))
+                    {
+                        //return error message: Selected quantity cannot be more than the available inventory qty
+
+                        ModelState.AddModelError("TreatmentQnty", "Selected quantity cannot be more than the available inventory quantity");
+
+                        ViewBag.InventoryID = new SelectList(db.Inventories, "InventoryID", "InvDescr", inventoryTreatment.InventoryID);
+                        ViewBag.TreatmentID = new SelectList(db.Treatments.Where(t => !t.TreatmentDescr.Contains("Stage 1 (Initial) Treatment")), "TreatmentID", "TreatmentDescr", inventoryTreatment.TreatmentID); //Treatment can only be stage 2 or Ad-Hoc
+                        ViewBag.Unit = new SelectList(db.Units.Where(u=> !u.UnitDescr.Contains("MM") && !u.UnitDescr.Contains("HOURS") && !u.UnitDescr.Contains("KM") && !u.UnitDescr.Contains("HA") && !u.UnitDescr.Contains("ML")), "UnitID", "UnitDescr", inventoryTreatment.Unit);
+
+                        return View(inventoryTreatment);
+                    }
+                    else
+                    {
+                        db.InventoryTreatments.Add(inventoryTreatment);
+                        db.SaveChanges();
+                        inventoryTreatment.JavaScriptToRun = "mySuccess()";
+                    }
+                }
+                catch (Exception e)
+                {
+
+                    ViewBag.Message = e.Message;
+                }
+
+                if (inventoryTreatment.TreatmentID == 2) //update field status when Id 2 = Stage 2 Treatment
+                {
+                    using (FarmDbContext dc = new FarmDbContext())
+                    {
+                        var tfield = (from a in dc.Plantations
+                                      join b in dc.Fields on a.FieldID equals b.FieldID
+                                      where a.PlantationID == id
+                                      select a.FieldID).FirstOrDefault();
+                        var f = dc.Fields.Find(tfield);
+                        try
+                        {
+                            //remove 
+
+
+                            f.FieldStatusID = 2; //Treated (This should be field Stage SIYA!!!)
+                            //db.Entry(inventoryTreatment).State = EntityState.Modified;
+                            dc.Entry(f).State = EntityState.Modified;
+                            dc.SaveChanges();
+                        }
+                        catch (Exception err)
+                        {
+
+                            ViewBag.Message = err.Message;
+                        }
+
+                    }
+
+                }
+                using (FarmDbContext dc = new FarmDbContext())
+                {
+                    // inventoryTreatment.Inventory.InvQty -= inventoryTreatment.TreatmentQnty; //decrease inventory
+                    var tfield1 = (from a in dc.Plantations                             //return the FieldID in Plantation
+                                   join b in dc.Fields on a.FieldID equals b.FieldID
+                                   where a.PlantationID == id
+                                   select a.FieldID).FirstOrDefault();
+                    ft.FieldID = Convert.ToInt32(tfield1);
+
+                    //GET the TreatmentID on post
+                    int treatId = inventoryTreatment.TreatmentID;
+                    ft.TreatmentID = Convert.ToInt32(treatId);
+                    ft.TreatmentDate = System.DateTime.Now;
+                    try
+                    {
+                        db.FieldTreatments.Add(ft);
+                        db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        ViewBag.Message = e.Message;
+                    }
+
+                }
+
+
+                //CreateFieldTreatment(inventoryTreatment.TreatmentID)
+                return RedirectToAction("Plantations","Plantation");
+            }
+
+            ViewBag.InventoryID = new SelectList(db.Inventories, "InventoryID", "InvDescr", inventoryTreatment.InventoryID);
+            ViewBag.TreatmentID = new SelectList(db.Treatments, "TreatmentID", "TreatmentDescr", inventoryTreatment.TreatmentID);
+            ViewBag.Unit = new SelectList(db.Units, "UnitID", "UnitDescr", inventoryTreatment.Unit);
+            return View(inventoryTreatment);
         }
 
         #endregion
@@ -543,6 +678,11 @@ namespace farmLogin.Controllers
         public ActionResult RedirectToHarvest(int? plantationID)
         {
             string url = "/Plantation/Harvest/" + plantationID;
+            return Json(new { Url = url });
+        }
+        public ActionResult RedirectToTreat(int? plantationID)
+        {
+            string url = "/Plantation/Treat/" + plantationID;
             return Json(new { Url = url });
         }
 

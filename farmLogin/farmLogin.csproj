@@ -785,7 +785,7 @@
     <Content Include="Views\AddHarvestSilo\FieldBioDisaster.cshtml" />
     <Content Include="Views\AddHarvestSilo\FieldNaturalDisaster.cshtml" />
     <Content Include="Views\AddHarvestSilo\SpecifyHarvestComplete.cshtml" />
-    <Content Include="Views\TreatPlantation\Treat.cshtml" />
+    <Content Include="Views\Plantation\Treat.cshtml" />
     <Content Include="Views\AttendanceSheetReport\Index.cshtml" />
     <Content Include="Views\FarmWorkerReport\Index.cshtml" />
     <Content Include="Views\SalesReport\Index.cshtml" />

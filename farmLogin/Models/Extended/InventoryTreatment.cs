@@ -10,7 +10,7 @@ namespace farmLogin.Models
     [MetadataType(typeof(InventoryTreatmentMetaData))]
     public partial class InventoryTreatment
     {
-
+        public string JavaScriptToRun { get; set; }
     }
     public class InventoryTreatmentMetaData
     {
