@@ -545,7 +545,6 @@ namespace farmLogin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ResetPassword(ResetPasswordModel model)
         {
-            var message = "";
             if (ModelState.IsValid)
             {
                 using (FarmDbContext dc = new FarmDbContext())
@@ -557,17 +556,17 @@ namespace farmLogin.Controllers
                         user.ResetPasswordCode = ""; //user can only update password once with given resetcode
                         dc.Configuration.ValidateOnSaveEnabled = false;
                         dc.SaveChanges();
-                        message = "New password updated successfully";
+                        TempData["yay"] = "New password updated successfully!";
+                        return View();
+                    }
+                    else
+                    {
+                        TempData["fail"] = "Password could not be updated";
+                        return View();
                     }
                 }
             }
-            else
-            {
-                message = "Something invalid";
-            }
-
-            ViewBag.Message = message;
-            return View(model);
+            return View();
         }
     }
 
