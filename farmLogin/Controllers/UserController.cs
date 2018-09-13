@@ -438,7 +438,7 @@ namespace farmLogin.Controllers
             var verifyUrl = "/User/" + emailFor + "/" + activationCode;
             var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl);
 
-            var fromEmail = new MailAddress("u15185142@tuks.co.za", "Arrie Awesome"); //Of course I'm awesome
+            var fromEmail = new MailAddress("u15185142@tuks.co.za", "FarmIT Account Control"); //Of course I'm awesome
             var toEmail = new MailAddress(email);
             var fromEmailPassword = "Pp15185142"; //Password is taken out :)
 
@@ -448,9 +448,9 @@ namespace farmLogin.Controllers
             {
                 subject = "Your account is successfully created!";
 
-                body = "<br/><br/>We are excited to tell you that your FarmIT account is successfully created. Please click on the below link to verify your account" +
+                body = "<br/><br/>We are excited to tell you that your FarmIT account has successfully been created. Please click on the link below to verify your account" +
                 "<br/><br/><a href='" + link + "'>" + link + "</a>" +
-                "<br/><br/>Your temporary password:<b>"+password+"</b>";
+                "<br/><br/>Your temporary password:<b>"+password+ "</b><br/><br/>";
             } 
             else if (emailFor == "ResetPassword")
             {
