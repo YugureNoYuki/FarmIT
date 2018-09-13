@@ -206,50 +206,50 @@ namespace farmLogin.Controllers
         #endregion
 
 
-        public ActionResult Set(int? id)
-        {
-            if (ModelState.IsValid)
-            {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                Plantation plantation = db.Plantations.Find(id);
+        //public ActionResult Set(int? id)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (id == null)
+        //        {
+        //            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //        }
+        //        Plantation plantation = db.Plantations.Find(id);
 
-                plantation.FieldStageID = 5;
-                plantation.JavaScriptToRun = "mySuccess()";
-                if (plantation == null)
-                {
-                    return HttpNotFound();
-                }
+        //        plantation.FieldStageID = 5;
+        //        plantation.JavaScriptToRun = "mySuccess()";
+        //        if (plantation == null)
+        //        {
+        //            return HttpNotFound();
+        //        }
 
-                try
-                {
-                    db.SaveChanges();
-                    return RedirectToAction("Plantations", plantation);
-                }
-                catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
-                {
-                    Exception raise = dbEx;
-                    foreach (var validationErrors in dbEx.EntityValidationErrors)
-                    {
-                        foreach (var validationError in validationErrors.ValidationErrors)
-                        {
-                            string message = string.Format("{0}:{1}",
-                                validationErrors.Entry.Entity.ToString(),
-                                validationError.ErrorMessage);
-                            // raise a new exception nesting
-                            // the current instance as InnerException
-                            raise = new InvalidOperationException(message, raise);
-                        }
-                    }
-                    throw raise;
-                }
+        //        try
+        //        {
+        //            db.SaveChanges();
+        //            return RedirectToAction("Plantations", plantation);
+        //        }
+        //        catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+        //        {
+        //            Exception raise = dbEx;
+        //            foreach (var validationErrors in dbEx.EntityValidationErrors)
+        //            {
+        //                foreach (var validationError in validationErrors.ValidationErrors)
+        //                {
+        //                    string message = string.Format("{0}:{1}",
+        //                        validationErrors.Entry.Entity.ToString(),
+        //                        validationError.ErrorMessage);
+        //                    // raise a new exception nesting
+        //                    // the current instance as InnerException
+        //                    raise = new InvalidOperationException(message, raise);
+        //                }
+        //            }
+        //            throw raise;
+        //        }
 
-            }
-            return View();
+        //    }
+        //    return View();
 
-        }
+        //}
 
         #region Confirm Plantation
         //GET
