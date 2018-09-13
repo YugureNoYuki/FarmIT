@@ -31,13 +31,13 @@ namespace farmLogin.Controllers
 
         public ActionResult Index()
         {
-            var plantation = db.Plantations.Include(p => p.CropCycle).Include(p => p.CropType).Include(p => p.Field).Include(p => p.SiloHarvests).Where(p => p.PlantationStatus == "Planned");
+            //var plantation = db.Plantations.Include(p => p.CropCycle).Include(p => p.CropType).Include(p => p.Field).Include(p => p.SiloHarvests).Where(p => p.PlantationStatus == "Planned");
             return View();
         }
 
         public ActionResult Plantations()
         {
-            var plantation = db.Plantations.Include(p => p.CropCycle).Include(p => p.CropType).Include(p => p.Field).Include(p => p.SiloHarvests).Where(p => p.PlantationStatus == "Confirmed");
+            //var plantation = db.Plantations.Include(p => p.CropCycle).Include(p => p.CropType).Include(p => p.Field).Include(p => p.SiloHarvests).Where(p => p.PlantationStatus == "Confirmed");
             return View();
         }
 
