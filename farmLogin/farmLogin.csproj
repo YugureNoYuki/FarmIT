@@ -790,6 +790,7 @@
     <Content Include="Views\FarmWorkerReport\Index.cshtml" />
     <Content Include="Views\SalesReport\Index.cshtml" />
     <Content Include="Views\FarmWorker\HowToClockInOrOut.cshtml" />
+    <Content Include="Views\Plantation\Harvest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
