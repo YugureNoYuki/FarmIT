@@ -191,6 +191,7 @@
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.FarmWorkerTypeID)
+    @Html.HiddenFor(model => model.FarmWorkerTypeActiveStatus)
     <div class="panel panel-success">
         <div class="panel-heading">
             <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-list"></span> &nbsp; Update Farm Worker Type Details</b></h3>
