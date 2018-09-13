@@ -15,5 +15,7 @@ namespace farmLogin
                 .ComputeHash(Encoding.UTF8.GetBytes(value))
                 );
         }
+
+        //Anne has just added a comment check it out
     }
 }
