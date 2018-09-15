@@ -334,7 +334,7 @@ namespace farmLogin.Controllers
                             myWorker.FarmWorkerFName = farmWorker.FarmWorkerFName;
                             myWorker.FarmWorkerLName = farmWorker.FarmWorkerLName;
                             myWorker.FarmWorkerContactNum = farmWorker.FarmWorkerContactNum;
-                            myWorker.FarmWorkerImg = "/~Files/" + file.FileName;
+                            myWorker.FarmWorkerImg = "~/Files/" + file.FileName;
                             myWorker.Address = farmWorker.Address;
                             myWorker.Surburb = farmWorker.Surburb;
                             myWorker.City = farmWorker.City;

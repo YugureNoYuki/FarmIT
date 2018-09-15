@@ -4,9 +4,8 @@
 }
 @*Style*@
 <style>
-     /*Confirmation*/
-      /*Green Button*/
-
+    /*Confirmation*/
+    /*Green Button*/
     #Confirm {
         font-family: Arial;
         font-weight: 600;
@@ -23,7 +22,7 @@
             border-color: #24820e;
             transition: 0.3s;
         }
-        /*Red Button*/
+    /*Red Button*/
     #Cancel {
         font-family: Arial;
         font-weight: 600;
@@ -35,7 +34,7 @@
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
     }
 
-       #Cancel:hover {
+        #Cancel:hover {
             background-color: #bc1c03;
             border-color: #bc1c03;
             transition: 0.3s;
@@ -255,11 +254,11 @@
                     <div class="col-xs-6 col-md-12">
                         <div class="form-group">
                             <div class="col-xs-6 col-md-6">
-                                @Html.LabelFor(model => model.FarmWorkerImg, "Upload Image: ", htmlAttributes: new { @class = "control-label" })
+                                @Html.LabelFor(model => model.FarmWorkerImg, "Upload Image: ", htmlAttributes: new { @class = "control-label"})
                             </div>
                             <div class="col-md-10">
                                 @*@Html.EditorFor(model => model.FarmWorkerImg, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.FarmWorkerImg, "", new { @class = "text-danger" })*@
+                                    @Html.ValidationMessageFor(model => model.FarmWorkerImg, "", new { @class = "text-danger" })*@
                                 <div style="color: red">
                                     @if (@ViewBag.Error != null)
                                     {
@@ -270,10 +269,19 @@
                                 <div class="input-group" style="left:-13px">
                                     <label class="input-group-btn">
                                         <span class="btn btn-default" id="BrowseBtn">
-                                            Browse&hellip; <input type="file" name="file" accept="image/jpeg, image/png" style="display: none;">
+                                            Browse&hellip; <input type="file" name="file" accept="image/jpeg, image/png" style="display: none" id="myImg">
                                         </span>
                                     </label>
                                     <input type="text" class="form-control" readonly>
+                                </div>
+                                <div class="col-md-4">
+                                    <br />
+                                    <div id="imgPreview" class="thumbnail" style="display:none">
+                                        <img class="img-responsive" id="targetImg" />
+                                        <div class="caption">
+                                            <a href="#" onclick="clearPreview()"><i class="glyphicon glyphicon-trash"></i></a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -442,7 +450,8 @@
                                 @Html.LabelFor(model => model.ContractStartDate, "Contract Start Date", htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.ContractStartDate, new { htmlAttributes = new { @class = "form-control" } })
+                                @*@Html.EditorFor(model => model.ContractStartDate, new { htmlAttributes = new { @class = "form-control" } })*@
+                                @Html.EditorFor(model => model.ContractStartDate, new { htmlAttributes = new { @class = "form-control date-picker", onkeydown = "return false", onpaste = "return false" } })
                                 @Html.ValidationMessageFor(model => model.ContractStartDate, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -453,7 +462,8 @@
                                 @Html.LabelFor(model => model.ContractEndDate, "Contract End Date", htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.ContractEndDate, new { htmlAttributes = new { @class = "form-control" } })
+                                @*@Html.EditorFor(model => model.ContractEndDate, new { htmlAttributes = new { @class = "form-control" } })*@
+                                @Html.EditorFor(model => model.ContractEndDate, new { htmlAttributes = new { @class = "form-control date-picker", onkeydown = "return false", onpaste = "return false" } })
                                 @Html.ValidationMessageFor(model => model.ContractEndDate, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -499,27 +509,27 @@
     </div>
 
             <!-- Modal -->
-        <div class="modal fade" id="confirm-submit" role="dialog">
-            <div class="modal-dialog">
+    <div class="modal fade" id="confirm-submit" role="dialog">
+        <div class="modal-dialog">
 
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" aria-hidden="true" data-dismiss=" modal">&times;</button>
-                        <h4 class="modal-title">Confirmation</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>Please confirm that you want to save these details.</p>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button id="Confirm" type="submit" class="btn btn-success" style="float:right" id="confirmBtn">CONFIRM</button>
-                        <button id ="Cancel" type="button" class="btn btn-warning" data-dismiss="modal" style="float: left">CANCEL</button>
-                    </div>
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-hidden="true" data-dismiss=" modal">&times;</button>
+                    <h4 class="modal-title">Confirmation</h4>
                 </div>
+                <div class="modal-body">
+                    <p>Please confirm that you want to save these details.</p>
 
+                </div>
+                <div class="modal-footer">
+                    <button id="Confirm" type="submit" class="btn btn-success" style="float:right" id="confirmBtn">CONFIRM</button>
+                    <button id="Cancel" type="button" class="btn btn-warning" data-dismiss="modal" style="float: left">CANCEL</button>
+                </div>
             </div>
+
         </div>
+    </div>
 
 }
 <div class="row">
@@ -542,20 +552,22 @@
     </div>
 </div>
 
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.uploadPreview.min.js"></script>
     <script type="text/javascript">
          @Model.JavaScriptToRun
 
-            function mySuccess() {
-                swal({
-                    icon: "success",
-                    title: "Success!",
-                    text: "Item has successfully been added.",
-                    type: "warning"
-                }).then(function () {
+        function mySuccess() {
+            swal({
+                icon: "success",
+                title: "Success!",
+                text: "Item has successfully been added.",
+                type: "warning"
+            }).then(function () {
 
                 window.location = "/FarmWorker/Index"
             })
@@ -592,6 +604,49 @@
             });
 
         });
+    </script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(".date-picker").datepicker();
+            $(".date-picker").datepicker("setDate", "+0d");
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#myImg").change(function () {
+                var File = this.files;
+                if (File && File[0]) {
+                    ReadImage(File[0])
+                }
+            })
+        })
+
+        var ReadImage = function (file) {
+            var reader = new FileReader;
+            var image = new Image;
+
+            reader.readAsDataURL(file);
+            reader.onload = function (_file) {
+                image.src = _file.target.result;
+                image.onload = function () {
+                    var height = this.height;
+                    var width = this.width;
+                    var type = file.type;
+                    var size = file.size;
+
+                    $("#targetImg").attr('src', _file.target.result);
+                    $("#description").text;
+                    $("#imgPreview").show();
+                }
+            }
+        }
+
+        var clearPreview = function () {
+            $("#myImg").val('');
+            $("#description").text('');
+            $("#imgPreview").hide();
+        }
     </script>
 }
 
