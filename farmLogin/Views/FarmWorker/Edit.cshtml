@@ -8,6 +8,9 @@
      /*Confirmation*/
       /*Green Button*/
 
+      #ui-datepicker-div {
+          background: blue!important;
+      }
     #Confirm {
         font-family: Arial;
         font-weight: 600;
@@ -174,6 +177,7 @@
         background-image: none;
         background-color: #d8d8d8;
     }
+    #datepicker
 </style>
 
 <div class="breadcrumb">
@@ -387,7 +391,8 @@
                                     @Html.LabelFor(model => model.ContractStartDate, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.ContractStartDate, new { htmlAttributes = new { @class = "form-control" } })
+                                   @* @Html.EditorFor(model => model.ContractStartDate, new { htmlAttributes = new { @class = "form-control datepicker" } })*@
+                                    @Html.EditorFor(model => model.ContractStartDate, new { htmlAttributes = new { Value = Model.ContractStartDate.ToString("yyyy/MM/dd"), @class = "form-control date-picker", onkeydown = "return false", onpaste = "return false" } })
                                     @Html.ValidationMessageFor(model => model.ContractStartDate, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -398,7 +403,8 @@
                                     @Html.LabelFor(model => model.ContractEndDate, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.ContractEndDate, new { htmlAttributes = new { @class = "form-control" } })
+                                   @* @Html.EditorFor(model => model.ContractEndDate, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    @Html.EditorFor(model => model.ContractEndDate, new { htmlAttributes = new { Value = Model.ContractEndDate.ToString("yyyy/MM/dd"), @class = "form-control date-picker", onkeydown = "return false", onpaste = "return false" } })
                                     @Html.ValidationMessageFor(model => model.ContractEndDate, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -508,7 +514,7 @@
 
         }
     </script>
-    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-1.12.4.min.js")" type="text/javascript"></script>
     <script>
         $(function () {
 
@@ -538,6 +544,17 @@
 
         });
     </script>
+<script src="@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")" type="text/javascript"></script>
+<script type="text/javascript">
+        $(function () {
+            $(".date-picker").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-100:+0", // You can set the year range as per as your need
+                dateFormat: 'yy/m/dd'
+            });
+        });
+</script>
 }
 
 
