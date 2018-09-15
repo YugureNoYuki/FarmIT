@@ -455,8 +455,7 @@ namespace farmLogin.Controllers
             else if (emailFor == "ResetPassword")
             {
                 subject = "Reset Password";
-                body = "Hi,<br/><br/>We got a request to reset your account password. Please click on the below link to reset your password" +
-                    "<br/><br/><a href=" + link + ">Reset password link</a>";
+                body = "Hi,<br/><br/>We got a request to reset your account password. Please click <a href='" + link + "'>here</a> to rest your password. <br/> ";
             }
 
 
@@ -509,14 +508,16 @@ namespace farmLogin.Controllers
                     dc.Configuration.ValidateOnSaveEnabled = false; //Avoid password does not match issue
                     dc.SaveChanges();
                     message = "Reset password link has been sent to your email";
+                    TempData["yay"] = "Password has successfully been Reset!";
+                    return View();
                 }
                 else
                 {
                     message = "Account not found";
+                    TempData["fail"] = "Email could not be found, please enter a valid email address!";
+                    return View();
                 }
             }
-            ViewBag.Message = message;
-            return View();
         }
 
         public ActionResult ResetPassword(string id)
@@ -544,7 +545,6 @@ namespace farmLogin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ResetPassword(ResetPasswordModel model)
         {
-            var message = "";
             if (ModelState.IsValid)
             {
                 using (FarmDbContext dc = new FarmDbContext())
@@ -556,17 +556,17 @@ namespace farmLogin.Controllers
                         user.ResetPasswordCode = ""; //user can only update password once with given resetcode
                         dc.Configuration.ValidateOnSaveEnabled = false;
                         dc.SaveChanges();
-                        message = "New password updated successfully";
+                        TempData["yay"] = "New password updated successfully!";
+                        return View();
+                    }
+                    else
+                    {
+                        TempData["fail"] = "Password could not be updated";
+                        return View();
                     }
                 }
             }
-            else
-            {
-                message = "Something invalid";
-            }
-
-            ViewBag.Message = message;
-            return View(model);
+            return View();
         }
     }
 
