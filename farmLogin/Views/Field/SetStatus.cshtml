@@ -238,7 +238,7 @@
 <div class="row">
 
     <div class="col-xs-6 col-md-4">
-        @using (Html.BeginForm("Index", "Farm", FormMethod.Get, new { @class = "form-inline" }))
+        @using (Html.BeginForm("Index", "Field", FormMethod.Get, new { @class = "form-inline" }))
             {
             <div class="col-xs-6 col-md-4">
                 <div class=input-group>
@@ -277,9 +277,13 @@
                 text: "Item has successfully been updated.",
                 type: "warning"
             }).then(function () {
-                window.location = "/Farm/Index"
+                window.location = "/Field/Index"
             })
         }
+
+        //Active Navbar
+        var element = document.getElementById("navFarm");
+        element.classList.add("active");
     </script>
 }
 

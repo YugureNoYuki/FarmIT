@@ -162,6 +162,10 @@
         color: #e0bf38;
     }
 
+    .glyphicon-tint
+    {
+        color:#0051bd;
+    }
     #SearchBar {
         right: -375px;
     }
@@ -300,7 +304,9 @@
                     <th>
                         Province
                     </th>
-                    <th></th>
+                    <th>
+                        Action
+                    </th>
                 </tr>
                 @foreach (var item in myList)
                 {
@@ -320,6 +326,7 @@
                             <a href="@Url.Action("Edit", "Farm", new { id = item.FarmID })" title="Edit">
                                 <i class="glyphicon glyphicon-pencil" id="ActionIcon"></i>
                             </a>
+                            
                             <a id="deleteItem" class="deleteItem" data-target="#basic"
                                data-toggle="modal"
                                data-path="@Url.Action("Delete", "Farm", new { id = item.FarmID })" title="Delete">
@@ -360,6 +367,9 @@
                             @*@Html.ActionLink("Details", "Details", new { id = item.LandID }) |*@
                             <a href="@Url.Action("Edit", "Land", new { id = item.LandID })" title="Edit">
                                 <i class="glyphicon glyphicon-pencil" id="ActionIcon"></i>
+                            </a>
+                            <a href="@Url.Action("CaptureRainfallRec", "RainfallRecord", new { id = item.FarmID })" title="Capture Rainfall">
+                                <i class="glyphicon glyphicon-tint" id="ActionIcon"></i>
                             </a>
                             <a id="deleteItem" class="deleteItem" data-target="#basic"
                                data-toggle="modal"
@@ -532,5 +542,9 @@
                 window.location = "/Farm/Index"
             })
         }
+
+        //Active Navbar
+        var element = document.getElementById("navFarm");
+        element.classList.add("active");
     </script>
 }

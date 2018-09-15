@@ -138,7 +138,7 @@
         line-height: 60px;
         width: 400px;
         position: relative;
-        left:-15.5px !important;
+        left: -15.5px !important;
         background: #FFF;
         border-radius: 10px 10px 0 0;
         -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
@@ -297,13 +297,65 @@
         top: 60%;
     }
 
-    .text-danger
-    {
-        position:absolute;
+    .text-danger {
+        position: absolute;
         left: 15.5%;
         top: 75%;
     }
 
+    .sun {
+        position: absolute;
+        top: -70%;
+        left: -85%;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: #fffb91; /* Old browsers */
+        background: -moz-radial-gradient(center, ellipse cover, #fffb91 1%, #fff787 12%, #fff466 26%, #fff654 42%, #fff242 60%, #fff028 75%, #efc434 100%); /* FF3.6-15 */
+        background: -webkit-radial-gradient(center, ellipse cover, #fffb91 1%,#fff787 12%,#fff466 26%,#fff654 42%,#fff242 60%,#fff028 75%,#efc434 100%); /* Chrome10-25,Safari5.1-6 */
+        background: radial-gradient(ellipse at center, #fffb91 1%,#fff787 12%,#fff466 26%,#fff654 42%,#fff242 60%,#fff028 75%,#efc434 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffb91', endColorstr='#efc434',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+        opacity: 0.8;
+        box-shadow: 0px 0px 40px 15px white;
+        z-index: -3;
+    }
+
+    .ray_box {
+        position: absolute;
+        margin: auto;
+        top: 0px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 70px;
+        -webkit-animation: ray_anim 120s linear infinite;
+        animation: ray_anim 120s linear infinite;
+    }
+
+    .ray {
+        background: -webkit-linear-gradient(top, #fffc7f) 0%, #fffc7f 50%, #fffc7f 100%;
+        background: linear-gradient(top, #fffc7f 0%, #fffc7f 50%, #fffc7f 100%);
+        margin-left: 10px;
+        border-radius: 80% 80% 0 0;
+        position: absolute;
+        opacity: 0.4;
+    }
+
+    .grass > div {
+        animation: breeze 4s cubic-bezier(.8,-0.5,.25,1.5) infinite;
+        background-color: #0b0;
+        border-left: solid 5px #0c0;
+        border-top-left-radius: 100%;
+        bottom: 0;
+        position: absolute;
+        transform-origin: bottom;
+        transition: all 100ms ease-in-out;
+        width: 6px;
+        z-index: -3;
+    }
 </style>
 
 
@@ -316,58 +368,86 @@
     </div>
 </div>
 
+<div class="sun">
+    <div class="ray_box">
+    </div>
+</div>
+
+<div class="grass"></div>
+
+
 @using (Html.BeginForm("Login", "User", FormMethod.Post, new { id = "loginBox" }))
 {
     @Html.AntiForgeryToken()
 
-<div id="content">
-    <div class="container">
-        <div @*id="loginBox"*@>
-            <div id="loginBox_header" class="img-opacity img-hover"><img src="~/Images/FarmIT Logo.png" class="img-1" style="width: 40%;" /><img src="~/Images/FarmIT LogoHover.png" class="img-2" style="width: 40%;" /></div>
-            
-            <div id="loginBox_content">
-                <div class="row">
-                    <div class="form-group textbox">
-                        <div class="col-md-12" style="margin-bottom: 3.5%;">
-                            @Html.EditorFor(model => model.UserEmailAddress, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" }})
+    <div id="content">
+        <div class="container">
+            <div @*id="loginBox"*@>
+                <div id="loginBox_header" class="img-opacity img-hover"><img src="~/Images/FarmIT Logo.png" class="img-1" style="width: 40%;" /><img src="~/Images/FarmIT LogoHover.png" class="img-2" style="width: 40%;" /></div>
+
+                <div id="loginBox_content">
+                    <div class="row">
+                        <div class="form-group textbox">
+                            <div class="col-md-12" style="margin-bottom: 3.5%;">
+                                @Html.EditorFor(model => model.UserEmailAddress, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" } })
+                            </div>
+                        </div>
+                        <div class="row validationEmail col-md-12">
+                            @Html.ValidationMessageFor(model => model.UserEmailAddress, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="row validationEmail col-md-12">
-                        @Html.ValidationMessageFor(model => model.UserEmailAddress, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group textbox">
-                        <div class="col-md-12">
-                            @Html.EditorFor(model => model.UserPassword, new { htmlAttributes = new { @class = "form-control", @placeholder = "Password" } })
+                    <div class="row">
+                        <div class="form-group textbox">
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.UserPassword, new { htmlAttributes = new { @class = "form-control", @placeholder = "Password" } })
+                            </div>
+                        </div>
+                        <div class="row validationPassword col-md-12">
+                            @Html.ValidationMessageFor(model => model.UserPassword, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="row validationPassword col-md-12">
-                        @Html.ValidationMessageFor(model => model.UserPassword, "", new { @class = "text-danger" })
+                </div>
+                <div class="text-danger">
+                    @ViewBag.Message
+                </div>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="FogotPassword">
+                    @Html.ActionLink("Forgot Password?", "ForgotPassword", "User")
+                </div>
+                <div id="loginBox_footer">
+                    <div class="loginButton">
+                        <button id="loginBox_btn" type="submit" value="Login">Login</button>
                     </div>
-                </div>
-            </div>
-            <div class="text-danger">
-                @ViewBag.Message
-            </div>
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="FogotPassword">
-                @Html.ActionLink("Forgot Password?", "ForgotPassword", "User")
-            </div>
-            <div id="loginBox_footer">
-                <div class="loginButton">
-                    <button id="loginBox_btn" type="submit" value="Login">Login</button>
-                </div>
-            </div><!-- / #loginBox_footer -->
-        </div><!-- / #loginBox -->
+                </div><!-- / #loginBox_footer -->
+            </div><!-- / #loginBox -->
+        </div>
     </div>
-</div>
 }
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script>
         //javascript: window.history.forward(1);
+
+        var numberOfBlades = 800;
+        var grass = document.getElementsByClassName('grass')[0];
+
+        function assignRandomStyles(blade) {
+            var randomHeight = Math.floor(Math.random() * 40);
+            var randomRight = Math.floor(Math.random() * (window.innerWidth +6));
+            var randomRotation = Math.floor(Math.random() * 10) +5;
+            blade.style.height = (randomHeight + 40) + 'px';
+            blade.style.zIndex = randomHeight;
+            blade.style.opacity = randomHeight * 0.02;
+            blade.style.right = randomRight + 'px';
+            blade.style.transform = 'rotate(' + randomRotation + 'deg)';
+        }
+
+        for (var i = 0; i < numberOfBlades; i++) {
+            var blade = document.createElement('div');
+            assignRandomStyles(blade);
+            grass.appendChild(blade);
+        }
     </script>
 }
 

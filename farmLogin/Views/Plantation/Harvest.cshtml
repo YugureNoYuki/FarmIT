@@ -1,9 +1,4 @@
 ﻿
-@{
-    ViewBag.Title = "Create";
-}
-
-<h2>Create</h2>
 
 @model farmLogin.Models.SiloHarvest
 
@@ -11,65 +6,295 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<style>
+    .breadcrumb {
+        display: inline-block;
+        overflow: hidden;
+        border-radius: 0px;
+        counter-reset: flag;
+        text-align: center;
+        font-family: Arial;
+        font-size: 12px;
+        font-weight: 700;
+        position: center;
+        background: #87CEFA;
+        margin-left: -15px;
+    }
+
+        .breadcrumb a {
+            text-decoration: none;
+            outline: none;
+            display: block;
+            float: left;
+            font-size: 12px;
+            line-height: 36px;
+            padding: 0 10px 0 60px;
+            background: #d1d1d1;
+            color: black;
+            position: relative;
+            box-shadow: 0 3px 6px black;
+        }
+
+            .breadcrumb a:first-child {
+                padding-left: 46px;
+                border-radius: 5px 0 0 5px;
+            }
+
+                .breadcrumb a:first-child:before {
+                    left: 14px;
+                }
+
+            .breadcrumb a:last-child {
+                border-radius: 0 5px 5px 0;
+                padding-right: 20px;
+            }
+
+            .breadcrumb a:after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: -18px;
+                width: 36px;
+                height: 36px;
+                transform: scale(0.707) rotate(45deg);
+                z-index: 1;
+                background: #d1d1d1;
+                box-shadow: 2px -2px 0 2px rgba(0, 0, 0, 0.4), 3px -3px 0 2px rgba(255, 255, 255, 0.1);
+                border-radius: 0 5px 0 50px;
+            }
+
+            .breadcrumb a:last-child:after {
+                content: none;
+            }
+
+            .breadcrumb a:before {
+                content: counter(flag);
+                counter-increment: flag;
+                border-radius: 50%;
+                width: 20px;
+                height: 20px;
+                line-height: 20px;
+                margin: 8px 0;
+                position: absolute;
+                top: 0;
+                left: 30px;
+                color: black;
+                background: white;
+            }
+
+            .breadcrumb a:hover, .breadcrumb a.active,
+            .breadcrumb a:hover:after, .breadcrumb a.active:after {
+                transition: all 0.5s;
+                background: #47A447;
+                color: white;
+            }
+
+    body {
+        background-color: #87CEFA;
+    }
+
+    .panel {
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    #PanelContent {
+        color: black;
+        margin-left: 60px;
+    }
+
+    .panel:hover span {
+        color: #1b8bc6;
+        transition: 0.5s;
+    }
+
+    .panel-success {
+        color: green;
+    }
+
+    .btn {
+        font-weight: 600;
+        background-color: #47A447;
+        font-family: Arial;
+        font-size: 14px;
+        display: inline-block;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        width: 100px;
+        border-radius: 5%;
+    }
+
+        .btn:hover {
+            background-color: #25820F;
+            transition: 0.5s;
+        }
+
+    .btn-default {
+        font-weight: 600;
+        color: white;
+        background-color: #79B9E1;
+        font-family: Arial;
+        font-size: 14px;
+        display: inline-block;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        width: 100px;
+        border-color: #79B9E1;
+        border-radius: 5%;
+    }
+
+        .btn-default:hover {
+            background-color: #1b8bc6;
+            color: white;
+            border-color: #79B9E1;
+            border-radius: 5%;
+            transition: 0.5s;
+        }
+
+    .btn-warning {
+        font-weight: 600;
+        color: white;
+        background-color: #d75152;
+        font-family: Arial;
+        font-size: 14px;
+        display: inline-block;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        width: 100px;
+        border-color: #d75152;
+        border-radius: 5%;
+    }
+
+        .btn-warning:hover {
+            background-color: #e54041;
+            color: white;
+            border-color: #e54041;
+            border-radius: 5%;
+            transition: 0.5s;
+        }
+
+    #btnBack {
+        left: -10px;
+    }
+
+    #btnSave {
+        right: -10px;
+    }
+
+    .panel > .panel-heading {
+        background-image: none;
+        background-color: #d8d8d8;
+    }
+
+    #addInventoryType {
+        width: 175px;
+        background-color: #2072D6;
+        border-color: #2072D6;
+    }
+
+        #addInventoryType:hover {
+            background: #1955a0;
+            border-color: #1955a0;
+        }
+</style>
+
+
+
+<div class="breadcrumb">
+    @Html.ActionLink("Home", "Index", "Home")
+    @Html.ActionLink("Crops Action Page", "ActionPage", "Plantation")
+    @Html.ActionLink("Manage Plantations", "Index", "Plantation")
+    <a class="active">Add Harvest to Silo</a>
+</div>
+
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>SiloHarvest</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.SiloHarvestStoreStartDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SiloHarvestStoreStartDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SiloHarvestStoreStartDate, "", new { @class = "text-danger" })
+    @*<div class="form-group">*@
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <br />
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-leaf"></span> &nbsp;Add Harvest to Silo</b></h3>
+        </div>
+        <div style="color: red">
+            @if (@ViewBag.Error != null)
+                {
+                <label><br />&nbsp;&nbsp; @ViewBag.Error <br /></label>
+            }
+
+        </div>
+
+        <div class="panel-body">
+            <div class="form-horizontal">
+                <div class="row" id="PanelContent">
+                    <div class="col-xs-6 col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-6 col-md-6">
+                                @Html.LabelFor(model => model.SiloHarvestStoreStartDate, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.SiloHarvestStoreStartDate, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.SiloHarvestStoreStartDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="PanelContent">
+                    <div class="col-xs-6 col-md-8">
+                        <div class="form-group">
+                            <div class="col-xs-6 col-md-6">
+                                @Html.LabelFor(model => model.SiloHarvestStoreEndDate, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.SiloHarvestStoreEndDate, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.SiloHarvestStoreEndDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" id="PanelContent">
+                    <div class="col-xs-6 col-md-8">
+                        <div class="form-group">
+                            <div class="col-xs-6 col-md-6">
+                                @Html.LabelFor(model => model.SiloHarvestTonnesStored, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.SiloHarvestTonnesStored, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.SiloHarvestTonnesStored, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="PanelContent">
+                    <div class="col-xs-6 col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-6 col-md-6">
+                                @Html.LabelFor(model => model.SiloID, "SiloID", htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-10">
+                                @Html.DropDownList("SiloID", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.SiloID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+        <div class="input-group">
+            <div class="input-group-btn">
+                <button class="btn btn-success" type="button" id="btnSave" data-toggle="modal" data-target="#confirm-submit">
+                    <span class="glyphicon glyphicon-save"></span>
+                    Save
+                </button>
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.SiloHarvestStoreEndDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SiloHarvestStoreEndDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SiloHarvestStoreEndDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.SiloHarvestTonnesStored, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SiloHarvestTonnesStored, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SiloHarvestTonnesStored, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.SiloID, "SiloID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("SiloID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.SiloID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
             @*@Html.LabelFor(model => model.PlantationID, "PlantationID", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.DropDownList("PlantationID", null, htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.PlantationID, "", new { @class = "text-danger" })
                 </div>*@
             @*@Html.HiddenFor(model => model.PlantationID)*@
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index", "Plantation")
-</div>
