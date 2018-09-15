@@ -4,9 +4,8 @@
 }
 @*Style*@
 <style>
-     /*Confirmation*/
-      /*Green Button*/
-
+    /*Confirmation*/
+    /*Green Button*/
     #Confirm {
         font-family: Arial;
         font-weight: 600;
@@ -23,7 +22,7 @@
             border-color: #24820e;
             transition: 0.3s;
         }
-        /*Red Button*/
+    /*Red Button*/
     #Cancel {
         font-family: Arial;
         font-weight: 600;
@@ -35,7 +34,7 @@
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
     }
 
-       #Cancel:hover {
+        #Cancel:hover {
             background-color: #bc1c03;
             border-color: #bc1c03;
             transition: 0.3s;
@@ -255,7 +254,7 @@
                     <div class="col-xs-6 col-md-12">
                         <div class="form-group">
                             <div class="col-xs-6 col-md-6">
-                                @Html.LabelFor(model => model.FarmWorkerImg, "Upload Image: ", htmlAttributes: new { @class = "control-label" })
+                                @Html.LabelFor(model => model.FarmWorkerImg, "Upload Image: ", htmlAttributes: new { @class = "control-label"})
                             </div>
                             <div class="col-md-10">
                                 @*@Html.EditorFor(model => model.FarmWorkerImg, new { htmlAttributes = new { @class = "form-control" } })
@@ -270,10 +269,19 @@
                                 <div class="input-group" style="left:-13px">
                                     <label class="input-group-btn">
                                         <span class="btn btn-default" id="BrowseBtn">
-                                            Browse&hellip; <input type="file" name="file" accept="image/jpeg, image/png" style="display: none;">
+                                            Browse&hellip; <input type="file" name="file" accept="image/jpeg, image/png" style="display: none" id="myImg">
                                         </span>
                                     </label>
                                     <input type="text" class="form-control" readonly>
+                                </div>
+                                <div class="col-md-4">
+                                    <br />
+                                    <div id="imgPreview" class="thumbnail" style="display:none">
+                                        <img class="img-responsive" id="targetImg" />
+                                        <div class="caption">
+                                            <a href="#" onclick="clearPreview()"><i class="glyphicon glyphicon-trash"></i></a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -549,6 +557,7 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.uploadPreview.min.js"></script>
     <script type="text/javascript">
          @Model.JavaScriptToRun
 
@@ -602,6 +611,42 @@
             $(".date-picker").datepicker();
             $(".date-picker").datepicker("setDate", "+0d");
         });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#myImg").change(function () {
+                var File = this.files;
+                if (File && File[0]) {
+                    ReadImage(File[0])
+                }
+            })
+        })
+
+        var ReadImage = function (file) {
+            var reader = new FileReader;
+            var image = new Image;
+
+            reader.readAsDataURL(file);
+            reader.onload = function (_file) {
+                image.src = _file.target.result;
+                image.onload = function () {
+                    var height = this.height;
+                    var width = this.width;
+                    var type = file.type;
+                    var size = file.size;
+
+                    $("#targetImg").attr('src', _file.target.result);
+                    $("#description").text;
+                    $("#imgPreview").show();
+                }
+            }
+        }
+
+        var clearPreview = function () {
+            $("#myImg").val('');
+            $("#description").text('');
+            $("#imgPreview").hide();
+        }
     </script>
 }
 
