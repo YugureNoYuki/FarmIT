@@ -19,10 +19,10 @@
             @Html.DisplayNameFor(model => model.VehicleServiceRecord)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Unit1.UnitDescr)
+            @Html.DisplayNameFor(model => model.Unit.UnitDescr)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Vehicle1.VehName)
+            @Html.DisplayNameFor(model => model.Vehicle.VehName)
         </th>
         <th>
             Actions
@@ -42,10 +42,10 @@
             @Html.DisplayFor(modelItem => item.VehicleServiceRecord)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Unit1.UnitDescr)
+            @Html.DisplayFor(modelItem => item.Unit.UnitDescr)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Vehicle1.VehName)
+            @Html.DisplayFor(modelItem => item.Vehicle.VehName)
         </td>
         <td>
             <a href="@Url.Action("EditService", new { id = item.VehicleServiceID })" data-toggle="tooltip" title="Update Vehicle Service">
@@ -57,3 +57,9 @@
 }
 
 </table>
+
+<script>
+    //Active Navbar
+    var element = document.getElementById("navVehicle");
+    element.classList.add("active");
+</script>

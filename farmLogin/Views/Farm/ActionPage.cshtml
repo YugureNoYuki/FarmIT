@@ -16,7 +16,7 @@
         border-radius: 5%;
         justify-content: center;
         margin-bottom: 20px;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.6);
     }
 
     .btn {
@@ -47,6 +47,7 @@
                 position: absolute;
                 z-index: -1;
                 left: 40px;
+                 box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
             }
 
             .btn:after {
@@ -62,11 +63,13 @@
 
             .btn:hover {
                 background-color: #24820e;
+                box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
             }
 
 
     body {
-        background-color: #87CEFA;
+        background-color: #3594C4;
+        overflow: hidden;
     }
 
 
@@ -86,6 +89,18 @@
         background-color: transparent;
         border-color: transparent;
         box-shadow: 0 3px 6px #fff;
+    }
+
+    #greenHR {
+        visibility: hidden;
+    }
+
+    #blueHR {
+        visibility: hidden;
+    }
+
+    footer {
+        visibility: hidden;
     }
 </style>
 
@@ -122,6 +137,12 @@
         </div>
     </div>
 </div>
+
+
+<script>
+        var element = document.getElementById("navFarm");
+        element.classList.add("active");
+</script>
 
 
 

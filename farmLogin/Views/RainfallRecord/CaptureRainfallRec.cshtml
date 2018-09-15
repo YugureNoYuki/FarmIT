@@ -1,6 +1,6 @@
 ﻿@model farmLogin.Models.RainfallRecord
 @{
-    ViewBag.Title = "CaptureRainfallRec";
+    ViewBag.Title = "Capture Rainfall Record";
 }
 <style>
     .breadcrumb {
@@ -192,8 +192,8 @@
 
 <div class="breadcrumb">
     <a href="#">Home</a>
-    @Html.ActionLink("Crop Action Page", "ActionPage", "Silo")
-    @Html.ActionLink("Manage Farms/Lands/Fields", "Index", "Silo")
+    @Html.ActionLink("Farm Action Page", "ActionPage", "Farm")
+    @Html.ActionLink("Manage Farms/Lands/Fields", "Index", "Land")
     <a class="active">Capture Rainfall Record</a>
 </div>
 
@@ -204,7 +204,7 @@
     <br />
     <div class="panel panel-success">
         <div class="panel-heading">
-            <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-folder-close"></span> &nbsp;Capture Rainfall Measurement</b></h3>
+            <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-tint"></span> &nbsp;Capture Rainfall Measurement</b></h3>
         </div>
         <div style="color: red">
             @if (@ViewBag.Error != null)
@@ -301,7 +301,7 @@
 <div class="row">
 
     <div class="col-xs-6 col-md-4">
-        @using (Html.BeginForm("Index", "Farm", FormMethod.Get, new { @class = "form-inline" }))
+        @using (Html.BeginForm("Index", "Land", FormMethod.Get, new { @class = "form-inline" }))
             {
             <div class="col-xs-6 col-md-4">
                 <div class=input-group>
@@ -339,7 +339,7 @@
                 text: "Item has successfully been added.",
                 type: "warning"
             }).then(function () {
-                window.location = "/Silo/Index"
+                window.location = "/Land/Index"
             })
         }
     </script>

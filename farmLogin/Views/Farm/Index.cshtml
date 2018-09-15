@@ -361,6 +361,9 @@
                             <a href="@Url.Action("Edit", "Land", new { id = item.LandID })" title="Edit">
                                 <i class="glyphicon glyphicon-pencil" id="ActionIcon"></i>
                             </a>
+                            <a href="@Url.Action("CaptureRainfallRec", "RainfallRecord", new { id = item.FarmID })" title="Capture Rainfall">
+                                <i class="glyphicon glyphicon-tint" id="ActionIcon"></i>
+                            </a>
                             <a id="deleteItem" class="deleteItem" data-target="#basic"
                                data-toggle="modal"
                                data-path="@Url.Action("Delete", "Land", new { id = item.LandID })" title="Delete">
@@ -532,6 +535,10 @@
                 window.location = "/Farm/Index"
             })
         }
+
+        //Active Navbar
+        var element = document.getElementById("navFarm");
+        element.classList.add("active");
     </script>
 }
 
