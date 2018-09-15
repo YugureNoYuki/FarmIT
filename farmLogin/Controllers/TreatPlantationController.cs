@@ -43,6 +43,7 @@ namespace farmLogin.Controllers
             ViewBag.InventoryID = new SelectList(db.Inventories, "InventoryID", "InvDescr");
             ViewBag.TreatmentID = new SelectList(db.Treatments.Where(t => !t.TreatmentDescr.Contains("Stage 2 (Secondary) Treatment") && !t.TreatmentDescr.Contains("Ad-Hoc Treatment")), "TreatmentID", "TreatmentDescr");
             ViewBag.Unit = new SelectList(db.Units.Where(u => !u.UnitDescr.Contains("MM") && !u.UnitDescr.Contains("HOURS") && !u.UnitDescr.Contains("KM") && !u.UnitDescr.Contains("HA") && !u.UnitDescr.Contains("ML")), "UnitID", "UnitDescr");
+            int plantationID = (int)TempData["plantationId"];
             //if (id == null)
             //{
             //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -50,7 +51,7 @@ namespace farmLogin.Controllers
             //GET PlantationID & FieldID
             using (FarmDbContext dc = new FarmDbContext())
             {
-                var tplantation = dc.Plantations.Find(id); //return plantation id
+                var tplantation = dc.Plantations.Find(plantationID); //return plantation id
                 //if(tplantation == null)
                 //{
                 //    return HttpNotFound();

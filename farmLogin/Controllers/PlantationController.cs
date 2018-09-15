@@ -309,6 +309,8 @@ namespace farmLogin.Controllers
                     plantation.JavaScriptToRun = "mySuccess()";
                     TempData["yay"] = plantation;
 
+                    TempData["plantationId"] = plantation.PlantationID;
+
                     ViewBag.CropCycleID = new SelectList(db.CropCycles, "CropCycleID", "CropCycleDescr", plantation.CropCycleID);
                     ViewBag.CropTypeID = new SelectList(db.CropTypes, "CropTypeID", "CropTypeDescr", plantation.CropTypeID);
                     ViewBag.FieldID = new SelectList(db.Fields, "FieldID", "FieldName", plantation.FieldID);
@@ -316,7 +318,7 @@ namespace farmLogin.Controllers
                     ViewBag.RefugeUnit = new SelectList(db.Units, "UnitID", "UnitDescr", plantation.RefugeUnit);
                     ViewBag.YieldUnit = new SelectList(db.Units, "UnitID", "UnitDescr", plantation.YieldUnit);
                     //return View(plantation);
-                    return RedirectToAction("InitTreat", "TreatPlantation");
+                    return RedirectToAction("InitTreat", "Plantation");
                 }
 
             }
@@ -394,6 +396,140 @@ namespace farmLogin.Controllers
         }
 
         #endregion
+
+        #region Initial treatment
+
+        // GET: TreatPlantation/Treat/1
+        public ActionResult InitTreat(int? id) //plantationID
+        {
+            ViewBag.InventoryID = new SelectList(db.Inventories, "InventoryID", "InvDescr");
+            ViewBag.TreatmentID = new SelectList(db.Treatments.Where(t => !t.TreatmentDescr.Contains("Stage 2 (Secondary) Treatment") && !t.TreatmentDescr.Contains("Ad-Hoc Treatment")), "TreatmentID", "TreatmentDescr");
+            ViewBag.Unit = new SelectList(db.Units.Where(u => !u.UnitDescr.Contains("MM") && !u.UnitDescr.Contains("HOURS") && !u.UnitDescr.Contains("KM") && !u.UnitDescr.Contains("HA") && !u.UnitDescr.Contains("ML")), "UnitID", "UnitDescr");
+            int plantationID = (int)TempData["plantationId"];
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //GET PlantationID & FieldID
+            using (FarmDbContext dc = new FarmDbContext())
+            {
+                var tplantation = dc.Plantations.Find(plantationID); //  plantation id
+                //InitTreat(null, plantationID);
+                //if(tplantation == null)
+                //{
+                //    return HttpNotFound();
+                //}
+                //return View();
+            }
+
+            return View();
+        }
+
+        // POST: TreatPlantation/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult InitTreat([Bind(Include = "TreatmentID,InventoryID,TreatmentQnty,Unit")] InventoryTreatment inventoryTreatment, int? id)
+        {
+            if (ModelState.IsValid)
+            {
+                //id = (int)TempData["plantationId"];
+                //get inventory quantity: Treatment quantity for selected inventory item cannot be more than the available qty
+                var qty = db.Inventories.Find(inventoryTreatment.InventoryID);
+                try
+                {
+                    if (Convert.ToInt32(inventoryTreatment.TreatmentQnty) > Convert.ToInt32(qty.InvQty))
+                    {
+                        //return error message: Selected quantity cannot be more than the available inventory qty
+
+                        ModelState.AddModelError("TreatmentQnty", "Selected quantity cannot be more than the available inventory quantity");
+
+                        ViewBag.InventoryID = new SelectList(db.Inventories, "InventoryID", "InvDescr", inventoryTreatment.InventoryID);
+                        ViewBag.TreatmentID = new SelectList(db.Treatments.Where(t => !t.TreatmentDescr.Contains("Stage 1 (Initial) Treatment")), "TreatmentID", "TreatmentDescr", inventoryTreatment.TreatmentID); //Treatment can only be stage 2 or Ad-Hoc
+                        ViewBag.Unit = new SelectList(db.Units.Where(u => !u.UnitDescr.Contains("MM") && !u.UnitDescr.Contains("HOURS") && !u.UnitDescr.Contains("KM") && !u.UnitDescr.Contains("HA") && !u.UnitDescr.Contains("ML")), "UnitID", "UnitDescr", inventoryTreatment.Unit);
+
+                        return View(inventoryTreatment);
+                    }
+                    else
+                    {
+                        db.InventoryTreatments.Add(inventoryTreatment);
+                        db.SaveChanges();
+                        inventoryTreatment.JavaScriptToRun = "mySuccess()";
+                    }
+                }
+                catch (Exception e)
+                {
+
+                    ViewBag.Error = e.Message;
+                }
+
+                if (inventoryTreatment.TreatmentID == 2) //update field status when Id 2 = Stage 2 Treatment
+                {
+                    using (FarmDbContext dc = new FarmDbContext())
+                    {
+                        var tfield = (from a in dc.Plantations
+                                      join b in dc.Fields on a.FieldID equals b.FieldID
+                                      where a.PlantationID == id
+                                      select a.FieldID).FirstOrDefault();
+                        var f = dc.Fields.Find(tfield);
+                        try
+                        {
+                            //remove 
+
+
+                            f.FieldStatusID = 2; //Treated (This should be field Stage SIYA!!!)
+                            //db.Entry(inventoryTreatment).State = EntityState.Modified;
+                            dc.Entry(f).State = EntityState.Modified;
+                            dc.SaveChanges();
+                        }
+                        catch (Exception err)
+                        {
+
+                            ViewBag.Error = err.Message;
+                        }
+
+                    }
+
+                }
+                using (FarmDbContext dc = new FarmDbContext())
+                {
+                    // inventoryTreatment.Inventory.InvQty -= inventoryTreatment.TreatmentQnty; //decrease inventory
+                    var tfield1 = (from a in dc.Plantations                             //return the FieldID in Plantation
+                                   join b in dc.Fields on a.FieldID equals b.FieldID
+                                   where a.PlantationID == id
+                                   select a.FieldID).FirstOrDefault();
+                    ft.FieldID = Convert.ToInt32(tfield1);
+
+                    //GET the TreatmentID on post
+                    int treatId = inventoryTreatment.TreatmentID;
+                    ft.TreatmentID = Convert.ToInt32(treatId);
+                    ft.TreatmentDate = System.DateTime.Now;
+                    try
+                    {
+                        db.FieldTreatments.Add(ft);
+                        db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        ViewBag.Error = e.Message;
+                    }
+
+                }
+
+
+                //CreateFieldTreatment(inventoryTreatment.TreatmentID)
+                return RedirectToAction("Plantations", "Plantation");
+            }
+
+            ViewBag.InventoryID = new SelectList(db.Inventories, "InventoryID", "InvDescr", inventoryTreatment.InventoryID);
+            ViewBag.TreatmentID = new SelectList(db.Treatments, "TreatmentID", "TreatmentDescr", inventoryTreatment.TreatmentID);
+            ViewBag.Unit = new SelectList(db.Units, "UnitID", "UnitDescr", inventoryTreatment.Unit);
+            return View(inventoryTreatment);
+        }
+
+        #endregion
+
 
         #region Treat Plantation
         public FieldTreatment ft = new FieldTreatment();
