@@ -62,12 +62,14 @@ namespace farmLogin.Models
         [Display(Name = "Contract Start Date")]
         //TODO: Validate future date selection
         [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public System.DateTime ContractStartDate { get; set; }
 
         [Required(ErrorMessage = "Contract End Date cannot be blank")]
         [Display(Name = "Contract End Date")]
         //TODO: Validate future date selection
         [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public System.DateTime ContractEndDate { get; set; }
 
         [Required(ErrorMessage = "ID Number cannot be blank")]
