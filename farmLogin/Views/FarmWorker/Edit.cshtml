@@ -1,12 +1,10 @@
 ﻿@model farmLogin.Models.FarmWorker
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Update Farm Worker";
 }
 
 <style>
-     /*Confirmation*/
-      /*Green Button*/
     #Confirm {
         font-family: Arial;
         font-weight: 600;
@@ -23,19 +21,19 @@
             border-color: #24820e;
             transition: 0.3s;
         }
-        /*Red Button*/
+    /*Red Button*/
     #Cancel {
         font-family: Arial;
         font-weight: 600;
         font-size: 12px;
         display: inline-block;
-        background-color: #e0422a;
-        border-color: #e0422a;
+        background-color: #e5543d;
+        border-color: #e5543d;
         border-radius: 5px;
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
     }
 
-       #Cancel:hover {
+        #Cancel:hover {
             background-color: #bc1c03;
             border-color: #bc1c03;
             transition: 0.3s;
@@ -51,7 +49,7 @@
         font-size: 12px;
         font-weight: 700;
         position: center;
-        background: #87CEFA;
+        background: #3594C4;
         margin-left: -15px;
     }
 
@@ -124,11 +122,11 @@
             }
 
     body {
-        background-color: #87CEFA;
+        background-color: #3594C4;
     }
 
     .panel {
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
     }
 
     #PanelContent {
@@ -136,7 +134,7 @@
         margin-left: 60px;
     }
 
-    .panel:hover span {
+    .panel:hover .glyphicon {
         color: #1b8bc6;
         transition: 0.5s;
     }
@@ -161,6 +159,48 @@
             transition: 0.5s;
         }
 
+    .btn-default {
+        font-weight: 600;
+        color: white;
+        background-color: #79B9E1;
+        font-family: Arial;
+        font-size: 14px;
+        display: inline-block;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        width: 100px;
+        border-color: #79B9E1;
+        border-radius: 5%;
+    }
+
+        .btn-default:hover {
+            background-color: #1b8bc6;
+            color: white;
+            border-color: #79B9E1;
+            border-radius: 5%;
+            transition: 0.5s;
+        }
+
+    .btn-warning {
+        font-weight: 600;
+        color: white;
+        background-color: #d75152;
+        font-family: Arial;
+        font-size: 14px;
+        display: inline-block;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        width: 100px;
+        border-color: #d75152;
+        border-radius: 5%;
+    }
+
+        .btn-warning:hover {
+            background-color: #e54041;
+            color: white;
+            border-color: #e54041;
+            border-radius: 5%;
+            transition: 0.5s;
+        }
+
     #btnBack {
         left: -10px;
     }
@@ -173,7 +213,28 @@
         background-image: none;
         background-color: #d8d8d8;
     }
-    #datepicker
+
+    #addInventoryType {
+        width: 175px;
+        background-color: #2072D6;
+        border-color: #2072D6;
+    }
+
+        #addInventoryType:hover {
+            background: #1955a0;
+            border-color: #1955a0;
+        }
+
+    #BrowseBtn {
+        left: 5px;
+        background-color: #47A447;
+        border-color: #47A447;
+    }
+
+        #BrowseBtn:hover {
+            background-color: #25820F;
+            transition: 0.5s;
+        }
 </style>
 
 <div class="breadcrumb">
@@ -191,7 +252,7 @@
 
     <div class="panel panel-success">
         <div class="panel-heading">
-            <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-lock"></span> &nbsp;Update Farm Worker Personal Details</b></h3>
+            <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-user"></span> &nbsp;Update Farm Worker Personal Details</b></h3>
         </div>
         <div class="panel-body">
             <div class="form-horizontal">
@@ -204,7 +265,7 @@
                             </div>
                             <div class="col-md-10">
                                 @*@Html.EditorFor(model => model.FarmWorkerImg, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.FarmWorkerImg, "", new { @class = "text-danger" })*@
+                                    @Html.ValidationMessageFor(model => model.FarmWorkerImg, "", new { @class = "text-danger" })*@
                                 <div style="color: red">
                                     @if (@ViewBag.Error != null)
                                     {
@@ -212,13 +273,13 @@
                                     }
 
                                 </div>
-                                <div class="input-group" style="left:-13px">
+                                <div class="input-group" style="left:-5px">
                                     <label class="input-group-btn">
                                         <span class="btn btn-default" id="BrowseBtn">
                                             Browse&hellip; <input type="file" name="file" accept="image/jpeg, image/png" style="display: none;">
                                         </span>
                                     </label>
-                                    <input type="text" class="form-control" readonly>
+                                    <input id="ImageInput" type="text" class="form-control" readonly>
                                 </div>
                             </div>
                         </div>
@@ -303,7 +364,7 @@
 
     <div class="panel panel-success">
         <div class="panel-heading">
-            <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-lock"></span> &nbsp;Update Farm Worker Residential Details</b></h3>
+            <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-map-marker"></span> &nbsp;Update Farm Worker Residential Details</b></h3>
         </div>
         <div class="panel-body">
             <div class="form-horizontal">
@@ -373,67 +434,67 @@
         </div>
     </div>
 
-        <div class="panel panel-success" style="margin-bottom: 20px;">
-            <div class="panel-heading">
-                <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-lock"></span> &nbsp;Update Farm Worker Contract Details</b></h3>
-            </div>
-            <div class="panel-body">
-                <div class="form-horizontal">
+    <div class="panel panel-success" style="margin-bottom: 20px;">
+        <div class="panel-heading">
+            <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-file"></span> &nbsp;Update Farm Worker Contract Details</b></h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-horizontal">
 
-                    <div class="row" id="PanelContent">
-                        <div class="col-xs-6 col-md-6">
-                            <div class="form-group">
-                                <div class="col-xs-6 col-md-6">
-                                    @Html.LabelFor(model => model.ContractStartDate, htmlAttributes: new { @class = "control-label" })
-                                </div>
-                                <div class="col-md-10">
-                                   @* @Html.EditorFor(model => model.ContractStartDate, new { htmlAttributes = new { @class = "form-control datepicker" } })*@
-                                    @Html.EditorFor(model => model.ContractStartDate, new { htmlAttributes = new { Value = Model.ContractStartDate.ToString("yyyy/MM/dd"), @class = "form-control date-picker", onkeydown = "return false", onpaste = "return false" } })
-                                    @Html.ValidationMessageFor(model => model.ContractStartDate, "", new { @class = "text-danger" })
-                                </div>
+                <div class="row" id="PanelContent">
+                    <div class="col-xs-6 col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-6 col-md-6">
+                                @Html.LabelFor(model => model.ContractStartDate, htmlAttributes: new { @class = "control-label" })
                             </div>
-                        </div>
-                        <div class="col-xs-6 col-md-6">
-                            <div class="form-group">
-                                <div class="col-xs-6 col-md-6">
-                                    @Html.LabelFor(model => model.ContractEndDate, htmlAttributes: new { @class = "control-label" })
-                                </div>
-                                <div class="col-md-10">
-                                   @* @Html.EditorFor(model => model.ContractEndDate, new { htmlAttributes = new { @class = "form-control" } })*@
-                                    @Html.EditorFor(model => model.ContractEndDate, new { htmlAttributes = new { Value = Model.ContractEndDate.ToString("yyyy/MM/dd"), @class = "form-control date-picker", onkeydown = "return false", onpaste = "return false" } })
-                                    @Html.ValidationMessageFor(model => model.ContractEndDate, "", new { @class = "text-danger" })
-                                </div>
+                            <div class="col-md-10">
+                                @* @Html.EditorFor(model => model.ContractStartDate, new { htmlAttributes = new { @class = "form-control datepicker" } })*@
+                                @Html.EditorFor(model => model.ContractStartDate, new { htmlAttributes = new { Value = Model.ContractStartDate.ToString("yyyy/MM/dd"), @class = "form-control date-picker", onkeydown = "return false", onpaste = "return false" } })
+                                @Html.ValidationMessageFor(model => model.ContractStartDate, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
-
-                    <div class="row" id="PanelContent">
-                        <div class="col-xs-6 col-md-6">
-                            <div class="form-group">
-                                <div class="col-xs-6 col-md-6">
-                                    @Html.LabelFor(model => model.FarmWorkerTypeID, "FarmWorkerTypeID", htmlAttributes: new { @class = "control-label" })
-                                </div>
-                                <div class="col-md-10">
-                                    @Html.DropDownList("FarmWorkerTypeID", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.FarmWorkerTypeID, "", new { @class = "text-danger" })
-                                </div>
+                    <div class="col-xs-6 col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-6 col-md-6">
+                                @Html.LabelFor(model => model.ContractEndDate, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-10">
+                                @* @Html.EditorFor(model => model.ContractEndDate, new { htmlAttributes = new { @class = "form-control" } })*@
+                                @Html.EditorFor(model => model.ContractEndDate, new { htmlAttributes = new { Value = Model.ContractEndDate.ToString("yyyy/MM/dd"), @class = "form-control date-picker", onkeydown = "return false", onpaste = "return false" } })
+                                @Html.ValidationMessageFor(model => model.ContractEndDate, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <div class="col-xs-6 col-md-6">
-                            <div class="form-group">
-                                <div class="col-xs-6 col-md-6">
-                                    @Html.LabelFor(model => model.FarmID, "FarmID", htmlAttributes: new { @class = "control-label" })
-                                </div>
-                                <div class="col-md-10">
-                                    @Html.DropDownList("FarmID", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.FarmID, "", new { @class = "text-danger" })
-                                </div>
+                    </div>
+                </div>
+
+                <div class="row" id="PanelContent">
+                    <div class="col-xs-6 col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-6 col-md-6">
+                                @Html.LabelFor(model => model.FarmWorkerTypeID, "FarmWorkerTypeID", htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-10">
+                                @Html.DropDownList("FarmWorkerTypeID", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.FarmWorkerTypeID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-6 col-md-6">
+                                @Html.LabelFor(model => model.FarmID, "FarmID", htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-10">
+                                @Html.DropDownList("FarmID", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.FarmID, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
 
         <div class="input-group">
@@ -461,7 +522,7 @@
                     </div>
                     <div class="modal-footer">
                         <button id="Confirm" type="submit" class="btn btn-success" style="float:right" id="confirmBtn">CONFIRM</button>
-                        <button id ="Cancel" type="button" class="btn btn-warning" data-dismiss="modal" style="float: left">CANCEL</button>
+                        <button id="Cancel" type="button" class="btn btn-warning" data-dismiss="modal" style="float: left">CANCEL</button>
                     </div>
                 </div>
 
@@ -496,13 +557,13 @@
     <script type="text/javascript">
          @Model.JavaScriptToRun
 
-            function mySuccess() {
-                swal({
-                    icon: "success",
-                    title: "Success!",
-                    text: "Item has successfully been added.",
-                    type: "warning"
-                }).then(function () {
+        function mySuccess() {
+            swal({
+                icon: "success",
+                title: "Success!",
+                text: "Item has successfully been added.",
+                type: "warning"
+            }).then(function () {
 
                 window.location = "/FarmWorker/Index"
             })
@@ -540,15 +601,22 @@
 
         });
     </script>
-<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
-<script type="text/javascript">
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script type="text/javascript">
         $(function () {
             $(".date-picker").datepicker({
 
             });
         });
-</script>
+    </script>
+    <script>
+        //Active Navbar
+        var element = document.getElementById("navFarmWorker");
+        element.classList.add("active");
+    </script>
 }
+
+
 
 
 
