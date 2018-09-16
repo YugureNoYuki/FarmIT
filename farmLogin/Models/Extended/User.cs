@@ -58,8 +58,7 @@ namespace farmLogin.Models
 
         [Required(ErrorMessage = "ID Number cannot be blank")]
         [Display(Name = "ID Number")]
-        [StringLength(maximumLength: 13, ErrorMessage = "Max 13 characters reached")]
-        [RegularExpression("[0-9]+", ErrorMessage = "ID Number must be digits")]
+        [StringLength(13, MinimumLength = 11, ErrorMessage = "Minimum of 11 characters and a maximum of 13.")]
         public string UserIDNum { get; set; }
 
         public Nullable<bool> IsEmailVerified { get; set; }
