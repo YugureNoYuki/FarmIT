@@ -1,7 +1,7 @@
 ﻿@*@model IEnumerable<farmLogin.Models.FarmWorkerType>*@
 @model farmLogin.Models.FarmWorkerType
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Farm Worker Types";
 }
 
 <style>
@@ -165,8 +165,7 @@
 
 
     .well {
-        background-image: none;
-        background-color: #eaeaea;
+        background-color: #dddddd;
     }
 
     .table-heading {
@@ -182,11 +181,11 @@
     }
 
     .glyphicon-pencil {
-        color: #47A447;
+        color: #42b229;
     }
 
     .glyphicon-eye-open {
-        color: #479ce5;
+        color: #298fb2;
     }
 
     .glyphicon-inbox {
@@ -305,14 +304,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="false"></button>
-                    <h4 class="modal-title">Delete Confirmation</h4>
+                    <h4 class="modal-title">Archive Confirmation</h4>
                 </div>
                 <div class="modal-body">
                     Are you sure you want to archive this item?
                 </div>
                 <div class="modal-footer">
-                    <button id="btnContinueCancel" data-dismiss="modal" type="button" class="btn btn-default">Cancel</button>
-                    <button id="btnContinueDelete" type="button" class="btn btn-primary">Archive</button>
+                    <button id="btnContinueCancel" data-dismiss="modal" type="button" class="btn btn-default" style="float:left;">CANCEL</button>
+                    <button id="btnContinueDelete" type="button" class="btn btn-primary">ARCHIVE</button>
                 </div>
             </div>
         </div>
@@ -368,6 +367,12 @@
             })
         }
     </script>
+
+<script>
+    //Active Navbar
+    var element = document.getElementById("navFarmWorker");
+    element.classList.add("active");
+</script>
 }
 
 
