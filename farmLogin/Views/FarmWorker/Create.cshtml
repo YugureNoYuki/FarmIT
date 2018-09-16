@@ -463,7 +463,7 @@
                             </div>
                             <div class="col-md-10">
                                 @*@Html.EditorFor(model => model.ContractEndDate, new { htmlAttributes = new { @class = "form-control" } })*@
-                                @Html.EditorFor(model => model.ContractEndDate, new { htmlAttributes = new { @class = "form-control date-picker", onkeydown = "return false", onpaste = "return false" } })
+                                @Html.EditorFor(model => model.ContractEndDate, new { htmlAttributes = new { @class = "form-control date-picker2", onkeydown = "return false", onpaste = "return false" } })
                                 @Html.ValidationMessageFor(model => model.ContractEndDate, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -608,8 +608,29 @@
     <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
     <script type="text/javascript">
         $(function () {
-            $(".date-picker").datepicker();
+            //date picker for START DATE
+            //dt = selected Date and passes to END DATE datepicker as minDate
+            $(".date-picker").datepicker({
+                onSelect: function (selectdate) {
+                    var dt = new Date(selectdate);
+                    dt.setDate(dt.getDate() + 1)
+                    $(".date-picker2").datepicker("option", "minDate", dt);
+                }
+            });
+
+            //date picker for END DATE
+            //dt = selected Date and passes to START DATE datepicker as maxDate
+            $(".date-picker2").datepicker({
+                onSelect: function (selectdate) {
+                    var dt = new Date(selectdate);
+                    dt.setDate(dt.getDate() - 1)
+                    $(".date-picker").datepicker("option", "maxDate", dt);
+                }
+            });
+
+            //initialise datepicker dates with today date for start and +1d for end date
             $(".date-picker").datepicker("setDate", "+0d");
+            $(".date-picker2").datepicker("setDate", "+1d");
         });
     </script>
     <script>
