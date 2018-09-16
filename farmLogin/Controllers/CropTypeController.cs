@@ -96,6 +96,7 @@ namespace farmLogin.Controllers
             {
                 ModelState.AddModelError("CropTypeExist", "Crop Type already exist, please specify different Crop Type!");
                 ViewBag.Error = "Crop Type already exist, please specify different Crop Type!";
+
                 return View(cropType);
             }
 
@@ -198,9 +199,10 @@ namespace farmLogin.Controllers
         {
             using (FarmDbContext ctx = new FarmDbContext())
             {
-                var list = ctx.CropTypes.Where(a => a.CropTypeDescr != inDescr).ToList();
+                var fullList = ctx.CropTypes.ToList();
 
-                var v = list.Where(a => a.CropTypeDescr == inDescr).FirstOrDefault();
+                var v = fullList.Where(a => a.CropTypeDescr == inDescr).ToList();
+
                 return v != null;
             }
         }
