@@ -91,21 +91,85 @@ namespace farmLogin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Exclude = "IsEmailValid,ActivationCode,UserPassword,UserName,UserEmailAddress")] User user)
+        public ActionResult Edit([Bind(Exclude = "IsEmailValid,ActivationCode,UserPassword,UserName")] User user)
         {
-            db.Configuration.ValidateOnSaveEnabled = false;
+            //db.Configuration.ValidateOnSaveEnabled = false;
             if (ModelState.IsValid)
             {
                 //db.Entry(user).State = EntityState.Modified;
 
-                User u = new User();
-                u.UserID = user.UserID;
-                u.UserIDNum = user.UserIDNum;
-                u.UserLName = user.UserFName;
-                u.UserLName = user.UserLName;
-                u.UserEmailAddress = user.UserEmailAddress;
-                u.UserContactNum = user.UserContactNum;
-                u.UserAccessLevelID = user.UserAccessLevelID;
+
+                var mu = db.Users.Where(u => u.UserID == user.UserID).SingleOrDefault();
+
+                if (mu != null)
+                {
+
+                    try
+                    {
+                        mu.UserID = user.UserID;
+                        mu.UserEmailAddress = user.UserEmailAddress;
+                        mu.UserPassword = mu.UserPassword;
+                        mu.UserContactNum = user.UserContactNum;
+                        mu.UserFName = user.UserFName;
+                        mu.UserLName = user.UserLName;
+                        mu.UserIDNum = user.UserIDNum;
+                        mu.IsEmailVerified = user.IsEmailVerified;
+                        mu.ActivationCode = user.ActivationCode;
+                        mu.ResetPasswordCode = user.ResetPasswordCode;
+                        mu.UserAccessLevelID = user.UserAccessLevelID;
+                        mu.ConfirmPassword = mu.UserPassword;
+
+                        db.SaveChanges();
+                        user.JavaScriptToRun = "mySuccess()";
+                        TempData["yay"] = user;
+                        ViewBag.UserAccessLevelID = new SelectList(db.UserAccessLevels, "UserAccessLevelID", "UserAccessLevelDescr", user.UserAccessLevelID);
+                        return View(user);
+                    }
+                    catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+                    {
+                        Exception raise = dbEx;
+                        foreach (var validationErrors in dbEx.EntityValidationErrors)
+                        {
+                            foreach (var validationError in validationErrors.ValidationErrors)
+                            {
+                                string message = string.Format("{0}:{1}",
+                                    validationErrors.Entry.Entity.ToString(),
+                                    validationError.ErrorMessage);
+                                // raise a new exception nesting
+                                // the current instance as InnerException
+                                raise = new InvalidOperationException(message, raise);
+                            }
+                        }
+                        throw raise;
+                    }
+
+                    //mu.UserID = user.UserID;
+                    //mu.UserEmailAddress = user.UserEmailAddress;
+                    //mu.UserPassword = mu.UserPassword;
+                    //mu.UserContactNum = user.UserContactNum;
+                    //mu.UserFName = user.UserFName;
+                    //mu.UserLName = user.UserLName;
+                    //mu.UserIDNum = user.UserIDNum;
+                    //mu.IsEmailVerified = user.IsEmailVerified;
+                    //mu.ActivationCode = user.ActivationCode;
+                    //mu.ResetPasswordCode = user.ResetPasswordCode;
+                    //mu.UserAccessLevelID = user.UserAccessLevelID;
+
+                    //db.SaveChanges();
+                    //user.JavaScriptToRun = "mySuccess()";
+                    //TempData["yay"] = user;
+
+                    //return View(user);
+                }
+
+                //User u = new User();
+                //u.UserID = user.UserID;
+                //u.UserIDNum = user.UserIDNum;
+                //u.UserLName = user.UserFName;
+                //u.UserLName = user.UserLName;
+                //u.UserEmailAddress = user.UserEmailAddress;
+                //u.UserContactNum = user.UserContactNum;
+                //u.UserAccessLevelID = user.UserAccessLevelID;
 
                 db.SaveChanges();
                 return RedirectToAction("Index");
