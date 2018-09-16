@@ -14,7 +14,7 @@
         font-size: 12px;
         font-weight: 700;
         position: center;
-        background: #318ab7;
+        background: #3594C4;
         margin-left: -15px;
     }
 
@@ -87,7 +87,7 @@
             }
 
     body {
-        background-color: #318ab7;
+        background-color: #3594C4;
         color: white;
     }
 
@@ -113,7 +113,7 @@
 
     h3 {
         font-weight: 600;
-        color: #003c91;
+        color: #1775a5;
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     }
 
@@ -154,6 +154,21 @@
         background-color: #d2def2;
         font-size: 18px;
     }
+
+    .pill {
+  height:0px;
+  border-radius: 2px;
+  color: #3594C4;
+  border: 2px solid currentColor;
+  }
+
+  .pill2 {
+  height:0px;
+  border-radius: 2px;
+  color: #aeb6c4;
+  border: 1px solid currentColor;
+  }
+
 </style>
 
 <br />
@@ -172,8 +187,8 @@
 <br />
 
 <div class="panel panel-success" style="margin-bottom:100px;">
-    <h3><b> Clock in</b></h3>
-    <hr />
+    <h3><span class="glyphicon glyphicon-time"></span><b> Clock In</b></h3>
+    <hr class="pill">
     <div>
         <div class="row">
             <div class="col-md-6">
@@ -185,7 +200,7 @@
             </div>
         </div>
     </div>
-    <hr />
+    <hr class="pill2">
     <div>
         <div class="row">
             <div class="col-md-6">
@@ -197,7 +212,7 @@
             </div>
         </div>
     </div>
-    <hr />
+    <hr class="pill2">
     <div>
         <div class="row">
             <div class="col-md-6">
@@ -209,7 +224,7 @@
             </div>
         </div>
     </div>
-    <hr />
+    <hr class="pill2">
     <div>
         <div class="row" style="margin-bottom: 100px;">
             <div class="col-md-6">
@@ -224,8 +239,8 @@
 </div>
 
 <div class="panel panel-success">
-    <h3><b> Clock Out</b></h3>
-    <hr />
+    <h3><span class="glyphicon glyphicon-time"></span><b> Clock Out</b></h3>
+    <hr class="pill">
     <div>
         <div class="row">
             <div class="col-md-6">
@@ -237,7 +252,7 @@
             </div>
         </div>
     </div>
-    <hr />
+    <hr class="pill2">
     <div>
         <div class="row">
             <div class="col-md-6">
@@ -249,7 +264,7 @@
             </div>
         </div>
     </div>
-    <hr />
+    <hr class="pill2">
     <div>
         <div class="row">
             <div class="col-md-6">
@@ -261,7 +276,7 @@
             </div>
         </div>
     </div>
-    <hr />
+    <hr class="pill2">
     <div>
         <div class="row">
             <div class="col-md-6">
@@ -274,3 +289,9 @@
         </div>
     </div>
 </div>
+
+<script>
+    //Active Navbar
+    var element = document.getElementById("navFarmWorker");
+    element.classList.add("active");
+</script>
