@@ -282,6 +282,44 @@ namespace farmLogin.Controllers
                 if (file == null)
                 {
                     ViewBag.Error = "File is Empty!";
+
+                    var mw = db.FarmWorkers.Where(f => f.FarmWorkerNum == farmWorker.FarmWorkerNum).SingleOrDefault();
+
+                    if (mw != null)
+                    {
+                        //string path = Path.Combine(Server.MapPath("~/Files"), Path.GetFileName(file.FileName));
+                        //file.SaveAs(path);
+
+                        //farmWorker.FarmWorkerImg = "~/Files/" + file.FileName;
+                        //db.FarmWorkers.Add(farmWorker);
+
+                        //db.Entry(farmWorker).State = EntityState.Modified;
+
+                        mw.FarmWorkerNum = farmWorker.FarmWorkerNum;
+                        mw.FarmWorkerFName = farmWorker.FarmWorkerFName;
+                        mw.FarmWorkerLName = farmWorker.FarmWorkerLName;
+                        mw.FarmWorkerContactNum = farmWorker.FarmWorkerContactNum;
+                        mw.FarmWorkerImg = mw.FarmWorkerImg;
+                        mw.Address = farmWorker.Address;
+                        mw.Surburb = farmWorker.Surburb;
+                        mw.City = farmWorker.City;
+                        mw.CountryID = farmWorker.CountryID;
+                        mw.ProvinceID = farmWorker.ProvinceID;
+                        mw.ContractStartDate = farmWorker.ContractStartDate;
+                        mw.ContractEndDate = farmWorker.ContractEndDate;
+                        mw.FarmWorkerIDNum = farmWorker.FarmWorkerIDNum;
+                        mw.TitleID = farmWorker.TitleID;
+                        mw.GenderID = farmWorker.GenderID;
+                        mw.FarmWorkerTypeID = farmWorker.FarmWorkerTypeID;
+                        mw.FarmID = farmWorker.FarmID;
+
+
+                        db.SaveChanges();
+                        farmWorker.JavaScriptToRun = "mySuccess()";
+                        TempData["yay"] = farmWorker;
+
+                        return View(farmWorker);
+                    }
                 }
                 else
                 {
@@ -363,15 +401,12 @@ namespace farmLogin.Controllers
                             return View(farmWorker);
                         }
 
-
-
                     }
 
+                    //farmWorker.JavaScriptToRun = "mySuccess()";
+                    //return View(farmWorker);
 
                 }
-
-                //farmWorker.JavaScriptToRun = "mySuccess()";
-                //return View(farmWorker);
 
             }
             return View(farmWorker);
