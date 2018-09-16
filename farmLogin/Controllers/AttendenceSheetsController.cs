@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using farmLogin.Models;
+using Microsoft.AspNet.Identity;
 
 namespace farmLogin.Controllers
 {
@@ -100,7 +101,7 @@ namespace farmLogin.Controllers
             AttendenceSheet at = new AttendenceSheet();
 
             ViewBag.FarmWorkerNum = new SelectList(db.FarmWorkers, "FarmWorkerNum", "FarmWorkerFName");
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "UserEmailAddress");
+            //ViewBag.UserID = new SelectList(db.Users, "UserID", "UserEmailAddress");
             return View(at);
         }
 
@@ -113,7 +114,18 @@ namespace farmLogin.Controllers
         {
             if (ModelState.IsValid)
             {
+                //get list of all users
+                var uList = db.Users.ToList();
+
+                //get the email of currently logged in email
+                var email = User.Identity.GetUserName();
+
+                //user email to find the id of currently logged in user
+                var currID = uList.Where(a => a.UserEmailAddress == email).Select(a => a.UserID).FirstOrDefault();
+                
+                //set clockin time and current user id then save to db
                 attendenceSheet.ClockInTime = DateTime.Now;
+                attendenceSheet.UserID = currID;
                 db.AttendenceSheets.Add(attendenceSheet);
                 db.SaveChanges();
 
