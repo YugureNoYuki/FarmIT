@@ -170,8 +170,7 @@
 
 
     .well {
-        background-image: none;
-        background-color: #eaeaea;
+        background-color: #dddddd;
     }
 
     .table-heading {
@@ -187,11 +186,11 @@
     }
 
     .glyphicon-pencil {
-        color: #47A447;
+        color: #42b229;
     }
 
     .glyphicon-eye-open {
-        color: #479ce5;
+        color: #298fb2;
     }
 
     .glyphicon-trash {
@@ -315,16 +314,24 @@
                 Are you sure you want to delete this item?
             </div>
             <div class="modal-footer">
-                <button id="btnContinueCancel" data-dismiss="modal" type="button" class="btn btn-default">Cancel</button>
-                <button id="btnContinueDelete" type="button" class="btn btn-primary">Delete</button>
+                <button id="btnContinueCancel" data-dismiss="modal" type="button" class="btn btn-default" style="float:left">CANCEL</button>
+                <button id="btnContinueDelete" type="button" class="btn btn-primary" >DELETE</button>
             </div>
         </div>
     </div>
 </div>
 
+<div>
+    @Html.PagedListPager(Model.UserAccessLevels, page => Url.Action("Index",@*Takes list of inventories and produces a hyperlink to each page*@
+    new
+    {
+        Search = @Model.Search,
+        page
+    }))
+</div>
 <p>
     @*condition? first_expression : second_expression*@
-    @(String.IsNullOrWhiteSpace(Model.Search) ? "Showing all " : "You search for " + Model.Search + " found ")@Model.UserAccessLevels.TotalItemCount access roles
+    @(String.IsNullOrWhiteSpace(Model.Search) ? "Showing all " : "You search for " + Model.Search + " found ")@Model.UserAccessLevels.TotalItemCount Access Roles
 </p>
 
 @*Generate paging links*@
@@ -332,12 +339,7 @@
     @*wrap in div for presentation purpose*@
     Page @(Model.UserAccessLevels.PageCount < Model.UserAccessLevels.PageNumber ? 0 : @*evaluate whether or not there are any pages to display*@
     Model.UserAccessLevels.PageNumber) of @Model.UserAccessLevels.PageCount @*Display Page x of y*@
-    @Html.PagedListPager(Model.UserAccessLevels, page => Url.Action("Index",@*Takes list of inventories and produces a hyperlink to each page*@
-    new
-    {
-        Search = @Model.Search,
-        page
-    }))
+   
 </div>
 
 @section Scripts {
