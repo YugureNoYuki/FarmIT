@@ -189,7 +189,7 @@
                                 @Html.LabelFor(model => model.MaturityDays, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.MaturityDays, new { htmlAttributes = new { min = 1, @class = "form-control" } })
+                                @Html.EditorFor(model => model.MaturityDays, new { htmlAttributes = new { min = 1, @class = "form-control" }, @type = "number" })
                                 @Html.ValidationMessageFor(model => model.MaturityDays, "", new { @class = "text-danger" })
                             </div>
                         </div>
