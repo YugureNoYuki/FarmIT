@@ -1,10 +1,10 @@
 ﻿@model farmLogin.Models.FarmWorker
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "View Farm Worker Details";
 }
 <style>
     body {
-        background-color: #87CEFA;
+        background-color: #3594C4;
     }
 
     .breadcrumb {
@@ -17,7 +17,7 @@
         font-size: 12px;
         font-weight: 700;
         position: center;
-        background: #87CEFA;
+        background: #3594C4;
         margin-left: -15px;
     }
 
@@ -90,7 +90,7 @@
             }
 
     .panel {
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
     }
 
     #PanelContent {
@@ -159,7 +159,7 @@
             <b>Farm Worker Details </b>
             <span class="pull-right">
                 &nbsp;
-                <a href="@Url.Action("Edit", new { id = Model.FarmWorkerNum,})">
+                <a href="@Url.Action("Edit", new { id = Model.FarmWorkerNum,})" data-toggle="tooltip" title="Edit">
                     <i class="glyphicon glyphicon-pencil"></i>
                     <span class="sr-only">Edit</span>
                 </a>
