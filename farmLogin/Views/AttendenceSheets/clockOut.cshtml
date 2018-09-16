@@ -5,6 +5,43 @@
 }
 
 <style>
+    /*Confirmation*/
+      /*Green Button*/
+
+    #Confirm {
+        font-family: Arial;
+        font-weight: 600;
+        font-size: 12px;
+        display: inline-block;
+        background-color: #52963f;
+        border-color: #52963f;
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+        #Confirm:hover {
+            background-color: #24820e;
+            border-color: #24820e;
+            transition: 0.3s;
+        }
+        /*Red Button*/
+    #Cancel {
+        font-family: Arial;
+        font-weight: 600;
+        font-size: 12px;
+        display: inline-block;
+        background-color: #e5543d;
+        border-color: #e0422a;
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+       #Cancel:hover {
+            background-color: #bc1c03;
+            border-color: #bc1c03;
+            transition: 0.3s;
+        }
+
     .breadcrumb {
         display: inline-block;
         overflow: hidden;
@@ -15,7 +52,7 @@
         font-size: 12px;
         font-weight: 700;
         position: center;
-        background: #87CEFA;
+        background: #3594C4;
         margin-left: -15px;
     }
 
@@ -88,11 +125,11 @@
             }
 
     body {
-        background-color: #87CEFA;
+        background-color: #3594C4;
     }
 
     .panel {
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
     }
 
     #PanelContent {
@@ -131,6 +168,7 @@
 
     #btnSave {
         right: -10px;
+        width: 110px !important;
     }
 
     .panel > .panel-heading {
@@ -241,7 +279,7 @@ li.ui-timepicker-selected .ui-timepicker-duration,
 
         <div class="panel panel-success">
             <div class="panel-heading">
-                <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-tree-conifer"></span> &nbsp;Clock Out</b></h3>
+                <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-time"></span> &nbsp;Clock Out</b></h3>
             </div>
             <div style="color: red">
                 @if (TempData["fail"] != null)
@@ -303,8 +341,8 @@ li.ui-timepicker-selected .ui-timepicker-duration,
         <div class="input-group">
             <div class="input-group-btn">
                 <button class="btn btn-success" type="button" id="btnSave" data-toggle="modal" data-target="#confirm-submit">
-                    <span class="glyphicon glyphicon-save"></span>
-                    Save
+                    <span class="glyphicon glyphicon-time"></span>
+                    Clock Out
                 </button>
             </div>
         </div>
@@ -319,12 +357,12 @@ li.ui-timepicker-selected .ui-timepicker-duration,
                         <h4 class="modal-title">Confirmation</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Please confirm that you want to save these details.</p>
+                        <p>Please confirm that you want to Clock this Farm Worker Out.</p>
 
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success" style="float:right" id="confirmBtn">CONFIRM</button>
-                        <button type="button" class="btn btn-warning" data-dismiss="modal" style="float: left">CANCEL</button>
+                        <button type="submit" class="btn btn-success" style="float:right" id="Confirm">CONFIRM</button>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal" style="float: left" id="Cancel">CANCEL</button>
                     </div>
                 </div>
 
@@ -402,6 +440,11 @@ li.ui-timepicker-selected .ui-timepicker-duration,
     $(function () {
         $(".date-picker").datetimepicker();
         });
+</script>
+<script>
+    //Active Navbar
+    var element = document.getElementById("navFarmWorker");
+    element.classList.add("active");
 </script>
 @*<script type="text/javascript">
         $(document).ready(function () {
