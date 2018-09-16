@@ -1,6 +1,6 @@
 ﻿@model farmLogin.Models.FarmWorkerType
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Add Farm Worker Type";
 }
 
 <style>
@@ -29,8 +29,8 @@
         font-weight: 600;
         font-size: 12px;
         display: inline-block;
-        background-color: #e0422a;
-        border-color: #e0422a;
+        background-color: #e5543d;
+        border-color: #e5543d;
         border-radius: 5px;
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
     }
@@ -51,7 +51,7 @@
         font-size: 12px;
         font-weight: 700;
         position: center;
-        background: #87CEFA;
+        background: #3594C4;
         margin-left: -15px;
     }
 
@@ -124,11 +124,11 @@
             }
 
     body {
-        background-color: #87CEFA;
+        background-color: #3594C4;
     }
 
     .panel {
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
     }
 
     #PanelContent {
@@ -349,6 +349,12 @@
 
         });
     </script>
+
+<script>
+    //Active Navbar
+    var element = document.getElementById("navFarmWorker");
+    element.classList.add("active");
+</script>
 }
 
 
