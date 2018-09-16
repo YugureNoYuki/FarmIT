@@ -279,7 +279,8 @@
                                 @Html.LabelFor(model => model.DatePlanted, "Date to Plant", htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.DatePlanted, new { htmlAttributes = new { @class = "form-control" } })
+                                @*@Html.EditorFor(model => model.DatePlanted, new { htmlAttributes = new { @class = "form-control" } })*@
+                                @Html.EditorFor(model => model.DatePlanted, new { htmlAttributes = new { Value = Model.DatePlanted.ToString("yyyy/MM/dd"), @class = "form-control date-picker", onkeydown = "return false", onpaste = "return false" } })
                                 @Html.ValidationMessageFor(model => model.DatePlanted, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -391,7 +392,7 @@
 
     </div>
 </div>
-
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -418,4 +419,13 @@
         var element = document.getElementById("navCrop");
         element.classList.add("active");
     </script>
+
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script type="text/javascript">
+        $(function () {
+            $(".date-picker").datepicker({
+
+            });
+        });
+</script>
 }

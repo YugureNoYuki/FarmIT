@@ -276,7 +276,7 @@
     <Property Name="CropTypeID" Type="int" Nullable="false" />
     <Property Name="CropCycleID" Type="int" Nullable="false" />
     <Property Name="FieldStageID" Type="int" Nullable="false" />
-    <Property Name="DatePlanted" Type="date" />
+    <Property Name="DatePlanted" Type="date" Nullable="false" />
     <Property Name="RefugeSeedAmntUsed" Type="decimal" Precision="18" Scale="2" />
     <Property Name="RefugeUnit" Type="int" />
     <Property Name="RefugeAreaHectares" Type="decimal" Precision="18" Scale="2" />
@@ -873,7 +873,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Plantatio__CropC__05D8E0BE">
+  <Association Name="FK__Plantatio__CropC__2DE6D218">
     <End Role="CropCycle" Type="Self.CropCycle" Multiplicity="1" />
     <End Role="Plantation" Type="Self.Plantation" Multiplicity="*" />
     <ReferentialConstraint>
@@ -885,7 +885,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Plantatio__CropT__04E4BC85">
+  <Association Name="FK__Plantatio__CropT__2CF2ADDF">
     <End Role="CropType" Type="Self.CropType" Multiplicity="1" />
     <End Role="Plantation" Type="Self.Plantation" Multiplicity="*" />
     <ReferentialConstraint>
@@ -897,7 +897,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Plantatio__Field__03F0984C">
+  <Association Name="FK__Plantatio__Field__2BFE89A6">
     <End Role="Field" Type="Self.Field" Multiplicity="1" />
     <End Role="Plantation" Type="Self.Plantation" Multiplicity="*" />
     <ReferentialConstraint>
@@ -909,7 +909,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Plantatio__Field__06CD04F7">
+  <Association Name="FK__Plantatio__Field__2EDAF651">
     <End Role="FieldStage" Type="Self.FieldStage" Multiplicity="1" />
     <End Role="Plantation" Type="Self.Plantation" Multiplicity="*" />
     <ReferentialConstraint>
@@ -921,7 +921,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Plantatio__Refug__07C12930">
+  <Association Name="FK__Plantatio__Refug__2FCF1A8A">
     <End Role="Unit" Type="Self.Unit" Multiplicity="0..1" />
     <End Role="Plantation" Type="Self.Plantation" Multiplicity="*" />
     <ReferentialConstraint>
@@ -933,7 +933,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Plantatio__Yield__08B54D69">
+  <Association Name="FK__Plantatio__Yield__30C33EC3">
     <End Role="Unit" Type="Self.Unit" Multiplicity="1" />
     <End Role="Plantation" Type="Self.Plantation" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1017,7 +1017,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__SiloHarve__Plant__0F624AF8">
+  <Association Name="FK__SiloHarve__Plant__3493CFA7">
     <End Role="Plantation" Type="Self.Plantation" Multiplicity="1" />
     <End Role="SiloHarvest" Type="Self.SiloHarvest" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1029,7 +1029,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__SiloHarve__SaleI__1AD3FDA4">
+  <Association Name="FK__SiloHarve__SaleI__3864608B">
     <End Role="Sale" Type="Self.Sale" Multiplicity="1" />
     <End Role="SiloHarvestSale" Type="Self.SiloHarvestSale" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1041,7 +1041,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__SiloHarve__SiloH__19DFD96B">
+  <Association Name="FK__SiloHarve__SiloH__37703C52">
     <End Role="SiloHarvest" Type="Self.SiloHarvest" Multiplicity="1" />
     <End Role="SiloHarvestSale" Type="Self.SiloHarvestSale" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1053,7 +1053,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__SiloHarve__SiloI__0E6E26BF">
+  <Association Name="FK__SiloHarve__SiloI__339FAB6E">
     <End Role="Silo" Type="Self.Silo" Multiplicity="1" />
     <End Role="SiloHarvest" Type="Self.SiloHarvest" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1358,27 +1358,27 @@
       <End Role="Order" EntitySet="Order" />
       <End Role="OrderLine" EntitySet="OrderLine" />
     </AssociationSet>
-    <AssociationSet Name="FK__Plantatio__CropC__05D8E0BE" Association="Self.FK__Plantatio__CropC__05D8E0BE">
+    <AssociationSet Name="FK__Plantatio__CropC__2DE6D218" Association="Self.FK__Plantatio__CropC__2DE6D218">
       <End Role="CropCycle" EntitySet="CropCycle" />
       <End Role="Plantation" EntitySet="Plantation" />
     </AssociationSet>
-    <AssociationSet Name="FK__Plantatio__CropT__04E4BC85" Association="Self.FK__Plantatio__CropT__04E4BC85">
+    <AssociationSet Name="FK__Plantatio__CropT__2CF2ADDF" Association="Self.FK__Plantatio__CropT__2CF2ADDF">
       <End Role="CropType" EntitySet="CropType" />
       <End Role="Plantation" EntitySet="Plantation" />
     </AssociationSet>
-    <AssociationSet Name="FK__Plantatio__Field__03F0984C" Association="Self.FK__Plantatio__Field__03F0984C">
+    <AssociationSet Name="FK__Plantatio__Field__2BFE89A6" Association="Self.FK__Plantatio__Field__2BFE89A6">
       <End Role="Field" EntitySet="Field" />
       <End Role="Plantation" EntitySet="Plantation" />
     </AssociationSet>
-    <AssociationSet Name="FK__Plantatio__Field__06CD04F7" Association="Self.FK__Plantatio__Field__06CD04F7">
+    <AssociationSet Name="FK__Plantatio__Field__2EDAF651" Association="Self.FK__Plantatio__Field__2EDAF651">
       <End Role="FieldStage" EntitySet="FieldStage" />
       <End Role="Plantation" EntitySet="Plantation" />
     </AssociationSet>
-    <AssociationSet Name="FK__Plantatio__Refug__07C12930" Association="Self.FK__Plantatio__Refug__07C12930">
+    <AssociationSet Name="FK__Plantatio__Refug__2FCF1A8A" Association="Self.FK__Plantatio__Refug__2FCF1A8A">
       <End Role="Unit" EntitySet="Unit" />
       <End Role="Plantation" EntitySet="Plantation" />
     </AssociationSet>
-    <AssociationSet Name="FK__Plantatio__Yield__08B54D69" Association="Self.FK__Plantatio__Yield__08B54D69">
+    <AssociationSet Name="FK__Plantatio__Yield__30C33EC3" Association="Self.FK__Plantatio__Yield__30C33EC3">
       <End Role="Unit" EntitySet="Unit" />
       <End Role="Plantation" EntitySet="Plantation" />
     </AssociationSet>
@@ -1406,19 +1406,19 @@
       <End Role="Unit" EntitySet="Unit" />
       <End Role="Silo" EntitySet="Silo" />
     </AssociationSet>
-    <AssociationSet Name="FK__SiloHarve__Plant__0F624AF8" Association="Self.FK__SiloHarve__Plant__0F624AF8">
+    <AssociationSet Name="FK__SiloHarve__Plant__3493CFA7" Association="Self.FK__SiloHarve__Plant__3493CFA7">
       <End Role="Plantation" EntitySet="Plantation" />
       <End Role="SiloHarvest" EntitySet="SiloHarvest" />
     </AssociationSet>
-    <AssociationSet Name="FK__SiloHarve__SaleI__1AD3FDA4" Association="Self.FK__SiloHarve__SaleI__1AD3FDA4">
+    <AssociationSet Name="FK__SiloHarve__SaleI__3864608B" Association="Self.FK__SiloHarve__SaleI__3864608B">
       <End Role="Sale" EntitySet="Sale" />
       <End Role="SiloHarvestSale" EntitySet="SiloHarvestSale" />
     </AssociationSet>
-    <AssociationSet Name="FK__SiloHarve__SiloH__19DFD96B" Association="Self.FK__SiloHarve__SiloH__19DFD96B">
+    <AssociationSet Name="FK__SiloHarve__SiloH__37703C52" Association="Self.FK__SiloHarve__SiloH__37703C52">
       <End Role="SiloHarvest" EntitySet="SiloHarvest" />
       <End Role="SiloHarvestSale" EntitySet="SiloHarvestSale" />
     </AssociationSet>
-    <AssociationSet Name="FK__SiloHarve__SiloI__0E6E26BF" Association="Self.FK__SiloHarve__SiloI__0E6E26BF">
+    <AssociationSet Name="FK__SiloHarve__SiloI__339FAB6E" Association="Self.FK__SiloHarve__SiloI__339FAB6E">
       <End Role="Silo" EntitySet="Silo" />
       <End Role="SiloHarvest" EntitySet="SiloHarvest" />
     </AssociationSet>

@@ -17,10 +17,12 @@ namespace farmLogin.Models
         [Key]
         public int PlantationID { get; set; }
 
+        [Required(ErrorMessage = "Date Planted cannot be blank")]
         [Display(Name = "Date Planted")]
         //TODO: Validate future date selection
-        [DataType(DataType.Date)]
-        [MyPast(ErrorMessage = "Date must be after Today")]
+        //[DataType(DataType.Date)]
+        //[MyPast(ErrorMessage = "Date must be after Today")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public System.DateTime DatePlanted { get; set; }
 
         [Display(Name = "Refuge Seed Amount")]

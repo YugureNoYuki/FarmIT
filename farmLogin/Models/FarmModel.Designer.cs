@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Bonga\Desktop\370 Project\DEL 08\DEL 08 Anne\DEL05 FINAL ALIFEROUS GR20\NEW\farmLogin\farmLogin\Models\FarmModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Bonga\Desktop\370 Del 8\farmLogin\Models\FarmModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

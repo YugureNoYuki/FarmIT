@@ -63,8 +63,8 @@ namespace farmLogin.Controllers
             ViewBag.CropTypeID = new SelectList(db.CropTypes, "CropTypeID", "CropTypeDescr");
             ViewBag.FieldID = new SelectList(db.Fields, "FieldID", "FieldName");
             ViewBag.FieldStageID = new SelectList(db.FieldStages, "FieldStageID", "FieldStageDescr");
-            ViewBag.RefugeUnit = new SelectList(db.Units, "UnitID", "UnitDescr");
-            ViewBag.YieldUnit = new SelectList(db.Units, "UnitID", "UnitDescr");
+            ViewBag.RefugeUnit = new SelectList(db.Units.Where(u => u.UnitDescr.Contains("KG") || u.UnitDescr.Contains("GRAMS")), "UnitID", "UnitDescr");
+            ViewBag.YieldUnit = new SelectList(db.Units.Where(u => u.UnitDescr.Contains("TONNE")), "UnitID", "UnitDescr");
 
             Plantation plantation = new Plantation();
 
@@ -85,15 +85,15 @@ namespace farmLogin.Controllers
             if (ModelState.IsValid)
             {
                 plantation.CropCycleID = 1; //This is not correct
-                plantation.FieldStageID = 1;
+                plantation.FieldStageID = 1; //Stage 0 - Planned
                 db.Plantations.Add(plantation);
                 db.SaveChanges();
                 ViewBag.CropCycleID = new SelectList(db.CropCycles, "CropCycleID", "CropCycleDescr", plantation.CropCycleID);
                 ViewBag.CropTypeID = new SelectList(db.CropTypes, "CropTypeID", "CropTypeDescr", plantation.CropTypeID);
                 ViewBag.FieldID = new SelectList(db.Fields, "FieldID", "FieldName", plantation.FieldID);
                 ViewBag.FieldStageID = new SelectList(db.FieldStages, "FieldStageID", "FieldStageDescr", plantation.FieldStageID);
-                ViewBag.RefugeUnit = new SelectList(db.Units, "UnitID", "UnitDescr", plantation.RefugeUnit);
-                ViewBag.YieldUnit = new SelectList(db.Units, "UnitID", "UnitDescr", plantation.YieldUnit);
+                ViewBag.RefugeUnit = new SelectList(db.Units.Where(u => u.UnitDescr.Contains("KG") || u.UnitDescr.Contains("GRAMS")), "UnitID", "UnitDescr", plantation.RefugeUnit);
+                ViewBag.YieldUnit = new SelectList(db.Units.Where(u => u.UnitDescr.Contains("TONNE")), "UnitID", "UnitDescr", plantation.YieldUnit);
                 plantation.JavaScriptToRun = "mySuccess()";
                 return View(plantation);
             }
@@ -102,8 +102,8 @@ namespace farmLogin.Controllers
             ViewBag.CropTypeID = new SelectList(db.CropTypes, "CropTypeID", "CropTypeDescr", plantation.CropTypeID);
             ViewBag.FieldID = new SelectList(db.Fields, "FieldID", "FieldName", plantation.FieldID);
             ViewBag.FieldStageID = new SelectList(db.FieldStages, "FieldStageID", "FieldStageDescr", plantation.FieldStageID);
-            ViewBag.RefugeUnit = new SelectList(db.Units, "UnitID", "UnitDescr", plantation.RefugeUnit);
-            ViewBag.YieldUnit = new SelectList(db.Units, "UnitID", "UnitDescr", plantation.YieldUnit);
+            ViewBag.RefugeUnit = new SelectList(db.Units.Where(u => u.UnitDescr.Contains("KG") || u.UnitDescr.Contains("GRAMS")), "UnitID", "UnitDescr", plantation.RefugeUnit);
+            ViewBag.YieldUnit = new SelectList(db.Units.Where(u => u.UnitDescr.Contains("TONNE")), "UnitID", "UnitDescr", plantation.YieldUnit);
             return View(plantation);
         }
 
@@ -123,8 +123,8 @@ namespace farmLogin.Controllers
             ViewBag.CropTypeID = new SelectList(db.CropTypes, "CropTypeID", "CropTypeDescr", plantation.CropTypeID);
             ViewBag.FieldID = new SelectList(db.Fields, "FieldID", "FieldName", plantation.FieldID);
             ViewBag.FieldStageID = new SelectList(db.FieldStages, "FieldStageID", "FieldStageDescr", plantation.FieldStageID);
-            ViewBag.RefugeUnit = new SelectList(db.Units, "UnitID", "UnitDescr", plantation.RefugeUnit);
-            ViewBag.YieldUnit = new SelectList(db.Units, "UnitID", "UnitDescr", plantation.YieldUnit);
+            ViewBag.RefugeUnit = new SelectList(db.Units.Where(u => u.UnitDescr.Contains("KG") || u.UnitDescr.Contains("GRAMS")), "UnitID", "UnitDescr", plantation.RefugeUnit);
+            ViewBag.YieldUnit = new SelectList(db.Units.Where(u => u.UnitDescr.Contains("TONNE")), "UnitID", "UnitDescr", plantation.YieldUnit);
             return View(plantation);
         }
 
@@ -163,8 +163,8 @@ namespace farmLogin.Controllers
                     ViewBag.CropTypeID = new SelectList(db.CropTypes, "CropTypeID", "CropTypeDescr", plantation.CropTypeID);
                     ViewBag.FieldID = new SelectList(db.Fields, "FieldID", "FieldName", plantation.FieldID);
                     ViewBag.FieldStageID = new SelectList(db.FieldStages, "FieldStageID", "FieldStageDescr", plantation.FieldStageID);
-                    ViewBag.RefugeUnit = new SelectList(db.Units, "UnitID", "UnitDescr", plantation.RefugeUnit);
-                    ViewBag.YieldUnit = new SelectList(db.Units, "UnitID", "UnitDescr", plantation.YieldUnit);
+                    ViewBag.RefugeUnit = new SelectList(db.Units.Where(u => u.UnitDescr.Contains("KG") || u.UnitDescr.Contains("GRAMS")), "UnitID", "UnitDescr", plantation.RefugeUnit);
+                    ViewBag.YieldUnit = new SelectList(db.Units.Where(u => u.UnitDescr.Contains("TONNE")), "UnitID", "UnitDescr", plantation.YieldUnit);
                     return View(plantation);
                 }
             }
@@ -173,8 +173,8 @@ namespace farmLogin.Controllers
             ViewBag.CropTypeID = new SelectList(db.CropTypes, "CropTypeID", "CropTypeDescr", plantation.CropTypeID);
             ViewBag.FieldID = new SelectList(db.Fields, "FieldID", "FieldName", plantation.FieldID);
             ViewBag.FieldStageID = new SelectList(db.FieldStages, "FieldStageID", "FieldStageDescr", plantation.FieldStageID);
-            ViewBag.RefugeUnit = new SelectList(db.Units, "UnitID", "UnitDescr", plantation.RefugeUnit);
-            ViewBag.YieldUnit = new SelectList(db.Units, "UnitID", "UnitDescr", plantation.YieldUnit);
+            ViewBag.RefugeUnit = new SelectList(db.Units.Where(u => u.UnitDescr.Contains("KG") || u.UnitDescr.Contains("GRAMS")), "UnitID", "UnitDescr", plantation.RefugeUnit);
+            ViewBag.YieldUnit = new SelectList(db.Units.Where(u => u.UnitDescr.Contains("TONNE")), "UnitID", "UnitDescr", plantation.YieldUnit);
             return View(plantation);
         }
 
@@ -267,10 +267,10 @@ namespace farmLogin.Controllers
             }
             ViewBag.CropCycleID = new SelectList(db.CropCycles, "CropCycleID", "CropCycleDescr", plantation.CropCycleID);
             ViewBag.CropTypeID = new SelectList(db.CropTypes, "CropTypeID", "CropTypeDescr", plantation.CropTypeID);
-            ViewBag.FieldID = new SelectList(db.Fields, "FieldID", "FieldName", plantation.FieldID);
+            ViewBag.FieldID = new SelectList(db.Fields.Where(f => f.FieldStatusID != 2 && f.FieldStatusID != 3), "FieldID", "FieldName", plantation.FieldID); //Show available fields only
             ViewBag.FieldStageID = new SelectList(db.FieldStages, "FieldStageID", "FieldStageDescr", plantation.FieldStageID);
-            ViewBag.RefugeUnit = new SelectList(db.Units, "UnitID", "UnitDescr", plantation.RefugeUnit);
-            ViewBag.YieldUnit = new SelectList(db.Units, "UnitID", "UnitDescr", plantation.YieldUnit);
+            ViewBag.RefugeUnit = new SelectList(db.Units.Where(u => u.UnitDescr.Contains("KG") || u.UnitDescr.Contains("GRAMS")), "UnitID", "UnitDescr", plantation.RefugeUnit);
+            ViewBag.YieldUnit = new SelectList(db.Units.Where(u => u.UnitDescr.Contains("TONNE")), "UnitID", "UnitDescr", plantation.YieldUnit);
             return View(plantation);
         }
         //Post
@@ -280,38 +280,69 @@ namespace farmLogin.Controllers
         {
             if (ModelState.IsValid)
             {
-                //Set Plantation Attributes
-                plantation.FieldStageID = 1; //Stage 1 - Planted
-                plantation.PlantationStatus = "Confirmed";
-                db.Entry(plantation).State = EntityState.Modified;
+                var field = db.Fields.Find(plantation.FieldID);
+                try
+                {
+                    if((decimal)plantation.RefugeAreaHectares > (decimal)field.FieldHectares) //RefugeeAreaHA cannot be greater than available Field HA
+                    {
+                        ModelState.AddModelError("RefugeAreaHectares", "Maximum available hectares for selected field is: " + field.FieldHectares);
 
-                //Update Field to In Use
-                int Id = plantation.FieldID;
-                var field = db.Fields.Find(Id);
-                field.FieldStatusID = 2; //In-Use
-                db.Entry(field).State = EntityState.Modified;
+                        ViewBag.CropCycleID = new SelectList(db.CropCycles, "CropCycleID", "CropCycleDescr", plantation.CropCycleID);
+                        ViewBag.CropTypeID = new SelectList(db.CropTypes, "CropTypeID", "CropTypeDescr", plantation.CropTypeID);
+                        ViewBag.FieldID = new SelectList(db.Fields, "FieldID", "FieldName", plantation.FieldID);
+                        ViewBag.FieldStageID = new SelectList(db.FieldStages, "FieldStageID", "FieldStageDescr", plantation.FieldStageID);
+                        ViewBag.RefugeUnit = new SelectList(db.Units.Where(u => u.UnitDescr.Contains("KG") || u.UnitDescr.Contains("GRAMS")), "UnitID", "UnitDescr", plantation.RefugeUnit);
+                        ViewBag.YieldUnit = new SelectList(db.Units.Where(u => u.UnitDescr.Contains("TONNE")), "UnitID", "UnitDescr", plantation.YieldUnit);
+                        return View(plantation);
+                    }
+                    //Set Plantation Attributes
+                    plantation.FieldStageID = 2; //Stage 1 - Planted
+                    plantation.PlantationStatus = "Confirmed";
+                    db.Entry(plantation).State = EntityState.Modified;
 
-                //Save All
-                db.SaveChanges();
+                    ////Update Field to In Use
+                    field.FieldStatusID = 2; //In-Use - Must have a plantation on the field
+                    db.Entry(field).State = EntityState.Modified;
 
-                ViewBag.CropCycleID = new SelectList(db.CropCycles, "CropCycleID", "CropCycleDescr", plantation.CropCycleID);
-                ViewBag.CropTypeID = new SelectList(db.CropTypes, "CropTypeID", "CropTypeDescr", plantation.CropTypeID);
-                ViewBag.FieldID = new SelectList(db.Fields, "FieldID", "FieldName", plantation.FieldID);
-                ViewBag.FieldStageID = new SelectList(db.FieldStages, "FieldStageID", "FieldStageDescr", plantation.FieldStageID);
-                ViewBag.RefugeUnit = new SelectList(db.Units, "UnitID", "UnitDescr", plantation.RefugeUnit);
-                ViewBag.YieldUnit = new SelectList(db.Units, "UnitID", "UnitDescr", plantation.YieldUnit);
+                    //Save All
+                    db.SaveChanges();
 
-                plantation.JavaScriptToRun = "mySuccess()";
-                TempData["yay"] = plantation;
+                    ViewBag.CropCycleID = new SelectList(db.CropCycles, "CropCycleID", "CropCycleDescr", plantation.CropCycleID);
+                    ViewBag.CropTypeID = new SelectList(db.CropTypes, "CropTypeID", "CropTypeDescr", plantation.CropTypeID);
+                    ViewBag.FieldID = new SelectList(db.Fields, "FieldID", "FieldName", plantation.FieldID);
+                    ViewBag.FieldStageID = new SelectList(db.FieldStages, "FieldStageID", "FieldStageDescr", plantation.FieldStageID);
+                    ViewBag.RefugeUnit = new SelectList(db.Units.Where(u => u.UnitDescr.Contains("KG") || u.UnitDescr.Contains("GRAMS")), "UnitID", "UnitDescr", plantation.RefugeUnit);
+                    ViewBag.YieldUnit = new SelectList(db.Units.Where(u => u.UnitDescr.Contains("TONNE")), "UnitID", "UnitDescr", plantation.YieldUnit);
 
-                return RedirectToAction("InitTreat", "Plantation");
+                    plantation.JavaScriptToRun = "mySuccess()";
+                    TempData["yay"] = plantation;
+
+                    return RedirectToAction("InitTreat", "Plantation"); //successfull
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+                {
+                    Exception raise = dbEx;
+                    foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            string message = string.Format("{0}:{1}",
+                                validationErrors.Entry.Entity.ToString(),
+                                validationError.ErrorMessage);
+                            // raise a new exception nesting
+                            // the current instance as InnerException
+                            raise = new InvalidOperationException(message, raise);
+                        }
+                    }
+                    throw raise;
+                }
             }
             ViewBag.CropCycleID = new SelectList(db.CropCycles, "CropCycleID", "CropCycleDescr", plantation.CropCycleID);
             ViewBag.CropTypeID = new SelectList(db.CropTypes, "CropTypeID", "CropTypeDescr", plantation.CropTypeID);
             ViewBag.FieldID = new SelectList(db.Fields, "FieldID", "FieldName", plantation.FieldID);
             ViewBag.FieldStageID = new SelectList(db.FieldStages, "FieldStageID", "FieldStageDescr", plantation.FieldStageID);
-            ViewBag.RefugeUnit = new SelectList(db.Units, "UnitID", "UnitDescr", plantation.RefugeUnit);
-            ViewBag.YieldUnit = new SelectList(db.Units, "UnitID", "UnitDescr", plantation.YieldUnit);
+            ViewBag.RefugeUnit = new SelectList(db.Units.Where(u => u.UnitDescr.Contains("KG") || u.UnitDescr.Contains("GRAMS")), "UnitID", "UnitDescr", plantation.RefugeUnit);
+            ViewBag.YieldUnit = new SelectList(db.Units.Where(u => u.UnitDescr.Contains("TONNE")), "UnitID", "UnitDescr", plantation.YieldUnit);
             return View(plantation);
         }
 
@@ -410,7 +441,7 @@ namespace farmLogin.Controllers
         {
             if (ModelState.IsValid)
             {
-                id = (int)TempData["plantationId"];
+                //id = (int)TempData["plantationId"];
                 //get inventory quantity: Treatment quantity for selected inventory item cannot be more than the available qty
                 var qty = db.Inventories.Find(inventoryTreatment.InventoryID);
                 try

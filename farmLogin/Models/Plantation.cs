@@ -25,7 +25,7 @@ namespace farmLogin.Models
         public int CropTypeID { get; set; }
         public int CropCycleID { get; set; }
         public int FieldStageID { get; set; }
-        public Nullable<System.DateTime> DatePlanted { get; set; }
+        public System.DateTime DatePlanted { get; set; }
         public Nullable<decimal> RefugeSeedAmntUsed { get; set; }
         public Nullable<int> RefugeUnit { get; set; }
         public Nullable<decimal> RefugeAreaHectares { get; set; }
