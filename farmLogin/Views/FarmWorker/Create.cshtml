@@ -1,6 +1,6 @@
 ﻿@model farmLogin.Models.FarmWorker
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Add Farm Worker";
 }
 @*Style*@
 <style>
@@ -286,7 +286,7 @@
                                             Browse&hellip; <input type="file" name="file" accept="image/jpeg, image/png" style="display: none" id="myImg">
                                         </span>
                                     </label>
-                                    <input type="text" class="form-control" readonly>
+                                    <input id="ImageInput" type="text" class="form-control" readonly>
                                 </div>
                                 <div class="col-md-4">
                                     <br />
@@ -679,8 +679,9 @@
 
         var clearPreview = function () {
             $("#myImg").val('');
-            $("#description").text('');
+            $("#description").text();
             $("#imgPreview").hide();
+            $("#ImageInput").val("");
         }
     </script>
 }
