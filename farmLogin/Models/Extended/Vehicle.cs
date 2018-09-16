@@ -63,8 +63,8 @@ namespace farmLogin.Models
         [Required(ErrorMessage = "License Expiry Date cannot be blank")]
         [Display(Name = "License Expiry Date")]
         //TODO: Validate past date selection
-        [DataType(DataType.Date)]
-        [MyPast(ErrorMessage = "Date must be after Today")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [MyPast(ErrorMessage = "Future date must be selected")]
 
         public Nullable<System.DateTime> VehExpDate { get; set; }
 

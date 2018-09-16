@@ -460,7 +460,8 @@
                                 @Html.LabelFor(model => model.VehExpDate, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.VehExpDate, new { htmlAttributes = new { @class = "form-control" } })
+                                @*@Html.EditorFor(model => model.VehExpDate, new { htmlAttributes = new { @class = "form-control" } })*@
+                                @Html.EditorFor(model => model.VehExpDate, new { htmlAttributes = new { @class = "form-control date-picker", onkeydown = "return false", onpaste = "return false" } })
                                 @Html.ValidationMessageFor(model => model.VehExpDate, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -584,7 +585,7 @@
 
     </div>
 </div>
-
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -614,4 +615,14 @@
         var element = document.getElementById("navVehicle");
         element.classList.add("active");
     </script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $(".date-picker").datepicker({
+            minDate: new Date()
+        });
+        //initialise datepicker dates with today date for start and +1d for end date
+        $(".date-picker").datepicker("setDate", "+0d");
+    });
+</script>
 }
