@@ -28,8 +28,8 @@
         font-weight: 600;
         font-size: 12px;
         display: inline-block;
-        background-color: #e0422a;
-        border-color: #e0422a;
+        background-color: #e5543d;
+        border-color: #e5543d;
         border-radius: 5px;
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
     }
@@ -50,7 +50,7 @@
         font-size: 12px;
         font-weight: 700;
         position: center;
-        background: #87CEFA;
+        background: #3594C4;
         margin-left: -15px;
     }
 
@@ -123,11 +123,11 @@
             }
 
     body {
-        background-color: #87CEFA;
+        background-color: #3594C4;
     }
 
     .panel {
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
     }
 
     #PanelContent {
@@ -135,7 +135,7 @@
         margin-left: 60px;
     }
 
-    .panel:hover span {
+    .panel:hover .glyphicon {
         color: #1b8bc6;
         transition: 0.5s;
     }
@@ -225,6 +225,20 @@
             background: #1955a0;
             border-color: #1955a0;
         }
+
+        #BrowseBtn
+        {
+            left: 5px;
+            background-color: #47A447;
+            border-color: #47A447;
+        }
+
+        #BrowseBtn:hover{
+            background-color: #25820F;
+            transition: 0.5s;
+        }
+
+        
 </style>
 
 @*Breadcrumb*@
@@ -266,7 +280,7 @@
                                     }
 
                                 </div>
-                                <div class="input-group" style="left:-13px">
+                                <div class="input-group" style="left:-5px">
                                     <label class="input-group-btn">
                                         <span class="btn btn-default" id="BrowseBtn">
                                             Browse&hellip; <input type="file" name="file" accept="image/jpeg, image/png" style="display: none" id="myImg">
@@ -279,7 +293,7 @@
                                     <div id="imgPreview" class="thumbnail" style="display:none">
                                         <img class="img-responsive" id="targetImg" />
                                         <div class="caption">
-                                            <a href="#" onclick="clearPreview()"><i class="glyphicon glyphicon-trash"></i></a>
+                                            <a href="#" onclick="clearPreview()"><i data-toggle="tooltip" title="Remove Image" class="glyphicon glyphicon-trash" style="float:right; color:red; top: -10px; transform:scale(1.3);"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -671,6 +685,12 @@
     </script>
 }
 @* easiest comment of my commit*@
+
+<script>
+    //Active Navbar
+    var element = document.getElementById("navFarmWorker");
+    element.classList.add("active");
+</script>
 
 
 
