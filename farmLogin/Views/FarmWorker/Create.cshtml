@@ -226,19 +226,27 @@
             border-color: #1955a0;
         }
 
-        #BrowseBtn
-        {
-            left: 5px;
-            background-color: #47A447;
-            border-color: #47A447;
-        }
+    #BrowseBtn {
+        left: 5px;
+        background-color: #47A447;
+        border-color: #47A447;
+    }
 
-        #BrowseBtn:hover{
+        #BrowseBtn:hover {
             background-color: #25820F;
             transition: 0.5s;
         }
 
-        
+    #addFarmWorkerType {
+        width: 200px;
+        background-color: #385f99;
+        border-color: #385f99;
+    }
+
+    #addFarmWorkerType:hover {
+        background: #1955a0;
+        border-color: #1955a0;
+    }
 </style>
 
 @*Breadcrumb*@
@@ -249,6 +257,21 @@
     <a class="active">Add Farm Worker</a>
 </div>
 
+<div class="row">
+    <div class="col-xs-6 col-md-4">
+        @using (Html.BeginForm("Create", "FarmWorkerType", FormMethod.Get, new { @class = "form-inline" }))
+        {
+        <div class="input-group">
+            <div class="input-group-btn">
+                <button class="btn btn-success inventory" type="submit" id="addFarmWorkerType">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Add Farm Worker Type
+                </button>
+            </div>
+        </div>
+        }
+    </div>
+</div>
 <br />
 
 
@@ -257,293 +280,293 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="panel panel-success">
-        <div class="panel-heading">
-            <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-user"></span> &nbsp;Add Farm Worker Personal Details</b></h3>
-        </div>
-        <div class="panel-body">
-            <div class="form-horizontal">
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-user"></span> &nbsp;Add Farm Worker Personal Details</b></h3>
+    </div>
+    <div class="panel-body">
+        <div class="form-horizontal">
 
-                <div class="row" id="PanelContent">
-                    <div class="col-xs-6 col-md-12">
-                        <div class="form-group">
-                            <div class="col-xs-6 col-md-6">
-                                @Html.LabelFor(model => model.FarmWorkerImg, "Upload Image: ", htmlAttributes: new { @class = "control-label" })
+            <div class="row" id="PanelContent">
+                <div class="col-xs-6 col-md-12">
+                    <div class="form-group">
+                        <div class="col-xs-6 col-md-6">
+                            @Html.LabelFor(model => model.FarmWorkerImg, "Upload Image: ", htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-md-10">
+                            @*@Html.EditorFor(model => model.FarmWorkerImg, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FarmWorkerImg, "", new { @class = "text-danger" })*@
+                            <div style="color: red">
+                                @if (@ViewBag.Error != null)
+                                {
+                                <label> @ViewBag.Error</label>
+                                }
+
                             </div>
-                            <div class="col-md-10">
-                                @*@Html.EditorFor(model => model.FarmWorkerImg, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.FarmWorkerImg, "", new { @class = "text-danger" })*@
-                                <div style="color: red">
-                                    @if (@ViewBag.Error != null)
-                                    {
-                                        <label> @ViewBag.Error</label>
-                                    }
-
-                                </div>
-                                <div class="input-group" style="left:-5px">
-                                    <label class="input-group-btn">
-                                        <span class="btn btn-default" id="BrowseBtn">
-                                            Browse&hellip; <input type="file" name="file" accept="image/jpeg, image/png" style="display: none" id="myImg">
-                                        </span>
-                                    </label>
-                                    <input id="ImageInput" type="text" class="form-control" readonly>
-                                </div>
-                                <div class="col-md-4">
-                                    <br />
-                                    <div id="imgPreview" class="thumbnail" style="display:none">
-                                        <img class="img-responsive" id="targetImg" />
-                                        <div class="caption">
-                                            <a href="#" onclick="clearPreview()"><i data-toggle="tooltip" title="Remove Image" class="glyphicon glyphicon-trash" style="float:right; color:red; top: -10px; transform:scale(1.3);"></i></a>
-                                        </div>
+                            <div class="input-group" style="left:-5px">
+                                <label class="input-group-btn">
+                                    <span class="btn btn-default" id="BrowseBtn">
+                                        Browse&hellip; <input type="file" name="file" accept="image/jpeg, image/png" style="display: none" id="myImg">
+                                    </span>
+                                </label>
+                                <input id="ImageInput" type="text" class="form-control" readonly>
+                            </div>
+                            <div class="col-md-4">
+                                <br />
+                                <div id="imgPreview" class="thumbnail" style="display:none">
+                                    <img class="img-responsive" id="targetImg" />
+                                    <div class="caption">
+                                        <a href="#" onclick="clearPreview()"><i data-toggle="tooltip" title="Remove Image" class="glyphicon glyphicon-trash" style="float:right; color:red; top: -10px; transform:scale(1.3);"></i></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="row" id="PanelContent">
-                    <div class="col-xs-6 col-md-6">
-                        <div class="form-group">
-                            <div class="col-xs-6 col-md-6">
-                                @Html.LabelFor(model => model.FarmWorkerFName, "First Name", htmlAttributes: new { @class = "control-label" })
-                            </div>
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.FarmWorkerFName, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.FarmWorkerFName, "", new { @class = "text-danger" })
-                            </div>
+            <div class="row" id="PanelContent">
+                <div class="col-xs-6 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-6 col-md-6">
+                            @Html.LabelFor(model => model.FarmWorkerFName, "First Name", htmlAttributes: new { @class = "control-label" })
                         </div>
-                    </div>
-                    <div class="col-xs-6 col-md-6">
-                        <div class="form-group">
-                            <div class="col-xs-6 col-md-6">
-                                @Html.LabelFor(model => model.FarmWorkerLName, "Last Name", htmlAttributes: new { @class = "control-label" })
-                            </div>
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.FarmWorkerLName, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.FarmWorkerLName, "", new { @class = "text-danger" })
-                            </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.FarmWorkerFName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FarmWorkerFName, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
-                <div class="row" id="PanelContent">
-                    <div class="col-xs-6 col-md-6">
-                        <div class="form-group">
-                            <div class="col-xs-6 col-md-6">
-                                @Html.LabelFor(model => model.FarmWorkerIDNum, "ID Number", htmlAttributes: new { @class = "control-label" })
-                            </div>
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.FarmWorkerIDNum, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.FarmWorkerIDNum, "", new { @class = "text-danger" })
-                            </div>
+                <div class="col-xs-6 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-6 col-md-6">
+                            @Html.LabelFor(model => model.FarmWorkerLName, "Last Name", htmlAttributes: new { @class = "control-label" })
                         </div>
-                    </div>
-                    <div class="col-xs-6 col-md-6">
-                        <div class="form-group">
-                            <div class="col-xs-6 col-md-6">
-                                @Html.LabelFor(model => model.FarmWorkerContactNum, "Contact Number", htmlAttributes: new { @class = "control-label" })
-                            </div>
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.FarmWorkerContactNum, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.FarmWorkerContactNum, "", new { @class = "text-danger" })
-                            </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.FarmWorkerLName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FarmWorkerLName, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
-                <div class="row" id="PanelContent">
-                    <div class="col-xs-6 col-md-6">
-                        <div class="form-group">
-                            <div class="col-xs-6 col-md-6">
-                                @Html.LabelFor(model => model.TitleID, "Title", htmlAttributes: new { @class = "control-label" })
-                            </div>
-                            <div class="col-md-10">
-                                @Html.DropDownList("TitleID", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.TitleID, "", new { @class = "text-danger" })
-                            </div>
+            </div>
+            <div class="row" id="PanelContent">
+                <div class="col-xs-6 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-6 col-md-6">
+                            @Html.LabelFor(model => model.FarmWorkerIDNum, "ID Number", htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.FarmWorkerIDNum, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FarmWorkerIDNum, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-xs-6 col-md-6">
-                        <div class="form-group">
-                            <div class="col-xs-6 col-md-6">
-                                @Html.LabelFor(model => model.GenderID, "Gender", htmlAttributes: new { @class = "control-label" })
-                            </div>
-                            <div class="col-md-10">
-                                @Html.DropDownList("GenderID", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.GenderID, "", new { @class = "text-danger" })
-                            </div>
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-6 col-md-6">
+                            @Html.LabelFor(model => model.FarmWorkerContactNum, "Contact Number", htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.FarmWorkerContactNum, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FarmWorkerContactNum, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="PanelContent">
+                <div class="col-xs-6 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-6 col-md-6">
+                            @Html.LabelFor(model => model.TitleID, "Title", htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-md-10">
+                            @Html.DropDownList("TitleID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.TitleID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-6 col-md-6">
+                            @Html.LabelFor(model => model.GenderID, "Gender", htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-md-10">
+                            @Html.DropDownList("GenderID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.GenderID, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="panel panel-success">
-        <div class="panel-heading">
-            <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-map-marker"></span> &nbsp;Add Farm Worker Residential Details</b></h3>
-        </div>
-        <div class="panel-body">
-            <div class="form-horizontal">
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-map-marker"></span> &nbsp;Add Farm Worker Residential Details</b></h3>
+    </div>
+    <div class="panel-body">
+        <div class="form-horizontal">
 
-                <div class="row" id="PanelContent">
-                    <div class="col-xs-6 col-md-6">
-                        <div class="form-group">
-                            <div class="col-xs-6 col-md-6">
-                                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label" })
-                            </div>
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
-                            </div>
+            <div class="row" id="PanelContent">
+                <div class="col-xs-6 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-6 col-md-6">
+                            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label" })
                         </div>
-                    </div>
-                    <div class="col-xs-6 col-md-6">
-                        <div class="form-group">
-                            <div class="col-xs-6 col-md-6">
-                                @Html.LabelFor(model => model.Surburb, htmlAttributes: new { @class = "control-label" })
-                            </div>
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Surburb, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Surburb, "", new { @class = "text-danger" })
-                            </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
-                <div class="row" id="PanelContent">
-                    <div class="col-xs-6 col-md-6">
-                        <div class="form-group">
-                            <div class="col-xs-6 col-md-6">
-                                @Html.LabelFor(model => model.ProvinceID, "Province", htmlAttributes: new { @class = "control-label" })
-                            </div>
-                            <div class="col-md-10">
-                                @Html.DropDownList("ProvinceID", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.ProvinceID, "", new { @class = "text-danger" })
-                            </div>
+                <div class="col-xs-6 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-6 col-md-6">
+                            @Html.LabelFor(model => model.Surburb, htmlAttributes: new { @class = "control-label" })
                         </div>
-                    </div>
-                    <div class="col-xs-6 col-md-6">
-                        <div class="form-group">
-                            <div class="col-xs-6 col-md-6">
-                                @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label" })
-                            </div>
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
-                            </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Surburb, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Surburb, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
-                <div class="row" id="PanelContent">
-                    <div class="col-xs-6 col-md-6">
-                        <div class="form-group">
-                            <div class="col-xs-6 col-md-6">
-                                @Html.LabelFor(model => model.CountryID, "Country", htmlAttributes: new { @class = "control-label" })
-                            </div>
-                            <div class="col-md-10">
-                                @Html.DropDownList("CountryID", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
-                            </div>
+            </div>
+            <div class="row" id="PanelContent">
+                <div class="col-xs-6 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-6 col-md-6">
+                            @Html.LabelFor(model => model.ProvinceID, "Province", htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-md-10">
+                            @Html.DropDownList("ProvinceID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ProvinceID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-6 col-md-6">
+                            @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="PanelContent">
+                <div class="col-xs-6 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-6 col-md-6">
+                            @Html.LabelFor(model => model.CountryID, "Country", htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-md-10">
+                            @Html.DropDownList("CountryID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="panel panel-success" style="margin-bottom: 20px;">
-        <div class="panel-heading">
-            <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-file"></span> &nbsp;Add Farm Worker Contract Details</b></h3>
-        </div>
-        <div class="panel-body">
-            <div class="form-horizontal">
+<div class="panel panel-success" style="margin-bottom: 20px;">
+    <div class="panel-heading">
+        <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-file"></span> &nbsp;Add Farm Worker Contract Details</b></h3>
+    </div>
+    <div class="panel-body">
+        <div class="form-horizontal">
 
-                <div class="row" id="PanelContent">
-                    <div class="col-xs-6 col-md-6">
-                        <div class="form-group">
-                            <div class="col-xs-6 col-md-6">
-                                @Html.LabelFor(model => model.ContractStartDate, "Contract Start Date", htmlAttributes: new { @class = "control-label" })
-                            </div>
-                            <div class="col-md-10">
-                                @*@Html.EditorFor(model => model.ContractStartDate, new { htmlAttributes = new { @class = "form-control" } })*@
-                                @Html.EditorFor(model => model.ContractStartDate, new { htmlAttributes = new { @class = "form-control date-picker", onkeydown = "return false", onpaste = "return false" } })
-                                @Html.ValidationMessageFor(model => model.ContractStartDate, "", new { @class = "text-danger" })
-                            </div>
+            <div class="row" id="PanelContent">
+                <div class="col-xs-6 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-6 col-md-6">
+                            @Html.LabelFor(model => model.ContractStartDate, "Contract Start Date", htmlAttributes: new { @class = "control-label" })
                         </div>
-                    </div>
-                    <div class="col-xs-6 col-md-6">
-                        <div class="form-group">
-                            <div class="col-xs-6 col-md-6">
-                                @Html.LabelFor(model => model.ContractEndDate, "Contract End Date", htmlAttributes: new { @class = "control-label" })
-                            </div>
-                            <div class="col-md-10">
-                                @*@Html.EditorFor(model => model.ContractEndDate, new { htmlAttributes = new { @class = "form-control" } })*@
-                                @Html.EditorFor(model => model.ContractEndDate, new { htmlAttributes = new { @class = "form-control date-picker2", onkeydown = "return false", onpaste = "return false" } })
-                                @Html.ValidationMessageFor(model => model.ContractEndDate, "", new { @class = "text-danger" })
-                            </div>
+                        <div class="col-md-10">
+                            @*@Html.EditorFor(model => model.ContractStartDate, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.EditorFor(model => model.ContractStartDate, new { htmlAttributes = new { @class = "form-control date-picker", onkeydown = "return false", onpaste = "return false" } })
+                            @Html.ValidationMessageFor(model => model.ContractStartDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
-
-                <div class="row" id="PanelContent">
-                    <div class="col-xs-6 col-md-6">
-                        <div class="form-group">
-                            <div class="col-xs-6 col-md-6">
-                                @Html.LabelFor(model => model.FarmWorkerTypeID, "Farm Worker Type", htmlAttributes: new { @class = "control-label" })
-                            </div>
-                            <div class="col-md-10">
-                                @Html.DropDownList("FarmWorkerTypeID", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.FarmWorkerTypeID, "", new { @class = "text-danger" })
-                            </div>
+                <div class="col-xs-6 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-6 col-md-6">
+                            @Html.LabelFor(model => model.ContractEndDate, "Contract End Date", htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-md-10">
+                            @*@Html.EditorFor(model => model.ContractEndDate, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.EditorFor(model => model.ContractEndDate, new { htmlAttributes = new { @class = "form-control date-picker2", onkeydown = "return false", onpaste = "return false" } })
+                            @Html.ValidationMessageFor(model => model.ContractEndDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-xs-6 col-md-6">
-                        <div class="form-group">
-                            <div class="col-xs-6 col-md-6">
-                                @Html.LabelFor(model => model.FarmID, "Farm", htmlAttributes: new { @class = "control-label" })
-                            </div>
-                            <div class="col-md-10">
-                                @Html.DropDownList("FarmID", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.FarmID, "", new { @class = "text-danger" })
-                            </div>
+                </div>
+            </div>
+
+            <div class="row" id="PanelContent">
+                <div class="col-xs-6 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-6 col-md-6">
+                            @Html.LabelFor(model => model.FarmWorkerTypeID, "Farm Worker Type", htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-md-10">
+                            @Html.DropDownList("FarmWorkerTypeID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.FarmWorkerTypeID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-6 col-md-6">
+                            @Html.LabelFor(model => model.FarmID, "Farm", htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-md-10">
+                            @Html.DropDownList("FarmID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.FarmID, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 
-    <div class="input-group">
-        <div class="input-group-btn">
-            <button class="btn btn-success" type="button" id="btnSave" data-toggle="modal" data-target="#confirm-submit">
-                <span class="glyphicon glyphicon-save"></span>
-                Save
-            </button>
-        </div>
+<div class="input-group">
+    <div class="input-group-btn">
+        <button class="btn btn-success" type="button" id="btnSave" data-toggle="modal" data-target="#confirm-submit">
+            <span class="glyphicon glyphicon-save"></span>
+            Save
+        </button>
     </div>
+</div>
 
-            <!-- Modal -->
-    <div class="modal fade" id="confirm-submit" role="dialog">
-        <div class="modal-dialog">
+<!-- Modal -->
+<div class="modal fade" id="confirm-submit" role="dialog">
+    <div class="modal-dialog">
 
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" aria-hidden="true" data-dismiss=" modal">&times;</button>
-                    <h4 class="modal-title">Confirmation</h4>
-                </div>
-                <div class="modal-body">
-                    <p>Please confirm that you want to save these details.</p>
-
-                </div>
-                <div class="modal-footer">
-                    <button id="Confirm" type="submit" class="btn btn-success" style="float:right" id="confirmBtn">CONFIRM</button>
-                    <button id="Cancel" type="button" class="btn btn-warning" data-dismiss="modal" style="float: left">CANCEL</button>
-                </div>
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" aria-hidden="true" data-dismiss=" modal">&times;</button>
+                <h4 class="modal-title">Confirmation</h4>
             </div>
+            <div class="modal-body">
+                <p>Please confirm that you want to save these details.</p>
 
+            </div>
+            <div class="modal-footer">
+                <button id="Confirm" type="submit" class="btn btn-success" style="float:right" id="confirmBtn">CONFIRM</button>
+                <button id="Cancel" type="button" class="btn btn-warning" data-dismiss="modal" style="float: left">CANCEL</button>
+            </div>
         </div>
+
     </div>
+</div>
 
 }
 <div class="row">
@@ -551,16 +574,16 @@
     <div class="col-xs-6 col-md-4">
         @using (Html.BeginForm("Index", "FarmWorker", FormMethod.Get, new { @class = "form-inline" }))
         {
-            <div class="col-xs-6 col-md-4">
-                <div class=input-group>
-                    <div class="input-group-btn">
-                        <button class="btn btn-success" type="submit" id="btnBack">
-                            <span class="glyphicon glyphicon-arrow-left"></span>
-                            Back
-                        </button>
-                    </div>
+        <div class="col-xs-6 col-md-4">
+            <div class=input-group>
+                <div class="input-group-btn">
+                    <button class="btn btn-success" type="submit" id="btnBack">
+                        <span class="glyphicon glyphicon-arrow-left"></span>
+                        Back
+                    </button>
                 </div>
             </div>
+        </div>
         }
 
     </div>
@@ -569,121 +592,121 @@
 <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script type="text/javascript" src="assets/js/jquery.uploadPreview.min.js"></script>
-    <script type="text/javascript">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript" src="assets/js/jquery.uploadPreview.min.js"></script>
+<script type="text/javascript">
          @Model.JavaScriptToRun
 
-        function mySuccess() {
-            swal({
-                icon: "success",
-                title: "Success!",
-                text: "Item has successfully been added.",
-                type: "warning"
-            }).then(function () {
+    function mySuccess() {
+        swal({
+            icon: "success",
+            title: "Success!",
+            text: "Item has successfully been added.",
+            type: "warning"
+        }).then(function () {
 
-                window.location = "/FarmWorker/Index"
-            })
-
-
-        }
-    </script>
-    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
-    <script>
-        $(function () {
-
-            // We can attach the `fileselect` event to all file inputs on the page
-            $(document).on('change', ':file', function () {
-                var input = $(this),
-                    numFiles = input.get(0).files ? input.get(0).files.length : 1,
-                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-                input.trigger('fileselect', [numFiles, label]);
-            });
-
-            // We can watch for our custom `fileselect` event like this
-            $(document).ready(function () {
-                $(':file').on('fileselect', function (event, numFiles, label) {
-
-                    var input = $(this).parents('.input-group').find(':text'),
-                        log = numFiles > 1 ? numFiles + ' files selected' : label;
-
-                    if (input.length) {
-                        input.val(log);
-                    } else {
-                        if (log) alert(log);
-                    }
-
-                });
-            });
-
-        });
-    </script>
-    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            //date picker for START DATE
-            //dt = selected Date and passes to END DATE datepicker as minDate
-            $(".date-picker").datepicker({
-                onSelect: function (selectdate) {
-                    var dt = new Date(selectdate);
-                    dt.setDate(dt.getDate() + 1)
-                    $(".date-picker2").datepicker("option", "minDate", dt);
-                }
-            });
-
-            //date picker for END DATE
-            //dt = selected Date and passes to START DATE datepicker as maxDate
-            $(".date-picker2").datepicker({
-                onSelect: function (selectdate) {
-                    var dt = new Date(selectdate);
-                    dt.setDate(dt.getDate() - 1)
-                    $(".date-picker").datepicker("option", "maxDate", dt);
-                }
-            });
-
-            //initialise datepicker dates with today date for start and +1d for end date
-            $(".date-picker").datepicker("setDate", "+0d");
-            $(".date-picker2").datepicker("setDate", "+1d");
-        });
-    </script>
-    <script>
-        $(document).ready(function() {
-            $("#myImg").change(function () {
-                var File = this.files;
-                if (File && File[0]) {
-                    ReadImage(File[0])
-                }
-            })
+            window.location = "/FarmWorker/Index"
         })
 
-        var ReadImage = function (file) {
-            var reader = new FileReader;
-            var image = new Image;
 
-            reader.readAsDataURL(file);
-            reader.onload = function (_file) {
-                image.src = _file.target.result;
-                image.onload = function () {
-                    var height = this.height;
-                    var width = this.width;
-                    var type = file.type;
-                    var size = file.size;
+    }
+</script>
+<script src="@Url.Content(" ~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+<script>
+    $(function () {
 
-                    $("#targetImg").attr('src', _file.target.result);
-                    $("#description").text;
-                    $("#imgPreview").show();
+        // We can attach the `fileselect` event to all file inputs on the page
+        $(document).on('change', ':file', function () {
+            var input = $(this),
+                numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            input.trigger('fileselect', [numFiles, label]);
+        });
+
+        // We can watch for our custom `fileselect` event like this
+        $(document).ready(function () {
+            $(':file').on('fileselect', function (event, numFiles, label) {
+
+                var input = $(this).parents('.input-group').find(':text'),
+                    log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+                if (input.length) {
+                    input.val(log);
+                } else {
+                    if (log) alert(log);
                 }
+
+            });
+        });
+
+    });
+</script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        //date picker for START DATE
+        //dt = selected Date and passes to END DATE datepicker as minDate
+        $(".date-picker").datepicker({
+            onSelect: function (selectdate) {
+                var dt = new Date(selectdate);
+                dt.setDate(dt.getDate() + 1)
+                $(".date-picker2").datepicker("option", "minDate", dt);
+            }
+        });
+
+        //date picker for END DATE
+        //dt = selected Date and passes to START DATE datepicker as maxDate
+        $(".date-picker2").datepicker({
+            onSelect: function (selectdate) {
+                var dt = new Date(selectdate);
+                dt.setDate(dt.getDate() - 1)
+                $(".date-picker").datepicker("option", "maxDate", dt);
+            }
+        });
+
+        //initialise datepicker dates with today date for start and +1d for end date
+        $(".date-picker").datepicker("setDate", "+0d");
+        $(".date-picker2").datepicker("setDate", "+1d");
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $("#myImg").change(function () {
+            var File = this.files;
+            if (File && File[0]) {
+                ReadImage(File[0])
+            }
+        })
+    })
+
+    var ReadImage = function (file) {
+        var reader = new FileReader;
+        var image = new Image;
+
+        reader.readAsDataURL(file);
+        reader.onload = function (_file) {
+            image.src = _file.target.result;
+            image.onload = function () {
+                var height = this.height;
+                var width = this.width;
+                var type = file.type;
+                var size = file.size;
+
+                $("#targetImg").attr('src', _file.target.result);
+                $("#description").text;
+                $("#imgPreview").show();
             }
         }
+    }
 
-        var clearPreview = function () {
-            $("#myImg").val('');
-            $("#description").text();
-            $("#imgPreview").hide();
-            $("#ImageInput").val("");
-        }
-    </script>
+    var clearPreview = function () {
+        $("#myImg").val('');
+        $("#description").text();
+        $("#imgPreview").hide();
+        $("#ImageInput").val("");
+    }
+</script>
 }
 @* easiest comment of my commit*@
 
