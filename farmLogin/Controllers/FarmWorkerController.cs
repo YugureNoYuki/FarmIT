@@ -158,6 +158,13 @@ namespace farmLogin.Controllers
                 if (file == null)
                 {
                     ViewBag.Error = "File is Empty!";
+                    db.FarmWorkers.Add(farmWorker);
+
+
+                    db.SaveChanges();
+                    farmWorker.JavaScriptToRun = "mySuccess()";
+                    return View(farmWorker);
+
                 }
                 else
                 {
