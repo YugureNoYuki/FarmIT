@@ -351,6 +351,7 @@ li.ui-timepicker-selected .ui-timepicker-duration,
 
     </div>
 </div>
+<link href="~/Content/jquery-ui-timepicker-addon.min.css" rel="stylesheet" />
 <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
 <link href="~/Content/jquery.timepicker.css" rel="stylesheet" />
 @section Scripts {
@@ -383,14 +384,13 @@ li.ui-timepicker-selected .ui-timepicker-duration,
         });
 </script>*@
 <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
-<script src="~/Scripts/jquery.timepicker.min.js"></script>
+<script src="~/Scripts/jquery-ui-timepicker-addon.min.js"></script>
 <script type="text/javascript">
     $(function () {
         $(".date-picker").datetimepicker();
-            $(".date-picker").datetimepicker("setDate", "+0d");
         });
 </script>
-<script type="text/javascript">
+@*<script type="text/javascript">
         $(document).ready(function () {
             $(function () {
                 $(".date-picker").datetimepicker({
@@ -416,5 +416,5 @@ li.ui-timepicker-selected .ui-timepicker-duration,
 
         });
 
-</script>
+</script>*@
 }

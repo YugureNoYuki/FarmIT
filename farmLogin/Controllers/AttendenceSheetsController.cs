@@ -63,8 +63,8 @@ namespace farmLogin.Controllers
 
                 if (attendanceLast != null && attendanceLast.ClockInTime != null && attendanceLast.ClockOutTime == null)
                 {
-                    attendanceLast.ClockOutTime = DateTime.Now;
-
+                    //attendanceLast.ClockOutTime = DateTime.Now;
+                    attendanceLast.ClockOutTime = attendenceSheet.ClockOutTime;
                     db.Entry(attendanceLast).State = EntityState.Modified;
                     db.SaveChanges();
                     ViewBag.FarmWorkerNum = new SelectList(db.FarmWorkers, "FarmWorkerNum", "FarmWorkerFName", attendenceSheet.FarmWorkerNum);
