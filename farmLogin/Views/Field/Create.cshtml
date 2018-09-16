@@ -214,7 +214,7 @@
                                 @Html.LabelFor(model => model.FieldStatusID, "Field Status", htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-10">
-                                @Html.DropDownList("FieldStatusID", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.DropDownList("FieldStatusID", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
                                 @Html.ValidationMessageFor(model => model.FieldStatusID, "", new { @class = "text-danger" })
                             </div>
                         </div>
