@@ -66,6 +66,7 @@ namespace farmLogin.Controllers
             }
             if (ModelState.IsValid)
             {
+                field.FieldStatusID = 1;
                 db.Fields.Add(field);
                 db.SaveChanges();
                 field.JavaScriptToRun = "mySuccess()";
