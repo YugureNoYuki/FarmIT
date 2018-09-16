@@ -91,7 +91,7 @@ namespace farmLogin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "CropTypeID,CropTypeDescr,MaturityDays")] CropType cropType)
         {
-            var IsExist = updExist(cropType.CropTypeDescr);
+            var IsExist = updExist(cropType.CropTypeID, cropType.CropTypeDescr);
             if (IsExist)
             {
                 ModelState.AddModelError("CropTypeExist", "Crop Type already exist, please specify different Crop Type!");
@@ -195,15 +195,22 @@ namespace farmLogin.Controllers
         }
 
         [NonAction]
-        public bool updExist(string inDescr)
+        public bool updExist(int inID, string inDescr)
         {
             using (FarmDbContext ctx = new FarmDbContext())
             {
                 var fullList = ctx.CropTypes.ToList();
 
-                var v = fullList.Where(a => a.CropTypeDescr == inDescr).ToList();
+                var v = fullList.Where(a => a.CropTypeID == inID).Select(a => a.CropTypeDescr).FirstOrDefault();
 
-                return v != null;
+                if(v.ToString() == inDescr)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
         }
     }
