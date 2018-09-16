@@ -280,63 +280,39 @@ namespace farmLogin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var myPlantation = db.Plantations.Where(p => p.PlantationID == plantation.PlantationID).SingleOrDefault();
-                using (FarmDbContext dc = new FarmDbContext())
-                {
-                    //Add plantation
-                    //plantation.FieldStageID = 1; //Stage 1 - Planted
-                    //plantation.PlantationStatus = "Confirmed";
-                    //dc.Plantations.Add(plantation);
-                    //dc.SaveChanges();
-                    //Update the field status
+                //Set Plantation Attributes
+                plantation.FieldStageID = 1; //Stage 1 - Planted
+                plantation.PlantationStatus = "Confirmed";
+                db.Entry(plantation).State = EntityState.Modified;
 
-                    //return RedirectToAction("Index");
-                    myPlantation.PlantationID = plantation.PlantationID;
-                    myPlantation.FieldID = plantation.FieldID;
-                    myPlantation.CropTypeID = plantation.CropTypeID;
-                    myPlantation.CropCycleID = plantation.CropCycleID;
-                    myPlantation.FieldStageID = 1; //Stage 1 -Planned
-                    myPlantation.DatePlanted = plantation.DatePlanted;
-                    myPlantation.RefugeSeedAmntUsed = plantation.RefugeSeedAmntUsed;
-                    myPlantation.RefugeUnit = plantation.RefugeUnit;
-                    myPlantation.RefugeAreaHectares = plantation.RefugeAreaHectares;
-                    myPlantation.ExpectedYieldQnty = plantation.ExpectedYieldQnty;
-                    myPlantation.YieldUnit = plantation.YieldUnit;
-                    myPlantation.DateHarvested = plantation.DateHarvested;
-                    myPlantation.PlantationStatus = "Confirmed";
+                //Update Field to In Use
+                int Id = plantation.FieldID;
+                var field = db.Fields.Find(Id);
+                field.FieldStatusID = 2; //In-Use
+                db.Entry(field).State = EntityState.Modified;
 
-                    db.SaveChanges();
-                    plantation.JavaScriptToRun = "mySuccess()";
-                    TempData["yay"] = plantation;
+                //Save All
+                db.SaveChanges();
 
-                    TempData["plantationId"] = plantation.PlantationID;
+                ViewBag.CropCycleID = new SelectList(db.CropCycles, "CropCycleID", "CropCycleDescr", plantation.CropCycleID);
+                ViewBag.CropTypeID = new SelectList(db.CropTypes, "CropTypeID", "CropTypeDescr", plantation.CropTypeID);
+                ViewBag.FieldID = new SelectList(db.Fields, "FieldID", "FieldName", plantation.FieldID);
+                ViewBag.FieldStageID = new SelectList(db.FieldStages, "FieldStageID", "FieldStageDescr", plantation.FieldStageID);
+                ViewBag.RefugeUnit = new SelectList(db.Units, "UnitID", "UnitDescr", plantation.RefugeUnit);
+                ViewBag.YieldUnit = new SelectList(db.Units, "UnitID", "UnitDescr", plantation.YieldUnit);
 
-                    ViewBag.CropCycleID = new SelectList(db.CropCycles, "CropCycleID", "CropCycleDescr", plantation.CropCycleID);
-                    ViewBag.CropTypeID = new SelectList(db.CropTypes, "CropTypeID", "CropTypeDescr", plantation.CropTypeID);
-                    ViewBag.FieldID = new SelectList(db.Fields, "FieldID", "FieldName", plantation.FieldID);
-                    ViewBag.FieldStageID = new SelectList(db.FieldStages, "FieldStageID", "FieldStageDescr", plantation.FieldStageID);
-                    ViewBag.RefugeUnit = new SelectList(db.Units, "UnitID", "UnitDescr", plantation.RefugeUnit);
-                    ViewBag.YieldUnit = new SelectList(db.Units, "UnitID", "UnitDescr", plantation.YieldUnit);
-                    //return View(plantation);
-                    return RedirectToAction("InitTreat", "Plantation");
-                }
+                plantation.JavaScriptToRun = "mySuccess()";
+                TempData["yay"] = plantation;
 
+                return RedirectToAction("InitTreat", "Plantation");
             }
-
-            int Id = plantation.FieldID;
-            var field = db.Fields.Find(Id);
-            field.FieldStatusID = 2; //In-Use
-            db.Entry(field).State = EntityState.Modified;
-            db.SaveChanges();
-
             ViewBag.CropCycleID = new SelectList(db.CropCycles, "CropCycleID", "CropCycleDescr", plantation.CropCycleID);
             ViewBag.CropTypeID = new SelectList(db.CropTypes, "CropTypeID", "CropTypeDescr", plantation.CropTypeID);
             ViewBag.FieldID = new SelectList(db.Fields, "FieldID", "FieldName", plantation.FieldID);
             ViewBag.FieldStageID = new SelectList(db.FieldStages, "FieldStageID", "FieldStageDescr", plantation.FieldStageID);
             ViewBag.RefugeUnit = new SelectList(db.Units, "UnitID", "UnitDescr", plantation.RefugeUnit);
             ViewBag.YieldUnit = new SelectList(db.Units, "UnitID", "UnitDescr", plantation.YieldUnit);
-            return RedirectToAction("InitTreat","TreatPlantation");
-            //return View(plantation);
+            return View(plantation);
         }
 
         #endregion
@@ -376,15 +352,15 @@ namespace farmLogin.Controllers
                 using (FarmDbContext dc = new FarmDbContext())
                 {
                     var plantation = dc.Plantations.Find(plantationID);
-                    var expYield = plantation.ExpectedYieldQnty;
-                    var siloHarvestTStored = siloHarvest.SiloHarvestTonnesStored;
-                    var yieldDiff = expYield - siloHarvestTStored;
-                    //float yieldDiff = plantation.ExpectedYieldQnty - siloHarvest.SiloHarvestTonnesStored;
-                    //if (yieldDiff > 0)
-                    //{
-                    //    return RedirectToAction("Reason");
-                    //    //return Reason(plantationID);
-                    //}
+                    //var expYield = plantation.ExpectedYieldQnty;
+                    //var siloHarvestTStored = siloHarvest.SiloHarvestTonnesStored;
+                    //var yieldDiff = expYield - siloHarvestTStored;
+                    decimal yieldDiff = plantation.ExpectedYieldQnty - siloHarvest.SiloHarvestTonnesStored;
+                    if (yieldDiff > 0)
+                    {
+                        return RedirectToAction("Reason");
+                        //return Reason(plantationID);
+                    }
                 }
 
                 return RedirectToAction("Index", "Plantation");
@@ -405,22 +381,22 @@ namespace farmLogin.Controllers
             ViewBag.InventoryID = new SelectList(db.Inventories, "InventoryID", "InvDescr");
             ViewBag.TreatmentID = new SelectList(db.Treatments.Where(t => !t.TreatmentDescr.Contains("Stage 2 (Secondary) Treatment") && !t.TreatmentDescr.Contains("Ad-Hoc Treatment")), "TreatmentID", "TreatmentDescr");
             ViewBag.Unit = new SelectList(db.Units.Where(u => !u.UnitDescr.Contains("MM") && !u.UnitDescr.Contains("HOURS") && !u.UnitDescr.Contains("KM") && !u.UnitDescr.Contains("HA") && !u.UnitDescr.Contains("ML")), "UnitID", "UnitDescr");
-            int plantationID = (int)TempData["plantationId"];
+           //id = (int)TempData["plantationId"];
             //if (id == null)
             //{
             //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             //}
             //GET PlantationID & FieldID
-            using (FarmDbContext dc = new FarmDbContext())
-            {
-                var tplantation = dc.Plantations.Find(plantationID); //  plantation id
+            //using (FarmDbContext dc = new FarmDbContext())
+            //{
+                //var tplantation = db.Plantations.Find(id); //  plantation id
                 //InitTreat(null, plantationID);
                 //if(tplantation == null)
                 //{
                 //    return HttpNotFound();
                 //}
                 //return View();
-            }
+            //}
 
             return View();
         }
@@ -434,7 +410,7 @@ namespace farmLogin.Controllers
         {
             if (ModelState.IsValid)
             {
-                //id = (int)TempData["plantationId"];
+                id = (int)TempData["plantationId"];
                 //get inventory quantity: Treatment quantity for selected inventory item cannot be more than the available qty
                 var qty = db.Inventories.Find(inventoryTreatment.InventoryID);
                 try

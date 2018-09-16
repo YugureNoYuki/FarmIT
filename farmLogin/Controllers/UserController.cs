@@ -82,6 +82,7 @@ namespace farmLogin.Controllers
                 return HttpNotFound();
             }
             ViewBag.UserAccessLevelID = new SelectList(db.UserAccessLevels, "UserAccessLevelID", "UserAccessLevelDescr", user.UserAccessLevelID);
+            db.Configuration.ValidateOnSaveEnabled = false;
             return View(user);
         }
 
@@ -92,6 +93,7 @@ namespace farmLogin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Exclude = "IsEmailValid,ActivationCode,UserPassword,UserName,UserEmailAddress")] User user)
         {
+            db.Configuration.ValidateOnSaveEnabled = false;
             if (ModelState.IsValid)
             {
                 //db.Entry(user).State = EntityState.Modified;
