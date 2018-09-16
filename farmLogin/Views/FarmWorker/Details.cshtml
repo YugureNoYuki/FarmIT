@@ -172,7 +172,14 @@
         </dt>
         <dd>
             @*@Html.DisplayFor(model => model.FarmWorkerImg)*@
-            <img src="@Url.Content(Model.FarmWorkerImg)" height="200" width="200" />
+            @if (Model.FarmWorkerImg != null)
+            {
+                <img src="@Url.Content(Model.FarmWorkerImg)" height="200" width="200" />
+            }
+            @if (Model.FarmWorkerImg == null)
+            {
+                <p> No Image has been uploaded!</p>
+            }
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.FarmWorkerFName)
