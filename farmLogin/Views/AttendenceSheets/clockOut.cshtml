@@ -244,9 +244,9 @@ li.ui-timepicker-selected .ui-timepicker-duration,
                 <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-tree-conifer"></span> &nbsp;Clock Out</b></h3>
             </div>
             <div style="color: red">
-                @if (@ViewBag.Error != null)
+                @if (TempData["fail"] != null)
                 {
-                    <label><br />&nbsp;&nbsp; @ViewBag.Error <br /></label>
+                    <label><br />&nbsp;&nbsp; Please select a Clock Out time after Worker was clocked in! Clock In Time was: @TempData["fail"].ToString()<br /></label> ;
                 }
 
             </div>
@@ -378,11 +378,24 @@ li.ui-timepicker-selected .ui-timepicker-duration,
             })
         }
     </script>
-@*<script type="text/javascript">
-        $(function() {
-            $('#basicExample').timepicker();
-        });
-</script>*@
+<script type="text/javascript">
+        @Model.JavaScriptToRun
+        function myFail() {
+
+            //alert('Item has successfully been added.');
+            //window.location = "/InventoryType/Index";
+
+            swal({
+                icon: "error",
+                title: "Error!",
+                text: "Worker cannot be clocked out! There is no available record to clock out!",
+                type: "warning"
+            }).then(function () {
+                window.location = "/AttendenceSheets/ClockOut"
+            })
+        }
+
+</script>
 <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
 <script src="~/Scripts/jquery-ui-timepicker-addon.min.js"></script>
 <script type="text/javascript">
