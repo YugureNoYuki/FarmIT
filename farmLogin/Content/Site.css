@@ -41,15 +41,18 @@ textarea {
     float: left;
     margin-left: -5px;
     margin-top: -34px;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
 }
 
 btnBack-Details {
     float: left;
+
 }
 
 #btnSave {
     float: right;
     margin-right: 10px;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
 }
 
 #detailsDL {

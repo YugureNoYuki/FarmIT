@@ -1,12 +1,12 @@
 ﻿@model farmLogin.Models.User
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "View User Details";
 }
 
 <style>
     body {
-        background-color: #87CEFA;
+        background-color: #3594C4;
     }
 
     .breadcrumb {
@@ -19,7 +19,7 @@
         font-size: 12px;
         font-weight: 700;
         position: center;
-        background: #87CEFA;
+        background: #3594C4;
         margin-left: -15px;
     }
 
@@ -34,7 +34,7 @@
             background: #d1d1d1;
             color: black;
             position: relative;
-            box-shadow: 0 3px 6px black;
+            box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
         }
 
             .breadcrumb a:first-child {
@@ -92,7 +92,7 @@
             }
 
     .panel {
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
     }
 
     #PanelContent {
@@ -115,7 +115,7 @@
         font-family: Arial;
         font-size: 14px;
         display: inline-block;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
         width: 100px;
         border-radius: 5%;
         left: -15px;
@@ -163,7 +163,7 @@
             <b>User Details </b>
             <span class="pull-right">
                 &nbsp;
-                <a href="@Url.Action("Edit", new { id = Model.UserID})">
+                <a href="@Url.Action("Edit", new { id = Model.UserID})" data-toggle="tooltip" title="Edit">
                     <i class="glyphicon glyphicon-pencil"></i>
                     <span class="sr-only">Edit</span>
                 </a>

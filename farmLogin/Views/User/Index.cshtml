@@ -178,14 +178,15 @@
         -webkit-backface-visibility: hidden;
         -ms-transform: scale(1.3);
         -webkit-transform: scale(1.3);
+        -webkit-font-smoothing: subpixel-antialiased;
     }
 
     .glyphicon-pencil {
-        color: #47A447;
+        color: #42b229;
     }
 
     .glyphicon-eye-open {
-        color: #479ce5;
+        color: #298fb2;
     }
 
     .glyphicon-trash {
@@ -222,6 +223,10 @@
             transition: 0.5s;
             color: white;
             /*box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);*/
+        }
+
+        .well{
+            background-color: #dddddd;
         }
 </style>
 
@@ -325,8 +330,8 @@
                 Are you sure you want to delete this item?
             </div>
             <div class="modal-footer">
-                <button id="btnContinueCancel" data-dismiss="modal" type="button" class="btn btn-default">Cancel</button>
-                <button id="btnContinueDelete" type="button" class="btn btn-primary">Delete</button>
+                <button id="btnContinueCancel" data-dismiss="modal" type="button" class="btn btn-default" style="float:left">CANCEL</button>
+                <button id="btnContinueDelete" type="button" class="btn btn-primary" >DELETE</button>
             </div>
         </div>
     </div>
@@ -338,6 +343,17 @@
 <br />
 <br />
 
+
+<div>
+    @Html.PagedListPager(Model.Users, page => Url.Action("Index",  @*Takes list of users and produces a hyperlink to each page*@
+ new
+
+ {
+     Search = @Model.Search,
+     page,
+     @class = "pageButton"
+ }))
+</div>
 <p>
 
     @*condition? first_expression : second_expression*@
@@ -348,16 +364,7 @@
     @*wrap in div for presentation purpose*@
     Page @(Model.Users.PageCount < Model.Users.PageNumber ? 0 : @*evaluate whether or not there are any pages to display*@
     Model.Users.PageNumber) of @Model.Users.PageCount @*Display Page x of y*@
-    <div>
-        @Html.PagedListPager(Model.Users, page => Url.Action("Index",  @*Takes list of users and produces a hyperlink to each page*@
- new
 
- {
-     Search = @Model.Search,
-     page,
-     @class = "pageButton"
- }))
-    </div>
 </div>
 
 @section Scripts {

@@ -60,15 +60,39 @@ namespace farmLogin.Controllers
             {
                 var attendanceList = db.AttendenceSheets.Where(a => a.FarmWorkerNum == attendenceSheet.FarmWorkerNum).OrderByDescending(a => a.AttendenceSheetID);
                 var attendanceLast = attendanceList.FirstOrDefault();
+                var att = attendenceSheet;
 
                 if (attendanceLast != null && attendanceLast.ClockInTime != null && attendanceLast.ClockOutTime == null)
                 {
                     //attendanceLast.ClockOutTime = DateTime.Now;
-                    attendanceLast.ClockOutTime = attendenceSheet.ClockOutTime;
-                    db.Entry(attendanceLast).State = EntityState.Modified;
-                    db.SaveChanges();
+
+                    var clockIn = attendanceLast.ClockInTime;
+                    var clockOut = attendenceSheet.ClockOutTime;
+
+                    if(clockOut < clockIn)
+                    {
+                        TempData["fail"] = clockIn;
+                        ViewBag.FarmWorkerNum = new SelectList(db.FarmWorkers, "FarmWorkerNum", "FarmWorkerFName", attendenceSheet.FarmWorkerNum);
+                        ViewBag.UserID = new SelectList(db.Users, "UserID", "UserEmailAddress", attendenceSheet.UserID);
+                        //attendenceSheet.JavaScriptToRun = "myFail()";
+                        return View(attendenceSheet);
+                    }
+                    else
+                    {
+                        attendanceLast.ClockOutTime = attendenceSheet.ClockOutTime;
+                        db.Entry(attendanceLast).State = EntityState.Modified;
+                        db.SaveChanges();
+                        ViewBag.FarmWorkerNum = new SelectList(db.FarmWorkers, "FarmWorkerNum", "FarmWorkerFName", attendenceSheet.FarmWorkerNum);
+                        ViewBag.UserID = new SelectList(db.Users, "UserID", "UserEmailAddress", attendenceSheet.UserID);
+                        attendenceSheet.JavaScriptToRun = "mySuccess()";
+                        return View(attendenceSheet);
+                    }
+                }
+                else
+                {
                     ViewBag.FarmWorkerNum = new SelectList(db.FarmWorkers, "FarmWorkerNum", "FarmWorkerFName", attendenceSheet.FarmWorkerNum);
                     ViewBag.UserID = new SelectList(db.Users, "UserID", "UserEmailAddress", attendenceSheet.UserID);
+                    attendenceSheet.JavaScriptToRun = "myFail()";
                     return View(attendenceSheet);
                 }
 
@@ -84,15 +108,6 @@ namespace farmLogin.Controllers
             ViewBag.UserID = new SelectList(db.Users, "UserID", "UserEmailAddress", attendenceSheet.UserID);
             return View(attendenceSheet);
         }
-
-
-
-
-
-
-
-
-
 
 
         // GET: AttendenceSheets/Create

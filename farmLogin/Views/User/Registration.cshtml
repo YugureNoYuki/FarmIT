@@ -1,7 +1,7 @@
 ﻿@model farmLogin.Models.User
 
 @{
-    ViewBag.Title = "Registration";
+    ViewBag.Title = "Register User";
 }
 
 
@@ -31,7 +31,7 @@
         font-weight: 600;
         font-size: 12px;
         display: inline-block;
-        background-color: #e0422a;
+        background-color: #e5543d;
         border-color: #e0422a;
         border-radius: 5px;
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
@@ -53,7 +53,7 @@
         font-size: 12px;
         font-weight: 700;
         position: center;
-        background: #87CEFA;
+        background-color: #3594C4;
         margin-left: -15px;
     }
 
@@ -68,7 +68,7 @@
             background: #d1d1d1;
             color: black;
             position: relative;
-            box-shadow: 0 3px 6px black;
+            box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
         }
 
             .breadcrumb a:first-child {
@@ -126,11 +126,11 @@
             }
 
     body {
-        background-color: #87CEFA;
+        background-color: #3594C4;
     }
 
     .panel {
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
     }
 
     #PanelContent {
@@ -153,7 +153,7 @@
         font-family: Arial;
         font-size: 14px;
         display: inline-block;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
         width: 100px;
         border-radius: 5%;
     }
@@ -178,8 +178,8 @@
 
     #addUserAccessRole {
         width: 200px;
-        background-color: #2072D6;
-        border-color: #2072D6;
+        background-color: #385f99;
+        border-color: #385f99;
     }
 
         #addUserAccessRole:hover {
@@ -194,7 +194,7 @@
     @Html.ActionLink("Home", "Index", "Home")
     @Html.ActionLink("User Action Page", "ActionPage", "User")
     @Html.ActionLink("Manage Users", "Index", "User")
-    <a class="active">Add User</a>
+    <a class="active">Register User</a>
 </div>
 
 <div class="row">
@@ -223,7 +223,7 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="panel panel-success">
         <div class="panel-heading">
-            <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-user"></span> &nbsp; Add User Details</b></h3>
+            <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-user"></span> &nbsp; Register User Details</b></h3>
         </div>
         <div class="panel-body">
             <div class="form-horizontal">
@@ -330,7 +330,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button id ="Confirm" type="submit" class="btn btn-success" style="float:right" id="confirmBtn">CONFIRM</button>
+                    <button id ="Confirm" type="submit" class="btn btn-success" style="float:right">CONFIRM</button>
                     <button id="Cancel" type="button" class="btn btn-warning" data-dismiss="modal" style="float: left">CANCEL</button>
                 </div>
             </div>
