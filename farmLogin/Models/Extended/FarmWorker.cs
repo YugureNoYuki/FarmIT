@@ -35,8 +35,7 @@ namespace farmLogin.Models
 
         [Required(ErrorMessage = "Contact Number cannot be blank")]
         [Display(Name = "Contact Number")]
-        [StringLength(maximumLength: 10, ErrorMessage = "Max 10 characters reached")]
-        [RegularExpression("[0-9]+", ErrorMessage = "Contact number must be numeric")]
+        [StringLength(10, MinimumLength = 10, ErrorMessage = "Must be 10 characters")]
         public string FarmWorkerContactNum { get; set; }
 
         [Display(Name = "Farm Worker Image")]

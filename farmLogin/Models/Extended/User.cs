@@ -40,8 +40,7 @@ namespace farmLogin.Models
         public string ConfirmPassword { get; set; }
 
         [Display(Name = "Contact Number")]
-        [StringLength(maximumLength: 10, ErrorMessage = "Max 10 characters reached")]
-        [RegularExpression("[0-9]+", ErrorMessage = "Contact number must be numeric")]
+        [StringLength(10, MinimumLength = 10, ErrorMessage = "Must be 10 characters")]
         public string UserContactNum { get; set; }
 
         [Required(ErrorMessage = "First Name cannot be blank")]
