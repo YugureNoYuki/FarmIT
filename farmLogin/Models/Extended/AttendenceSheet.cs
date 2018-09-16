@@ -24,9 +24,10 @@ namespace farmLogin.Models
 
         [Display(Name = "Clock Out Time")]
         //TODO: Validate future date selection
-        [DataType(DataType.Date)]
+        //[DataType(DataType.Date)]
         [MyDate(ErrorMessage = "Date must be before or on Today")]
-        public System.TimeSpan ClockOutTime { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public System.DateTime ClockOutTime { get; set; }
 
     }
 }

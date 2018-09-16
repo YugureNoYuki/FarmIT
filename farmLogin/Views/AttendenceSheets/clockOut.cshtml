@@ -236,6 +236,8 @@ li.ui-timepicker-selected .ui-timepicker-duration,
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.AttendenceSheetID)
         @Html.HiddenFor(model => model.ClockInTime);
+        @Html.HiddenFor(model => model.UserID)
+
 
         <div class="panel panel-success">
             <div class="panel-heading">
@@ -259,9 +261,10 @@ li.ui-timepicker-selected .ui-timepicker-duration,
                                 </div>
                                 <div class="col-md-10">
                                   @*  @Html.EditorFor(model => model.ClockOutTime, new { htmlAttributes = new { @class = "form-control" } })*@
-                                    <input id="basicExample" class="time ui-timepicker-input" autocomplete="off" type="text" />
+                                    @*<input id="basicExample" class="time ui-timepicker-input" autocomplete="off" type="text" />*@
                                     
                                    @*//   @Html.EditorFor(model => model.ClockOutTime, new { htmlAttributes = new { @class = "form-control", @id="basicExample"} })*@
+                                    @Html.EditorFor(model => model.ClockOutTime, new { htmlAttributes = new { @class = "form-control date-picker", onkeydown = "return false", onpaste = "return false" } })
                                     @Html.ValidationMessageFor(model => model.ClockOutTime, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -280,7 +283,7 @@ li.ui-timepicker-selected .ui-timepicker-duration,
                             </div>
                         </div>
                     </div>
-                    <div class="row" id="PanelContent">
+                    @*<div class="row" id="PanelContent">
                         <div class="col-xs-6 col-md-6">
                             <div class="form-group">
                                 <div class="col-xs-6 col-md-6">
@@ -292,7 +295,7 @@ li.ui-timepicker-selected .ui-timepicker-duration,
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>*@
                 </div>
             </div>
         </div>
@@ -348,7 +351,8 @@ li.ui-timepicker-selected .ui-timepicker-duration,
 
     </div>
 </div>
-
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+<link href="~/Content/jquery.timepicker.css" rel="stylesheet" />
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -373,9 +377,44 @@ li.ui-timepicker-selected .ui-timepicker-duration,
             })
         }
     </script>
-<script type="text/javascript">
+@*<script type="text/javascript">
         $(function() {
             $('#basicExample').timepicker();
         });
+</script>*@
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script src="~/Scripts/jquery.timepicker.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $(".date-picker").datetimepicker();
+            $(".date-picker").datetimepicker("setDate", "+0d");
+        });
+</script>
+<script type="text/javascript">
+        $(document).ready(function () {
+            $(function () {
+                $(".date-picker").datetimepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: "-100:+0",
+                    dateFormat: 'dd-M-yy',
+                    controlType: 'select',
+                    timeFormat: 'hh:mm TT'
+                });
+
+            });
+
+            jQuery.validator.methods.date = function (value, element) {
+                var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+                if (isChrome) {
+                    var d = new Date();
+                    return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+                } else {
+                    return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+                }
+            };
+
+        });
+
 </script>
 }
