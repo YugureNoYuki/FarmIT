@@ -274,7 +274,7 @@ li.ui-timepicker-selected .ui-timepicker-duration,
                         <div class="col-xs-6 col-md-6">
                             <div class="form-group">
                                 <div class="col-xs-6 col-md-6">
-                                    @Html.LabelFor(model => model.FarmWorkerNum, "FarmWorkerNum", htmlAttributes: new { @class = "control-label" })
+                                    @Html.LabelFor(model => model.FarmWorkerNum, "Farm Worker", htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-10">
                                     @Html.DropDownList("FarmWorkerNum", null, htmlAttributes: new { @class = "form-control" })
@@ -335,7 +335,7 @@ li.ui-timepicker-selected .ui-timepicker-duration,
 <div class="row">
 
     <div class="col-xs-6 col-md-4">
-        @using (Html.BeginForm("Index", "Farm", FormMethod.Get, new { @class = "form-inline" }))
+        @using (Html.BeginForm("ActionPage", "FarmWorker", FormMethod.Get, new { @class = "form-inline" }))
             {
             <div class="col-xs-6 col-md-4">
                 <div class=input-group>
