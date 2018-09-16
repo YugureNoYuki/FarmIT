@@ -102,6 +102,38 @@
         z-index: -1;
     }
 
+    .cloud-5 {
+        top: 320px;
+        opacity: 0.75;
+        -webkit-transform: scale(0.90);
+        -moz-transform: scale(0.90);
+        transform: scale(0.90);
+        -webkit-animation: moveclouds 34s linear infinite;
+        -moz-animation: moveclouds 34s linear infinite;
+        -o-animation: moveclouds 34s linear infinite;
+        animation: moveclouds 34s linear infinite;
+        -webkit-animation-delay: 2s;
+        -moz-animation-delay: 2s;
+        animation-delay: 2s;
+        z-index: -1;
+    }
+
+    .cloud-6 {
+        top: 450px;
+        opacity: 0.75;
+        -webkit-transform: scale(0.5);
+        -moz-transform: scale(0.5);
+        transform: scale(0.5);
+        -webkit-animation: moveclouds 38s linear infinite;
+        -moz-animation: moveclouds 38s linear infinite;
+        -o-animation: moveclouds 38s linear infinite;
+        animation: moveclouds 38s linear infinite;
+        -webkit-animation-delay: 10s;
+        -moz-animation-delay: 10s;
+        animation-delay: 10s;
+        z-index: -1;
+    }
+
 
     .body-content {
         margin-top: 1000px;
@@ -344,18 +376,6 @@
         opacity: 0.4;
     }
 
-    .grass > div {
-        animation: breeze 4s cubic-bezier(.8,-0.5,.25,1.5) infinite;
-        background-color: #0b0;
-        border-left: solid 5px #0c0;
-        border-top-left-radius: 100%;
-        bottom: 0;
-        position: absolute;
-        transform-origin: bottom;
-        transition: all 100ms ease-in-out;
-        width: 6px;
-        z-index: -3;
-    }
 </style>
 
 
@@ -365,6 +385,8 @@
         <div class="cloud-2" data-speed="45000" data-delay="15000"></div>
         <div class="cloud-3" data-speed="40000"></div>
         <div class="cloud-4" data-speed="38000" data-delay="20000"></div>
+        <div class="cloud-5" data-speed="30000" data-delay="25000"></div>
+        <div class="cloud-6" data-speed="28000" data-delay="21000"></div>
     </div>
 </div>
 
@@ -373,7 +395,6 @@
     </div>
 </div>
 
-<div class="grass"></div>
 
 
 @using (Html.BeginForm("Login", "User", FormMethod.Post, new { id = "loginBox" }))
