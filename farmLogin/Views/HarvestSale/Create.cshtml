@@ -1,10 +1,47 @@
 ﻿@model farmLogin.Models.Sale
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Capture Harvest Sale";
 }
 
 <style>
+    /*Confirmation*/
+    /*Green Button*/
+
+    #Confirm {
+        font-family: Arial;
+        font-weight: 600;
+        font-size: 12px;
+        display: inline-block;
+        background-color: #52963f;
+        border-color: #52963f;
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+        #Confirm:hover {
+            background-color: #24820e;
+            border-color: #24820e;
+            transition: 0.3s;
+        }
+    /*Red Button*/
+    #Cancel {
+        font-family: Arial;
+        font-weight: 600;
+        font-size: 12px;
+        display: inline-block;
+        background-color: #e5543d;
+        border-color: #e0422a;
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+        #Cancel:hover {
+            background-color: #bc1c03;
+            border-color: #bc1c03;
+            transition: 0.3s;
+        }
+
     .breadcrumb {
         display: inline-block;
         overflow: hidden;
@@ -15,7 +52,7 @@
         font-size: 12px;
         font-weight: 700;
         position: center;
-        background: #87CEFA;
+        background: #3594C4;
         margin-left: -15px;
     }
 
@@ -88,11 +125,11 @@
             }
 
     body {
-        background-color: #87CEFA;
+        background-color: #3594C4;
     }
 
     .panel {
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
     }
 
     #PanelContent {
@@ -137,14 +174,30 @@
         background-image: none;
         background-color: #d8d8d8;
     }
+
+    #addInventoryType {
+        width: 175px;
+        background-color: #385f99;
+        border-color: #385f99;
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+    }
+
+        #addInventoryType:hover {
+            background: #1955a0;
+            border-color: #1955a0;
+        }
 </style>
+
+<header>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</header>
 
 
 
 <div class="breadcrumb">
     <a href="#">Home</a>
     @Html.ActionLink("Crop Action Page", "ActionPage", "Plantation")
-    @Html.ActionLink("Manage Plantation", "Index", "HarvestSale")
+    @Html.ActionLink("Manage Harvest Sale", "Index", "HarvestSale")
     <a class="active">Capture Harvest Sale</a>
 </div>
 
@@ -157,7 +210,7 @@
     <br />
     <div class="panel panel-success">
         <div class="panel-heading">
-            <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-usd"></span> &nbsp;Capture Harvest Sale Details</b></h3>
+            <h3 class="panel-title" style="color:black;"><b><span class="fas fa-coins"></span> &nbsp;Capture Harvest Sale Details</b></h3>
         </div>
         <div class="panel-body">
             <div class="form-horizontal">
