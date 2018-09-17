@@ -261,9 +261,14 @@
         color: #0AA633;
     }
 
-
+        .fa-edit{
+            color: #f27d00;
+        }
 </style>
 
+<header>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</header>
 
 <div class="breadcrumb">
     <a href="#">Home</a>
@@ -468,8 +473,8 @@
                             <a href="@Url.Action("Edit", "Field", new { id = item.FieldID })" title="Edit">
                                 <i class="glyphicon glyphicon-pencil" id="ActionIcon"></i>
                             </a>
-                            <a href="@Url.Action("SetStatus", "Field", new { id = item.FieldID })" title="Edit">
-                                <i class="glyphicon glyphicon-edit" id="ActionIcon"></i>
+                            <a href="@Url.Action("SetStatus", "Field", new { id = item.FieldID })" title="Set Status">
+                                <i class="fas fa-edit" id="ActionIcon"></i>
                             </a>
                             <a id="deleteItem" class="deleteItem" data-target="#basic"
                                data-toggle="modal"
