@@ -14,8 +14,8 @@
         font-size: 12px;
         font-weight: 700;
         position: center;
-        background: #fff;
-        margin-left: -15px;
+        background: #3594C4;
+        margin-left: -3.45%;
     }
 
         .breadcrumb a {
@@ -29,7 +29,7 @@
             background: #d1d1d1;
             color: black;
             position: relative;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+            box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
         }
 
             .breadcrumb a:first-child {
@@ -88,7 +88,8 @@
             }
 
     body {
-        background-color: #fff;
+        background-color: #3594C4;
+        font-weight: 600;
     }
 
     .panel {
@@ -100,10 +101,6 @@
         margin-left: 60px;
     }
 
-    .panel:hover span {
-        color: #1b8bc6;
-        transition: 0.5s;
-    }
 
     .panel-success {
         color: green;
@@ -181,6 +178,72 @@
     td > a {
         padding: 3px;
     }
+
+    #AddPlan {
+        left: -8%;
+        background-color: #385f99;
+        border-color: #385f99;
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+    }
+
+        #AddPlan:hover {
+            background: #1955a0;
+            border-color: #1955a0;
+        }
+
+    #btnConfirm {
+        font-weight: 600;
+        background-color: #47A447;
+        border-color: #47A447;
+        font-family: Arial;
+        font-size: 14px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+        #btnConfirm:hover {
+            background-color: #25820F;
+            border-color: #25820F;
+            transition: 0.5s;
+        }
+
+    #btnEdit {
+        background-color: #479CE5;
+        border-color: #428bca;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+        #btnEdit:hover {
+            background: #2072d6;
+            border-color: #2072d6;
+            transition: 0.5s;
+        }
+
+
+    #btnClose {
+        background-color: #e0422a;
+        border-color: #e0422a;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+        #btnClose:hover {
+            background-color: #bc1c03;
+            border-color: #bc1c03;
+            transition: 0.3s;
+        }
+
+    h2 {
+        color: #3b3e42;
+        font-weight: 600;
+        margin-left: -35% !important;
+    }
+
+    .fc-day-number {
+        color: #3b3e42;
+    }
+
+    .fc-state-highlight {
+        background-color: #a3d2ff !important;
+    }
 </style>
 
 <div class="breadcrumb">
@@ -189,26 +252,31 @@
     <a class="active">View Plantation Plans</a>
 </div>
 
-<div class="well">
-    <div class="row">
-        <div class="col-xs-6 col-md-2">
-            @using (Html.BeginForm("Create", "Plantation", FormMethod.Get, new { @class = "form-inline" }))
+<div class="row">
+    <div class="col-xs-6 col-md-2">
+        @using (Html.BeginForm("Create", "Plantation", FormMethod.Get, new { @class = "form-inline" }))
             {
-                <div class="input-group">
-                    <div class="input-group-btn">
-                        <button class="btn btn-success" type="submit">
-                            <span class="glyphicon glyphicon-plus"></span>
-                            Add Plan
-                        </button>
-                    </div>
+            <div class="input-group">
+                <div class="input-group-btn">
+                    <button class="btn btn-success" type="submit" id="AddPlan">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        Add Plantation Plan
+                    </button>
                 </div>
-            }
-        </div>
+            </div>
+        }
     </div>
 </div>
 
-<h2>Plantation Plans</h2>
-<div id="calender"></div>
+<br />
+<div class="panel panel-success row">
+    <div class="panel-heading">
+        <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-calendar"></span> &nbsp;Plantation Plans</b></h3>
+    </div>
+    <div id="calender" class="panel-body"></div>
+</div>
+@*<h2>Plantation Plans</h2>
+    <div id="calender"></div>*@
 
 
 
@@ -222,17 +290,17 @@
             <div class="modal-body">
                 <div class="row">
                     <button id="btnEdit" class="btn btn-default btn-sm pull-right" style="margin-right:5px;">
-                        <span class="glyphicon glyphicon-pencil"></span> Edit
+                        <span class="glyphicon glyphicon-pencil" style="color:white;"></span> Edit
                     </button>
                     <button id="btnConfirm" class="btn btn-default btn-sm pull-right" style="margin-right:5px;">
-                        <span class="glyphicon glyphicon-pencil"></span> Confirm
+                        <span class="glyphicon glyphicon-ok" style="color:white;"></span> Confirm
                     </button>
                 </div>
 
                 <p id="pDetails"></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="btnClose" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -387,7 +455,8 @@
                         header: {
                             left: 'prev,next today',
                             center: 'title',
-                            right: 'month'
+                            right: 'thisWas:month now its blank',
+                            color: 'black'
                         },
                         eventLimit: true,
                         eventColor: '#378006',
