@@ -1,10 +1,45 @@
 ﻿@model farmLogin.Models.Silo
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Silos";
 }
 
 <style>
+    /*Confirmation Box*/
+    #btnContinueDelete {
+        font-family: Arial;
+        font-weight: 600;
+        font-size: 12px;
+        display: inline-block;
+        background-color: #e0422a;
+        border-color: #e0422a;
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+        #btnContinueDelete:hover {
+            background-color: #bc1c03;
+            border-color: #bc1c03;
+            transition: 0.3s;
+        }
+
+    #btnContinueCancel {
+        font-family: Arial;
+        font-weight: 600;
+        font-size: 12px;
+        display: inline-block;
+        background-color: #9ba5a4;
+        border-color: #9ba5a4;
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+        #btnContinueCancel:hover {
+            background-color: #8c9190;
+            border-color: #8c9190;
+            transition: 0.3s;
+        }
+
     .breadcrumb {
         display: inline-block;
         overflow: hidden;
@@ -129,10 +164,6 @@
         }
 
 
-    .well {
-        background-image: none;
-        background-color: #eaeaea;
-    }
 
     .table-heading {
         color: #0AA633;
@@ -144,26 +175,23 @@
         -webkit-backface-visibility: hidden;
         -ms-transform: scale(1.3);
         -webkit-transform: scale(1.3);
+        -webkit-font-smoothing: subpixel-antialiased;
     }
 
     .glyphicon-pencil {
-        color: #47A447;
+        color: #42b229;
     }
 
     .glyphicon-eye-open {
-        color: #479ce5;
+        color: #298fb2;
     }
 
-    .glyphicon-inbox {
+    .glyphicon-trash {
         color: red;
     }
 
-    .glyphicon-usd {
-        color: #e0bf38;
-    }
-
     #SearchBar {
-        right: -375px;
+        right: -305px;
     }
 
     .btn-info {
@@ -174,33 +202,9 @@
             transition: 0.5s;
         }
 
-
-    #Filter {
-        right: -80px;
-    }
-
     td > a {
         padding: 3px;
     }
-
-    #Order {
-        font-weight: 600;
-        background-color: #479CE5;
-        border-color: #428bca;
-        font-family: Arial;
-        font-size: 14px;
-        display: inline-block;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-        width: auto !important;
-        border-radius: 5%;
-        color: #fff;
-    }
-
-        #Order:hover {
-            background: #2072d6;
-            border-color: #2072d6;
-            transition: 0.5s;
-        }
 
     .pagination > li > a {
         font-weight: 600;
@@ -217,7 +221,15 @@
             color: white;
             /*box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);*/
         }
+
+    .well {
+        background-color: #dddddd;
+    }
 </style>
+
+
+
+
 
 
 <div class="breadcrumb">
@@ -250,22 +262,24 @@
     <table class="table table-condensed table-striped">
         <thead>
             <tr>
-                <th>
+                <th class="table-heading">
                     @Html.DisplayNameFor(model => model.SiloDescr)
                 </th>
-                <th>
+                <th class="table-heading">
                     @Html.DisplayNameFor(model => model.SiloCapacity)
                 </th>
-                <th>
+                <th class="table-heading">
                     @Html.DisplayNameFor(model => model.SiloRentalFeePA)
                 </th>
-                <th>
+                <th class="table-heading">
                     @Html.DisplayNameFor(model => model.SiloStatus)
                 </th>
-                <th>
+                <th class="table-heading">
                     @Html.DisplayNameFor(model => model.Unit.UnitDescr)
                 </th>
-                <th></th>
+                <th class="table-heading">
+                    Actions
+                </th>
             </tr>
         </thead>
         @foreach (var item in siloList)
@@ -316,8 +330,8 @@
                     Are you sure you want to delete this item?
                 </div>
                 <div class="modal-footer">
-                    <button data-dismiss="modal" type="button" class="btn btn-default">Cancel</button>
-                    <button id="btnContinueDelete" type="button" class="btn btn-primary">Delete</button>
+                    <button data-dismiss="modal" type="button" class="btn btn-default pull-left" id="btnContinueCancel">CANCEL</button>
+                    <button id="btnContinueDelete" type="button" class="btn btn-primary">DELETE</button>
                 </div>
             </div>
         </div>
