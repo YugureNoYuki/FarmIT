@@ -1,7 +1,7 @@
 ﻿@* PLANTATION PLAN INDEX *@
 @Html.AntiForgeryToken()
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Plan Plantation";
 }
 <style>
     .breadcrumb {
@@ -89,7 +89,6 @@
 
     body {
         background-color: #3594C4;
-        font-weight: 600;
     }
 
     .panel {
@@ -239,6 +238,7 @@
 
     .fc-day-number {
         color: #3b3e42;
+        font-weight: 600;
     }
 
     .fc-state-highlight {
@@ -467,21 +467,21 @@
                             //////////////////////////
                             $('#myModal #eventTitle').text(calEvent.title);
                             var $description = $('<div/>');
-                            $description.append($('<p/>').html('<b>Start:</b>' + calEvent.start.format("DD-MMM-YYYY")));
+                            $description.append($('<p/>').html('<b>Start:</b>' + ' ' + calEvent.start.format("DD-MMM-YYYY")));
                             if (calEvent.end != null) {
-                                $description.append($('<p/>').html('<b>End:</b>' + calEvent.end.format("DD-MMM-YYYY")));
+                                $description.append($('<p/>').html('<b>End:</b>' + ' ' + calEvent.end.format("DD-MMM-YYYY")));
                             }
 
-                            $description.append($('<p/>').html('<b>Description:</b>' + calEvent.description));
-                            $description.append($('<p/>').html('<b>Crop Type:</b>' + calEvent.title));
-                            $description.append($('<p/>').html('<b>Field Name:</b>' + calEvent.field));
-                            $description.append($('<p/>').html('<b>Cycle Name:</b>' + calEvent.cycle));
-                            $description.append($('<p/>').html('<b>Field Stage:</b>' + calEvent.stage));
-                            $description.append($('<p/>').html('<b>Refuge Seed Amount:</b>' + calEvent.refugeseed));
-                            $description.append($('<p/>').html('<b>Refuge Unit:</b>' + calEvent.refuge));
-                            $description.append($('<p/>').html('<b>Refuge Area Hectares:</b>' + calEvent.refugehectares));
-                            $description.append($('<p/>').html('<b>Yield Unit:</b>' + calEvent.yieldunit));
-                            $description.append($('<p/>').html('<b>Expected Yield:</b>' + calEvent.expyield));
+                            $description.append($('<p/>').html('<b>Description:</b>' + ' ' + calEvent.description));
+                            $description.append($('<p/>').html('<b>Crop Type:</b>' + ' ' + calEvent.title));
+                            $description.append($('<p/>').html('<b>Field Name:</b>' + ' ' + calEvent.field));
+                            $description.append($('<p/>').html('<b>Cycle Name:</b>' + ' ' + calEvent.cycle));
+                            $description.append($('<p/>').html('<b>Field Stage:</b>' + ' ' + calEvent.stage));
+                            $description.append($('<p/>').html('<b>Refuge Seed Amount:</b>' + ' ' + calEvent.refugeseed));
+                            $description.append($('<p/>').html('<b>Refuge Unit:</b>' + ' ' + calEvent.refuge));
+                            $description.append($('<p/>').html('<b>Refuge Area Hectares:</b>' + ' ' + calEvent.refugehectares));
+                            $description.append($('<p/>').html('<b>Yield Unit:</b>' + ' ' + calEvent.yieldunit));
+                            $description.append($('<p/>').html('<b>Expected Yield:</b>' + ' ' + calEvent.expyield));
 
                             if (calEvent.dateharvested != null) {
                                 $description.append($('<p/>').html('<b>Date Harvested:</b>' + calEvent.dateharvested.format("DD-MMM-YYYY")));
