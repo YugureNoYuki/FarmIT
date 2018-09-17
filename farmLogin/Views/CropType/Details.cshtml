@@ -1,12 +1,49 @@
 ﻿@model farmLogin.Models.CropType
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Update Crop Type";
 }
 
 <style>
+     /*Confirmation*/
+      /*Green Button*/
+
+    #Confirm {
+        font-family: Arial;
+        font-weight: 600;
+        font-size: 12px;
+        display: inline-block;
+        background-color: #52963f;
+        border-color: #52963f;
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+        #Confirm:hover {
+            background-color: #24820e;
+            border-color: #24820e;
+            transition: 0.3s;
+        }
+        /*Red Button*/
+    #Cancel {
+        font-family: Arial;
+        font-weight: 600;
+        font-size: 12px;
+        display: inline-block;
+        background-color: #e5543d;
+        border-color: #e0422a;
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+       #Cancel:hover {
+            background-color: #bc1c03;
+            border-color: #bc1c03;
+            transition: 0.3s;
+        }
+
     body {
-        background-color: #87CEFA;
+        background-color: #3594C4;
     }
 
     .breadcrumb {
@@ -19,7 +56,7 @@
         font-size: 12px;
         font-weight: 700;
         position: center;
-        background: #87CEFA;
+        background: #3594C4;
         margin-left: -15px;
     }
 
@@ -92,7 +129,7 @@
             }
 
     .panel {
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
     }
 
     #PanelContent {
@@ -163,8 +200,8 @@
             <b>Crop Type Details </b>
             <span>
                 &nbsp;
-                <a href="@Url.Action("Edit", new { id = Model.CropTypeID})">
-                    <i class="glyphicon glyphicon-pencil"></i>
+                <a href="@Url.Action("Edit", new { id = Model.CropTypeID})" data-toggle="tooltip" title="Edit">
+                    <i class="glyphicon glyphicon-pencil pull-right"></i>
                     <span class="sr-only">Edit</span>
                 </a>
             </span>
