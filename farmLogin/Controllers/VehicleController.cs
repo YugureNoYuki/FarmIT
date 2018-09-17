@@ -336,7 +336,7 @@ namespace farmLogin.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(vehicle).State = EntityState.Modified;
-                vehicle.VehNextService = vehicle.VehCurrMileage + vehicle.VehServiceInterval;
+                //vehicle.VehNextService = vehicle.VehCurrMileage + vehicle.VehServiceInterval;
                 db.SaveChanges();
 
 
