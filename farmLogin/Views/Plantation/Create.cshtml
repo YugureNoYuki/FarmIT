@@ -1,8 +1,45 @@
 ﻿@model farmLogin.Models.Plantation
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Plan Plantation";
 }
 <style>
+     /*Confirmation*/
+      /*Green Button*/
+
+    #Confirm {
+        font-family: Arial;
+        font-weight: 600;
+        font-size: 12px;
+        display: inline-block;
+        background-color: #52963f;
+        border-color: #52963f;
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+        #Confirm:hover {
+            background-color: #24820e;
+            border-color: #24820e;
+            transition: 0.3s;
+        }
+        /*Red Button*/
+    #Cancel {
+        font-family: Arial;
+        font-weight: 600;
+        font-size: 12px;
+        display: inline-block;
+        background-color: #e5543d;
+        border-color: #e0422a;
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+       #Cancel:hover {
+            background-color: #bc1c03;
+            border-color: #bc1c03;
+            transition: 0.3s;
+        }
+
     .breadcrumb {
         display: inline-block;
         overflow: hidden;
@@ -13,7 +50,7 @@
         font-size: 12px;
         font-weight: 700;
         position: center;
-        background: #87CEFA;
+        background: #3594C4;
         margin-left: -15px;
     }
 
@@ -86,11 +123,12 @@
             }
 
     body {
-        background-color: #87CEFA;
+        background-color: #3594C4;
+        overflow-x: hidden;
     }
 
     .panel {
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
     }
 
     #PanelContent {
@@ -178,17 +216,24 @@
         background-color: #d8d8d8;
     }
 
-    #addInventoryType {
+    #addCropType {
         width: 175px;
-        background-color: #2072D6;
-        border-color: #2072D6;
+        background-color: #385f99;
+        border-color: #385f99;
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
     }
 
-        #addInventoryType:hover {
+        #addCropType:hover {
             background: #1955a0;
             border-color: #1955a0;
+
         }
 </style>
+
+    <header>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    </header>
+
 
 <div class="breadcrumb">
     @Html.ActionLink("Home", "Index", "Home")
@@ -204,7 +249,7 @@
             {
             <div class="input-group">
                 <div class="input-group-btn">
-                    <button class="btn btn-success inventory" type="submit" id="addInventoryType">
+                    <button class="btn btn-success inventory" type="submit" id="addCropType">
                         <span class="glyphicon glyphicon-plus"></span>
                         Add Crop Type
                     </button>
@@ -226,7 +271,7 @@
     //Field / Crop Type / Excepted Yield Panel
     <div class="panel panel-success">
         <div class="panel-heading">
-            <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-leaf"></span> &nbsp;Add Plantation Plan Details</b></h3>
+            <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-calendar"></span> &nbsp;Add Plantation Plan Details</b></h3>
         </div>
         <div style="color: red">
             @if (@ViewBag.Error != null)
@@ -308,7 +353,7 @@
     //Field / Crop Type / Excepted Yield Panel
     <div class="panel panel-success">
         <div class="panel-heading">
-            <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-leaf"></span> &nbsp;Add Refuge Details for Plantation Plan</b></h3>
+            <h3 class="panel-title" style="color:black;"><b><span class="fas fa-flask"></span> &nbsp;Add Refuge Details for Plantation Plan</b></h3>
         </div>
         <div class="panel-body">
             <div class="form-horizontal">
@@ -383,8 +428,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success" style="float:right" id="confirmBtn">CONFIRM</button>
-                    <button type="button" class="btn btn-warning" data-dismiss="modal" style="float: left">CANCEL</button>
+                    <button type="submit" class="btn btn-success" style="float:right" id="Confirm">CONFIRM</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal" style="float: left" id="Cancel">CANCEL</button>
                 </div>
             </div>
 
