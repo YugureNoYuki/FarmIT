@@ -1,10 +1,45 @@
 ﻿@model farmLogin.Models.Farm
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Manage Farm/ Land / Field";
 }
 
 <style>
+     /*Confirmation Box*/
+    #btnContinueDelete {
+        font-family: Arial;
+        font-weight: 600;
+        font-size: 12px;
+        display: inline-block;
+        background-color: #e0422a;
+        border-color: #e0422a;
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+        #btnContinueDelete:hover {
+            background-color: #bc1c03;
+            border-color: #bc1c03;
+            transition: 0.3s;
+        }
+
+        #btnContinueCancel {
+        font-family: Arial;
+        font-weight: 600;
+        font-size: 12px;
+        display: inline-block;
+        background-color: #9ba5a4;
+        border-color: #9ba5a4;
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+        #btnContinueCancel:hover {
+            background-color: #8c9190;
+            border-color: #8c9190;
+            transition: 0.3s;
+        }
+
     .breadcrumb {
         display: inline-block;
         overflow: hidden;
@@ -147,11 +182,11 @@
     }
 
     .glyphicon-pencil {
-        color: #47A447;
+        color: #42b229;
     }
 
     .glyphicon-eye-open {
-        color: #479ce5;
+        color: #298fb2;
     }
 
     .glyphicon-trash {
@@ -217,6 +252,16 @@
             color: white;
             /*box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);*/
         }
+
+        .nav-tabs{
+          font-weight: 600;
+        }
+
+        .table-heading {
+        color: #0AA633;
+    }
+
+
 </style>
 
 
@@ -294,13 +339,15 @@
         <div id="FarmDetails" class="tab-pane fade in active">
             <table class="table">
                 <tr>
-                    <th>
+                    <th class="table-heading">
                         @Html.DisplayNameFor(model => model.FarmName)
                     </th>
-                    <th>
+                    <th class="table-heading">
                         @Html.DisplayNameFor(model => model.Province.ProvinceDescr)
                     </th>
-                    <th></th>
+                    <th class="table-heading">
+                        Actions
+                    </th>
                 </tr>
                 @foreach (var item in myList)
                 {
@@ -335,13 +382,15 @@
         <div id="LandDetails" class="tab-pane fade">
             <table class="table">
                 <tr>
-                    <th>
+                    <th class="table-heading">
                         Land Name
                     </th>
-                    <th>
+                    <th class="table-heading">
                         Farm Name
                     </th>
-                    <th></th>
+                    <th class="table-heading">
+                        Actions
+                    </th>
                 </tr>
                 @foreach (var item in landList)
                 {
@@ -379,19 +428,20 @@
         <div id="FieldDetails" class="tab-pane fade">
             <table class="table">
                 <tr>
-                    <th>
+                    <th class="table-heading">
                         Field Name
                     </th>
-                    <th>
-                        Hectares
-                    </th>
-                    <th>
-                        Status
-                    </th>
-                    <th>
+                    <th class="table-heading">
                         Land Name
                     </th>
-                    <th>Actions</th>
+                    <th class="table-heading">
+                        Hectares
+                    </th>
+                    <th class="table-heading">
+                        Status
+                    </th>
+                    
+                    <th class="table-heading">Actions</th>
                 </tr>
                 @foreach (var item in fieldList)
                 {
@@ -400,14 +450,15 @@
                             @Html.DisplayFor(modelItem => item.FieldName)
                         </td>
                         <td>
+                            @Html.DisplayFor(modelItem => item.Land.LandName)
+                        </td>
+                        <td>
                             @Html.DisplayFor(modelItem => item.FieldHectares)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.FieldStatu.FieldStatDescr)
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Land.LandName)
-                        </td>
+                        
                         <td>
                             @*@Html.ActionLink("Details", "Details", new { id = item.FieldID }) |*@
                             <a href="@Url.Action("Details", "Field", new { id = item.FieldID })" title="Details">
@@ -446,8 +497,8 @@
                     Are you sure you want to remove this item?
                 </div>
                 <div class="modal-footer">
-                    <button data-dismiss="modal" type="button" class="btn btn-default">Cancel</button>
-                    <button id="btnContinueDelete" type="button" class="btn btn-primary">Confirm</button>
+                    <button data-dismiss="modal" type="button" class="btn btn-default" id="btnContinueCancel" style="float:left">CANCEL</button>
+                    <button id="btnContinueDelete" type="button" class="btn btn-primary" >DELETE</button>
                 </div>
             </div>
         </div>
