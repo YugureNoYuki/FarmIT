@@ -265,7 +265,7 @@
                                 @Html.LabelFor(model => model.FieldHectares, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.FieldHectares, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.FieldHectares, new { htmlAttributes = new { min = 1, @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.FieldHectares, "", new { @class = "text-danger" })
                             </div>
                         </div>
