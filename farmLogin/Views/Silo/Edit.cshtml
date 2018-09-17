@@ -1,10 +1,47 @@
 ﻿@model farmLogin.Models.Silo
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Update Silo";
 }
 
 <style>
+    /*Confirmation*/
+    /*Green Button*/
+
+    #Confirm {
+        font-family: Arial;
+        font-weight: 600;
+        font-size: 12px;
+        display: inline-block;
+        background-color: #52963f;
+        border-color: #52963f;
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+        #Confirm:hover {
+            background-color: #24820e;
+            border-color: #24820e;
+            transition: 0.3s;
+        }
+    /*Red Button*/
+    #Cancel {
+        font-family: Arial;
+        font-weight: 600;
+        font-size: 12px;
+        display: inline-block;
+        background-color: #e5543d;
+        border-color: #e0422a;
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+        #Cancel:hover {
+            background-color: #bc1c03;
+            border-color: #bc1c03;
+            transition: 0.3s;
+        }
+
     .breadcrumb {
         display: inline-block;
         overflow: hidden;
@@ -15,7 +52,7 @@
         font-size: 12px;
         font-weight: 700;
         position: center;
-        background: #fff;
+        background: #3594C4;
         margin-left: -15px;
     }
 
@@ -30,7 +67,7 @@
             background: #d1d1d1;
             color: black;
             position: relative;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 3px 6px black;
         }
 
             .breadcrumb a:first-child {
@@ -80,7 +117,6 @@
                 background: white;
             }
 
-
             .breadcrumb a:hover, .breadcrumb a.active,
             .breadcrumb a:hover:after, .breadcrumb a.active:after {
                 transition: all 0.5s;
@@ -89,11 +125,11 @@
             }
 
     body {
-        background-color: #fff;
+        background-color: #3594C4;
     }
 
     .panel {
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
     }
 
     #PanelContent {
@@ -101,7 +137,7 @@
         margin-left: 60px;
     }
 
-    .panel:hover span {
+    .panel:hover i {
         color: #1b8bc6;
         transition: 0.5s;
     }
@@ -112,112 +148,49 @@
 
     .btn {
         font-weight: 600;
-        background-color: #479CE5;
-        border-color: #428bca;
+        background-color: #47A447;
         font-family: Arial;
         font-size: 14px;
         display: inline-block;
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-        width: auto !important;
+        width: 100px;
         border-radius: 5%;
     }
 
         .btn:hover {
-            background: #2072d6;
-            border-color: #2072d6;
+            background-color: #25820F;
             transition: 0.5s;
         }
 
+    #btnBack {
+        left: -10px;
+    }
 
-    .well {
+    #btnSave {
+        right: -10px;
+    }
+
+    .panel > .panel-heading {
         background-image: none;
-        background-color: #eaeaea;
+        background-color: #d8d8d8;
     }
 
-    .table-heading {
-        color: #0AA633;
+    #addInventoryType {
+        width: 175px;
+        background-color: #385f99;
+        border-color: #385f99;
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
     }
 
-    #ActionIcon:hover {
-        transform: scale(1.3);
-        transition: 0.3s;
-        -webkit-backface-visibility: hidden;
-        -ms-transform: scale(1.3);
-        -webkit-transform: scale(1.3);
-    }
-
-    .glyphicon-pencil {
-        color: #47A447;
-    }
-
-    .glyphicon-eye-open {
-        color: #479ce5;
-    }
-
-    .glyphicon-inbox {
-        color: red;
-    }
-
-    .glyphicon-usd {
-        color: #e0bf38;
-    }
-
-    #SearchBar {
-        right: -375px;
-    }
-
-    .btn-info {
-        right: 20px;
-    }
-
-        .btn-info:hover {
-            transition: 0.5s;
-        }
-
-
-    #Filter {
-        right: -80px;
-    }
-
-    td > a {
-        padding: 3px;
-    }
-
-    #Order {
-        font-weight: 600;
-        background-color: #479CE5;
-        border-color: #428bca;
-        font-family: Arial;
-        font-size: 14px;
-        display: inline-block;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-        width: auto !important;
-        border-radius: 5%;
-        color: #fff;
-    }
-
-        #Order:hover {
-            background: #2072d6;
-            border-color: #2072d6;
-            transition: 0.5s;
-        }
-
-    .pagination > li > a {
-        font-weight: 600;
-        border-color: #428BCA;
-        font-family: Arial;
-        font-size: 14px;
-        /*box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);*/
-    }
-
-        .pagination > li > a:hover {
-            background: #428BCA;
-            border-color: #428BCA;
-            transition: 0.5s;
-            color: white;
-            /*box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);*/
+        #addInventoryType:hover {
+            background: #1955a0;
+            border-color: #1955a0;
         }
 </style>
+
+<header>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</header>
 
 
 <div class="breadcrumb">
@@ -236,7 +209,7 @@
     <br />
     <div class="panel panel-success">
         <div class="panel-heading">
-            <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-folder-close"></span> &nbsp;Add Silo Details</b></h3>
+            <h3 class="panel-title" style="color:black;"><b><i class="fas fa-database"></i> &nbsp;Update Silo Details</b></h3>
         </div>
         <div style="color: red">
             @if (@ViewBag.Error != null)
@@ -324,8 +297,8 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success" style="float:right" id="confirmBtn">CONFIRM</button>
-                        <button type="button" class="btn btn-warning" data-dismiss="modal" style="float: left">CANCEL</button>
+                        <button type="submit" class="btn btn-success" style="float:right" id="Confirm">CONFIRM</button>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal" style="float: left" id="Cancel">CANCEL</button>
                     </div>
                 </div>
 
