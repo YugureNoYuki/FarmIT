@@ -1,7 +1,7 @@
 ﻿@model farmLogin.Models.CropType
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Crop Types";
 }
 
 <style>
@@ -167,7 +167,7 @@
     }
 
     .table-heading {
-        color: #428BCA;
+        color: #0AA633;
     }
 
     #ActionIcon:hover {
@@ -179,13 +179,12 @@
     }
 
     .glyphicon-pencil {
-        color: #47A447;
+        color: #42b229;
     }
 
     .glyphicon-eye-open {
-        color: #479ce5;
+        color: #298fb2;
     }
-
     .glyphicon-trash {
         color: red;
     }
@@ -209,7 +208,7 @@
         background: red;
     }
 
-    #types {
+    #AddCropType {
         background: #479CE5;
         font-weight: 600;
         font-family: Arial;
@@ -218,10 +217,9 @@
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
         color: #fff;
         border-color: #479CE5;
-        top: 5px;
     }
 
-        #types:hover {
+        #AddCropType:hover {
             background: #2072d6;
             border-color: #2072d6;
             transition: 0.5s;
@@ -269,7 +267,7 @@
                 {
                     <div class="input-group">
                         <div class="input-group-btn">
-                            <button class="btn btn-success" type="submit">
+                            <button class="btn btn-success" type="submit" id="AddCropType">
                                 <span class="glyphicon glyphicon-plus"></span>
                                 Add Crop Type
                             </button>
@@ -282,14 +280,14 @@
     <table class="table table-condensed table-striped">
         <thead>
             <tr>
-                <th>
+                <th class="table-heading">
                     @Html.DisplayNameFor(model => model.CropTypeDescr)
                 </th>
-                <th>
+                <th class="table-heading">
                     @Html.DisplayNameFor(model => model.MaturityDays)
                 </th>
-                <th>
-                    <span class="table-heading">Actions</span>
+                <th class="table-heading">
+                    Actions
                 </th>
             </tr>
         </thead>
@@ -320,6 +318,9 @@
             </tr>
         }
     </table>
+
+    <br />
+    <br />
      <!-- MODAL -->
     <div class="modal fade" id="basic" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
@@ -332,8 +333,8 @@
                     Are you sure you want to remove this item?
                 </div>
                 <div class="modal-footer">
-                    <button data-dismiss="modal" type="button" class="btn btn-default">Cancel</button>
-                    <button id="btnContinueDelete" type="button" class="btn btn-primary">Confirm</button>
+                    <button id="btnContinueCancel" data-dismiss="modal" type="button" class="btn btn-default" style="float:left; width: 75px;">CANCEL</button>
+                    <button id="btnContinueDelete" type="button" class="btn btn-primary">DELETE</button>
                 </div>
             </div>
         </div>
