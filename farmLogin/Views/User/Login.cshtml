@@ -104,7 +104,7 @@
 
     .cloud-5 {
         top: 320px;
-        opacity: 0.75;
+        opacity: 0.90;
         -webkit-transform: scale(0.90);
         -moz-transform: scale(0.90);
         transform: scale(0.90);
@@ -120,7 +120,7 @@
 
     .cloud-6 {
         top: 450px;
-        opacity: 0.75;
+        opacity: 0.85;
         -webkit-transform: scale(0.5);
         -moz-transform: scale(0.5);
         transform: scale(0.5);
@@ -345,11 +345,11 @@
         width: 100px;
         height: 100px;
         border-radius: 50%;
-        background: #fffb91; /* Old browsers */
-        background: -moz-radial-gradient(center, ellipse cover, #fffb91 1%, #fff787 12%, #fff466 26%, #fff654 42%, #fff242 60%, #fff028 75%, #efc434 100%); /* FF3.6-15 */
-        background: -webkit-radial-gradient(center, ellipse cover, #fffb91 1%,#fff787 12%,#fff466 26%,#fff654 42%,#fff242 60%,#fff028 75%,#efc434 100%); /* Chrome10-25,Safari5.1-6 */
-        background: radial-gradient(ellipse at center, #fffb91 1%,#fff787 12%,#fff466 26%,#fff654 42%,#fff242 60%,#fff028 75%,#efc434 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffb91', endColorstr='#efc434',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+        background: #fffba0; /* Old browsers */
+        background: -moz-radial-gradient(center, ellipse cover, #fffba0 1%, #fff896 12%, #fff466 26%, #fff654 42%, #fff242 60%, #fff028 75%, #efc434 100%); /* FF3.6-15 */
+        background: -webkit-radial-gradient(center, ellipse cover, #fffba0 1%,#fff896 12%,#fff466 26%,#fff654 42%,#fff242 60%,#fff028 75%,#efc434 100%); /* Chrome10-25,Safari5.1-6 */
+        background: radial-gradient(ellipse at center, #fffba0 1%,#fff896 12%,#fff466 26%,#fff654 42%,#fff242 60%,#fff028 75%,#efc434 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffba0', endColorstr='#efc434',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
         opacity: 0.8;
         box-shadow: 0px 0px 40px 15px white;
         z-index: -3;
@@ -368,14 +368,93 @@
     }
 
     .ray {
-        background: -webkit-linear-gradient(top, #fffc7f) 0%, #fffc7f 50%, #fffc7f 100%;
-        background: linear-gradient(top, #fffc7f 0%, #fffc7f 50%, #fffc7f 100%);
+        background: -webkit-linear-gradient(top, rgba(249, 242, 57,0) 0%, rgba(249, 242, 575,0.8) 50%, rgba(249, 242, 57,0) 100%);
+        background: linear-gradient(top, rgba(249, 242, 57,0) 0%, rgba(249, 242, 57,0.8) 50%, rgba(249, 242, 57,0) 100%);
         margin-left: 10px;
         border-radius: 80% 80% 0 0;
         position: absolute;
-        opacity: 0.4;
+        opacity: 0.2;
     }
 
+    .ray1 {
+        height: 170px;
+        width: 30px;
+        -webkit-transform: rotate(180deg);
+        top: -175px;
+        left: 15px;
+    }
+
+    .ray2 {
+        height: 100px;
+        width: 8px;
+        -webkit-transform: rotate(220deg);
+        top: -90px;
+        left: 75px;
+    }
+
+    .ray3 {
+        height: 170px;
+        width: 50px;
+        -webkit-transform: rotate(250deg);
+        top: -80px;
+        left: 100px;
+    }
+
+    .ray4 {
+        height: 120px;
+        width: 14px;
+        -webkit-transform: rotate(305deg);
+        top: 30px;
+        left: 100px;
+    }
+
+    .ray5 {
+        height: 140px;
+        width: 30px;
+        -webkit-transform: rotate(-15deg);
+        top: 60px;
+        left: 40px;
+    }
+
+    .ray6 {
+        height: 90px;
+        width: 50px;
+        -webkit-transform: rotate(30deg);
+        top: 60px;
+        left: -40px;
+    }
+
+    .ray7 {
+        height: 180px;
+        width: 10px;
+        -webkit-transform: rotate(70deg);
+        top: -35px;
+        left: -40px;
+    }
+
+    .ray8 {
+        height: 120px;
+        width: 30px;
+        -webkit-transform: rotate(100deg);
+        top: -45px;
+        left: -90px;
+    }
+
+    .ray9 {
+        height: 80px;
+        width: 10px;
+        -webkit-transform: rotate(120deg);
+        top: -65px;
+        left: -60px;
+    }
+
+    .ray10 {
+        height: 190px;
+        width: 23px;
+        -webkit-transform: rotate(150deg);
+        top: -185px;
+        left: -60px;
+    }
 </style>
 
 
@@ -392,6 +471,16 @@
 
 <div class="sun">
     <div class="ray_box">
+        <div class="ray ray1"></div>
+        <div class="ray ray2"></div>
+        <div class="ray ray3"></div>
+        <div class="ray ray4"></div>
+        <div class="ray ray5"></div>
+        <div class="ray ray6"></div>
+        <div class="ray ray7"></div>
+        <div class="ray ray8"></div>
+        <div class="ray ray9"></div>
+        <div class="ray ray10"></div>
     </div>
 </div>
 
@@ -455,8 +544,8 @@
 
         function assignRandomStyles(blade) {
             var randomHeight = Math.floor(Math.random() * 40);
-            var randomRight = Math.floor(Math.random() * (window.innerWidth +6));
-            var randomRotation = Math.floor(Math.random() * 10) +5;
+            var randomRight = Math.floor(Math.random() * (window.innerWidth + 6));
+            var randomRotation = Math.floor(Math.random() * 10) + 5;
             blade.style.height = (randomHeight + 40) + 'px';
             blade.style.zIndex = randomHeight;
             blade.style.opacity = randomHeight * 0.02;
