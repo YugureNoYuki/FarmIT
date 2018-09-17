@@ -229,7 +229,7 @@
 </style>
 
 <div class="breadcrumb">
-    <a href="#">Home</a>
+    @Html.ActionLink("Home", "Index", "Home")
     @Html.ActionLink("Farm Action Page", "ActionPage", "Farm")
     @Html.ActionLink("Manage Farms/Lands/Fields", "Index", "Land")
     <a class="active">Capture Rainfall Record</a>
