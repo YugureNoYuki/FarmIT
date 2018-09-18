@@ -1,12 +1,12 @@
 ﻿@model farmLogin.Models.VehicleService
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Vehicle Service Details";
 }
 
 <style>
     body {
-        background-color: #87CEFA;
+        background-color: #3594C4;
     }
 
     .breadcrumb {
@@ -19,7 +19,7 @@
         font-size: 12px;
         font-weight: 700;
         position: center;
-        background: #87CEFA;
+        background: #3594C4;
         margin-left: -15px;
     }
 
@@ -157,9 +157,9 @@
 
 <div class="breadcrumb">
     @Html.ActionLink("Home", "Index", "Home")
-    @Html.ActionLink("Crop Action Page", "ActionPage", "Plantation")
-    @Html.ActionLink("Manage Silos", "Index", "Silo")
-    <a class="active">Silo Details</a>
+    @Html.ActionLink("Vehicle Action Page", "ActionPage", "Vehicle")
+    @Html.ActionLink("Manage Vehicles Services", "Index", "VehicleService")
+    <a class="active">Vehicle Service Details</a>
 </div>
 
 <div class="panel panel-success" id="PanelContent">
@@ -169,7 +169,7 @@
             <b>Vehicle Service Details</b>
             <span class="pull-right">
                 &nbsp;
-                <a href="@Url.Action("Edit", new { id = Model.VehicleServiceID})">
+                <a href="@Url.Action("Edit", new { id = Model.VehicleServiceID})" title="Edit">
                     <i class="glyphicon glyphicon-pencil"></i>
                     <span class="sr-only">Edit</span>
                 </a>
