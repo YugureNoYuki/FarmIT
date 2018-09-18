@@ -1,12 +1,12 @@
 ﻿@model farmLogin.Models.Supplier
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "View Supplier Details";
 }
 
 <style>
     body {
-        background-color: #87CEFA;
+        background-color: #3594C4;
     }
 
     .breadcrumb {
@@ -19,7 +19,7 @@
         font-size: 12px;
         font-weight: 700;
         position: center;
-        background: #87CEFA;
+        background: #3594C4;
         margin-left: -15px;
     }
 
@@ -148,6 +148,10 @@
     }
 </style>
 
+<header>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</header>
+
 
 <div class="breadcrumb">
     @Html.ActionLink("Home", "Index", "Home")
@@ -159,11 +163,11 @@
 <div class="panel panel-success" id="PanelContent">
     <div class="panel-heading">
         <h3 class="panel-title" style="color:black;">
-            <span class="glyphicon glyphicon-user"></span> &nbsp;
+            <i class="fas fa-shipping-fast"></i> &nbsp;
             <b>Supplier Details </b>
             <span class="pull-right">
                 &nbsp;
-                <a href="@Url.Action("Edit", new { id = Model.SupplierID})">
+                <a href="@Url.Action("Edit", new { id = Model.SupplierID})" title="Edit">
                     <i class="glyphicon glyphicon-pencil"></i>
                     <span class="sr-only">Edit</span>
                 </a>
