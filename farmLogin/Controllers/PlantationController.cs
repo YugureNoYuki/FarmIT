@@ -303,13 +303,25 @@ namespace farmLogin.Controllers
                 var field = db.Fields.Find(plantation.FieldID);
                 try
                 {
+                    if (field == null)
+                    {
+                        ModelState.AddModelError("FieldID", "Current fields are all occupied. Please add a new field or update existing fields");
+
+                        ViewBag.CropCycleID = new SelectList(db.CropCycles, "CropCycleID", "CropCycleDescr", plantation.CropCycleID);
+                        ViewBag.CropTypeID = new SelectList(db.CropTypes, "CropTypeID", "CropTypeDescr", plantation.CropTypeID);
+                        ViewBag.FieldID = new SelectList(db.Fields.Where(f => f.FieldStatusID != 2 && f.FieldStatusID != 3), "FieldID", "FieldName", plantation.FieldID); //Show available fields only
+                        ViewBag.FieldStageID = new SelectList(db.FieldStages, "FieldStageID", "FieldStageDescr", plantation.FieldStageID);
+                        ViewBag.RefugeUnit = new SelectList(db.Units.Where(u => u.UnitDescr.Contains("KG") || u.UnitDescr.Contains("GRAMS")), "UnitID", "UnitDescr", plantation.RefugeUnit);
+                        ViewBag.YieldUnit = new SelectList(db.Units.Where(u => u.UnitDescr.Contains("TONNE")), "UnitID", "UnitDescr", plantation.YieldUnit);
+                        return View(plantation);
+                    }
                     if ((decimal)plantation.RefugeAreaHectares > (decimal)field.FieldHectares) //RefugeeAreaHA cannot be greater than available Field HA
                     {
                         ModelState.AddModelError("RefugeAreaHectares", "Maximum available hectares for selected field is: " + field.FieldHectares);
 
                         ViewBag.CropCycleID = new SelectList(db.CropCycles, "CropCycleID", "CropCycleDescr", plantation.CropCycleID);
                         ViewBag.CropTypeID = new SelectList(db.CropTypes, "CropTypeID", "CropTypeDescr", plantation.CropTypeID);
-                        ViewBag.FieldID = new SelectList(db.Fields, "FieldID", "FieldName", plantation.FieldID);
+                        ViewBag.FieldID = new SelectList(db.Fields.Where(f => f.FieldStatusID != 2 && f.FieldStatusID != 3), "FieldID", "FieldName", plantation.FieldID); //Show available fields only
                         ViewBag.FieldStageID = new SelectList(db.FieldStages, "FieldStageID", "FieldStageDescr", plantation.FieldStageID);
                         ViewBag.RefugeUnit = new SelectList(db.Units.Where(u => u.UnitDescr.Contains("KG") || u.UnitDescr.Contains("GRAMS")), "UnitID", "UnitDescr", plantation.RefugeUnit);
                         ViewBag.YieldUnit = new SelectList(db.Units.Where(u => u.UnitDescr.Contains("TONNE")), "UnitID", "UnitDescr", plantation.YieldUnit);
