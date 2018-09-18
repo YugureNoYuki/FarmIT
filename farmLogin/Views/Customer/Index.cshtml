@@ -352,6 +352,15 @@
 </div>
 <br />
 <br />
+
+<div>
+    @Html.PagedListPager(Model.Customers, page => Url.Action("Index",@*Takes list of inventories and produces a hyperlink to each page*@
+    new
+    {
+        Search = @Model.Search,
+        page
+    }))
+</div>
 @* TODO: JQuery-Bootbox Confirmation Dialog for Delete Action *@
 <p>
     @*condition? first_expression : second_expression*@
@@ -363,12 +372,7 @@
     @*wrap in div for presentation purpose*@
     Page @(Model.Customers.PageCount < Model.Customers.PageNumber ? 0 : @*evaluate whether or not there are any pages to display*@
     Model.Customers.PageNumber) of @Model.Customers.PageCount @*Display Page x of y*@
-    @Html.PagedListPager(Model.Customers, page => Url.Action("Index",@*Takes list of inventories and produces a hyperlink to each page*@
-    new
-    {
-        Search = @Model.Search,
-        page
-    }))
+   
 </div>
 
 @section Scripts {
