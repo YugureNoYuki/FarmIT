@@ -1,6 +1,6 @@
 ﻿@model farmLogin.ViewModels.CropCycleIndexViewModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Crop Cycles";
 }
 <style>
      /*Confirmation Box*/
@@ -296,6 +296,9 @@
         </tr>
     }
 </table>
+<br />
+<br />
+
 <p>
     @*condition? first_expression : second_expression*@
     @(String.IsNullOrWhiteSpace(ViewBag.Search) ? "Showing all " : "You search for " + ViewBag.Search + " found ")@Model.CropCycles.TotalItemCount crop cycles
