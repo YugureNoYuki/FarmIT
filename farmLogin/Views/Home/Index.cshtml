@@ -676,6 +676,19 @@
         window.onload = function() {
             $.ajax({
                 method: "POST",
+                url: "/Home/NotifyService",
+                success: function (data) {
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(errorThrown);
+                }
+            });
+        }
+    </script>
+    <script>
+        window.onload = function() {
+            $.ajax({
+                method: "POST",
                 url: "/Home/NotifyLicense",
                 success: function (data) {
                 },
