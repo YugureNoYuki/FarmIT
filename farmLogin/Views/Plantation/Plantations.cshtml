@@ -1,4 +1,6 @@
-﻿@Html.AntiForgeryToken()
+﻿@model farmLogin.Models.Plantation
+
+@Html.AntiForgeryToken()
 @{
     ViewBag.Title = "View Plantations";
 }
@@ -325,7 +327,8 @@
 @* style sheets for FULLCalender from CDN *@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
-
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @section Scripts{
 
     @* JavaScripts for FULLCalender from CDN *@
@@ -334,9 +337,8 @@
     @* /////////////////////////////////////////////////*@
     @* /////////////////ORIGINAL GET FOR CALENDAR/////////////////*@
     @* /////////////////////////////////////////////////*@
-@*<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script type="text/javascript">
+
+@*<script type="text/javascript">
         @Model.JavaScriptToRun
 </script>
 <script type="text/javascript">
@@ -360,7 +362,7 @@
         var element = document.getElementById("navCrop");
         element.classList.add("active");
 </script>*@
-    <script>
+    <script type="text/javascript">
         $(function () {
             $(document).ready(function () {
                 var events = [];
@@ -698,5 +700,30 @@
                 }
             })
         })
+       
 </script>
+    <script type="text/javascript">
+         @Model.JavaScriptToRun
+    </script>
+    <script type="text/javascript">
+        @Model.JavaScriptToRun
+        function mySuccess() {
+
+            //alert('Item has successfully been added.');
+            //window.location = "/InventoryType/Index";
+
+            swal({
+                icon: "success",
+                title: "Success!",
+                text: "Item has successfully been updated.",
+                type: "warning"
+            }).then(function () {
+                window.location = "/Plantation/Plantations"
+            })
+        }
+
+        //Active Navbar
+        var element = document.getElementById("navCrop");
+        element.classList.add("active");
+    </script>
 }

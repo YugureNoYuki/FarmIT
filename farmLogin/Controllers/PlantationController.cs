@@ -38,8 +38,8 @@ namespace farmLogin.Controllers
 
         public ActionResult Plantations()
         {
-            //var plantation = db.Plantations.Include(p => p.CropCycle).Include(p => p.CropType).Include(p => p.Field).Include(p => p.SiloHarvests).Where(p => p.PlantationStatus == "Confirmed");
-            return View();
+            Plantation plantation = new Plantation();
+            return View(plantation);
         }
 
         public ActionResult Details(int? id)
@@ -933,6 +933,7 @@ namespace farmLogin.Controllers
                     db.SaveChanges();
 
                     plantation.JavaScriptToRun = "mySuccess()";
+                    return View("Plantations",plantation);
                 }
                 catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
                 {
@@ -951,6 +952,7 @@ namespace farmLogin.Controllers
                     }
                     throw raise;
                 }
+
                 return View("Plantations");
             }
         }
