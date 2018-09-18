@@ -3,7 +3,7 @@
 
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Suppliers";
 }
 
 <style>
@@ -149,11 +149,11 @@
     }
 
     .glyphicon-pencil {
-        color: #47A447;
+        color: #42b229;
     }
 
     .glyphicon-eye-open {
-        color: #479ce5;
+        color: #298fb2;
     }
 
     .glyphicon-trash {
@@ -329,6 +329,16 @@
         </div>
     </div>
 </div>
+
+<div>
+    @Html.PagedListPager(Model.Suppliers, page => Url.Action("Index",@*Takes list of suppliers and produces a hyperlink to each page*@
+    new
+    {
+        //farmworkertype = @Model.InventoryType,
+        Search = @Model.Search,
+        page
+    }))
+</div>
 <p>
     @*condition? first_expression : second_expression*@
     @(String.IsNullOrWhiteSpace(Model.Search) ? "Showing all " : "You searched for '" + Model.Search + "' found ")@Model.Suppliers.TotalItemCount suppliers
@@ -339,13 +349,6 @@
     @*wrap in div for presentation purpose*@
     Page @(Model.Suppliers.PageCount < Model.Suppliers.PageNumber ? 0 : @*evaluate whether or not there are any pages to display*@
     Model.Suppliers.PageNumber) of @Model.Suppliers.PageCount @*Display Page x of y*@
-    @Html.PagedListPager(Model.Suppliers, page => Url.Action("Index",@*Takes list of suppliers and produces a hyperlink to each page*@
-    new
-    {
-        //farmworkertype = @Model.InventoryType,
-        Search = @Model.Search,
-        page
-    }))
 </div>
 
 

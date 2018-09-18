@@ -2,7 +2,7 @@
 
 @using PagedList.Mvc @*PageList Library*@
 @{
-    ViewBag.Title = "Inventory";
+    ViewBag.Title = "Inventorys";
 }
 <style>
     /*Confirmation Box*/
@@ -181,12 +181,13 @@
     }
 
     .glyphicon-pencil {
-        color: #47A447;
+        color: #42b229;
     }
 
     .glyphicon-eye-open {
-        color: #479ce5;
+        color: #298fb2;
     }
+
 
     .glyphicon-trash {
         color: red;
@@ -396,14 +397,24 @@
                 Are you sure you want to delete this item?
             </div>
             <div class="modal-footer">
-                <button id="btnContinueCancel" data-dismiss="modal" type="button" class="btn btn-default">Cancel</button>
-                <button id="btnContinueDelete" type="button" class="btn btn-primary">Delete</button>
+                <button id="btnContinueCancel" data-dismiss="modal" type="button" class="btn btn-default pull-left">CANCEL</button>
+                <button id="btnContinueDelete" type="button" class="btn btn-primary">DELETE</button>
             </div>
         </div>
     </div>
 </div>
 <br />
 <br />
+
+<div>
+    @Html.PagedListPager(Model.Inventories, page => Url.Action("Index",@*Takes list of inventories and produces a hyperlink to each page*@
+    new
+    {
+        farmworkertype = @Model.InventoryType,
+        Search = @Model.Search,
+        page
+    }))
+</div>
 <p>
     @*condition? first_expression : second_expression*@
     @(String.IsNullOrWhiteSpace(Model.Search) ? "Showing all " : "You searched for '" + Model.Search + "' found ")@Model.Inventories.TotalItemCount inventory items
@@ -413,13 +424,6 @@
     @*wrap in div for presentation purpose*@
     Page @(Model.Inventories.PageCount < Model.Inventories.PageNumber ? 0 : @*evaluate whether or not there are any pages to display*@
     Model.Inventories.PageNumber) of @Model.Inventories.PageCount @*Display Page x of y*@
-    @Html.PagedListPager(Model.Inventories, page => Url.Action("Index",@*Takes list of inventories and produces a hyperlink to each page*@
-    new
-    {
-        farmworkertype = @Model.InventoryType,
-        Search = @Model.Search,
-        page
-    }))
 </div>
 @section Scripts {
     <script>

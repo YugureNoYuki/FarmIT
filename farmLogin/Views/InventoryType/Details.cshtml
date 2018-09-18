@@ -1,11 +1,11 @@
 ﻿@model farmLogin.Models.InventoryType
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "View Inventory Type Details";
 }
 <style>
     body {
-        background-color: #87CEFA;
+        background-color: #3594C4;
     }
 
     .breadcrumb {
@@ -18,7 +18,7 @@
         font-size: 12px;
         font-weight: 700;
         position: center;
-        background: #87CEFA;
+        background: #3594C4;
         margin-left: -15px;
     }
 
@@ -168,7 +168,7 @@
             <b>Inventory Item Type Details </b>
             <span>
                 &nbsp;
-                <a href="@Url.Action("Edit", new { id = Model.InvTypeID})">
+                <a href="@Url.Action("Edit", new { id = Model.InvTypeID})" title="Edit">
                     <i class="glyphicon glyphicon-pencil pull-right"></i>
                     <span class="sr-only">Edit</span>
                 </a>
