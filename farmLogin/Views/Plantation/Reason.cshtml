@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Reason";
+}
+
+<h2>Reason</h2>
+<div class="panel panel-success">
+    <div class="panel-heading">
+    </div>
+    <div class="panel-body">
+        <div class="input-group">
+            <a href='@Url.Action("FieldNaturalDisaster", "Plantation")' class="btn btn-success btn-lg">Natural Disaster</a>
+            <a href='@Url.Action("FieldBioDisaster", "Plantation")' class="btn btn-success btn-lg">Biological Disaster</a>
+            <a href='@Url.Action("NotApplicable", "Plantation")' class="btn btn-success btn-lg">Not Applicable</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    //Active Navbar
+    var element = document.getElementById("navCrop");
+    element.classList.add("active");
+</script>

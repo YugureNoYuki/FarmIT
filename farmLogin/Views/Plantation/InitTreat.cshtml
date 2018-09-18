@@ -235,6 +235,29 @@
         </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="confirm-submit" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-hidden="true" data-dismiss=" modal">&times;</button>
+                    <h4 class="modal-title">Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Please confirm that you want to save these details.</p>
+
+                </div>
+                <div class="modal-footer">
+                    <button id="Confirm" type="submit" class="btn btn-success" style="float:right">CONFIRM</button>
+                    <button id="Cancel" type="button" class="btn btn-warning" data-dismiss="modal" style="float: left">CANCEL</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 }
 <div class="row">
 
@@ -255,13 +278,44 @@
 
     </div>
 </div>
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+    <script type="text/javascript">
+        @*@Model.JavaScriptToRun
+        function mySuccess() {
 
-<script>
+            //alert('Item has successfully been added.');
+            //window.location = "/InventoryType/Index";
+
+            swal({
+                icon: "success",
+                title: "Success!",
+                text: "Item has successfully been added.",
+                type: "warning"
+            }).then(function () {
+                window.location = "/Plantation/Index"
+            })
+        }*@
+
+        //Active Navbar
         var element = document.getElementById("navCrop");
         element.classList.add("active");
-</script>
+    </script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //date picker for PLANT DATE
+            $(".date-picker").datepicker({
+                minDate : 'now'
+            });
+
+            //initialise datepicker dates with today date for start and +1d for end date
+            $(".date-picker").datepicker("setDate", "+0d");
+        });
+    </script>
+}
