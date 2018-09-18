@@ -1,12 +1,12 @@
 ﻿@model farmLogin.Models.Inventory
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "View Inventory Details";
 }
 
 <style>
     body {
-        background-color: #87CEFA;
+        background-color: #3594C4;
     }
 
     .breadcrumb {
@@ -19,7 +19,7 @@
         font-size: 12px;
         font-weight: 700;
         position: center;
-        background: #87CEFA;
+        background: #3594C4;
         margin-left: -15px;
     }
 
@@ -92,7 +92,7 @@
             }
 
     .panel {
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
     }
 
     #PanelContent {
@@ -154,6 +154,10 @@
     }
 </style>
 
+<header>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</header>
+
 
 <div class="breadcrumb">
     @Html.ActionLink("Home", "Index", "Home")
@@ -165,11 +169,11 @@
 <div class="panel panel-success" id="PanelContent">
     <div class="panel-heading">
         <h3 class="panel-title" style="color:black;">
-            <span class="glyphicon glyphicon-folder-close"></span> &nbsp;
+            <i class="fas fa-box"></i> &nbsp;
             <b>Inventory Item Details </b>
             <span class="pull-right">
                 &nbsp;
-                <a href="@Url.Action("Edit", new { id = Model.InventoryID})">
+                <a href="@Url.Action("Edit", new { id = Model.InventoryID})" title="Edit">
                     <i class="glyphicon glyphicon-pencil"></i>
                     <span class="sr-only">Edit</span>
                 </a>
