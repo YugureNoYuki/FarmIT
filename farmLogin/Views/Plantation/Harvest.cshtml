@@ -217,7 +217,7 @@
         </div>
         <div style="color: red">
             @if (@ViewBag.Error != null)
-                {
+            {
                 <label><br />&nbsp;&nbsp; @ViewBag.Error <br /></label>
             }
 
@@ -282,7 +282,7 @@
             </div>
         </div>
     </div>
-}
+
         <div class="input-group">
             <div class="input-group-btn">
                 <button class="btn btn-success" type="button" id="btnSave" data-toggle="modal" data-target="#confirm-submit">
@@ -291,6 +291,30 @@
                 </button>
             </div>
         </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="confirm-submit" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" aria-hidden="true" data-dismiss=" modal">&times;</button>
+                        <h4 class="modal-title">Confirmation</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Please confirm that you want to save these details.</p>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button id="Confirm" type="submit" class="btn btn-success" style="float:right">CONFIRM</button>
+                        <button id="Cancel" type="button" class="btn btn-warning" data-dismiss="modal" style="float: left">CANCEL</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+}
 
             @*@Html.LabelFor(model => model.PlantationID, "PlantationID", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">

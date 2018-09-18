@@ -26,7 +26,6 @@ namespace farmLogin
             //ModelBinders.Binders.Add(typeof(decimal), new Controllers.FieldController.DecimalModelBinder());
             //DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(Controllers.FieldController.DecimalAttribute), typeof(RegularExpressionAttributeAdapter));
 
-
         }
     }
 }

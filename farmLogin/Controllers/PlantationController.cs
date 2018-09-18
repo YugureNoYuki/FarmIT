@@ -78,24 +78,44 @@ namespace farmLogin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Plantation plantation)
         {
-            plantation.CropCycleID = 1;
-            plantation.FieldStageID = 1;
-            plantation.PlantationStatus = "Planned";
-
             if (ModelState.IsValid)
             {
-                plantation.CropCycleID = 1; //This is not correct
-                plantation.FieldStageID = 1; //Stage 0 - Planned
-                db.Plantations.Add(plantation);
-                db.SaveChanges();
-                ViewBag.CropCycleID = new SelectList(db.CropCycles, "CropCycleID", "CropCycleDescr", plantation.CropCycleID);
-                ViewBag.CropTypeID = new SelectList(db.CropTypes, "CropTypeID", "CropTypeDescr", plantation.CropTypeID);
-                ViewBag.FieldID = new SelectList(db.Fields, "FieldID", "FieldName", plantation.FieldID);
-                ViewBag.FieldStageID = new SelectList(db.FieldStages, "FieldStageID", "FieldStageDescr", plantation.FieldStageID);
-                ViewBag.RefugeUnit = new SelectList(db.Units.Where(u => u.UnitDescr.Contains("KG") || u.UnitDescr.Contains("GRAMS")), "UnitID", "UnitDescr", plantation.RefugeUnit);
-                ViewBag.YieldUnit = new SelectList(db.Units.Where(u => u.UnitDescr.Contains("TONNE")), "UnitID", "UnitDescr", plantation.YieldUnit);
-                plantation.JavaScriptToRun = "mySuccess()";
-                return View(plantation);
+                try
+                {
+                    TempData["plantationId"] = plantation.PlantationID;
+                    plantation.CropCycleID = 1; //This is not correct
+                    plantation.FieldStageID = 1; //Stage 0 - Planned
+                    plantation.PlantationStatus = "Planned";
+                    db.Plantations.Add(plantation);
+                    db.SaveChanges();
+
+                    ViewBag.CropCycleID = new SelectList(db.CropCycles, "CropCycleID", "CropCycleDescr", plantation.CropCycleID);
+                    ViewBag.CropTypeID = new SelectList(db.CropTypes, "CropTypeID", "CropTypeDescr", plantation.CropTypeID);
+                    ViewBag.FieldID = new SelectList(db.Fields, "FieldID", "FieldName", plantation.FieldID);
+                    ViewBag.FieldStageID = new SelectList(db.FieldStages, "FieldStageID", "FieldStageDescr", plantation.FieldStageID);
+                    ViewBag.RefugeUnit = new SelectList(db.Units.Where(u => u.UnitDescr.Contains("KG") || u.UnitDescr.Contains("GRAMS")), "UnitID", "UnitDescr", plantation.RefugeUnit);
+                    ViewBag.YieldUnit = new SelectList(db.Units.Where(u => u.UnitDescr.Contains("TONNE")), "UnitID", "UnitDescr", plantation.YieldUnit);
+                    plantation.JavaScriptToRun = "mySuccess()";
+
+                    return View(plantation);
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+                {
+                    Exception raise = dbEx;
+                    foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            string message = string.Format("{0}:{1}",
+                                validationErrors.Entry.Entity.ToString(),
+                                validationError.ErrorMessage);
+                            // raise a new exception nesting
+                            // the current instance as InnerException
+                            raise = new InvalidOperationException(message, raise);
+                        }
+                    }
+                    throw raise;
+                }
             }
 
             ViewBag.CropCycleID = new SelectList(db.CropCycles, "CropCycleID", "CropCycleDescr", plantation.CropCycleID);
@@ -283,7 +303,7 @@ namespace farmLogin.Controllers
                 var field = db.Fields.Find(plantation.FieldID);
                 try
                 {
-                    if((decimal)plantation.RefugeAreaHectares > (decimal)field.FieldHectares) //RefugeeAreaHA cannot be greater than available Field HA
+                    if ((decimal)plantation.RefugeAreaHectares > (decimal)field.FieldHectares) //RefugeeAreaHA cannot be greater than available Field HA
                     {
                         ModelState.AddModelError("RefugeAreaHectares", "Maximum available hectares for selected field is: " + field.FieldHectares);
 
@@ -374,17 +394,49 @@ namespace farmLogin.Controllers
 
             if (ModelState.IsValid)
             {
-                int plantationID = (int)TempData["plantationId"];
-                siloHarvest.PlantationID = plantationID;
-                db.SiloHarvests.Add(siloHarvest);
-                db.SaveChanges();
+                //decrease Silo Available Qty
+                var silo = db.Silos.Find(siloHarvest.SiloID);
+                silo.SiloCapacity -= siloHarvest.SiloHarvestTonnesStored;
+                if (silo.SiloCapacity <= 0)
+                {
+                    ModelState.AddModelError("SiloHarvestTonnesStored", "Maximum Silo capacity has been reached");
+
+                    ViewBag.PlantationID = new SelectList(db.Plantations, "PlantationID", "PlantationStatus", siloHarvest.PlantationID);
+                    ViewBag.SiloID = new SelectList(db.Silos, "SiloID", "SiloDescr", siloHarvest.SiloID);
+                    return View(siloHarvest);
+                }
+                try
+                {
+                    int plantationID = (int)TempData["plantationId"];
+                    siloHarvest.PlantationID = plantationID;
+                    db.SiloHarvests.Add(siloHarvest);
+
+                    db.SaveChanges();
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+                {
+                    Exception raise = dbEx;
+                    foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            string message = string.Format("{0}:{1}",
+                                validationErrors.Entry.Entity.ToString(),
+                                validationError.ErrorMessage);
+                            // raise a new exception nesting
+                            // the current instance as InnerException
+                            raise = new InvalidOperationException(message, raise);
+                        }
+                    }
+                    throw raise;
+                }
 
                 //Calculate difference between ExpectedYield and SiloHarvestTonnes stored
                 using (FarmDbContext dc = new FarmDbContext())
                 {
-                    var plantation = dc.Plantations.Find(plantationID);
-                    //var expYield = plantation.ExpectedYieldQnty;
-                    //var siloHarvestTStored = siloHarvest.SiloHarvestTonnesStored;
+                    var plantation = dc.Plantations.Find(siloHarvest.PlantationID);
+                    var expYield = plantation.ExpectedYieldQnty;
+                    var siloHarvestTStored = siloHarvest.SiloHarvestTonnesStored;
                     //var yieldDiff = expYield - siloHarvestTStored;
                     decimal yieldDiff = plantation.ExpectedYieldQnty - siloHarvest.SiloHarvestTonnesStored;
                     if (yieldDiff > 0)
@@ -394,12 +446,186 @@ namespace farmLogin.Controllers
                     }
                 }
 
-                return RedirectToAction("Index", "Plantation");
+                return RedirectToAction("Plantations", "Plantation");
             }
 
             ViewBag.PlantationID = new SelectList(db.Plantations, "PlantationID", "PlantationStatus", siloHarvest.PlantationID);
             ViewBag.SiloID = new SelectList(db.Silos, "SiloID", "SiloDescr", siloHarvest.SiloID);
             return View(siloHarvest);
+        }
+
+        public ActionResult Reason() //plantationId
+        {
+            //TempData["plantation"] = id;
+            return View();
+        }
+
+        public ActionResult FieldBioDisaster()
+        {
+            ViewBag.NatDisasterID = new SelectList(db.NaturalDisasters, "NatDisasterID", "NatDisasterDescr");
+            ViewBag.BioDisasterID = new SelectList(db.BiologicalDisasters, "BioDisasterID", "BioDisasterDescr");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult FieldBioDisaster(BiologicalDisaster biodisaster)
+        {
+            FieldBiologicalDisaster model = new FieldBiologicalDisaster();
+            //biodisaster.BioDisasterDescr = db.BiologicalDisasters.Where(p => p.BioDisasterID == biodisaster.BioDisasterID).ToString();
+            //if (ModelState.IsValid)
+            //{
+                using (FarmDbContext dc = new FarmDbContext())
+                {
+
+                    model.Date = System.DateTime.Now;
+                    int f = (int)TempData["plantationId"];
+                    var fld = dc.Plantations.Find(f);
+                    int fId = fld.FieldID;
+                    model.FieldID = f;
+                    model.BioDisasterID = biodisaster.BioDisasterID;
+
+                    //populate FieldNatural Disaster table
+                    dc.FieldBiologicalDisasters.Add(model);
+                    dc.SaveChanges();
+                    //routeId = 0; //reset
+                    return RedirectToAction("SpecifyHarvestComplete");
+                }
+            //}
+            ViewBag.NatDisasterID = new SelectList(db.NaturalDisasters, "NatDisasterID", "NatDisasterDescr");
+            ViewBag.BioDisasterID = new SelectList(db.BiologicalDisasters, "BioDisasterID", "BioDisasterDescr");
+            return View();
+        }
+        //GET
+        public ActionResult FieldNaturalDisaster()   //return the view FieldNaturalDisaster
+        {
+            //get field Id
+            //int fplantation = (int)TempData["plantation"];
+            //using (FarmDbContext dc = new FarmDbContext())
+            //{
+            //    var f = dc.Plantations.Find(fplantation);
+            //    int fId = f.FieldID; //got my field
+            //    ViewBag.FieldID = fId; //store in viewBag
+            //}
+            //ViewBag.FieldID = new SelectList(db.Fields, "FieldID", "FielDescr");
+            ViewBag.NatDisasterID = new SelectList(db.NaturalDisasters, "NatDisasterID", "NatDisasterDescr");
+            ViewBag.BioDisasterID = new SelectList(db.BiologicalDisasters, "BioDisasterID", "BioDisasterDescr");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult FieldNaturalDisaster(NaturalDisaster naturaldisaster)
+        {
+            FieldNaturalDisaster model = new FieldNaturalDisaster(); //populate this obj and save in db
+            //assgin variables and save to db
+            using (FarmDbContext dc = new FarmDbContext())
+            {
+                model.Date = System.DateTime.Now;
+                int f = (int)TempData["plantationId"];
+                var fld = dc.Plantations.Find(f);
+                int fId = fld.FieldID;
+                model.FieldID = f;
+                model.NatDisasterID = naturaldisaster.NatDisasterID;
+
+
+
+                //populate FieldNatural Disaster table
+                dc.FieldNaturalDisasters.Add(model);
+                dc.SaveChanges();
+                //routeId = 0; //reset
+                return RedirectToAction("SpecifyHarvestComplete");
+            }
+            ViewBag.NatDisasterID = new SelectList(db.NaturalDisasters, "NatDisasterID", "NatDisasterDescr");
+            ViewBag.BioDisasterID = new SelectList(db.BiologicalDisasters, "BioDisasterID", "BioDisasterDescr");
+            return View();
+        }
+
+        public ActionResult SpecifyHarvestComplete()
+        {
+            return View();
+        }
+        public ActionResult PartialHarvest()
+        {
+            using (FarmDbContext dc = new FarmDbContext())
+            {
+                var plantation = dc.Plantations.Find(routeId);
+                //if (ModelState.IsValid)
+                //{
+                if (plantation != null)
+                {
+                    //var plantation = dc.Plantations.Find(routeId);
+                    try
+                    {
+                        // plantation.PlantationStatus = "Complete";
+                        dc.Entry(plantation).State = EntityState.Modified;
+                        dc.SaveChanges();
+                    }
+                    catch (Exception err)
+                    {
+
+                        ViewBag.Message = err.Message;
+                    }
+                    return RedirectToAction("Index", "Plantation"); //success
+                }
+                else
+                {
+                    ViewBag.Message = "Model is not valid";
+                }
+
+                //routeId = 0; //empty
+                RedirectToAction("Index", "Plantation");
+            }
+            return View();
+        }
+
+        public ActionResult NotApplicable()
+        {
+            return RedirectToAction("Create");
+        }
+
+        public ActionResult CompleteHarvest()
+        {
+            using (FarmDbContext dc = new FarmDbContext())
+            {
+                int plantationID = (int)TempData["plantationId"];
+                var plantation = dc.Plantations.Find(plantationID);
+                //if (ModelState.IsValid)
+                //{
+                if (plantation != null)
+                {
+                    //var plantation = dc.Plantations.Find(routeId);
+                    try
+                    {
+                        //Update plantation Status = "Complete"
+                        plantation.PlantationStatus = "Complete";
+                        dc.Entry(plantation).State = EntityState.Modified;
+
+                        //Update Field Status = "In preparation"
+                        var field = dc.Fields.Find(plantation.FieldID);
+                        field.FieldStatusID = 1; //"In preparation";
+                        dc.Entry(field).State = EntityState.Modified;
+
+                        dc.SaveChanges();
+
+                        //RedirectToAction("Index", "Plantation");
+                    }
+                    catch (Exception err)
+                    {
+
+                        ViewBag.Message = err.Message;
+                    }
+
+                }
+                else
+                {
+                    ViewBag.Message = "Model is not valid";
+                }
+
+                //routeId = 0; //empty
+                return RedirectToAction("Index", "Plantation", null);
+            }
+            //return View();
         }
 
         #endregion
@@ -412,7 +638,7 @@ namespace farmLogin.Controllers
             ViewBag.InventoryID = new SelectList(db.Inventories, "InventoryID", "InvDescr");
             ViewBag.TreatmentID = new SelectList(db.Treatments.Where(t => !t.TreatmentDescr.Contains("Stage 2 (Secondary) Treatment") && !t.TreatmentDescr.Contains("Ad-Hoc Treatment")), "TreatmentID", "TreatmentDescr");
             ViewBag.Unit = new SelectList(db.Units.Where(u => !u.UnitDescr.Contains("MM") && !u.UnitDescr.Contains("HOURS") && !u.UnitDescr.Contains("KM") && !u.UnitDescr.Contains("HA") && !u.UnitDescr.Contains("ML")), "UnitID", "UnitDescr");
-           //id = (int)TempData["plantationId"];
+            //id = (int)TempData["plantationId"];
             //if (id == null)
             //{
             //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -420,13 +646,13 @@ namespace farmLogin.Controllers
             //GET PlantationID & FieldID
             //using (FarmDbContext dc = new FarmDbContext())
             //{
-                //var tplantation = db.Plantations.Find(id); //  plantation id
-                //InitTreat(null, plantationID);
-                //if(tplantation == null)
-                //{
-                //    return HttpNotFound();
-                //}
-                //return View();
+            //var tplantation = db.Plantations.Find(id); //  plantation id
+            //InitTreat(null, plantationID);
+            //if(tplantation == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //return View();
             //}
 
             return View();
@@ -578,7 +804,7 @@ namespace farmLogin.Controllers
                 var qty = db.Inventories.Find(inventoryTreatment.InventoryID);
                 try
                 {
-                    if(Convert.ToInt32(inventoryTreatment.TreatmentQnty) > Convert.ToInt32(qty.InvQty))
+                    if (Convert.ToInt32(inventoryTreatment.TreatmentQnty) > Convert.ToInt32(qty.InvQty))
                     {
                         //return error message: Selected quantity cannot be more than the available inventory qty
 
@@ -586,7 +812,7 @@ namespace farmLogin.Controllers
 
                         ViewBag.InventoryID = new SelectList(db.Inventories, "InventoryID", "InvDescr", inventoryTreatment.InventoryID);
                         ViewBag.TreatmentID = new SelectList(db.Treatments.Where(t => !t.TreatmentDescr.Contains("Stage 1 (Initial) Treatment")), "TreatmentID", "TreatmentDescr", inventoryTreatment.TreatmentID); //Treatment can only be stage 2 or Ad-Hoc
-                        ViewBag.Unit = new SelectList(db.Units.Where(u=> !u.UnitDescr.Contains("MM") && !u.UnitDescr.Contains("HOURS") && !u.UnitDescr.Contains("KM") && !u.UnitDescr.Contains("HA") && !u.UnitDescr.Contains("ML")), "UnitID", "UnitDescr", inventoryTreatment.Unit);
+                        ViewBag.Unit = new SelectList(db.Units.Where(u => !u.UnitDescr.Contains("MM") && !u.UnitDescr.Contains("HOURS") && !u.UnitDescr.Contains("KM") && !u.UnitDescr.Contains("HA") && !u.UnitDescr.Contains("ML")), "UnitID", "UnitDescr", inventoryTreatment.Unit);
 
                         return View(inventoryTreatment);
                     }
@@ -658,7 +884,7 @@ namespace farmLogin.Controllers
 
 
                 //CreateFieldTreatment(inventoryTreatment.TreatmentID)
-                return RedirectToAction("Plantations","Plantation");
+                return RedirectToAction("Plantations", "Plantation");
             }
 
             ViewBag.InventoryID = new SelectList(db.Inventories, "InventoryID", "InvDescr", inventoryTreatment.InventoryID);

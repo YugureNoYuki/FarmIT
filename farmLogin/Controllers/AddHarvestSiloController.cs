@@ -82,8 +82,9 @@ namespace farmLogin.Controllers
                     //float yieldDiff = plantation.ExpectedYieldQnty - siloHarvest.SiloHarvestTonnesStored;
                     if (yieldDiff > 0)
                     {
-                        return RedirectToAction("Reason");
+                        //return RedirectToAction("Reason");
                         //return Reason(plantationID);
+                        Reason(plantationID);
                     }
                 }
 
@@ -95,9 +96,10 @@ namespace farmLogin.Controllers
             return View(siloHarvest);
         }
 
-        public ActionResult Reason() //plantationId
+        public ActionResult Reason(int? id) //plantationId
         {
             //TempData["plantation"] = id;
+            id = (int)TempData["plantationId"];
             return View();
         }
 
@@ -120,7 +122,7 @@ namespace farmLogin.Controllers
             {
 
                 model.Date = System.DateTime.Now;
-                int f = routeId;
+                int f = (int)TempData["plantationId"];
                 var fld = dc.Plantations.Find(f);
                 int fId = fld.FieldID;
                 model.FieldID = f;
@@ -235,7 +237,8 @@ namespace farmLogin.Controllers
         {
             using (FarmDbContext dc = new FarmDbContext())
             {
-                var plantation = dc.Plantations.Find(routeId);
+                int plantationID = (int)TempData["plantationId"];
+                var plantation = dc.Plantations.Find(plantationID);
                 //if (ModelState.IsValid)
                 //{
                 if (plantation != null)
@@ -243,10 +246,16 @@ namespace farmLogin.Controllers
                     //var plantation = dc.Plantations.Find(routeId);
                     try
                     {
-                        plantation.PlantationStatus = "In preparation";
+                        //Update Plantation Status to "Complete"
+                        plantation.PlantationStatus = "Complete";
                         dc.Entry(plantation).State = EntityState.Modified;
-                        dc.SaveChanges();
 
+                        //Update Field Status = "In preparation"
+                        var field = dc.Fields.Find(plantation.FieldID);
+                        field.FieldStatusID = 1; //"In preparation";
+                        dc.Entry(field).State = EntityState.Modified;
+
+                        dc.SaveChanges();
                         //RedirectToAction("Index", "Plantation");
                     }
                     catch (Exception err)

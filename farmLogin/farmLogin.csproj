@@ -877,10 +877,10 @@
     <Content Include="Views\AttendenceSheets\Create.cshtml" />
     <Content Include="Views\Plantation\Confirm.cshtml" />
     <Content Include="Views\AddHarvestSilo\Create.cshtml" />
-    <Content Include="Views\AddHarvestSilo\Reason.cshtml" />
-    <Content Include="Views\AddHarvestSilo\FieldBioDisaster.cshtml" />
-    <Content Include="Views\AddHarvestSilo\FieldNaturalDisaster.cshtml" />
-    <Content Include="Views\AddHarvestSilo\SpecifyHarvestComplete.cshtml" />
+    <Content Include="Views\Plantation\Reason.cshtml" />
+    <Content Include="Views\Plantation\FieldBioDisaster.cshtml" />
+    <Content Include="Views\Plantation\FieldNaturalDisaster.cshtml" />
+    <Content Include="Views\Plantation\SpecifyHarvestComplete.cshtml" />
     <Content Include="Views\Plantation\Treat.cshtml" />
     <Content Include="Views\AttendanceSheetReport\Index.cshtml" />
     <Content Include="Views\FarmWorkerReport\Index.cshtml" />
