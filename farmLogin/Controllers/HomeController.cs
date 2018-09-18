@@ -114,7 +114,7 @@ namespace farmLogin.Controllers
         }
 
         [HttpPost]
-        public void NotifyLicense()
+        public void NotifyService()
         {
             //get list of all vehicles
             var vList = db.Vehicles.ToList();
@@ -146,6 +146,68 @@ namespace farmLogin.Controllers
                         subject = "Notify Vehicle Service";
 
                         body = "<br/><br/><b>Your Vehicle, " + item.VehName + "<b/>, with License Number of <b>" + item.VehLicenseNum + "<b/> has reached the halfway mark of its Servicing Interval.<br/><br/>Current Mileage: " + item.VehCurrMileage + "<br/>Next Service: " + item.VehNextService + "<br/><br/>Please update the indicated vehicle's servicing details accordingly on the system.<br/><br/>Vehicle's Current Details:<br/><b>Name: <b/>" + item.VehName + "<br/><b>Year: <b/>" + item.VehYear + "<br/><b>Model: <b/>" + item.VehModel + "<br/><b>License Number: <b/>" + item.VehLicenseNum + "<b><br/>Current Mileage: <b/>" + item.VehCurrMileage + "<br/><b>Next Servicing Mileage: <b/>" + item.VehNextService + "<br/><b>Servicing Interval: <b/>" + item.VehServiceInterval + "<br/><br/><b>Disclaimer:<b/> This email will be sent to you everytime you reach the dashboard of the system, until the Vehicle's Servicing Details has been manually updated on the system.";
+                    }
+
+
+                    var smtp = new SmtpClient
+                    {
+                        Host = "smtp.gmail.com",
+                        Port = 587,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
+                    };
+
+                    using (var message = new MailMessage(fromEmail, toEmail)
+                    {
+                        Subject = subject,
+                        Body = body,
+                        IsBodyHtml = true
+                    })
+
+                        smtp.Send(message);
+                }
+            }
+        }
+
+        [HttpPost]
+        public void NotifyLicense()
+        {
+            //get list of all vehicles
+            var vList = db.Vehicles.ToList();
+
+            //get list of all users
+            var uList = db.Users.ToList();
+
+            //get the email of currently logged in email
+            var email = User.Identity.GetUserName();
+
+            //user email to find the id of currently logged in user
+            var currID = uList.Where(a => a.UserEmailAddress == email).Select(a => a.UserID).FirstOrDefault();
+
+            var fromEmail = new MailAddress("u15185142@tuks.co.za", "FarmIT Notification Service"); //Of course I'm awesome
+            var toEmail = new MailAddress(email);
+            var fromEmailPassword = "Pp15185142"; //Password is taken out :)
+
+            foreach (var item in vList)
+            {
+                DateTime d1 = DateTime.Now;
+                DateTime d2 = item.VehExpDate;
+
+                TimeSpan span = d2.Subtract(d1);
+                int diff = (int)span.TotalDays;
+
+
+                if (diff <= 7)
+                {
+                    string subject = "";
+                    string body = "";
+                    if (email != null)
+                    {
+                        subject = "Notify Vehicle Service";
+
+                        body = "<br/><br/><b>Your Vehicle, " + item.VehName + "<b/>, with License Number of <b>" + item.VehLicenseNum + "<b/> will have its License Number expiring within the next 7 days.<br/><br/>Current Date: " + DateTime.Now.ToShortDateString() + "<br/>License Expiry Date: " + item.VehExpDate.ToShortDateString() + "<br/><br/>Please renew and update the indicated vehicle's license number accordingly on the system.<br/><br/>Vehicle's Current Details:<br/><b>Name: <b/>" + item.VehName + "<br/><b>Year: <b/>" + item.VehYear + "<br/><b>Model: <b/>" + item.VehModel + "<br/><b>License Number: <b/>" + item.VehLicenseNum + "<b><br/>License Expiry Date: " + item.VehExpDate.ToShortDateString() + "<br/><br/>Current Mileage: <b/>" + item.VehCurrMileage + "<br/><b>Next Servicing Mileage: <b/>" + item.VehNextService + "<br/><b>Servicing Interval: <b/>" + item.VehServiceInterval + "<br/><br/><b>Disclaimer:<b/> This email will be sent to you everytime you reach the dashboard of the system, until the Vehicle's Servicing Details has been manually updated on the system.";
                     }
 
 
