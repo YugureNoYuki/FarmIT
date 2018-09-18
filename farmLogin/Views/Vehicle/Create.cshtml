@@ -1,113 +1,48 @@
 ﻿@model farmLogin.Models.Vehicle
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Add Vehicle";
 }
 
 @*style*@
 <style>
+    /*Confirmation*/
+    /*Green Button*/
 
-    /*Confirmation Box*/
-
-/*Confirmation Box*/
-
-.swal-button--confirm {
-    font-family: Arial;
-    font-weight: 600;
-    font-size: 12px;
-    display: inline-block;
-    background-color: #52963f;
-    border-color: #52963f;
-    border-radius: 5px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-}
-
-    .swal-button--confirm:hover {
-        background-color: #24820e;
-        border-color: #24820e;
-        transition: 0.3s;
+    #Confirm {
+        font-family: Arial;
+        font-weight: 600;
+        font-size: 12px;
+        display: inline-block;
+        background-color: #52963f;
+        border-color: #52963f;
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
     }
 
-.swal-button--cancel {
-    font-family: Arial;
-    font-weight: 600;
-    font-size: 12px;
-    display: inline-block;
-    background-color: #e0422a;
-    border-color: #e0422a;
-    border-radius: 5px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-}
-
-    .swal-button--cancel:hover {
-        background-color: #bc1c03;
-        border-color: #bc1c03;
-        transition: 0.3s;
-    }
-/*Success Box*/
-.swal-button--confirm {
-    padding: 7px 19px;
-    border-radius: 2px;
-    background-color: #4962B3;
-    font-size: 12px;
-    border: 1px solid #3e549a;
-    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
-}
-
-    .swal-button--confirm:hover {
-        background-color: #24820e;
-        border-color: #24820e;
-        transition: 0.3s;
+        #Confirm:hover {
+            background-color: #24820e;
+            border-color: #24820e;
+            transition: 0.3s;
+        }
+    /*Red Button*/
+    #Cancel {
+        font-family: Arial;
+        font-weight: 600;
+        font-size: 12px;
+        display: inline-block;
+        background-color: #e5543d;
+        border-color: #e0422a;
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
     }
 
-/*Remove or Archive Confirmation Box*/
-.swal-button--confirm {
-    font-family: Arial;
-    font-weight: 600;
-    font-size: 12px;
-    display: inline-block;
-    background-color: #52963f;
-    border-color: #52963f;
-    border-radius: 5px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-}
+        #Cancel:hover {
+            background-color: #bc1c03;
+            border-color: #bc1c03;
+            transition: 0.3s;
+        }
 
-
-/*Confirmation Box*/
-
-.swal-button--confirm {
-    font-family: Arial;
-    font-weight: 600;
-    font-size: 12px;
-    display: inline-block;
-    background-color: #888c8b;
-    border-color: #888c8b;
-    border-radius: 5px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-}
-
-    .swal-button--confirm:hover {
-        background-color: #24820e;
-        border-color: #24820e;
-        transition: 0.3s;
-    }
-
-.swal-button--cancel {
-    font-family: Arial;
-    font-weight: 600;
-    font-size: 12px;
-    display: inline-block;
-    background-color: #e0422a;
-    border-color: #e0422a;
-    border-radius: 5px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-}
-
-    .swal-button--cancel:hover {
-        background-color: #bc1c03;
-        border-color: #bc1c03;
-        transition: 0.3s;
-    }
     .breadcrumb {
         display: inline-block;
         overflow: hidden;
@@ -118,7 +53,7 @@
         font-size: 12px;
         font-weight: 700;
         position: center;
-        background: #87CEFA;
+        background-color: #3594C4;
         margin-left: -15px;
     }
 
@@ -133,7 +68,7 @@
             background: #d1d1d1;
             color: black;
             position: relative;
-            box-shadow: 0 3px 6px black;
+            box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
         }
 
             .breadcrumb a:first-child {
@@ -191,11 +126,11 @@
             }
 
     body {
-        background-color: #87CEFA;
+        background-color: #3594C4;
     }
 
     .panel {
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
     }
 
     #PanelContent {
@@ -218,31 +153,13 @@
         font-family: Arial;
         font-size: 14px;
         display: inline-block;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
         width: 100px;
         border-radius: 5%;
     }
 
         .btn:hover {
             background-color: #25820F;
-            transition: 0.5s;
-        }
-
-    .btn-primary {
-        font-weight: 600;
-        background-color: #428bca;
-        border-color: #357ebd;
-        font-family: Arial;
-        font-size: 14px;
-        display: inline-block;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-        width: auto !important;
-        border-radius: 5%;
-    }
-
-        .btn-primary:hover {
-            background-color: #2072d6;
-            border-color: #2072d6;
             transition: 0.5s;
         }
 
@@ -258,7 +175,24 @@
         background-image: none;
         background-color: #d8d8d8;
     }
+
+    #addVehicleType {
+        width: 200px;
+        background-color: #385f99;
+        border-color: #385f99;
+    }
+
+        #addVehicleType:hover {
+            background: #1955a0;
+            border-color: #1955a0;
+        }
 </style>
+
+
+<header>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</header>
+
 
 @*Breadcrumb*@
 <div class="breadcrumb">
@@ -275,7 +209,7 @@
             {
             <div class="input-group">
                 <div class="input-group-btn">
-                    <button class="btn btn-primary" type="submit">
+                    <button class="btn btn-primary" type="submit" id="addVehicleType">
                         <span class="glyphicon glyphicon-plus"></span>
                         Add Vehicle Type
                     </button>
@@ -298,7 +232,7 @@
     //General Vehicle Details Panel
     <div class="panel panel-success">
         <div class="panel-heading">
-            <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-folder-close"></span> &nbsp;Add General Vehicle Details</b></h3>
+            <h3 class="panel-title" style="color:black;"><b><span class="fas fa-truck-pickup"></span> &nbsp;Add General Vehicle Details</b></h3>
         </div>
         <div style="color: red">
             @if (@ViewBag.Error != null)
@@ -395,7 +329,7 @@
     //Vehicle Engine and License Details
     <div class="panel panel-success">
         <div class="panel-heading">
-            <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-folder-close"></span> &nbsp;Add Vehicle Engine and License Details</b></h3>
+            <h3 class="panel-title" style="color:black;"><b><span class="fas fa-file-alt"></span> &nbsp;Add Vehicle Engine and License Details</b></h3>
         </div>
         <div class="panel-body">
             <div class="form-horizontal">
@@ -475,7 +409,7 @@
     //Vehicle Servicing and MIleage Details
     <div class="panel panel-success">
         <div class="panel-heading">
-            <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-folder-close"></span> &nbsp;Add Vehicle Engine and License Details</b></h3>
+            <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-dashboard"></span> &nbsp;Add Vehicle Mileage Details</b></h3>
         </div>
         <div class="panel-body">
             <div class="form-horizontal">
@@ -555,8 +489,8 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success" style="float:right" id="confirmBtn">CONFIRM</button>
-                        <button type="button" class="btn btn-warning" data-dismiss="modal" style="float: left">CANCEL</button>
+                        <button type="submit" class="btn btn-success" style="float:right" id="Confirm">CONFIRM</button>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal" style="float: left" id="Cancel">CANCEL</button>
                     </div>
                 </div>
 
