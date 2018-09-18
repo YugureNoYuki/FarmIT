@@ -227,50 +227,50 @@ namespace farmLogin.Controllers
         #endregion
 
 
-        public ActionResult Set(int? id)
-        {
-            if (ModelState.IsValid)
-            {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                Plantation plantation = db.Plantations.Find(id);
+        //public ActionResult Set(int? id)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (id == null)
+        //        {
+        //            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //        }
+        //        Plantation plantation = db.Plantations.Find(id);
 
-                plantation.FieldStageID = 5;
-                plantation.JavaScriptToRun = "mySuccess()";
-                if (plantation == null)
-                {
-                    return HttpNotFound();
-                }
+        //        plantation.FieldStageID = 5;
+        //        plantation.JavaScriptToRun = "mySuccess()";
+        //        if (plantation == null)
+        //        {
+        //            return HttpNotFound();
+        //        }
 
-                try
-                {
-                    db.SaveChanges();
-                    return RedirectToAction("Plantations", plantation);
-                }
-                catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
-                {
-                    Exception raise = dbEx;
-                    foreach (var validationErrors in dbEx.EntityValidationErrors)
-                    {
-                        foreach (var validationError in validationErrors.ValidationErrors)
-                        {
-                            string message = string.Format("{0}:{1}",
-                                validationErrors.Entry.Entity.ToString(),
-                                validationError.ErrorMessage);
-                            // raise a new exception nesting
-                            // the current instance as InnerException
-                            raise = new InvalidOperationException(message, raise);
-                        }
-                    }
-                    throw raise;
-                }
+        //        try
+        //        {
+        //            db.SaveChanges();
+        //            return RedirectToAction("Plantations", plantation);
+        //        }
+        //        catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+        //        {
+        //            Exception raise = dbEx;
+        //            foreach (var validationErrors in dbEx.EntityValidationErrors)
+        //            {
+        //                foreach (var validationError in validationErrors.ValidationErrors)
+        //                {
+        //                    string message = string.Format("{0}:{1}",
+        //                        validationErrors.Entry.Entity.ToString(),
+        //                        validationError.ErrorMessage);
+        //                    // raise a new exception nesting
+        //                    // the current instance as InnerException
+        //                    raise = new InvalidOperationException(message, raise);
+        //                }
+        //            }
+        //            throw raise;
+        //        }
 
-            }
-            return View();
+        //    }
+        //    return View();
 
-        }
+        //}
 
         #region Confirm Plantation
         //GET
@@ -504,9 +504,9 @@ namespace farmLogin.Controllers
                     return RedirectToAction("SpecifyHarvestComplete");
                 }
             //}
-            ViewBag.NatDisasterID = new SelectList(db.NaturalDisasters, "NatDisasterID", "NatDisasterDescr");
-            ViewBag.BioDisasterID = new SelectList(db.BiologicalDisasters, "BioDisasterID", "BioDisasterDescr");
-            return View();
+            //ViewBag.NatDisasterID = new SelectList(db.NaturalDisasters, "NatDisasterID", "NatDisasterDescr");
+            //ViewBag.BioDisasterID = new SelectList(db.BiologicalDisasters, "BioDisasterID", "BioDisasterDescr");
+            //return View();
         }
         //GET
         public ActionResult FieldNaturalDisaster()   //return the view FieldNaturalDisaster
@@ -548,9 +548,9 @@ namespace farmLogin.Controllers
                 //routeId = 0; //reset
                 return RedirectToAction("SpecifyHarvestComplete");
             }
-            ViewBag.NatDisasterID = new SelectList(db.NaturalDisasters, "NatDisasterID", "NatDisasterDescr");
-            ViewBag.BioDisasterID = new SelectList(db.BiologicalDisasters, "BioDisasterID", "BioDisasterDescr");
-            return View();
+            //ViewBag.NatDisasterID = new SelectList(db.NaturalDisasters, "NatDisasterID", "NatDisasterDescr");
+            //ViewBag.BioDisasterID = new SelectList(db.BiologicalDisasters, "BioDisasterID", "BioDisasterDescr");
+            //return View();
         }
 
         public ActionResult SpecifyHarvestComplete()
@@ -903,6 +903,56 @@ namespace farmLogin.Controllers
             ViewBag.TreatmentID = new SelectList(db.Treatments, "TreatmentID", "TreatmentDescr", inventoryTreatment.TreatmentID);
             ViewBag.Unit = new SelectList(db.Units, "UnitID", "UnitDescr", inventoryTreatment.Unit);
             return View(inventoryTreatment);
+        }
+
+        #endregion
+
+        #region Set Ready for Harvest
+
+        public ActionResult Set(int? id) //plantationID
+        {
+            if(id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            //Find plantation to be Set for Ready for Harvest
+            Plantation plantation = db.Plantations.Find(id);
+
+            //Check if null
+            if(plantation == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                try
+                {
+                    //update FieldStageID to Stage 3
+                    plantation.FieldStageID = 3; //ready for Harvest
+                    db.Entry(plantation).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    plantation.JavaScriptToRun = "mySuccess()";
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+                {
+                    Exception raise = dbEx;
+                    foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            string message = string.Format("{0}:{1}",
+                                validationErrors.Entry.Entity.ToString(),
+                                validationError.ErrorMessage);
+                            // raise a new exception nesting
+                            // the current instance as InnerException
+                            raise = new InvalidOperationException(message, raise);
+                        }
+                    }
+                    throw raise;
+                }
+                return View("Plantations");
+            }
         }
 
         #endregion

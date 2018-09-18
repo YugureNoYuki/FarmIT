@@ -141,9 +141,9 @@ namespace farmLogin.Controllers
             //    ViewBag.Message = "Someting went wrong!";
             //}
 
-            ViewBag.NatDisasterID = new SelectList(db.NaturalDisasters, "NatDisasterID", "NatDisasterDescr");
-            ViewBag.BioDisasterID = new SelectList(db.BiologicalDisasters, "BioDisasterID", "BioDisasterDescr");
-            return View();
+            //ViewBag.NatDisasterID = new SelectList(db.NaturalDisasters, "NatDisasterID", "NatDisasterDescr");
+            //ViewBag.BioDisasterID = new SelectList(db.BiologicalDisasters, "BioDisasterID", "BioDisasterDescr");
+            //return View();
         }
         //GET
         public ActionResult FieldNaturalDisaster()   //return the view FieldNaturalDisaster
@@ -185,9 +185,9 @@ namespace farmLogin.Controllers
                 //routeId = 0; //reset
                 return RedirectToAction("SpecifyHarvestComplete");
             }
-            ViewBag.NatDisasterID = new SelectList(db.NaturalDisasters, "NatDisasterID", "NatDisasterDescr");
-            ViewBag.BioDisasterID = new SelectList(db.BiologicalDisasters, "BioDisasterID", "BioDisasterDescr");
-            return View();
+            //ViewBag.NatDisasterID = new SelectList(db.NaturalDisasters, "NatDisasterID", "NatDisasterDescr");
+            //ViewBag.BioDisasterID = new SelectList(db.BiologicalDisasters, "BioDisasterID", "BioDisasterDescr");
+            //return View();
         }
 
         public ActionResult SpecifyHarvestComplete()
