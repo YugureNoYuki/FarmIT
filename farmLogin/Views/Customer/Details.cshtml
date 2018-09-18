@@ -1,12 +1,12 @@
 ﻿@model farmLogin.Models.Customer
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "View Customer Details";
 }
 
 <style>
     body {
-        background-color: #87CEFA;
+        background-color: #3594C4;
     }
 
     .breadcrumb {
@@ -19,7 +19,7 @@
         font-size: 12px;
         font-weight: 700;
         position: center;
-        background: #87CEFA;
+        background: #3594C4;
         margin-left: -15px;
     }
 
@@ -153,7 +153,7 @@
     @Html.ActionLink("Home", "Index", "Home")
     @Html.ActionLink("Admin Action Page", "ActionPage", "Customer")
     @Html.ActionLink("Manage Customers", "Index", "Customer")
-    <a class="active">User Details</a>
+    <a class="active">Customer Details</a>
 </div>
 
 <div class="panel panel-success" id="PanelContent">
@@ -163,7 +163,7 @@
             <b>Customer Details </b>
             <span class="pull-right">
                 &nbsp;
-                <a href="@Url.Action("Edit", new { id = Model.CustomerID})">
+                <a href="@Url.Action("Edit", new { id = Model.CustomerID})" title="Edit">
                     <i class="glyphicon glyphicon-pencil"></i>
                     <span class="sr-only">Edit</span>
                 </a>
