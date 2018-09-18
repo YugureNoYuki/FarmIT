@@ -1,11 +1,11 @@
 ﻿@model farmLogin.Models.Vehicle
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "View Vehicle Details";
 }
 @*style*@
 <style>
     body {
-        background-color: #87CEFA;
+        background-color: #3594C4;
     }
 
     .breadcrumb {
@@ -18,7 +18,7 @@
         font-size: 12px;
         font-weight: 700;
         position: center;
-        background: #87CEFA;
+        background: #3594C4;
         margin-left: -15px;
     }
 
@@ -139,7 +139,33 @@
         color: #0097bd;
         transition: 0.5s;
     }
+
+    .glyphicon-eye-open
+    {
+        color: #479ce5;
+    }
+
+    .glyphicon-wrench
+    {
+        color: #3a38e0;
+    }
+
+     #ActionIcon:hover {
+        transform: scale(1.3);
+        transition: 0.3s;
+        -webkit-backface-visibility: hidden;
+        -ms-transform: scale(1.3);
+        -webkit-transform: scale(1.3);
+    }
+
+      /*.table-heading {
+        color: #0AA633;
+    }*/
 </style>
+
+<header>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</header>
 
 @*Breadcrumb*@
 <div class="breadcrumb">
@@ -153,11 +179,11 @@
     @* heading *@
     <div class="panel-heading">
         <h3 class="panel-title" style="color:black;">
-            <span class="glyphicon glyphicon-eye-open"></span> &nbsp;
+            <i class="fas fa-truck-pickup"></i> &nbsp;
             <b>Vehicle Details </b>
             <span>
                 &nbsp;
-                <a href="@Url.Action("Edit", new { id = Model.VehicleID})">
+                <a href="@Url.Action("Edit", new { id = Model.VehicleID})" title="Edit">
                     <i class="glyphicon glyphicon-pencil pull-right"></i>
                     <span class="sr-only">Edit</span>
                 </a>
@@ -266,27 +292,27 @@
     @* heading *@
     <div class="panel-heading">
         <h3 class="panel-title" style="color:black;">
-            <span class="glyphicon glyphicon-eye-open"></span> &nbsp;
+            <i class="fas fa-wrench"></i> &nbsp;
             <b>Vehicle Service Details </b>
         </h3>
     </div>
     <table class="table table-condensed table-striped">
         <thead>
             <tr>
-                <th>
+                <th class="table-heading">
                     <span class="table-heading">@Html.DisplayNameFor(model => model.VehicleServices.First().VehicleService_Date)</span>
                 </th>
-                <th>
+                <th class="table-heading">
                     <span class="table-heading">@Html.DisplayNameFor(model => model.VehicleServices.First().VehicleService_Cost)</span>
                 </th>
-                <th>
+                <th class="table-heading">
                     <span class="table-heading">@Html.DisplayNameFor(model => model.VehicleServices.First().VehicleServiceRecord)</span>
                 </th>
-                <th>
+                <th class="table-heading">
                     <span class="table-heading">@Html.DisplayNameFor(model => model.VehicleServices.First().Unit)</span>
                 </th>
 
-                <th>
+                <th class="table-heading">
                     <span class="table-heading">@Html.DisplayName("Actions")</span>
                 </th>
             </tr>
@@ -311,8 +337,8 @@
                         <i class="glyphicon glyphicon-eye-open" id="ActionIcon"></i>
                         <span class="sr-only">Details</span>
                     </a>
-                    <a href="@Url.Action("Edit","VehicleService", new { id = item.VehicleServiceID })" data-toggle="tooltip" title="Details">
-                        <i class="glyphicon glyphicon-edit" id="ActionIcon"></i>
+                    <a href="@Url.Action("Edit","VehicleService", new { id = item.VehicleServiceID })" data-toggle="tooltip" title="Update Vehicle Service Details">
+                        <i class="glyphicon glyphicon-wrench" id="ActionIcon"></i>
                         <span class="sr-only">Edit</span>
                     </a>
                 </td>
