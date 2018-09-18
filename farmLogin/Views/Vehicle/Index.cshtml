@@ -160,11 +160,11 @@
     }
 
     .glyphicon-pencil {
-        color: #47A447;
+        color: #42b229;
     }
 
     .glyphicon-eye-open {
-        color: #479ce5;
+        color: #298fb2;
     }
 
     .glyphicon-trash {
@@ -292,25 +292,25 @@
 <table class="table table-condensed table-striped">
     <thead>
         <tr>
-            <th>
+            <th class="table-heading">
                 <span style="color:green;">@Html.DisplayNameFor(model => model.Vehicles.First().VehName)</span>
             </th>
-            <th>
+            <th class="table-heading">
                 <span style="color:green;">@Html.DisplayNameFor(model => model.Vehicles.First().VehModel)</span>
             </th>
-            <th>
+            <th class="table-heading">
                 <span style="color:green;">@Html.DisplayNameFor(model => model.Vehicles.First().VehLicenseNum)</span>
             </th>
-            <th>
+            <th class="table-heading">
                 <span style="color:green;">@Html.DisplayNameFor(model => model.Vehicles.First().Farm1.FarmName)</span>
             </th>
-            <th>
+            <th class="table-heading">
                 <span style="color:green;">@Html.DisplayNameFor(model => model.Vehicles.First().VehicleMake.VehMakeDescr)</span>
             </th>
-            <th>
+            <th class="table-heading">
                 <span style="color:green;">@Html.DisplayNameFor(model => model.Vehicles.First().VehicleType.VehTypeDescr)</span>
             </th>
-            <th>
+            <th class="table-heading">
                 <span style="color:green;">Actions</span>
             </th>
         </tr>
@@ -345,15 +345,16 @@
                     <i class="glyphicon glyphicon-pencil" id="ActionIcon"></i>
                     <span class="sr-only">Edit</span>
                 </a>
+                <a href="@Url.Action("EditMileage", "Vehicle", new { id = item.VehicleID })" data-toggle="tooltip" title="Update Mileage">
+                    <i class="glyphicon glyphicon-dashboard" id="ActionIcon"></i>
+                    <span class="sr-only">EditMileage</span>
+                </a>
                 <a id="deleteItem" class="deleteItem" data-target="#basic"
                    data-toggle="modal"
                    data-path="@Url.Action("Delete", "Vehicle", new { id = item.VehicleID })" title="Delete">
                     <i class="glyphicon glyphicon-trash" id="ActionIcon"></i>
                 </a>
-                <a href="@Url.Action("EditMileage", "Vehicle", new { id = item.VehicleID })" data-toggle="tooltip" title="Update Mileage">
-                    <i class="glyphicon glyphicon-dashboard" id="ActionIcon"></i>
-                    <span class="sr-only">EditMileage</span>
-                </a>
+               
                 @*@if (this.Model.VehicleServices.VehicleID != this.Model.Vehicle.VehicleID)*@
 
                 @*<a href="@Url.Action("Create", "VehicleService", new { id = item.VehicleID })" data-toggle="tooltip" title="Capture Vehicle Service">
@@ -389,6 +390,17 @@
         </div>
     </div>
 </div>
+<br />
+
+<div>
+    @Html.PagedListPager(Model.Vehicles, page => Url.Action("Index",@*Takes list of inventories and produces a hyperlink to each page*@
+    new
+    {
+        vehicletype = @Model.VehicleType,
+        Search = @Model.Search,
+        page
+    }))
+</div>
 <p>
     @*condition? first_expression : second_expression*@
     @(String.IsNullOrWhiteSpace(Model.Search) ? "Showing all " : "You searched for '" + Model.Search + "' found ")@Model.Vehicles.TotalItemCount vehicles
@@ -399,13 +411,6 @@
     @*wrap in div for presentation purpose*@
     Page @(Model.Vehicles.PageCount < Model.Vehicles.PageNumber ? 0 : @*evaluate whether or not there are any pages to display*@
     Model.Vehicles.PageNumber) of @Model.Vehicles.PageCount @*Display Page x of y*@
-    @Html.PagedListPager(Model.Vehicles, page => Url.Action("Index",@*Takes list of inventories and produces a hyperlink to each page*@
-    new
-    {
-        vehicletype = @Model.VehicleType,
-        Search = @Model.Search,
-        page
-    }))
 </div>
 
 @section Scripts {
