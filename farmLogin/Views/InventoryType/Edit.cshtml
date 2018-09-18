@@ -1,12 +1,12 @@
 ﻿@model farmLogin.Models.InventoryType
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Update Inventory Type";
 }
 
 <style>
-     /*Confirmation*/
-      /*Green Button*/
+    /*Confirmation*/
+    /*Green Button*/
 
     #Confirm {
         font-family: Arial;
@@ -24,19 +24,19 @@
             border-color: #24820e;
             transition: 0.3s;
         }
-        /*Red Button*/
+    /*Red Button*/
     #Cancel {
         font-family: Arial;
         font-weight: 600;
         font-size: 12px;
         display: inline-block;
-        background-color: #e0422a;
+        background-color: #e5543d;
         border-color: #e0422a;
         border-radius: 5px;
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
     }
 
-       #Cancel:hover {
+        #Cancel:hover {
             background-color: #bc1c03;
             border-color: #bc1c03;
             transition: 0.3s;
@@ -52,7 +52,7 @@
         font-size: 12px;
         font-weight: 700;
         position: center;
-        background: #87CEFA;
+        background-color: #3594C4;
         margin-left: -15px;
     }
 
@@ -67,7 +67,7 @@
             background: #d1d1d1;
             color: black;
             position: relative;
-            box-shadow: 0 3px 6px black;
+            box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
         }
 
             .breadcrumb a:first-child {
@@ -125,11 +125,11 @@
             }
 
     body {
-        background-color: #87CEFA;
+        background-color: #3594C4;
     }
 
     .panel {
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
     }
 
     #PanelContent {
@@ -152,7 +152,7 @@
         font-family: Arial;
         font-size: 14px;
         display: inline-block;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
         width: 100px;
         border-radius: 5%;
     }
@@ -174,7 +174,20 @@
         background-image: none;
         background-color: #d8d8d8;
     }
+
+    #addUserAccessRole {
+        width: 200px;
+        background-color: #385f99;
+        border-color: #385f99;
+    }
+
+        #addUserAccessRole:hover {
+            background: #1955a0;
+            border-color: #1955a0;
+        }
 </style>
+
+
 
 
 
