@@ -1,11 +1,11 @@
 ﻿@*@model IEnumerable<farmLogin.Models.BiologicalDisaster>*@
 @model farmLogin.Models.BiologicalDisaster
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Biological Disasters";
 }
 <style>
-     /*Confirmation Box*/
-      #btnContinueDelete {
+    /*Confirmation Box*/
+    #btnContinueDelete {
         font-family: Arial;
         font-weight: 600;
         font-size: 12px;
@@ -22,7 +22,7 @@
             transition: 0.3s;
         }
 
-        #btnContinueCancel {
+    #btnContinueCancel {
         font-family: Arial;
         font-weight: 600;
         font-size: 12px;
@@ -181,11 +181,11 @@
     }
 
     .glyphicon-pencil {
-        color: #47A447;
+        color: #42b229;
     }
 
     .glyphicon-eye-open {
-        color: #479ce5;
+        color: #298fb2;
     }
 
     .glyphicon-trash {
@@ -217,7 +217,7 @@
         padding: 3px;
     }
 
-        .pagination > li > a {
+    .pagination > li > a {
         font-weight: 600;
         border-color: #428BCA;
         font-family: Arial;
@@ -240,6 +240,7 @@
     @Html.ActionLink("Admin Action Page", "ActionPage", "Customer")
     <a class="active">Manage Biological Disasters</a>
 </div>
+
 <div class="well">
     <div class="row">
         <div class="col-xs-6 col-md-3">
@@ -263,18 +264,20 @@
     var db = new farmLogin.Models.FarmDbContext();
     var myList = db.BiologicalDisasters.ToList();
 
-    <table class="table">
-        <tr>
-            <th>
-                <span class="table-heading">@Html.DisplayNameFor(model => model.BioDisasterDescr)</span>
-            </th>
-            <th>
-                <span class="table-heading">@Html.DisplayNameFor(model => model.BioDisasterNotes)</span>
-            </th>
-            <th>
-                <span class="table-heading" ;">Actions</span>
-            </th>
-        </tr>
+    <table class="table table-striped table-condensed">
+        <thead>
+            <tr>
+                <th>
+                    <span class="table-heading">@Html.DisplayNameFor(model => model.BioDisasterDescr)</span>
+                </th>
+                <th>
+                    <span class="table-heading">@Html.DisplayNameFor(model => model.BioDisasterNotes)</span>
+                </th>
+                <th>
+                    <span class="table-heading" ;">Actions</span>
+                </th>
+            </tr>
+        </thead>
         @foreach (var item in myList)
         {
             <tr>
