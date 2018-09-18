@@ -1,111 +1,46 @@
 ﻿@*//@model IEnumerable<farmLogin.Models.VehicleType>*@
 @model farmLogin.Models.VehicleType
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Vehicle Types";
 }
 
 @*style*@
 <style>
-
     /*Confirmation Box*/
-
-.swal-button--confirm {
-    font-family: Arial;
-    font-weight: 600;
-    font-size: 12px;
-    display: inline-block;
-    background-color: #52963f;
-    border-color: #52963f;
-    border-radius: 5px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-}
-
-    .swal-button--confirm:hover {
-        background-color: #24820e;
-        border-color: #24820e;
-        transition: 0.3s;
+    #btnContinueDelete {
+        font-family: Arial;
+        font-weight: 600;
+        font-size: 12px;
+        display: inline-block;
+        background-color: #e0422a;
+        border-color: #e0422a;
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
     }
 
-.swal-button--cancel {
-    font-family: Arial;
-    font-weight: 600;
-    font-size: 12px;
-    display: inline-block;
-    background-color: #e0422a;
-    border-color: #e0422a;
-    border-radius: 5px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-}
+        #btnContinueDelete:hover {
+            background-color: #bc1c03;
+            border-color: #bc1c03;
+            transition: 0.3s;
+        }
 
-    .swal-button--cancel:hover {
-        background-color: #bc1c03;
-        border-color: #bc1c03;
-        transition: 0.3s;
-    }
-/*Success Box*/
-.swal-button--confirm {
-    padding: 7px 19px;
-    border-radius: 2px;
-    background-color: #4962B3;
-    font-size: 12px;
-    border: 1px solid #3e549a;
-    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
-}
-
-    .swal-button--confirm:hover {
-        background-color: #24820e;
-        border-color: #24820e;
-        transition: 0.3s;
+    #btnContinueCancel {
+        font-family: Arial;
+        font-weight: 600;
+        font-size: 12px;
+        display: inline-block;
+        background-color: #9ba5a4;
+        border-color: #9ba5a4;
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
     }
 
-/*Remove or Archive Confirmation Box*/
-.swal-button--confirm {
-    font-family: Arial;
-    font-weight: 600;
-    font-size: 12px;
-    display: inline-block;
-    background-color: #52963f;
-    border-color: #52963f;
-    border-radius: 5px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-}
+        #btnContinueCancel:hover {
+            background-color: #8c9190;
+            border-color: #8c9190;
+            transition: 0.3s;
+        }
 
-
-/*Confirmation Box*/
-
-.swal-button--confirm {
-    font-family: Arial;
-    font-weight: 600;
-    font-size: 12px;
-    display: inline-block;
-    background-color: #888c8b;
-    border-color: #888c8b;
-    border-radius: 5px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-}
-
-    .swal-button--confirm:hover {
-        background-color: #24820e;
-        border-color: #24820e;
-        transition: 0.3s;
-    }
-
-.swal-button--cancel {
-    font-family: Arial;
-    font-weight: 600;
-    font-size: 12px;
-    display: inline-block;
-    background-color: #e0422a;
-    border-color: #e0422a;
-    border-radius: 5px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-}
-
-    .swal-button--cancel:hover {
-        background-color: #bc1c03;
-        border-color: #bc1c03;
-        transition: 0.3s;
-    }
     .breadcrumb {
         display: inline-block;
         overflow: hidden;
@@ -211,30 +146,31 @@
         color: green;
     }
 
-    .inventory {
+    .btn {
         font-weight: 600;
-        background-color: #47A447;
+        background-color: #479CE5;
+        border-color: #428bca;
         font-family: Arial;
-        font-size: 13px;
+        font-size: 14px;
         display: inline-block;
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        width: auto !important;
         border-radius: 5%;
-        top: 5px;
     }
 
-    .btn:hover {
-        background-color: #25820F;
-        transition: 0.5s;
-    }
+        .btn:hover {
+            background: #2072d6;
+            border-color: #2072d6;
+            transition: 0.5s;
+        }
 
 
     .well {
-        background-image: none;
-        background-color: #eaeaea;
+        background-color: #dddddd;
     }
 
     .table-heading {
-        color: #428BCA;
+        color: #0AA633;
     }
 
     #ActionIcon:hover {
@@ -246,11 +182,11 @@
     }
 
     .glyphicon-pencil {
-        color: #47A447;
+        color: #42b229;
     }
 
     .glyphicon-eye-open {
-        color: #479ce5;
+        color: #298fb2;
     }
 
     .glyphicon-trash {
@@ -258,59 +194,18 @@
     }
 
     #SearchBar {
-        right: -20px;
-        top: 5px;
+        right: -305px;
     }
 
     .btn-info {
-        background-color: #428bca;
-        border-color: #357ebd;
         right: 20px;
-    }
-
-        .btn-info:hover {
-            background: #2072d6;
-            transition: 0.5s;
-        }
-
-    .btn-primary:hover {
-        background-color: #2072d6;
-        border-color: #2072d6;
-        transition: 0.5s;
-    }
-
-    .pagination {
-        background: red;
-    }
-
-    #types {
-        background: #479CE5;
-        font-weight: 600;
-        font-family: Arial;
-        font-size: 13px;
-        display: inline-block;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-        color: #fff;
-        border-color: #479CE5;
-        top: 5px;
-    }
-
-        #types:hover {
-            background: #2072d6;
-            border-color: #2072d6;
-            transition: 0.5s;
-        }
-
-    #Filter {
-        top: -3px;
-        right: -50px;
     }
 
     td > a {
         padding: 3px;
     }
 
-     .pagination > li > a {
+    .pagination > li > a {
         font-weight: 600;
         border-color: #428BCA;
         font-family: Arial;
@@ -365,13 +260,13 @@
     <table class="table table-condensed table-striped">
         <thead>
             <tr>
-                <th>
-                    Vehicle Type Description
+                <th class="table-heading">
+                    Vehicle Type
                 </th>
                 @*<th>
                     Image
                 </th>*@
-                <th>
+                <th class="table-heading">
                     Actions
                 </th>
             </tr>
@@ -408,6 +303,9 @@
         }
     </table>
 
+    <br />
+    <br />
+
     <!-- MODAL -->
     <div class="modal fade" id="basic" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
@@ -420,8 +318,8 @@
                     Are you sure you want to delete this item?
                 </div>
                 <div class="modal-footer">
-                    <button data-dismiss="modal" type="button" class="btn btn-default">Cancel</button>
-                    <button id="btnContinueDelete" type="button" class="btn btn-primary">Delete</button>
+                    <button data-dismiss="modal" type="button" class="btn btn-default pull-left" id="btnContinueCancel">CANCEL</button>
+                    <button id="btnContinueDelete" type="button" class="btn btn-primary">DELETE</button>
                 </div>
             </div>
         </div>

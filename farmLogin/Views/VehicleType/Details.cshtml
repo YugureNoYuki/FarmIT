@@ -1,11 +1,11 @@
 ﻿@model farmLogin.Models.VehicleType
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "View Vehicle Type Details";
 }
 <style>
     body {
-        background-color: #87CEFA;
+        background-color:#3594C4;
     }
 
     .breadcrumb {
@@ -18,7 +18,7 @@
         font-size: 12px;
         font-weight: 700;
         position: center;
-        background: #87CEFA;
+        background: #3594C4;
         margin-left: -15px;
     }
 
@@ -125,15 +125,14 @@
             transition: 0.5s;
         }
 
-    .glyphicon-pencil {
+     .glyphicon-pencil {
         color: #47A447;
+        transform: scale(1.2);
     }
-
-
 
     .panel:hover .glyphicon-pencil {
         transition: 0.5s;
-        transform: scale(1.2);
+        transform: scale(1.3);
     }
 
     .glyphicon-pencil:hover {
@@ -163,12 +162,12 @@
 <div class="panel panel-success" id="PanelContent">
     <div class="panel-heading">
         <h3 class="panel-title" style="color:black;">
-            <span class="glyphicon glyphicon-folder-close"></span> &nbsp;
+            <span class="glyphicon glyphicon-list"></span> &nbsp;
             <b>Inventory Item Details </b>
             <span>
                 &nbsp;
-                <a href="@Url.Action("Edit", new { id = Model.VehTypeID})">
-                    <i class="glyphicon glyphicon-pencil"></i>
+                <a href="@Url.Action("Edit", new { id = Model.VehTypeID})" title="Edit">
+                    <i class="glyphicon glyphicon-pencil pull-right"></i>
                     <span class="sr-only">Edit</span>
                 </a>
             </span>

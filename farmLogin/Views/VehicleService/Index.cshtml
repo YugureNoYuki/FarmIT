@@ -1,7 +1,7 @@
 ﻿@*@model IEnumerable<farmLogin.Models.VehicleService>*@
 @model farmLogin.Models.VehicleService
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Vehicle Services";
 }
 
 
@@ -159,11 +159,11 @@
     }
 
     .glyphicon-pencil {
-        color: #47A447;
+        color: #42b229;
     }
 
     .glyphicon-eye-open {
-        color: #479ce5;
+        color: #298fb2;
     }
 
     .glyphicon-trash {
@@ -235,13 +235,13 @@
     <div class="row">
 
         <div class="col-xs-6 col-md-3">
-            @using (Html.BeginForm("Create", "Vehicle", FormMethod.Get, new { @class = "form-inline" }))
+            @using (Html.BeginForm("Create", "VehicleService", FormMethod.Get, new { @class = "form-inline" }))
             {
                 <div class="input-group">
                     <div class="input-group-btn">
                         <button class="btn btn-success" type="submit">
                             <span class="glyphicon glyphicon-plus"></span>
-                            Add Vehicle
+                            Capture Vehicle Services
                         </button>
                     </div>
                 </div>
@@ -261,16 +261,16 @@
                 }
             </div>*@
         @*<div class="col-xs-6 col-md-5">
-            @using (Html.BeginForm("Index", "Vehicle", FormMethod.Get))
-            {
-                <div class="input-group" id="Filter">
-                    <label for="FilterDropdown" class="col-sm-6 col-form-label">Filter by type</label>
-                    <div class="col-sm-6">
-                        <span class="filterDropdown">@Html.DropDownListFor(vm => vm.VehicleType, Model.VehTypeFilterItems, "All", new { id = "FilterDropdown", @class = "form-control", onchange = "this.form.submit();" })</span>
+                @using (Html.BeginForm("Index", "Vehicle", FormMethod.Get))
+                {
+                    <div class="input-group" id="Filter">
+                        <label for="FilterDropdown" class="col-sm-6 col-form-label">Filter by type</label>
+                        <div class="col-sm-6">
+                            <span class="filterDropdown">@Html.DropDownListFor(vm => vm.VehicleType, Model.VehTypeFilterItems, "All", new { id = "FilterDropdown", @class = "form-control", onchange = "this.form.submit();" })</span>
+                        </div>
                     </div>
-                </div>
-            }
-        </div>*@
+                }
+            </div>*@
         <div class="col-xs-6 col-md-5">
             @using (Html.BeginForm("Index", "Vehicle", FormMethod.Get, new { @class = "form-inline" }))
             {
@@ -290,100 +290,103 @@
 {
     var db = new farmLogin.Models.FarmDbContext();
     var myList = db.VehicleServices.ToList();
-<table class="table table-condensed table-striped">
-    <thead>
-        <tr>
-            <th class="table-heading">
-                @Html.DisplayNameFor(model => model.VehicleService_Date)
-            </th>
-            <th class="table-heading">
-                @Html.DisplayNameFor(model => model.VehicleService_Cost)
-            </th>
-            <th class="table-heading">
-                @Html.DisplayNameFor(model => model.VehicleServiceRecord)
-            </th>
-            <th class="table-heading">
-                @Html.DisplayNameFor(model => model.Unit.UnitDescr)
-            </th>
-            <th class="table-heading">
-                @Html.DisplayNameFor(model => model.Vehicle.VehName)
-            </th>
-            <th class="table-heading">
-                Actions
-            </th>
-        </tr>
-    </thead>
-    @foreach (var item in myList)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.VehicleService_Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VehicleService_Cost)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VehicleServiceRecord)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Unit.UnitDescr)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vehicle.VehName)
-            </td>
-            <td>
-                <a href="@Url.Action("Details", new { id = item.VehicleServiceID })" data-toggle="tooltip" title="Details">
-                    <i class="glyphicon glyphicon-eye-open" id="ActionIcon"></i>
-                    <span class="sr-only">Details</span>
-                </a>
-                <a href="@Url.Action("Edit", "VehicleService", new { id = item.VehicleServiceID })" data-toggle="tooltip" title="Edit">
-                    <i class="glyphicon glyphicon-pencil" id="ActionIcon"></i>
-                    <span class="sr-only">Edit</span>
-                </a>
-                @*<a id="deleteItem" class="deleteItem" data-target="#basic"
-                   data-toggle="modal"
-                   data-path="@Url.Action("Delete", "Vehicle", new { id = item.VehicleID })" title="Delete">
-                    <i class="glyphicon glyphicon-trash" id="ActionIcon"></i>
-                </a>*@
-                @*<a href="@Url.Action("EditMileage", "Vehicle", new { id = item.VehicleID })" data-toggle="tooltip" title="Update Mileage">
-                    <i class="glyphicon glyphicon-dashboard" id="ActionIcon"></i>
-                    <span class="sr-only">EditMileage</span>
-                </a>*@
-                @*@if (this.Model.VehicleServices.VehicleID != this.Model.Vehicle.VehicleID)*@
+    <table class="table table-condensed table-striped">
+        <thead>
+            <tr>
+                <th class="table-heading">
+                    @Html.DisplayNameFor(model => model.VehicleService_Date)
+                </th>
+                <th class="table-heading">
+                    @Html.DisplayNameFor(model => model.VehicleService_Cost)
+                </th>
+                <th class="table-heading">
+                    @Html.DisplayNameFor(model => model.VehicleServiceRecord)
+                </th>
+                <th class="table-heading">
+                    @Html.DisplayNameFor(model => model.Unit.UnitDescr)
+                </th>
+                <th class="table-heading">
+                    @Html.DisplayNameFor(model => model.Vehicle.VehName)
+                </th>
+                <th class="table-heading">
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        @foreach (var item in myList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VehicleService_Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VehicleService_Cost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VehicleServiceRecord)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Unit.UnitDescr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vehicle.VehName)
+                </td>
+                <td>
+                    <a href="@Url.Action("Details", new { id = item.VehicleServiceID })" data-toggle="tooltip" title="Details">
+                        <i class="glyphicon glyphicon-eye-open" id="ActionIcon"></i>
+                        <span class="sr-only">Details</span>
+                    </a>
+                    <a href="@Url.Action("Edit", "VehicleService", new { id = item.VehicleServiceID })" data-toggle="tooltip" title="Edit">
+                        <i class="glyphicon glyphicon-pencil" id="ActionIcon"></i>
+                        <span class="sr-only">Edit</span>
+                    </a>
+                    @*<a id="deleteItem" class="deleteItem" data-target="#basic"
+                           data-toggle="modal"
+                           data-path="@Url.Action("Delete", "Vehicle", new { id = item.VehicleID })" title="Delete">
+                            <i class="glyphicon glyphicon-trash" id="ActionIcon"></i>
+                        </a>*@
+                    @*<a href="@Url.Action("EditMileage", "Vehicle", new { id = item.VehicleID })" data-toggle="tooltip" title="Update Mileage">
+                            <i class="glyphicon glyphicon-dashboard" id="ActionIcon"></i>
+                            <span class="sr-only">EditMileage</span>
+                        </a>*@
+                    @*@if (this.Model.VehicleServices.VehicleID != this.Model.Vehicle.VehicleID)*@
 
-                @*<a href="@Url.Action("Create", "VehicleService", new { id = item.VehicleID })" data-toggle="tooltip" title="Capture Vehicle Service">
-                        <i class="glyphicon glyphicon-wrench" id="ActionIcon"></i>
-                        <span class="sr-only">VehicleService</span>
-                    </a>*@
-                @*<a href="@Url.Action("ServiceIndex", new { id = item.VehicleID })" data-toggle="tooltip" title="View Vehicle Services">
-                        <i class="glyphicon glyphicon-eye-open"></i>
-                        <span class="sr-only">VehicleService</span>
-                    </a>*@
+                    @*<a href="@Url.Action("Create", "VehicleService", new { id = item.VehicleID })" data-toggle="tooltip" title="Capture Vehicle Service">
+                            <i class="glyphicon glyphicon-wrench" id="ActionIcon"></i>
+                            <span class="sr-only">VehicleService</span>
+                        </a>*@
+                    @*<a href="@Url.Action("ServiceIndex", new { id = item.VehicleID })" data-toggle="tooltip" title="View Vehicle Services">
+                            <i class="glyphicon glyphicon-eye-open"></i>
+                            <span class="sr-only">VehicleService</span>
+                        </a>*@
 
 
-            </td>
-        </tr>
-    }
+                </td>
+            </tr>
+        }
 
-</table>
-<!-- MODAL -->
-<div class="modal fade" id="basic" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="false"></button>
-                <h4 class="modal-title">Delete Confirmation</h4>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to delete this item?
-            </div>
-            <div class="modal-footer">
-                <button data-dismiss="modal" type="button" class="btn btn-default">Cancel</button>
-                <button id="btnContinueDelete" type="button" class="btn btn-primary">Delete</button>
+    </table>
+
+    <br />
+    <br />
+    <!-- MODAL -->
+    <div class="modal fade" id="basic" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="false"></button>
+                    <h4 class="modal-title">Delete Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this item?
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" type="button" class="btn btn-default">Cancel</button>
+                    <button id="btnContinueDelete" type="button" class="btn btn-primary">Delete</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 }
 @section Scripts {
     <script>
