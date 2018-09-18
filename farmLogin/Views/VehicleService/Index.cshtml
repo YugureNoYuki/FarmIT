@@ -1,7 +1,7 @@
 ﻿@*@model IEnumerable<farmLogin.Models.VehicleService>*@
 @model farmLogin.Models.VehicleService
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Vehicle Services";
 }
 
 
@@ -159,11 +159,11 @@
     }
 
     .glyphicon-pencil {
-        color: #47A447;
+        color: #42b229;
     }
 
     .glyphicon-eye-open {
-        color: #479ce5;
+        color: #298fb2;
     }
 
     .glyphicon-trash {
@@ -235,13 +235,13 @@
     <div class="row">
 
         <div class="col-xs-6 col-md-3">
-            @using (Html.BeginForm("Create", "Vehicle", FormMethod.Get, new { @class = "form-inline" }))
+            @using (Html.BeginForm("Create", "VehicleService", FormMethod.Get, new { @class = "form-inline" }))
             {
                 <div class="input-group">
                     <div class="input-group-btn">
                         <button class="btn btn-success" type="submit">
                             <span class="glyphicon glyphicon-plus"></span>
-                            Add Vehicle
+                            Capture Vehicle Services
                         </button>
                     </div>
                 </div>
