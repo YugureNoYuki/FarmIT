@@ -1,110 +1,47 @@
 ﻿@model farmLogin.Models.VehicleType
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Update Vehicle Type";
 }
 @*Style*@
 <style>
+    /*Confirmation*/
+    /*Green Button*/
 
-    /*Confirmation Box*/
-
-.swal-button--confirm {
-    font-family: Arial;
-    font-weight: 600;
-    font-size: 12px;
-    display: inline-block;
-    background-color: #52963f;
-    border-color: #52963f;
-    border-radius: 5px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-}
-
-    .swal-button--confirm:hover {
-        background-color: #24820e;
-        border-color: #24820e;
-        transition: 0.3s;
+    #Confirm {
+        font-family: Arial;
+        font-weight: 600;
+        font-size: 12px;
+        display: inline-block;
+        background-color: #52963f;
+        border-color: #52963f;
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
     }
 
-.swal-button--cancel {
-    font-family: Arial;
-    font-weight: 600;
-    font-size: 12px;
-    display: inline-block;
-    background-color: #e0422a;
-    border-color: #e0422a;
-    border-radius: 5px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-}
-
-    .swal-button--cancel:hover {
-        background-color: #bc1c03;
-        border-color: #bc1c03;
-        transition: 0.3s;
-    }
-/*Success Box*/
-.swal-button--confirm {
-    padding: 7px 19px;
-    border-radius: 2px;
-    background-color: #4962B3;
-    font-size: 12px;
-    border: 1px solid #3e549a;
-    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
-}
-
-    .swal-button--confirm:hover {
-        background-color: #24820e;
-        border-color: #24820e;
-        transition: 0.3s;
+        #Confirm:hover {
+            background-color: #24820e;
+            border-color: #24820e;
+            transition: 0.3s;
+        }
+    /*Red Button*/
+    #Cancel {
+        font-family: Arial;
+        font-weight: 600;
+        font-size: 12px;
+        display: inline-block;
+        background-color: #e5543d;
+        border-color: #e0422a;
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
     }
 
-/*Remove or Archive Confirmation Box*/
-.swal-button--confirm {
-    font-family: Arial;
-    font-weight: 600;
-    font-size: 12px;
-    display: inline-block;
-    background-color: #52963f;
-    border-color: #52963f;
-    border-radius: 5px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-}
+        #Cancel:hover {
+            background-color: #bc1c03;
+            border-color: #bc1c03;
+            transition: 0.3s;
+        }
 
-
-/*Confirmation Box*/
-
-.swal-button--confirm {
-    font-family: Arial;
-    font-weight: 600;
-    font-size: 12px;
-    display: inline-block;
-    background-color: #888c8b;
-    border-color: #888c8b;
-    border-radius: 5px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-}
-
-    .swal-button--confirm:hover {
-        background-color: #24820e;
-        border-color: #24820e;
-        transition: 0.3s;
-    }
-
-.swal-button--cancel {
-    font-family: Arial;
-    font-weight: 600;
-    font-size: 12px;
-    display: inline-block;
-    background-color: #e0422a;
-    border-color: #e0422a;
-    border-radius: 5px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-}
-
-    .swal-button--cancel:hover {
-        background-color: #bc1c03;
-        border-color: #bc1c03;
-        transition: 0.3s;
-    }
     .breadcrumb {
         display: inline-block;
         overflow: hidden;
@@ -115,7 +52,7 @@
         font-size: 12px;
         font-weight: 700;
         position: center;
-        background: #87CEFA;
+        background-color: #3594C4;
         margin-left: -15px;
     }
 
@@ -130,7 +67,7 @@
             background: #d1d1d1;
             color: black;
             position: relative;
-            box-shadow: 0 3px 6px black;
+            box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
         }
 
             .breadcrumb a:first-child {
@@ -188,11 +125,11 @@
             }
 
     body {
-        background-color: #87CEFA;
+        background-color: #3594C4;
     }
 
     .panel {
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
     }
 
     #PanelContent {
@@ -215,55 +152,13 @@
         font-family: Arial;
         font-size: 14px;
         display: inline-block;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
         width: 100px;
         border-radius: 5%;
     }
 
         .btn:hover {
             background-color: #25820F;
-            transition: 0.5s;
-        }
-
-    .btn-default {
-        font-weight: 600;
-        color: white;
-        background-color: #79B9E1;
-        font-family: Arial;
-        font-size: 14px;
-        display: inline-block;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-        width: 100px;
-        border-color: #79B9E1;
-        border-radius: 5%;
-    }
-
-        .btn-default:hover {
-            background-color: #1b8bc6;
-            color: white;
-            border-color: #79B9E1;
-            border-radius: 5%;
-            transition: 0.5s;
-        }
-
-    .btn-warning {
-        font-weight: 600;
-        color: white;
-        background-color: #d75152;
-        font-family: Arial;
-        font-size: 14px;
-        display: inline-block;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-        width: 100px;
-        border-color: #d75152;
-        border-radius: 5%;
-    }
-
-        .btn-warning:hover {
-            background-color: #e54041;
-            color: white;
-            border-color: #e54041;
-            border-radius: 5%;
             transition: 0.5s;
         }
 
@@ -280,13 +175,13 @@
         background-color: #d8d8d8;
     }
 
-    #addInventoryType {
-        width: 175px;
-        background-color: #2072D6;
-        border-color: #2072D6;
+    #addVehicleType {
+        width: 200px;
+        background-color: #385f99;
+        border-color: #385f99;
     }
 
-        #addInventoryType:hover {
+        #addVehicleType:hover {
             background: #1955a0;
             border-color: #1955a0;
         }
@@ -297,7 +192,7 @@
     @Html.ActionLink("Home", "Index", "Home")
     @Html.ActionLink("Vehicle Action Page", "ActionPage", "Vehicle")
     @Html.ActionLink("Manage Vehicles Types", "Index", "VehicleType")
-    <a class="active">Edit Vehicle Type</a>
+    <a class="active">Update Vehicle Type</a>
 </div>
 
 @*Start Form*@
@@ -311,7 +206,7 @@
     //Vehicle Type Details Panel
     <div class="panel panel-success">
         <div class="panel-heading">
-            <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-folder-close"></span> &nbsp;Add Vehicle Type Details</b></h3>
+            <h3 class="panel-title" style="color:black;"><b><span class="glyphicon glyphicon-list"></span> &nbsp;Update Vehicle Type Details</b></h3>
         </div>
         <div style="color: red">
             @if (@ViewBag.Error != null)
@@ -385,7 +280,7 @@
                     <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" aria-hidden="true" data-dismiss=" modal">&times;</button>
+                            <button type="button" class="close" aria-hidden="true" data-dismiss="modal">&times;</button>
                             <h4 class="modal-title">Confirmation</h4>
                         </div>
                         <div class="modal-body">
@@ -393,8 +288,8 @@
 
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-success" style="float:right" id="confirmBtn">CONFIRM</button>
-                            <button type="button" class="btn btn-warning" data-dismiss="modal" style="float: left">CANCEL</button>
+                            <button type="submit" class="btn btn-success" style="float:right" id="Confirm">CONFIRM</button>
+                            <button type="button" class="btn btn-warning" data-dismiss="modal" style="float: left" id="Cancel">CANCEL</button>
                         </div>
                     </div>
 
