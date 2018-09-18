@@ -219,7 +219,7 @@
     @Html.HiddenFor(model => model.Farm)
     @Html.HiddenFor(model => model.VehTypeID)
     @Html.HiddenFor(model => model.VehMakeID)
-
+    @Html.HiddenFor(model => model.VehServiceInterval)
 
     @*General Vehicle Details Panel *@
     <div class="panel panel-success">
@@ -248,7 +248,7 @@
                                 @Html.LabelFor(model => model.VehServiceInterval, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.VehServiceInterval, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.VehServiceInterval, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
                                 @Html.ValidationMessageFor(model => model.VehServiceInterval, "", new { @class = "text-danger" })
                             </div>
                         </div>

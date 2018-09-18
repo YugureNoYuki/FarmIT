@@ -128,15 +128,16 @@ namespace farmLogin.Controllers
             //user email to find the id of currently logged in user
             var currID = uList.Where(a => a.UserEmailAddress == email).Select(a => a.UserID).FirstOrDefault();
 
-            var fromEmail = new MailAddress("u15185142@tuks.co.za", "FarmIT Account Control"); //Of course I'm awesome
+            var fromEmail = new MailAddress("u15185142@tuks.co.za", "FarmIT Notification Service"); //Of course I'm awesome
             var toEmail = new MailAddress(email);
             var fromEmailPassword = "Pp15185142"; //Password is taken out :)
 
             foreach (var item in vList)
             {
                 var diff = item.VehNextService - item.VehCurrMileage;
+                var halfInterval = (item.VehServiceInterval / 2);
 
-                if(diff <= item.VehServiceInterval)
+                if(diff <= halfInterval)
                 {
                     string subject = "";
                     string body = "";
@@ -144,7 +145,7 @@ namespace farmLogin.Controllers
                     {
                         subject = "Notify Vehicle Service";
 
-                        body = "<br/><br/>Your Vehicle" + item.VehName + " with License Number of " + item.VehLicenseNum + "Needs to be serviced withing " + diff + "Mileage.";
+                        body = "<br/><br/><b>Your Vehicle, " + item.VehName + "<b/>, with License Number of <b>" + item.VehLicenseNum + "<b/> has reached the halfway mark of its Servicing Interval.<br/><br/>Current Mileage: " + item.VehCurrMileage + "<br/>Next Service: " + item.VehNextService + "<br/><br/>Please update the indicated vehicle's servicing details accordingly on the system.<br/><br/>Vehicle's Current Details:<br/><b>Name: <b/>" + item.VehName + "<br/><b>Year: <b/>" + item.VehYear + "<br/><b>Model: <b/>" + item.VehModel + "<br/><b>License Number: <b/>" + item.VehLicenseNum + "<b><br/>Current Mileage: <b/>" + item.VehCurrMileage + "<br/><b>Next Servicing Mileage: <b/>" + item.VehNextService + "<br/><b>Servicing Interval: <b/>" + item.VehServiceInterval + "<br/><br/><b>Disclaimer:<b/> This email will be sent to you everytime you reach the dashboard of the system, until the Vehicle's Servicing Details has been manually updated on the system.";
                     }
 
 
